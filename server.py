@@ -9,18 +9,15 @@ def hello():
     return render_template('index.html')
 
 
-
 @app.route("/list")
-
 def display_questions_list():
     list_of_questions = open_question_file()
     list_of_questions = data_sorting(list_of_questions, True)
     return render_template('questions_list.html', table_headers=TABLE_HEADERS, list_of_questions=list_of_questions)
 
+
 @app.route('/questions/<question_id>')
-
 def display_question(question_id):
-
     list_of_questions = open_question_file()
     current_question = []
     for row in list_of_questions:
@@ -34,13 +31,12 @@ def display_question(question_id):
     current_answers = []
     for row in answer_list:
         if row[QUESTION_ID_IN_ANSWERS] == question_id:
-            current_answers.append(row[ID])
-            current_answers.append(row[ANSWER_MESSAGE])
-    return render_template('question.html', question_id=question_id, current_question=current_question,
-                           current_answers=current_answers)
-
-
-
+            answers = [row[ID], row[ANSWER_MESSAGE], row[IMG]]
+            current_answers.append(answers)
+    return render_template('question.html',
+                           current_question=current_question,
+                           current_answers=current_answers,
+                           )
 
 
 if __name__ == "__main__":

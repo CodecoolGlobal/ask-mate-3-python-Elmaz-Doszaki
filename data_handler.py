@@ -10,14 +10,19 @@ TABLE_HEADERS = [
     'Vote Down'
 ]
 
+QUESTIONS_FILE = "sample_data/question.csv"
 ID = 0
+TIME = 1
 VIEW = 2
+VOTE = 3
 TITLE = 4
 MESSAGE = 5
-QUESTIONS_FILE = "sample_data/question.csv"
+
 ANSWERS_FILE = "sample_data/answer.csv"
+ANSWER_VOTE = 2
 QUESTION_ID_IN_ANSWERS = 3
 ANSWER_MESSAGE = 4
+IMG = 5
 
 
 def open_question_file():
@@ -42,6 +47,7 @@ def data_sorting(data, rev_opt):
     '''
     data = sorted(data, key=lambda data: data[1], reverse=rev_opt)
     return data
+
 
 def write_question_to_file(data):
     filepath = QUESTIONS_FILE
