@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 
-    <html>
-        <link rel="stylesheet" href="/static/home_style.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <head>
-            <title>Ask Mate</title>
-        </head>
-        <body>
-            <div align="middle" >
-                <h1 align="middle">AskMate</h1>
-                <h2 align="middle">Question list</h2>
-            </div>
+<html>
+<link rel="stylesheet" href="/static/home_style.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<head>
+    <title>Ask Mate</title>
+</head>
+<body>
+<div align="middle">
+    <h1 align="middle">AskMate</h1>
+    <h2 align="middle">Question list</h2>
+</div>
 {#            <form action="/question/new" method="GET">#}
 {#                <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/question/new">#}
 {#            </form>#}
-            <table>
-                <tr>
-                    {% for item in table_headers %}
-                        <th>{{ item }}</th>
-                    {% endfor %}
-                </tr>
-                {% for row in list_of_questions %}
-                    <tr>
-                        {% for question in row %}
-                            <td>{{ question }}</td>
-                        {% endfor %}
-{#                        <td align="middle">
+<table>
+    <tr>
+        {% for item in table_headers %}
+            <th>{{ item }}</th>
+        {% endfor %}
+    </tr>
+    {% for row in list_of_questions %}
+        {% for question in row %}
+
+            <div>
+                <td><a href='/questions/{{ row[0] }}'>{{ question }}</a></td>
+            </div>
+
+        {% endfor %}
+
+        {#                        <td align="middle">
                             <form action="/question/{{ row[0] }}" method="POST">
                                 <input  id="view_button" name="view_button" type="image" src="/static/img/view.png" alt="Submit" width="60" value="{{ row[0] }}">
                             </form>
@@ -45,8 +49,8 @@
                                 <input  id="vote_down_button" name="vote_down_button" type="image" src="/static/img/vote_down.png" alt="Submit" width="60" value="{{ row[0] }}">
                             </form>
                         </td>#}
-                    </tr>
-                {% endfor %}
-            </table>
-        </body>
-    </html>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Ask Mate</title>
+</head>
+<body>
+<div align="middle">
+    <h1 align="middle">AskMate</h1>
+    <h2 align="middle">Question</h2>
+</div>
+<table>
+    <tr>
+        {% for item in current_question %}
+            <th>{{ item }}</th>
+        {% endfor %}
+    </tr>
+</table>
+<table>
+    {% for row in current_answers %}
+        {% for answer in row %}
+            <td>{{ answer }}</td>
+
+        {% endfor %}
+
+    {% endfor %}
+
+</table>
+</body>
+</html>

@@ -5,13 +5,19 @@ TABLE_HEADERS = [
     'Vote number',
     'Title',
     'Message',
-    'View',
     'Delete',
     'Vote Up',
     'Vote Down'
 ]
+
+ID = 0
+VIEW = 2
+TITLE = 4
+MESSAGE = 5
 QUESTIONS_FILE = "sample_data/question.csv"
 ANSWERS_FILE = "sample_data/answer.csv"
+QUESTION_ID_IN_ANSWERS = 3
+ANSWER_MESSAGE = 4
 
 
 def open_question_file():
@@ -36,3 +42,23 @@ def data_sorting(data, rev_opt):
     '''
     data = sorted(data, key=lambda data: data[1], reverse=rev_opt)
     return data
+
+def write_question_to_file(data):
+    filepath = QUESTIONS_FILE
+    # data = base64_encoder(data)
+    #     # data = time_stamp_encode(data)
+    with open(filepath, 'w') as workfile:
+        for item in data:
+            row = ','.join(item)
+            workfile.write(row + '\n')
+
+
+def read_answer_file():
+    filepath = ANSWERS_FILE
+    with open(filepath) as workfile:
+        row = workfile.readlines()
+        data = [item.replace('\n', '').split(',') for item in row]
+        # data = time_stamp_decode(data)
+        # data = base64_decoder_ans(data)
+        return data
+
