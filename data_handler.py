@@ -1,3 +1,6 @@
+import time
+import datetime
+
 TABLE_HEADERS = [
     '#ID',
     'Submission time',
@@ -25,19 +28,6 @@ ANSWER_MESSAGE = 4
 IMG = 5
 
 
-def open_question_file():
-    '''
-        Opens the question.csv file,
-        reads it content as rows.
-        Minden sor egy lista lesz
-    '''
-    filepath = QUESTIONS_FILE
-    with open(filepath) as workfile:
-        row = workfile.readlines()
-        data = [item.replace('\n', '').split(',') for item in row]
-        # data = time_stamp_decode(data)
-        # data = base64_decoder(data)
-        return data
 
 
 def data_sorting(data, rev_opt):
@@ -49,8 +39,7 @@ def data_sorting(data, rev_opt):
     return data
 
 
-def write_question_to_file(data):
-    filepath = QUESTIONS_FILE
+def write_file(data, filepath):
     # data = base64_encoder(data)
     #     # data = time_stamp_encode(data)
     with open(filepath, 'w') as workfile:
@@ -59,8 +48,15 @@ def write_question_to_file(data):
             workfile.write(row + '\n')
 
 
-def read_answer_file():
-    filepath = ANSWERS_FILE
+def append_file(data, filepath):
+    # data = base64_encoder(data)
+    #     # data = time_stamp_encode(data)
+    with open(filepath, 'a') as workfile:
+        row = ','.join(data)
+        workfile.write(row + '\n')
+
+
+def read_file(filepath):
     with open(filepath) as workfile:
         row = workfile.readlines()
         data = [item.replace('\n', '').split(',') for item in row]
@@ -68,3 +64,14 @@ def read_answer_file():
         # data = base64_decoder_ans(data)
         return data
 
+
+
+def new_id(filepath):
+    data = read_file(filepath)
+    new_id = int(data[-1][0]) +1
+    return new_id
+
+def get_time_stamp():
+    current_time = str(int(time.time()))
+    decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
+    return current_time
