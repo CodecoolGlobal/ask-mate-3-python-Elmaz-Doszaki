@@ -52,7 +52,7 @@ def add_question():
             path = "0"
         else:
             file1 = request.files['file1']
-            path = UPLOAD_FOLDER + "Q"+ id + file1.filename
+            path = UPLOAD_FOLDER + "Q" + id + file1.filename
             file1.save(os.path.join(app.config['UPLOAD_FOLDER'], "Q" + id + file1.filename))
         data = [id, get_time_stamp(), "0", "0", request.form['title'], request.form['question'], path]
         append_file(data, QUESTIONS_FILE)
@@ -108,12 +108,8 @@ def delete_question(q_id):
     return redirect('/list')
 
 
-@app.route('/question/<q_id>/edit', methods = ['POST', 'GET'])
+@app.route('/question/<q_id>/edit', methods=['POST', 'GET'])
 def route_edit(q_id):
-    # mit tartalmaz a q_id kérdés
-    #átmegyünk az add-question-hez hasonló edit-question.html  oldalra
-    # és ott minden adat ki van töltve a kérdés adataival
-    #az update gombra rányomra visszairányít minket a display_question route-ra a frissen sült adatokkal
     data = read_file(QUESTIONS_FILE)
     if request.method == 'GET':
         for row in data:
@@ -122,10 +118,16 @@ def route_edit(q_id):
                 message = row[MESSAGE]
         return render_template('edit-question.html', title=title, message=message, q_id=q_id)
     else:
-        for row in data:
-            if row[ID] == q_id:
+        for index in range(len(data)):
+            if data[index][ID] == q_id:
                 current_time = str(int(time.time()))
-                row = [q_id, current_time, '0', '0', request.form['title'], request.form['message']]
+                data[index] = [q_id,
+                               current_time,
+                               '0',
+                               '0',
+                               request.form['title'],
+                               request.form['message'],
+                               data[index][QUESTION_IMG_PATH]]
         write_file(data, QUESTIONS_FILE)
         return redirect('/questions/'+q_id)
 

@@ -17,13 +17,14 @@
         {% endfor %}
     </tr>
     {% for row in list_of_questions %}
-        {% for question in row %}
-
-            <div>
-
-                <td><a href='/questions/{{ row[0] }}'>{{ question }}</a></td>
-            </div>
-
+        {% for index in range(row|length) %}
+            {% if index != 6 %}
+                <td><a href='/questions/{{ row[0] }}'>{{ row[index] }}</a></td>
+            {% elif row[index] != "0" %}
+                <td><img src="{{ row[index] }}"></td>
+            {% else %}
+                <td></td>
+            {% endif %}
         {% endfor %}
 
         <td align="middle">

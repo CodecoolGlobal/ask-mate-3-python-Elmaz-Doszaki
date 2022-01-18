@@ -11,6 +11,7 @@ TABLE_HEADERS = [
     'Vote number',
     'Title',
     'Message',
+    '',
     'Delete',
     'Vote Up',
     'Vote Down'
