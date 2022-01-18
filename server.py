@@ -70,11 +70,27 @@ def add_new_answer():
     #     max_id = max(int(i[0]) for i in data)
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    data = [str(max_id+1), decoded_time, '0', request.form['question_id'], request.form['answer_message']]
+    data = [str(max_id+1), current_time, '0', request.form['question_id'], request.form['answer_message']]
 
     append_file(data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
 
 
+@app.route('/question/<q_id>/delete', methods=['POST'])
+def delete_question(q_id):
+    question_data = read_file(QUESTIONS_FILE)
+    for row in question_data:
+        if row[0] == q_id:
+            question_data.remove(row)
+    write_file(question_data, QUESTIONS_FILE)
+
+    answer_data = read_file(ANSWERS_FILE)
+    for row in answer_data:
+        if row[3] == q_id:
+            answer_data.remove(row)
+    write_file(answer_data, ANSWERS_FILE)
+    return redirect('/list')
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

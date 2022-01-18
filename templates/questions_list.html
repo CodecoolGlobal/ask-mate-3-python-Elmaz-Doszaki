@@ -28,7 +28,14 @@
 
         {% endfor %}
 
-        {#                        <td align="middle">
+        <td align="middle">
+            <form action="/question/{{ row[0] }}/delete" method="POST">
+                <input  id="delete_button" type="image" src="/static/img/view.png" alt="Submit" width="60" value="delete_button">
+            </form>
+        </td>
+
+
+        <!-- {#                        <td align="middle">
                             <form action="/question/{{ row[0] }}" method="POST">
                                 <input  id="view_button" name="view_button" type="image" src="/static/img/view.png" alt="Submit" width="60" value="{{ row[0] }}">
                             </form>
@@ -47,7 +54,7 @@
                             <form action="/question/<q_id>/vote-down" method="POST">
                                 <input  id="vote_down_button" name="vote_down_button" type="image" src="/static/img/vote_down.png" alt="Submit" width="60" value="{{ row[0] }}">
                             </form>
-                        </td>#}
+                        </td>#} -->
         </tr>
     {% endfor %}
 </table>
