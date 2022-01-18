@@ -64,10 +64,10 @@ def add_new_answer():
     """
     Add the new answer to database.
     """
-    # data = read_file(ANSWERS_FILE)
+    data = read_file(ANSWERS_FILE)
     max_id = 0
-    # if len(data) > 0:
-    #     max_id = max(int(i[0]) for i in data)
+    if len(data) > 0:
+        max_id = max(int(i[0]) for i in data)
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
     data = [str(max_id+1), current_time, '0', request.form['question_id'], request.form['answer_message']]
@@ -90,6 +90,15 @@ def delete_question(q_id):
             answer_data.remove(row)
     write_file(answer_data, ANSWERS_FILE)
     return redirect('/list')
+
+@app.route('/answer/<a_id>/delete', methods=['POST'])
+def delete_answer(a_id):
+    answer_data = read_file(ANSWERS_FILE)
+    for row in answer_data:
+        if row[0] == a_id:
+            answer_data.remove(row)
+    write_file(answer_data, ANSWERS_FILE)
+    return redirect("/questions/" + request.form['question_id'])
 
 
 if __name__ == "__main__":
