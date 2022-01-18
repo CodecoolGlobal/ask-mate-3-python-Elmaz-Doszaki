@@ -11,19 +11,26 @@
     </div>
     <table>
       <tr>
-        {% for item in current_question %}
-        <th>{{ item }}</th>
-        {% endfor %}
+          {% for item in range(current_question|length) %}
+              {% if item != 3 %}
+                  <th>{{ current_question[item] }}</th>
+              {% elif current_question[item] != "0" %}
+                  <th> <img src={{ current_question[item] }} height="80px"></th>
+              {% endif %}
+          {% endfor %}
       </tr>
-    </table>
+  </table>
+  
     <table>
       {% for row in current_answers %}
       <tr>
-        {% for i in range(row|length) %} {# {% if i == row|length-1 %}#} {#
-        <td><img alt="Code Cool Logo" src="codecool_logo.png" /></td>
-        #} {# {% else %}#}
-        <td>{{ row[i] }}</td>
-        {# {% endif %}#} {% endfor %}
+        {% for i in range(row|length) %}  
+            {% if i != 3 %}
+                  <th>{{ row[i] }}</th>
+            {% elif current_answers[item] != "0" %}
+                  <th> <img src="{{ row[i] }}" height="80px"></th>
+            {% endif %}
+        {% endfor %}
 
         <td align="middle">
           <form action="/answer/{{ row[0] }}/delete" method="POST">

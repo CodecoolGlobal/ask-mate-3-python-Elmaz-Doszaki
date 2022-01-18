@@ -1,5 +1,8 @@
 import time
 import datetime
+import os
+
+UPLOAD_FOLDER = '/static/'
 
 TABLE_HEADERS = [
     '#ID',
@@ -20,12 +23,14 @@ VIEW = 2
 VOTE = 3
 TITLE = 4
 MESSAGE = 5
+QUESTION_IMG_PATH = 6
 
 ANSWERS_FILE = "sample_data/answer.csv"
 ANSWER_VOTE = 2
 QUESTION_ID_IN_ANSWERS = 3
 ANSWER_MESSAGE = 4
 IMG = 5
+SEPARATOR = ';'
 
 
 def data_sorting(data, rev_opt):
@@ -42,7 +47,7 @@ def write_file(data, filepath):
     #     # data = time_stamp_encode(data)
     with open(filepath, 'w') as workfile:
         for item in data:
-            row = ','.join(item)
+            row = SEPARATOR.join(item)
             workfile.write(row + '\n')
 
 
@@ -50,14 +55,14 @@ def append_file(data, filepath):
     # data = base64_encoder(data)
     #     # data = time_stamp_encode(data)
     with open(filepath, 'a') as workfile:
-        row = ','.join(data)
+        row = SEPARATOR.join(data)
         workfile.write(row + '\n')
 
 
 def read_file(filepath):
     with open(filepath) as workfile:
         row = workfile.readlines()
-        data = [item.replace('\n', '').split(',') for item in row]
+        data = [item.replace('\n', '').split(SEPARATOR) for item in row]
         # data = time_stamp_decode(data)
         # data = base64_decoder_ans(data)
         return data

@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect
 from data_handler import *
 
-app = Flask(__name__)
 
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'static'
 
 @app.route("/")
 def hello():
@@ -26,6 +27,7 @@ def display_question(question_id):
             current_question.append(row[ID])
             current_question.append(row[TITLE])
             current_question.append(row[MESSAGE])
+            current_question.append(row[QUESTION_IMG_PATH])
             write_file(list_of_questions, QUESTIONS_FILE)
     answer_list = read_file(ANSWERS_FILE)
     current_answers = []
@@ -39,19 +41,26 @@ def display_question(question_id):
                            question_id=question_id)
 
 
+
 @app.route('/add-question', methods=['GET', 'POST'])
 def add_question():
     if request.method == 'GET':
         return render_template('add-question.html')
     else:
+        if request.files['file1'].filename == "":
+            path = "0"
+        else:
+            file1 = request.files['file1']
+            path = UPLOAD_FOLDER + request.files['file1'].filename
+            file1.save(os.path.join(app.config['UPLOAD_FOLDER'], file1.filename))
         id = str(new_id(QUESTIONS_FILE))
-        data = [id, get_time_stamp(), "0", "0", request.form['title'], request.form['question']]
+        data = [id, get_time_stamp(), "0", "0", request.form['title'], request.form['question'], path]
         append_file(data, QUESTIONS_FILE)
         return redirect('/questions/'+id)
 
 
 @app.route('/question/<q_id>/new-answer', methods=['POST'])
-def display_answer(q_id=None):
+def display_answer(q_id):
     """
         Displays the answer form page.
     """
@@ -115,6 +124,7 @@ def vote_down_question(q_id):
     data = read_file(QUESTIONS_FILE)
     for row in data:
         if row[ID] == q_id:
+            #if dow
             row[VOTE] = str(int(row[VOTE])-1)
     write_file(data, QUESTIONS_FILE)
     return redirect('/list')
