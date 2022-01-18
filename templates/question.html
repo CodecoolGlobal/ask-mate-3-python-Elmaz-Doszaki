@@ -21,14 +21,17 @@
     {% for row in current_answers %}
         <tr>
             {% for i in range(row|length) %}
-                {% if i == row|length-1 %}
-                    <td><img  alt="Code Cool Logo" src="codecool_logo.png"/></td>
-                {% else %}
-                    <td>{{ row[i] }}</td>
-                {% endif %}
+                {#                {% if i == row|length-1 %}#}
+                {#                    <td><img alt="Code Cool Logo" src="codecool_logo.png"/></td>#}
+                {#                {% else %}#}
+                <td>{{ row[i] }}</td>
+                {#        {% endif %}#}
             {% endfor %}
         </tr>
     {% endfor %}
 </table>
+<form action="/question/{{ question_id }}/new-answer" method="POST">
+    <input id="new_answer" name="new_answer" type="submit" class="button" width="60" value="New Answer">
+</form>
 </body>
 </html>

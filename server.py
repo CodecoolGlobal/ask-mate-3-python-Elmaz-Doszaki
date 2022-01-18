@@ -31,12 +31,12 @@ def display_question(question_id):
     current_answers = []
     for row in answer_list:
         if row[QUESTION_ID_IN_ANSWERS] == question_id:
-            answers = [row[ID], row[ANSWER_MESSAGE], row[IMG]]
+            answers = [row[ID], row[ANSWER_MESSAGE]]  # row[img]
             current_answers.append(answers)
     return render_template('question.html',
                            current_question=current_question,
                            current_answers=current_answers,
-                           )
+                           question_id=question_id)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -49,6 +49,31 @@ def add_question():
         append_file(data, QUESTIONS_FILE)
         return redirect('/questions/'+id)
 
+
+@app.route('/question/<q_id>/new-answer', methods=['POST'])
+def display_answer(q_id=None):
+    """
+        Displays the answer form page.
+    """
+    question_id = q_id
+    return render_template('answer_form.html', question_id=question_id)
+
+
+@app.route('/question/new-answer', methods=['POST'])
+def add_new_answer():
+    """
+    Add the new answer to database.
+    """
+    # data = read_file(ANSWERS_FILE)
+    max_id = 0
+    # if len(data) > 0:
+    #     max_id = max(int(i[0]) for i in data)
+    current_time = str(int(time.time()))
+    decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
+    data = [str(max_id+1), decoded_time, '0', request.form['question_id'], request.form['answer_message']]
+
+    append_file(data, ANSWERS_FILE)
+    return redirect("/questions/" + request.form['question_id'])
 
 
 if __name__ == "__main__":

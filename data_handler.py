@@ -28,13 +28,11 @@ ANSWER_MESSAGE = 4
 IMG = 5
 
 
-
-
 def data_sorting(data, rev_opt):
-    '''
+    """
         Sorts the questions by time in descanding order
         Order can be reveresed with rev_opt.
-    '''
+    """
     data = sorted(data, key=lambda data: data[1], reverse=rev_opt)
     return data
 
@@ -65,11 +63,11 @@ def read_file(filepath):
         return data
 
 
-
 def new_id(filepath):
     data = read_file(filepath)
-    new_id = int(data[-1][0]) +1
+    new_id = int(data[-1][0]) + 1
     return new_id
+
 
 def get_time_stamp():
     current_time = str(int(time.time()))
