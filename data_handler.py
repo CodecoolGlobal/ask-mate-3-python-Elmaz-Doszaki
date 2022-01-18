@@ -81,3 +81,14 @@ def get_time_stamp():
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
     return current_time
+
+
+def vote_question(q_id, vote):
+    data = read_file(QUESTIONS_FILE)
+    for row in data:
+        if row[ID] == q_id:
+            if vote == 'down':
+                row[VOTE] = str(int(row[VOTE])-1)
+            else:
+                row[VOTE] = str(int(row[VOTE])+1)
+    write_file(data, QUESTIONS_FILE)
