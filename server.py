@@ -80,13 +80,13 @@ def add_new_answer():
 def delete_question(q_id):
     question_data = read_file(QUESTIONS_FILE)
     for row in question_data:
-        if row[0] == q_id:
+        if row[ID] == q_id:
             question_data.remove(row)
     write_file(question_data, QUESTIONS_FILE)
 
     answer_data = read_file(ANSWERS_FILE)
     for row in answer_data:
-        if row[3] == q_id:
+        if row[QUESTION_ID_IN_ANSWERS] == q_id:
             answer_data.remove(row)
     write_file(answer_data, ANSWERS_FILE)
     return redirect('/list')
@@ -95,11 +95,29 @@ def delete_question(q_id):
 def delete_answer(a_id):
     answer_data = read_file(ANSWERS_FILE)
     for row in answer_data:
-        if row[0] == a_id:
+        if row[ID] == a_id:
             answer_data.remove(row)
     write_file(answer_data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
 
+@app.route('/question/<q_id>/vote-up', methods=['POST'])
+def vote_up_question(q_id):
+    data = read_file(QUESTIONS_FILE)
+    for row in data:
+        if row[ID] == q_id:
+            row[VOTE] = str(int(row[VOTE])+1)
+    write_file(data, QUESTIONS_FILE)
+    return redirect('/list')
+
+
+@app.route('/question/<q_id>/vote-down', methods=['POST'])
+def vote_down_question(q_id):
+    data = read_file(QUESTIONS_FILE)
+    for row in data:
+        if row[ID] == q_id:
+            row[VOTE] = str(int(row[VOTE])-1)
+    write_file(data, QUESTIONS_FILE)
+    return redirect('/list')
 
 if __name__ == "__main__":
     app.run(debug=True)
