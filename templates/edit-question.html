@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit Question</title>
+</head>
+<body>
+<h1>Edit Question</h1>
+<form action="/question/{{ q_id }}/edit" method="post">
+    <div>
+        <label>Question title:</label> <br/>
+        <input
+                name="title"
+                type="text"
+                required
+                minlength="3"
+                value="{{ title }}"
+        />
+    </div>
+    <div>
+        <label>Question:</label> <br/>
+        <textarea id="message" name="message" rows="6" cols="60">{{ message }}</textarea>
+    </div>
+    <button type="submit">Add new Question</button>
+</form>
+</body>
+</html>
