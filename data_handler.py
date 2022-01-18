@@ -70,7 +70,10 @@ def read_file(filepath):
 
 def new_id(filepath):
     data = read_file(filepath)
-    new_id = int(data[-1][0]) + 1
+    try:
+        new_id = int(data[-1][0]) + 1
+    except:
+        new_id = 0
     return new_id
 
 

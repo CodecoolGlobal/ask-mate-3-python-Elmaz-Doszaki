@@ -25,10 +25,10 @@
       {% for row in current_answers %}
       <tr>
         {% for i in range(row|length) %}  
-            {% if i != 3 %}
-                  <th>{{ row[i] }}</th>
+            {% if i != 2 %}
+                  <td>{{ row[i] }}</td>
             {% elif current_answers[item] != "0" %}
-                  <th> <img src="{{ row[i] }}" height="80px"></th>
+                  <td> <img src="{{ row[i] }}" height="60px"></td>
             {% endif %}
         {% endfor %}
 

@@ -10,9 +10,6 @@
     <h2 align="middle">Question list</h2>
     <a href="/add-question">Add New Question</a>
 </div>
-{#            <form action="/question/new" method="GET">#}
-{#                <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/question/new">#}
-{#            </form>#}
 <table>
     <tr>
         {% for item in table_headers %}
@@ -23,6 +20,7 @@
         {% for question in row %}
 
             <div>
+                
                 <td><a href='/questions/{{ row[0] }}'>{{ question }}</a></td>
             </div>
 

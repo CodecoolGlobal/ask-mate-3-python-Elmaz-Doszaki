@@ -33,7 +33,7 @@ def display_question(question_id):
     current_answers = []
     for row in answer_list:
         if row[QUESTION_ID_IN_ANSWERS] == question_id:
-            answers = [row[ID], row[ANSWER_MESSAGE]]  # row[img]
+            answers = [row[ID], row[ANSWER_MESSAGE], row[IMG]]
             current_answers.append(answers)
     return render_template('question.html',
                            current_question=current_question,
@@ -47,13 +47,13 @@ def add_question():
     if request.method == 'GET':
         return render_template('add-question.html')
     else:
+        id = str(new_id(QUESTIONS_FILE))
         if request.files['file1'].filename == "":
             path = "0"
         else:
             file1 = request.files['file1']
-            path = UPLOAD_FOLDER + request.files['file1'].filename
-            file1.save(os.path.join(app.config['UPLOAD_FOLDER'], file1.filename))
-        id = str(new_id(QUESTIONS_FILE))
+            path = UPLOAD_FOLDER + "Q"+ id + file1.filename
+            file1.save(os.path.join(app.config['UPLOAD_FOLDER'], "Q"+ id + file1.filename))
         data = [id, get_time_stamp(), "0", "0", request.form['title'], request.form['question'], path]
         append_file(data, QUESTIONS_FILE)
         return redirect('/questions/'+id)
@@ -77,9 +77,16 @@ def add_new_answer():
     max_id = 0
     if len(data) > 0:
         max_id = max(int(i[0]) for i in data)
+    max_id = str(max_id+1)
+    if request.files['answerfile'].filename == "":
+        path = "0"
+    else:
+        answerfile = request.files['answerfile']
+        path = UPLOAD_FOLDER + "A"+ max_id + answerfile.filename
+        answerfile.save(os.path.join(app.config['UPLOAD_FOLDER'], "A"+ max_id + answerfile.filename))
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    data = [str(max_id+1), current_time, '0', request.form['question_id'], request.form['answer_message']]
+    data = [max_id, current_time, '0', request.form['question_id'], request.form['answer_message'], path]
 
     append_file(data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
