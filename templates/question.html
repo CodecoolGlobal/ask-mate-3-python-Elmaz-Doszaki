@@ -8,6 +8,7 @@
   />
   <head>
     <title>Ask Mate</title>
+
   </head>
   <body>
     <form action="/list">
@@ -32,6 +33,8 @@
           <th>{{ current_question[item] }}</th>
           {% elif current_question[item] != "0" %}
           <th><img src="{{ current_question[item] }}" height="80px" /></th>
+          {% else %}
+           <th></th>
           {% endif %} {% endfor %}
         </tr>
       </table>
@@ -44,8 +47,10 @@
             {% for i in range(row|length) %}
                 {% if i != 3 %}
                     <td>{{ row[i] }}</td>
-                {% elif current_answers[item] != "0" %}
+                {% elif row[i] != "0" %}
                     <td><img src="{{ row[i] }}" height="60px"></td>
+                {% else %}
+                    <td></td>
                 {% endif %}
             {% endfor %}
 
