@@ -34,7 +34,7 @@ def display_question(question_id):
     current_answers = []
     for row in answer_list:
         if row[QUESTION_ID_IN_ANSWERS] == question_id:
-            answers = [row[ID], row[ANSWER_MESSAGE], row[IMG]]
+            answers = [row[ID], row[ANSWER_VOTE], row[ANSWER_MESSAGE], row[IMG]]
             current_answers.append(answers)
     return render_template('question.html',
                            current_question=current_question,
@@ -152,6 +152,20 @@ def vote_up_question(q_id):
 def vote_down_question(q_id):
     vote_question(q_id, 'down')
     return redirect('/list')
+
+
+@app.route('/answer/<answer_id>/vote-up', methods=['POST'])
+def vote_up_answer(answer_id):
+    q_id = request.form['question_id']
+    vote_answer(answer_id, 'up')
+    return redirect('/questions/' + q_id)
+
+
+@app.route('/answer/<answer_id>/vote-down', methods=['POST'])
+def vote_down_answer(answer_id):
+    q_id = request.form['question_id']
+    vote_answer(answer_id, 'down')
+    return redirect('/questions/' + q_id)
 
 
 if __name__ == "__main__":
