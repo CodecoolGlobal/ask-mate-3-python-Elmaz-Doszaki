@@ -41,30 +41,45 @@
       <tbody class="table-hover">
         {% for row in current_answers %}
         <tr>
-          {% for i in range(row|length) %} {% if i != 2 %}
-          <td>{{ row[i] }}</td>
-          {% elif current_answers[item] != "0" %}
-          <td><img src="{{ row[i] }}" height="60px" /></td>
-          {% endif %} {% endfor %}
+            {% for i in range(row|length) %}
+                {% if i != 3 %}
+                    <td>{{ row[i] }}</td>
+                {% elif current_answers[item] != "0" %}
+                    <td><img src="{{ row[i] }}" height="60px"></td>
+                {% endif %}
+            {% endfor %}
 
-          <td align="middle">
-            <form action="/answer/{{ row[0] }}/delete" method="POST">
-              <input
-                id="delete_button"
-                type="image"
-                src="/static/img/view.png"
-                alt="Delete"
-                class="button"
-                width="60"
-                value="delete_button"
-              />
-              <input
-                type="hidden"
-                name="question_id"
-                value="{{ current_question[0] }}"
-              />
-            </form>
-          </td>
+            <td align="middle">
+                <form action="/answer/{{ row[0] }}/delete" method="POST">
+                    <input
+                            id="delete_button"
+                            type="image"
+                            src="/static/img/view.png"
+                            alt="Delete"
+                            width="60"
+                            value="delete_button"
+                    />
+                    <input
+                            type="hidden"
+                            name="question_id"
+                            value="{{ current_question[0] }}"
+                    />
+                </form>
+            <td align="middle">
+                <form action="/answer/{{ row[0] }}/vote-up" method="POST">
+                    <input type="hidden" name="question_id" value="{{ current_question[0] }}"/>
+                    <input id="vote_up_button" name="vote_up_button" type="image" src="/static/img/vote_up.png"
+                           alt="Vote-up" width="60" value="{{ row[0] }}">
+                </form>
+            </td>
+            <td align="middle">
+                <form action="/answer/{{ row[0] }}/vote-down" method="POST">
+                    <input type="hidden" name="question_id" value="{{ current_question[0] }}"/>
+                    <input id="vote_down_button" name="vote_down_button" type="image" src="/static/img/vote_down.png"
+                           alt="Vote-down" width="60" value="{{ row[0] }}">
+                </form>
+            </td>
+            </td>
         </tr>
         {% endfor %}
       </tbody>

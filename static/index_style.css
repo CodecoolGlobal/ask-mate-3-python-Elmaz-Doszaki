@@ -1,0 +1,52 @@
+footer {
+    position: relative;
+    min-height: 10vh;
+    max-width: 100%;
+    background-image: linear-gradient(180deg, #708090, #708090, #000000);
+}
+footer ul {
+    position: relative;
+    top: 15px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+footer ul li {
+    list-style: none;
+    margin: 10px 15px 10px 0;
+}
+footer ul li .fa {
+    font-size: 30px;
+    line-height: 60px;
+    transition: 0.6s;
+    color: #2f4f4f;
+}
+footer ul li a {
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: white;
+    transition: 0.6s;
+}
+footer ul li a:hover {
+    transform: translate(3px, -12px);
+    box-shadow: -1px 5px 4px rgb(231, 128, 9);
+}
+footer ul li a:hover .fa {
+    color: white;
+}
+footer ul li:nth-child(1) a:hover {
+    background-color: #3b5999;
+}
+footer ul li:nth-child(2) a:hover {
+    background-color: #55acee;
+}
+footer ul li:nth-child(3) a:hover {
+    background-color: #e4405f;
+}
+footer ul li:nth-child(4) a:hover {
+    background-color: #0077b5;
+}

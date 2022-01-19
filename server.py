@@ -13,9 +13,16 @@ def hello():
 
 @app.route("/list")
 def display_questions_list():
+    args = request.args
+    order_by = args.get('order_by', default='submission_time')
+    order_direction = args.get('order_direction', default='desc')
     list_of_questions = read_file(QUESTIONS_FILE)
-    list_of_questions = data_sorting(list_of_questions, True)
-    return render_template('questions_list.html', table_headers=TABLE_HEADERS, list_of_questions=list_of_questions)
+    list_of_questions = data_sorting(list_of_questions, order_by, order_direction)
+    return render_template('questions_list.html',
+                           table_headers=TABLE_HEADERS,
+                           list_of_questions=list_of_questions,
+                           order_by=order_by,
+                           order_direction=order_direction)
 
 
 @app.route('/questions/<question_id>')
@@ -34,7 +41,7 @@ def display_question(question_id):
     current_answers = []
     for row in answer_list:
         if row[QUESTION_ID_IN_ANSWERS] == question_id:
-            answers = [row[ID], row[ANSWER_MESSAGE], row[IMG]]
+            answers = [row[ID], row[ANSWER_VOTE], row[ANSWER_MESSAGE], row[IMG]]
             current_answers.append(answers)
     return render_template('question.html',
                            current_question=current_question,
@@ -86,7 +93,7 @@ def add_new_answer():
         answerfile.save(os.path.join(app.config['UPLOAD_FOLDER'], "A" + max_id + answerfile.filename))
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    data = [max_id, current_time, '0', request.form['question_id'], request.form['answer_message'], path]
+    data = [max_id, decoded_time, '0', request.form['question_id'], request.form['answer_message'], path]
 
     append_file(data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
@@ -152,6 +159,20 @@ def vote_up_question(q_id):
 def vote_down_question(q_id):
     vote_question(q_id, 'down')
     return redirect('/list')
+
+
+@app.route('/answer/<answer_id>/vote-up', methods=['POST'])
+def vote_up_answer(answer_id):
+    q_id = request.form['question_id']
+    vote_answer(answer_id, 'up')
+    return redirect('/questions/' + q_id)
+
+
+@app.route('/answer/<answer_id>/vote-down', methods=['POST'])
+def vote_down_answer(answer_id):
+    q_id = request.form['question_id']
+    vote_answer(answer_id, 'down')
+    return redirect('/questions/' + q_id)
 
 
 if __name__ == "__main__":

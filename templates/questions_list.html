@@ -13,6 +13,26 @@
         <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/add-question">
     </form>
 </div>
+
+<form action="/list" method="get">  # post
+    <div>
+        <label for="order_by">Sort by:</label>
+        <select name="order_by" id="order_by">
+            <option {{ 'selected' if order_by == 'title' }} value="title">Title</option>
+            <option {{ 'selected' if order_by == 'submission_time' }} value="submission_time">Submission time</option>
+            <option {{ 'selected' if order_by == 'message' }} value="message">Message</option>
+            <option {{ 'selected' if order_by == 'number_of_views' }} value="number_of_views">Number of views</option>
+            <option {{ 'selected' if order_by == 'number_of_votes' }} value="number_of_votes">Number of votes</option>
+        </select>
+        <label for="order_direction">Order:</label>
+        <select name="order_direction" id="order_direction">
+            <option {{ 'selected' if order_direction == 'desc' }} value="desc">Descending</option>
+            <option {{ 'selected' if order_direction == 'asc' }} value="asc">Ascending</option>
+        </select>
+        <button>Sort</button>
+    </div>
+</form>
+
 <table>
     <tr>
         {% for item in table_headers %}
