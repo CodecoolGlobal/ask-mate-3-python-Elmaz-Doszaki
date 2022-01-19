@@ -34,12 +34,26 @@ IMG = 5
 SEPARATOR = ';'
 
 
-def data_sorting(data, rev_opt):
+def data_sorting(data, order_by, order_direction):
     """
         Sorts the questions by time in descanding order
         Order can be reveresed with rev_opt.
     """
-    data = sorted(data, key=lambda data: data[1], reverse=rev_opt)
+    if order_by == 'title':
+        order_by = TITLE
+    elif order_by == 'submission_time':
+        order_by = TIME
+    elif order_by == 'message':
+        order_by = MESSAGE
+    elif order_by == 'number_of_views':
+        order_by = VIEW
+    elif order_by == 'number_of_votes':
+        order_by = VOTE
+    if order_direction == 'asc':
+        order_direction = False
+    else:
+        order_direction = True
+    data = sorted(data, key=lambda data: data[order_by], reverse=order_direction)
     return data
 
 
