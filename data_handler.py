@@ -34,18 +34,32 @@ IMG = 5
 SEPARATOR = ';'
 
 
-def data_sorting(data, rev_opt):
+def data_sorting(data, order_by, order_direction):
     """
         Sorts the questions by time in descanding order
         Order can be reveresed with rev_opt.
     """
-    data = sorted(data, key=lambda data: data[1], reverse=rev_opt)
+    if order_by == 'title':
+        order_by = TITLE
+    elif order_by == 'submission_time':
+        order_by = TIME
+    elif order_by == 'message':
+        order_by = MESSAGE
+    elif order_by == 'number_of_views':
+        order_by = VIEW
+    elif order_by == 'number_of_votes':
+        order_by = VOTE
+    if order_direction == 'asc':
+        order_direction = False
+    else:
+        order_direction = True
+    data = sorted(data, key=lambda data: data[order_by], reverse=order_direction)
     return data
 
 
 def write_file(data, filepath):
     # data = base64_encoder(data)
-    #     # data = time_stamp_encode(data)
+    # data = time_stamp_encode(data)
     with open(filepath, 'w') as workfile:
         for item in data:
             row = SEPARATOR.join(item)
@@ -81,7 +95,7 @@ def new_id(filepath):
 def get_time_stamp():
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    return current_time
+    return decoded_time
 
 
 def vote_question(q_id, vote):
@@ -93,3 +107,14 @@ def vote_question(q_id, vote):
             else:
                 row[VOTE] = str(int(row[VOTE])+1)
     write_file(data, QUESTIONS_FILE)
+
+
+def vote_answer(a_id, vote):
+    data = read_file(ANSWERS_FILE)
+    for row in data:
+        if row[ID] == a_id:
+            if vote == 'down':
+                row[ANSWER_VOTE] = str(int(row[ANSWER_VOTE]) - 1)
+            else:
+                row[ANSWER_VOTE] = str(int(row[ANSWER_VOTE]) + 1)
+    write_file(data, ANSWERS_FILE)
