@@ -26,7 +26,8 @@
       <h1 align="middle">AskMate</h1>
       <h2 align="middle">Question</h2>
     </div>
-    <div class="card shadow-sm">
+    <div class= "tables">
+    <div class="header">
       <table>
         <tr>
           {% for item in range(current_question|length) %} {% if item != 3 %}
@@ -39,7 +40,7 @@
         </tr>
       </table>
     </div>
-
+    <br>
     <table class="table-fill">
     <thead>
     <tr>
@@ -96,6 +97,8 @@
         {% endfor %}
       </tbody>
     </table>
+    </div>
+    <br>
     <form action="/question/{{ question_id }}/new-answer" method="POST">
       <input
         id="new_answer"
