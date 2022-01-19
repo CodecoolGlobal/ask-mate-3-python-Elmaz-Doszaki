@@ -18,7 +18,11 @@ def display_questions_list():
     order_direction = args.get('order_direction', default='desc')
     list_of_questions = read_file(QUESTIONS_FILE)
     list_of_questions = data_sorting(list_of_questions, order_by, order_direction)
-    return render_template('questions_list.html', table_headers=TABLE_HEADERS, list_of_questions=list_of_questions)
+    return render_template('questions_list.html',
+                           table_headers=TABLE_HEADERS,
+                           list_of_questions=list_of_questions,
+                           order_by=order_by,
+                           order_direction=order_direction)
 
 
 @app.route('/questions/<question_id>')
