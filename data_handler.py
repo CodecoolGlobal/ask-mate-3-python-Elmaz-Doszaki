@@ -16,7 +16,16 @@ TABLE_HEADERS = [
     'Vote Up',
     'Vote Down'
 ]
-
+ANSWER_HEADERS = [
+    '#ID',
+    'Submission time',
+    'Vote number',
+    'Message',
+    '',
+    'Delete',
+    'Vote Up',
+    'Vote Down'
+]
 QUESTIONS_FILE = "sample_data/question.csv"
 ID = 0
 TIME = 1
