@@ -1,76 +1,94 @@
 <!DOCTYPE html>
 
 <html>
-<head>
+  <link rel="stylesheet" href="/static/question.css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto"
+    rel="stylesheet"
+  />
+  <head>
     <title>Ask Mate</title>
-</head>
-<body>
-<div align="middle">
-    <h1 align="middle">AskMate</h1>
-    <h2 align="middle">Question</h2>
-</div>
-<table>
-    <tr>
-        {% for item in range(current_question|length) %}
-            {% if item != 3 %}
-                <th>{{ current_question[item] }}</th>
-            {% elif current_question[item] != "0" %}
-                <th><img src={{ current_question[item] }} height="80px"></th>
-            {% endif %}
-        {% endfor %}
-    </tr>
-</table>
-
-<table>
-    {% for row in current_answers %}
+  </head>
+  <body>
+    <form action="/list">
+      <button
+        id="home"
+        name="home_button"
+        type="submit"
+        action="/"
+        class="button"
+      >
+        HOME
+      </button>
+    </form>
+    <div align="middle">
+      <h1 align="middle">AskMate</h1>
+      <h2 align="middle">Question</h2>
+    </div>
+    <div class="card shadow-sm">
+      <table>
         <tr>
-            {% for i in range(row|length) %}
-                {% if i != 2 %}
-                    <td>{{ row[i] }}</td>
-                {% elif current_answers[item] != "0" %}
-                    <td><img src="{{ row[i] }}" height="60px"></td>
-                {% endif %}
-            {% endfor %}
-
-            <td align="middle">
-                <form action="/answer/{{ row[0] }}/delete" method="POST">
-                    <input
-                            id="delete_button"
-                            type="image"
-                            src="/static/img/view.png"
-                            alt="Delete"
-                            width="60"
-                            value="delete_button"
-                    />
-                    <input
-                            type="hidden"
-                            name="question_id"
-                            value="{{ current_question[0] }}"
-                    />
-                </form>
-            </td>
+          {% for item in range(current_question|length) %} {% if item != 3 %}
+          <th>{{ current_question[item] }}</th>
+          {% elif current_question[item] != "0" %}
+          <th><img src="{{ current_question[item] }}" height="80px" /></th>
+          {% endif %} {% endfor %}
         </tr>
-    {% endfor %}
-</table>
-<form action="/question/{{ question_id }}/new-answer" method="POST">
-    <input
-            id="new_answer"
-            name="new_answer"
-            type="submit"
-            class="button"
-            width="60"
-            value="New Answer"
-    />
-</form>
-<form action="/question/{{ question_id }}/edit" method="GET">
-    <input
-            id="edit_question"
-            name="edit_question"
-            type="submit"
-            class="button"
-            width="60"
-            value="Edit Question"
-    />
-</form>
-</body>
+      </table>
+    </div>
+
+    <table class="table-fill">
+      <tbody class="table-hover">
+        {% for row in current_answers %}
+        <tr>
+          {% for i in range(row|length) %} {% if i != 2 %}
+          <td>{{ row[i] }}</td>
+          {% elif current_answers[item] != "0" %}
+          <td><img src="{{ row[i] }}" height="60px" /></td>
+          {% endif %} {% endfor %}
+
+          <td align="middle">
+            <form action="/answer/{{ row[0] }}/delete" method="POST">
+              <input
+                id="delete_button"
+                type="image"
+                src="/static/img/view.png"
+                alt="Delete"
+                class="button"
+                width="60"
+                value="delete_button"
+              />
+              <input
+                type="hidden"
+                name="question_id"
+                value="{{ current_question[0] }}"
+              />
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <form action="/question/{{ question_id }}/new-answer" method="POST">
+      <input
+        id="new_answer"
+        name="new_answer"
+        type="submit"
+        class="button"
+        width="60"
+        value="New Answer"
+      />
+    </form>
+    <br />
+    <form action="/question/{{ question_id }}/edit" method="GET">
+      <input
+        id="edit_question"
+        name="edit_question"
+        type="submit"
+        class="button"
+        width="60"
+        value="Edit Question"
+      />
+    </form>
+  </body>
 </html>
