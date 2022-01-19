@@ -30,7 +30,7 @@
     <div class="header">
       <table>
         <tr>
-          {% for item in range(current_question|length) %} {% if item != 3 %}
+          {% for item in range(current_question|length) %} {% if item != 4 %}
           <th>{{ current_question[item] }}</th>
           {% elif current_question[item] != "0" %}
           <th><img src="{{ current_question[item] }}" height="80px" /></th>

@@ -32,7 +32,7 @@ def display_question(question_id):
     for row in list_of_questions:
         if row[ID] == question_id:
             row[VIEW] = str(int(row[VIEW]) + 1)
-            # current_question.append(row[ID])
+            current_question.append(row[ID])
             current_question.append(row[TIME])
             current_question.append(row[TITLE])
             current_question.append(row[MESSAGE])
