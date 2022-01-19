@@ -68,7 +68,8 @@ def data_sorting(data, order_by, order_direction):
 
 def write_file(data, filepath):
     # data = base64_encoder(data)
-    # data = time_stamp_encode(data)
+    data = time_stamp_encode(data)
+    # data = time_stamp_decode(data)
     with open(filepath, 'w') as workfile:
         for item in data:
             row = SEPARATOR.join(item)
@@ -77,9 +78,10 @@ def write_file(data, filepath):
 
 def append_file(data, filepath):
     # data = base64_encoder(data)
-    #     # data = time_stamp_encode(data)
+    data = time_stamp_encode([data])
+    # data = time_stamp_decode(data)
     with open(filepath, 'a') as workfile:
-        row = SEPARATOR.join(data)
+        row = SEPARATOR.join(data[0])
         workfile.write(row + '\n')
 
 
@@ -87,9 +89,28 @@ def read_file(filepath):
     with open(filepath) as workfile:
         row = workfile.readlines()
         data = [item.replace('\n', '').split(SEPARATOR) for item in row]
-        # data = time_stamp_decode(data)
+        data = time_stamp_decode(data)
+        # data = time_stamp_encode(data)
         # data = base64_decoder_ans(data)
         return data
+
+
+def time_stamp_decode(data):
+    """
+        Decodes the UNIX timestamp to readable string format.
+    """
+    for row in data:
+        row[1] = str(datetime.datetime.fromtimestamp(float(row[1])).strftime('%Y-%m-%d %H:%M:%S'))
+    return data
+
+
+def time_stamp_encode(data):
+    """
+        Encodes the string time format to UNIX timestamp.
+    """
+    for row in data:
+        row[1] = str(int(datetime.datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S').strftime("%s")))
+    return data
 
 
 def new_id(filepath):
