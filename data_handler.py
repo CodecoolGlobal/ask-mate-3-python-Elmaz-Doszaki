@@ -45,7 +45,7 @@ def data_sorting(data, rev_opt):
 
 def write_file(data, filepath):
     # data = base64_encoder(data)
-    #     # data = time_stamp_encode(data)
+    # data = time_stamp_encode(data)
     with open(filepath, 'w') as workfile:
         for item in data:
             row = SEPARATOR.join(item)
@@ -81,7 +81,7 @@ def new_id(filepath):
 def get_time_stamp():
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    return current_time
+    return decoded_time
 
 
 def vote_question(q_id, vote):

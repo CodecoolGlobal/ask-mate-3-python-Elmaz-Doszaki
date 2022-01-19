@@ -86,7 +86,7 @@ def add_new_answer():
         answerfile.save(os.path.join(app.config['UPLOAD_FOLDER'], "A" + max_id + answerfile.filename))
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    data = [max_id, current_time, '0', request.form['question_id'], request.form['answer_message'], path]
+    data = [max_id, decoded_time, '0', request.form['question_id'], request.form['answer_message'], path]
 
     append_file(data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
