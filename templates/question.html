@@ -41,11 +41,18 @@
     </div>
 
     <table class="table-fill">
+    <thead>
+    <tr>
+        {% for header in answer_header %}
+            <th>{{ header }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
       <tbody class="table-hover">
         {% for row in current_answers %}
         <tr>
             {% for i in range(row|length) %}
-                {% if i != 3 %}
+                {% if i != 4 %}
                     <td>{{ row[i] }}</td>
                 {% elif row[i] != "0" %}
                     <td><img src="{{ row[i] }}" height="60px"></td>

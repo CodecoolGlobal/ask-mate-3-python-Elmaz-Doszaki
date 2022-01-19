@@ -32,7 +32,8 @@ def display_question(question_id):
     for row in list_of_questions:
         if row[ID] == question_id:
             row[VIEW] = str(int(row[VIEW]) + 1)
-            current_question.append(row[ID])
+            # current_question.append(row[ID])
+            current_question.append(row[TIME])
             current_question.append(row[TITLE])
             current_question.append(row[MESSAGE])
             current_question.append(row[QUESTION_IMG_PATH])
@@ -41,10 +42,11 @@ def display_question(question_id):
     current_answers = []
     for row in answer_list:
         if row[QUESTION_ID_IN_ANSWERS] == question_id:
-            answers = [row[ID], row[ANSWER_VOTE], row[ANSWER_MESSAGE], row[IMG]]
+            answers = [row[ID], row[TIME], row[ANSWER_VOTE], row[ANSWER_MESSAGE], row[IMG]]
             current_answers.append(answers)
     return render_template('question.html',
                            current_question=current_question,
+                           answer_header=ANSWER_HEADERS,
                            current_answers=current_answers,
                            question_id=question_id)
 
