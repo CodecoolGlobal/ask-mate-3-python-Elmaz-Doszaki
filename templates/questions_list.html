@@ -17,6 +17,7 @@
         {% endfor %}
     </tr>
     {% for row in list_of_questions %}
+    <tr>
         {% for index in range(row|length) %}
             {% if index != 6 %}
                 <td><a href='/questions/{{ row[0] }}'>{{ row[index] }}</a></td>
@@ -28,7 +29,7 @@
         {% endfor %}
 
         <td align="middle">
-            <form action="/question/{{ row[0] }}/delete" method="POST">
+            <form action="/question/{{ row[0] }}/delete" method="POST" >
                 <input id="delete_button" type="image" src="/static/img/view.png" alt="Delete" width="60"
                        value="delete_button">
             </form>
