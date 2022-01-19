@@ -93,3 +93,14 @@ def vote_question(q_id, vote):
             else:
                 row[VOTE] = str(int(row[VOTE])+1)
     write_file(data, QUESTIONS_FILE)
+
+
+def vote_answer(a_id, vote):
+    data = read_file(ANSWERS_FILE)
+    for row in data:
+        if row[ID] == a_id:
+            if vote == 'down':
+                row[ANSWER_VOTE] = str(int(row[ANSWER_VOTE]) - 1)
+            else:
+                row[ANSWER_VOTE] = str(int(row[ANSWER_VOTE]) + 1)
+    write_file(data, ANSWERS_FILE)
