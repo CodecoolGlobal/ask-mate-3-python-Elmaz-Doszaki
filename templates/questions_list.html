@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    <link rel="stylesheet" href="/static/list.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <head>
     <title>Ask Mate</title>
 </head>
 <body>
-<div align="middle">
+<div align="middle" class="table-title">
     <h1 align="middle">AskMate</h1>
     <h2 align="middle">Question list</h2>
-    <a href="/add-question">Add New Question</a>
+    <form action="/add-question">
+        <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/add-question">
+    </form>
 </div>
 
 <form action="/list" method="get">  # post

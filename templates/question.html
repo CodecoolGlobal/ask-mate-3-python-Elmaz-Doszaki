@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 
 <html>
-<head>
+  <link rel="stylesheet" href="/static/question.css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto"
+    rel="stylesheet"
+  />
+  <head>
     <title>Ask Mate</title>
-</head>
-<body>
-<div align="middle">
-    <h1 align="middle">AskMate</h1>
-    <h2 align="middle">Question</h2>
-</div>
-<table>
-    <tr>
-        {% for item in range(current_question|length) %}
-            {% if item != 3 %}
-                <th>{{ current_question[item] }}</th>
-            {% elif current_question[item] != "0" %}
-                <th><img src={{ current_question[item] }} height="80px"></th>
-            {% endif %}
-        {% endfor %}
-    </tr>
-</table>
+  </head>
+  <body>
+    <form action="/list">
+      <button
+        id="home"
+        name="home_button"
+        type="submit"
+        action="/"
+        class="button"
+      >
+        HOME
+      </button>
+    </form>
+    <div align="middle">
+      <h1 align="middle">AskMate</h1>
+      <h2 align="middle">Question</h2>
+    </div>
+    <div class="card shadow-sm">
+      <table>
+        <tr>
+          {% for item in range(current_question|length) %} {% if item != 3 %}
+          <th>{{ current_question[item] }}</th>
+          {% elif current_question[item] != "0" %}
+          <th><img src="{{ current_question[item] }}" height="80px" /></th>
+          {% endif %} {% endfor %}
+        </tr>
+      </table>
+    </div>
 
-<table>
-    {% for row in current_answers %}
+    <table class="table-fill">
+      <tbody class="table-hover">
+        {% for row in current_answers %}
         <tr>
             {% for i in range(row|length) %}
                 {% if i != 3 %}
@@ -64,27 +81,29 @@
             </td>
             </td>
         </tr>
-    {% endfor %}
-</table>
-<form action="/question/{{ question_id }}/new-answer" method="POST">
-    <input
-            id="new_answer"
-            name="new_answer"
-            type="submit"
-            class="button"
-            width="60"
-            value="New Answer"
-    />
-</form>
-<form action="/question/{{ question_id }}/edit" method="GET">
-    <input
-            id="edit_question"
-            name="edit_question"
-            type="submit"
-            class="button"
-            width="60"
-            value="Edit Question"
-    />
-</form>
-</body>
+        {% endfor %}
+      </tbody>
+    </table>
+    <form action="/question/{{ question_id }}/new-answer" method="POST">
+      <input
+        id="new_answer"
+        name="new_answer"
+        type="submit"
+        class="button"
+        width="60"
+        value="New Answer"
+      />
+    </form>
+    <br />
+    <form action="/question/{{ question_id }}/edit" method="GET">
+      <input
+        id="edit_question"
+        name="edit_question"
+        type="submit"
+        class="button"
+        width="60"
+        value="Edit Question"
+      />
+    </form>
+  </body>
 </html>
