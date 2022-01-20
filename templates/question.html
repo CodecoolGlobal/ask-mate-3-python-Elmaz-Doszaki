@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 
 <html>
+  <div class="container">
   <link rel="stylesheet" href="/static/css_files/question.css" />
   <link
     href="https://fonts.googleapis.com/css?family=Roboto"
     rel="stylesheet"
   />
+  <link
+  href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap"
+  rel="stylesheet"
+/>
+
   <head>
-    <title>Ask Mate</title>
+    <title>Ask Meme</title>
+    <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
 
   </head>
   <body>
+    <header>Ask Meme</header>
+    <br />
     <form action="/list">
-      <button
-        id="home"
-        type="submit"
-        class="button"
-      >
-        HOME
-      </button>
+        <button
+          id="home"
+          type="submit"
+          class="home-button"
+        >
+          HOME
+        </button>
     </form>
-    <div align="middle">
-      <h1 align="middle">AskMate</h1>
-      <h2 align="middle">Question</h2>
-    </div>
-    <div class= "tables">
-    <div class="header">
+    <br />
+    
+    <div class = "question-header">
       <table>
         <tr>
           {% for item in range(current_question|length) %} {% if item != 4 %}
-          <th>{{ current_question[item] }}</th>
+          <th class = "question-header">{{ current_question[item] }}</th>
           {% elif current_question[item] != "0" %}
-          <th><img src="{{ current_question[item] }}" height="80px" /></th>
+          <th class = "question-header" ><img src="{{ current_question[item] }}" height="80px" /></th>
           {% else %}
            <th></th>
           {% endif %} {% endfor %}
@@ -39,11 +49,12 @@
       </table>
     </div>
     <br>
+    <div class= "tables">
     <table class="table-fill">
     <thead>
     <tr>
         {% for header in answer_header %}
-            <th>{{ header }}</th>
+            <th >{{ header }}</th>
         {% endfor %}
     </tr>
     </thead>
@@ -62,7 +73,7 @@
 
             <td align="middle">
                 <form action="/answer/{{ row[0] }}/delete" method="POST">
-                    <input
+                    <input class= "icon"
                             id="delete_button"
                             type="image"
                             src="/static/img/trash.png"
@@ -79,14 +90,14 @@
             <td align="middle">
                 <form action="/answer/{{ row[0] }}/vote-up" method="POST">
                     <input type="hidden" name="question_id" value="{{ current_question[0] }}"/>
-                    <input id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
+                    <input class= "icon" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
                            alt="Vote-up" width="60" value="{{ row[0] }}">
                 </form>
             </td>
             <td align="middle">
                 <form action="/answer/{{ row[0] }}/vote-down" method="POST">
                     <input type="hidden" name="question_id" value="{{ current_question[0] }}"/>
-                    <input id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
+                    <input class= "icon" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
                            alt="Vote-down" width="60" value="{{ row[0] }}">
                 </form>
             </td>
@@ -119,4 +130,5 @@
       />
     </form>
   </body>
+</div>
 </html>
