@@ -62,7 +62,8 @@ def data_sorting(data, order_by, order_direction):
         order_direction = False
     else:
         order_direction = True
-    data = sorted(data, key=lambda data: data[order_by], reverse=order_direction)
+    data = sorted(
+        data, key=lambda data: data[order_by], reverse=order_direction)
     return data
 
 
@@ -124,7 +125,8 @@ def new_id(filepath):
 
 def get_time_stamp():
     current_time = str(int(time.time()))
-    decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
+    decoded_time = str(datetime.datetime.fromtimestamp(
+        float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
     return decoded_time
 
 
@@ -148,3 +150,18 @@ def vote_answer(a_id, vote):
             else:
                 row[ANSWER_VOTE] = str(int(row[ANSWER_VOTE]) + 1)
     write_file(data, ANSWERS_FILE)
+
+
+def best_memes():
+    pics = []
+    pic_list = read_file(ANSWERS_FILE)
+    pic_list = sorted(pic_list, key=lambda x: int(x[ANSWER_VOTE]), reverse= True)[:3]
+    for i in pic_list:
+        if i[IMG] != "0":
+        pics.append((i[ANSWER_VOTE], i[IMG]))
+    pic_list = read_file(QUESTIONS_FILE)
+    pic_list = sorted(pic_list, key=lambda x: int(x[VOTE]), reverse= True)[:3]
+    for i in pic_list:
+        if i[QUESTION_IMG_PATH] != "0":
+            pics.append((i[VOTE], i[QUESTION_IMG_PATH]))
+    return sorted(pics, key=lambda x: int(x[0]), reverse= True)[:3]

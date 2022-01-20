@@ -8,7 +8,8 @@ app.config['UPLOAD_FOLDER'] = 'static'
 
 @app.route("/")
 def hello():
-    return render_template('index.html')
+    list_of_best_memes = best_memes()
+    return render_template('index.html', list_of_best_memes=list_of_best_memes)
 
 
 @app.route("/list")
