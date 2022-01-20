@@ -1,5 +1,5 @@
-body {
-  background-color: #ddba1d;
+/* body {
+  background-color: #b1a296;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -7,6 +7,60 @@ body {
   max-width: 80%;
   margin-right: auto;
   margin-left: auto;
+}
+ */
+
+.container {
+  margin: auto;
+  width: 79%;
+  height: 1500px;
+  background-color: #b1a296;
+}
+
+body {
+  font-family: "Luxurious Roman", cursive;
+  font-size: 16px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+  height: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #2e2a26;
+  opacity: 0.8;
+  background-image: radial-gradient(#b1a296 0.5px, transparent 0.5px),
+    radial-gradient(#b1a296 0.5px, #2e2a26 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+header {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b1a296;
+  font-weight: bold;
+  font-family: "The Nautigal", cursive;
+  color: #fafafa;
+  font-size: 100px;
+  text-shadow: 2px 2px black;
+}
+
+img {
+  min-width: 130px;
+  min-height: 130px;
+  padding: 5px;
+}
+
+.icon {
+  max-width: 30px;
+  max-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
 }
 
 div.table-title {
@@ -39,10 +93,9 @@ div.table-title {
   animation: float 5s infinite;
 }
 
-.tables {
-  background-color: #434343;
-  padding: 20px;
-  box-shadow: 10px 10px 10px #2c2b28;
+h2 {
+  font-family: "The Nautigal", cursive;
+  font-size: 40px;
 }
 
 .header {
@@ -53,16 +106,16 @@ div.table-title {
 }
 
 th {
-  color: #ffffff;
-  background: #1a1919;
-  border-right: 1px solid #343a45;
-  font-size: 23px;
+  color: darkslategrey;
+  background: #b2beb5;
+
+  border-right: 1px solid white;
+  font-size: 16px;
   font-weight: 100;
   padding: 24px;
   text-align: center;
   vertical-align: middle;
-  margin-right: auto;
-  margin-left: auto;
+  font-family: "Luxurious Roman", cursive;
 }
 
 th:first-child {
@@ -74,20 +127,44 @@ th:last-child {
   border-right: none;
 }
 
+.question-header {
+  background-color: #5d5c61;
+  color: white;
+  font-size: 18px;
+  margin: auto;
+  word-wrap: break-word;
+  max-width: 40vh;
+  max-width: 1000px;
+
+  /*   background-color: #5d5c61;
+  padding: 20px;
+  box-shadow: 10px 10px 10px #2c2b28;
+  font-size: 23px;
+  font-weight: 100;
+  padding: 24px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: "Luxurious Roman", cursive;
+  align-items: center;
+  justify-content: center;
+  display: flex; */
+}
+
 tr {
   border-top: 1px solid #434343;
-  border-bottom: 1px solid #ffffff;
-  color: #000000;
+  border-bottom: 1px solid #ffff;
+  color: darkslategrey;
+  background-color: #d1d0cf;
   font-size: 16px;
   font-weight: normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
-  margin: 6px;
+  margin: 2px;
   border-top: solid 3px #434343;
 }
 
 tr:hover td {
-  background: #ddba1d;
-  color: #ffffff;
+  background: #a3a1a1;
+  color: #5c4242;
   border-top: 1px solid #22262e;
   border-bottom: 1px solid #22262e;
   box-shadow: 5px 5px 5px #5c4242;
@@ -109,7 +186,7 @@ tr:last-child td:last-child {
   border-bottom-right-radius: 3px;
 }
 
-td {
+/* td {
   background: #ffffff;
   padding: 20px;
   text-align: left;
@@ -117,7 +194,59 @@ td {
   font-weight: 300;
   font-size: 18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #c1d1ca;
+  border-right: 1px solid #d1d0cf;
+  text-align: center;
+  max-width: 20vh;
+  word-wrap: break-word;
+}
+ */
+td {
+  background: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 12px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #c1c3d1;
+  max-width: 40vh;
+  word-wrap: break-word;
+  max-width: 100px;
+}
+
+tr:nth-child(2) {
+  height: 150px;
+}
+
+tr:nth-child(3) {
+  height: 150px;
+}
+
+tr:nth-child(4) {
+  height: 150px;
+}
+
+tr:nth-child(5) {
+  height: 150px;
+}
+
+tr:nth-child(6) {
+  height: 150px;
+}
+
+tr:nth-child(7) {
+  height: 150px;
+}
+
+tr:nth-child(8) {
+  height: 150px;
+}
+
+tr:nth-child(9) {
+  height: 150px;
+}
+
+tr:nth-child(10) {
+  height: 150px;
 }
 
 td:last-child {
@@ -150,19 +279,40 @@ td.text-right {
 
 /*** Button Styles ***/
 .button {
-  background: #000000;
+  background: #1b1e24;
   color: #ffffff;
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 20px;
-  font-family: "Roboto", sans-serif;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
+  font-family: "Luxurious Roman", cursive;
   cursor: pointer;
   border-radius: 3px;
+  margin-right: 10px;
+}
+
+.home-button {
+  position: relative;
+  right: 150px;
+  bottom: 100px;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  border: 2px solid #000000;
+  border-radius: 3px;
   box-shadow: 5px 5px 5px #363535;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: "Luxurious Roman", cursive;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  background-color: #4e5066;
+  color: rgb(255, 255, 255);
+  border: 3px solid #000000;
+  box-shadow: 15px 15px 15px #363535;
 }
 
 .button {
