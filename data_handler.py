@@ -81,7 +81,7 @@ def append_file(data, filepath):
     # data = base64_encoder(data)
     # data = time_stamp_encode([data])
     # data = time_stamp_decode(data)
-    with open(filepath, 'a') as workfile:
+    with open(filepath, 'a', newline='\n') as workfile:
         row = SEPARATOR.join(data)
         workfile.write(row + '\n')
 
