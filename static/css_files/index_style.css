@@ -29,18 +29,19 @@ section {
 
 section div {
     display: flex;
-    justify-content:space-between;
+    justify-content:space-around;
     height: 20vh;
     width: 100vh;
     margin: 5px;
     text-align: center;
+    border: 7px solid red;
 }
 
 .arrow1 {
-    background-image: url("/static/page_imgs/nyíl.png");
+    background-image: url("/static/img/arrow_for_home.png");
     background-size:contain;
     background-repeat: no-repeat;
-    background-position-x: center;
+    background-position-x: right;
     background-position-y: center;
     width: 50%;
     min-height:100%;
@@ -56,17 +57,6 @@ section div {
     display: flex;
     align-items: center;
 
-    background-image: repeating-linear-gradient(to right,
-    #c4e17f 0px, #c4e17f 25px,
-    #f7fdca 50px, #f7fdca 50px,
-    #fad071 100px, #fad071 75px,
-    #f0766b 150px, #f0766b 100px,
-    #db9dbe 200px, #db9dbe 125px,
-    #c49cdf 250px, #c49cdf 150px,
-    #6599e2 300px, #6599e2 175px,
-    #61c2e4 350px, #61c2e4 200px);
-    background-size: 100% 10px;
-    background-repeat:no-repeat;
 }
 
 button {
@@ -75,17 +65,6 @@ button {
     background-color: #c1c3d1;
     font-family: 'The Nautigal', cursive;
 
-    background-image: repeating-linear-gradient(to right,
-    #c4e17f 0px, #c4e17f 25px,
-    #f7fdca 50px, #f7fdca 50px,
-    #fad071 100px, #fad071 75px,
-    #f0766b 150px, #f0766b 100px,
-    #db9dbe 200px, #db9dbe 125px,
-    #c49cdf 250px, #c49cdf 150px,
-    #6599e2 300px, #6599e2 175px,
-    #61c2e4 350px, #61c2e4 200px);
-    background-size: 100% 10px;
-    background-repeat:no-repeat;
 }
 button:hover {
     transform: translate(2px, -8px);
