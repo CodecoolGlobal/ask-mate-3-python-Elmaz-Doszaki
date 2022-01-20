@@ -1,5 +1,5 @@
 html {
-    
+    font-family: 'Pacifico', cursive;
 }
 
 header {
@@ -8,12 +8,12 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #3f291f;
+    background-color: #c1c3d1;
     font-weight: bold;
 }
 
 body {
-    background-color: #c55826;
+    background-color: #b1a296
 }
 
 main {
@@ -23,17 +23,27 @@ main {
 section {
     display: flex;
     flex-direction: column;
-    
-
+    margin-left: 45px;
 }
 
 section div {
     display: flex;
     justify-content:space-between;
-    border: 3px solid red;
     height: 20vh;
     width: 100vh;
-    
+    margin: 5px;
+    text-align: center;
+}
+
+.arrow1 {
+    background-image: url("/static/page_imgs/nyíl.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    width: 50%;
+    min-height:100%;
+    margin: 0;
 }
 
 .best_meme_pic {
@@ -55,12 +65,14 @@ button {
     border-radius: 4px;
     border-style:dotted solid double dashed;
     box-shadow: -1px 5px 4px #3f291f;
-    background-color: #c55826;
+    background-color: #c1c3d1;
+    font-family: 'The Nautigal', cursive;
 }
 button:hover {
     transform: translate(2px, -8px);
-    box-shadow: -1px 3px 2px #3f291f;
-    transition: 0.5s;
+    box-shadow: -1px 3px 2px #E5E4E2;
+    font-family: 'Pacifico', cursive;
+    transition: 1s;
 }
 
 aside {
@@ -70,11 +82,12 @@ aside {
     border: 2px;
     border-radius: 1px;
     padding: 3px;
-    background-color: #3f291f;
-    box-shadow: 4px 6px 5px #000000;
+    background-color: #c1c3d1;
+    box-shadow: 3px 5px 4px #c1c3d1;
     max-width: 20%;
     font-size: small;
     text-align: center;
+    margin-left: 35px;
 }
 
 main aside img {
@@ -84,8 +97,9 @@ main aside img {
     border-radius: 5px;
 }
 
+
 header h1 {
-    font-family: 'Pacifico', cursive;
+    font-family: 'The Nautigal', cursive;
     color: #3b5999;
 }
 
@@ -94,7 +108,7 @@ footer {
     bottom: 0px;
     min-height: 10vh;
     max-width: 100%;
-    background-image: linear-gradient(180deg, #3f291f, #c55826, #c55826, #c55826, #c55826, #c55826, #c55826);
+    background-image: linear-gradient(180deg, #B2BEB5, #b1a296, #b1a296, #b1a296, #b1a296, #b1a296, #b1a296);
 }
 footer ul {
     position: relative;
@@ -125,7 +139,7 @@ footer ul li a {
 }
 footer ul li a:hover {
     transform: translate(3px, -12px);
-    box-shadow: -1px 5px 4px rgb(182, 33, 120);
+    box-shadow: -1px 5px 4px #c1c3d1;
 }
 footer ul li a:hover .fa {
     color: white;
