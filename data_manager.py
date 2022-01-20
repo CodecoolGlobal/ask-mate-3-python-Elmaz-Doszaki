@@ -97,7 +97,10 @@ def edit_question(message, question_id, title):
 
 def delete_an_answer(answer_id):
     answer_data = read_file(ANSWERS_FILE)
-    util.answer_delete(answer_data, answer_id)
+    for row in answer_data:
+        if row[ID] == answer_id:
+            delete_file(row[-1])
+            answer_data.remove(row)
     write_file(answer_data, ANSWERS_FILE)
 
 
