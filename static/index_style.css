@@ -1,57 +1,65 @@
+html {
+    
+}
+
 header {
     width: 100%;
     height: 15vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e4405f;
+    background-color: #3f291f;
+    font-weight: bold;
 }
 
 body {
-    background-color: #da1c74;
+    background-color: #c55826;
 }
 
 main {
     display: flex;
-    flex-direction: column;
 }
 
 section {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    
 
 }
 
 section div {
     display: flex;
-    justify-content: space-evenly;
-    align-items:stretch;
+    justify-content:space-between;
+    border: 3px solid red;
     height: 20vh;
-    width: 100%;
+    width: 100vh;
     
 }
 
+.best_meme_pic {
+    max-width: 91%;
+}
+
 .indexbox {
-    border: 4px solid rgb(182, 33, 120);
+    border: 4px solid #3f291f;
     border-radius: 6px;
     border-style:dotted solid double dashed;
-    box-shadow: -1px 5px 4px rgb(182, 33, 120);
+    box-shadow: -1px 5px 4px #3f291f;
     display: flex;
     align-items: center;
 }
 
 button {
     height: 60%;
-    border: 6px solid rgb(182, 33, 120);
+    border: 6px solid #3f291f;
     border-radius: 4px;
     border-style:dotted solid double dashed;
-    box-shadow: -1px 5px 4px rgb(182, 33, 120);
-    background-color: grey;
+    box-shadow: -1px 5px 4px #3f291f;
+    background-color: #c55826;
 }
 button:hover {
     transform: translate(2px, -8px);
-    box-shadow: -1px 3px 2px rgb(182, 33, 120);
+    box-shadow: -1px 3px 2px #3f291f;
     transition: 0.5s;
 }
 
@@ -62,22 +70,22 @@ aside {
     border: 2px;
     border-radius: 1px;
     padding: 3px;
-    background-color: #e4405f;
-    box-shadow: 4px 6px 5px #da1c74;
+    background-color: #3f291f;
+    box-shadow: 4px 6px 5px #000000;
     max-width: 20%;
     font-size: small;
     text-align: center;
 }
 
 main aside img {
-    filter: opacity(40%);
+    filter: opacity(90%);
     margin: 5px 2px 2px 2px;
     box-shadow: 2px 3px 3px #000000;
     border-radius: 5px;
 }
 
 header h1 {
-    font-family: "Neonderthaw", cursive;
+    font-family: 'Pacifico', cursive;
     color: #3b5999;
 }
 
@@ -86,7 +94,7 @@ footer {
     bottom: 0px;
     min-height: 10vh;
     max-width: 100%;
-    background-image: linear-gradient(180deg, #708090, #708090, #000000);
+    background-image: linear-gradient(180deg, #3f291f, #c55826, #c55826, #c55826, #c55826, #c55826, #c55826);
 }
 footer ul {
     position: relative;

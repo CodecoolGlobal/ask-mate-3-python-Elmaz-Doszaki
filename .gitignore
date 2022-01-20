@@ -2,9 +2,10 @@ venv/
 
 *md
 
-
 .idea/
-
 
 __pycache__/
 
+static/
+
+sample_data/
