@@ -10,8 +10,8 @@ TABLE_HEADERS = [
     'View number',
     'Vote number',
     'Title',
-    'Message',
-    '',
+    '         Message       ',
+    'Photo',
     'Delete',
     'Vote Up',
     'Vote Down'
@@ -20,8 +20,8 @@ ANSWER_HEADERS = [
     '#ID',
     'Submission time',
     'Vote number',
-    'Message',
-    '',
+    '___________Message___________',
+    '___________Photo___________',
     'Delete',
     'Vote Up',
     'Vote Down'
