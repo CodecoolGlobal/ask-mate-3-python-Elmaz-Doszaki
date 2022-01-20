@@ -1,5 +1,22 @@
+/* Table title: font-family: 'The Nautigal', cursive;
+th: font-family: 'Luxurious Roman', cursive;
+tr : font-family: 'Pacifico', cursive;
+háttérszín:#b1a296
+a többi színt csak beírkálom hogy ezekkel a színekkel dolgoztam és akkor végül is mindenki oda rakja ahova szeretné
+ha az úgy jó?
+#fafafa
+#B2BEB5
+darkslategrey
+#5d5c61
+#E5E4E2
+#c1c3d1
+meg fehér meg fekete
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+fontokhoz */
+
 body {
-  background-color: #ddba1d;
+  background-color: #b1a296;
 }
 
 h1 {
@@ -9,6 +26,11 @@ h1 {
   font-style: normal;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
+}
+
+.text {
+  font-family: "Luxurious Roman", cursive;
+  font-size: 20px;
 }
 
 .form-style-8 {
@@ -21,23 +43,40 @@ h1 {
   -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   border-radius: 3px;
+  border: 4px dashed #5d5c61;
 }
 .form-style-8 h2 {
-  background: #1b1e24;
-  font-family: "Roboto", sans-serif;
-  color: #fafafa;
-  font-size: 23px;
+  background: #ffffff;
+  font-family: "The Nautigal", cursive;
+  color: #000000;
+  font-size: 40px;
   font-weight: 100;
   padding: 20px;
   margin: -30px -30px 30px -30px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-  -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px 15px 15px rgba(255, 255, 255, 0);
 }
+
+.form-style-8 textarea {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  border: none;
+  padding-top: 7px;
+  border-bottom: 1px solid #ddd;
+  background: transparent;
+  margin-bottom: 10px;
+  font: 16px "Roboto", sans-serif;
+  font-family: "Luxurious Roman", cursive;
+}
+
 .form-style-8 input[type="text"],
 .form-style-8 input[type="number"],
-.form-style-8 textarea,
 .form-style-8 select {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -77,6 +116,7 @@ h1 {
   color: white;
   border: 2px solid #1b1e24;
   border-radius: 3px;
+  box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.22);
 }
 
 .button:hover {
@@ -90,4 +130,90 @@ h1 {
   transition: 0.5s ease;
   left: 20px;
   top: 20px;
+}
+
+header h1 {
+  font-family: "The Nautigal", cursive;
+  color: #fafafa;
+}
+header {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b1a296;
+  font-weight: bold;
+  font-family: "The Nautigal", cursive;
+  color: #fafafa;
+  font-size: 100px;
+  text-shadow: 2px 2px black;
+}
+
+h2 {
+  font-family: "The Nautigal", cursive;
+  font-size: 35px;
+}
+
+footer {
+  position: sticky;
+  bottom: 0px;
+  min-height: 10vh;
+  max-width: 100%;
+  background-image: linear-gradient(
+    180deg,
+    #b2beb5,
+    #b1a296,
+    #b1a296,
+    #b1a296,
+    #b1a296,
+    #b1a296,
+    #b1a296
+  );
+}
+footer ul {
+  position: relative;
+  top: 15px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+footer ul li {
+  list-style: none;
+  margin: 10px 15px 10px 0;
+}
+footer ul li .fa {
+  font-size: 30px;
+  line-height: 60px;
+  transition: 0.6s;
+  color: #2f4f4f;
+}
+footer ul li a {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: white;
+  transition: 0.6s;
+}
+footer ul li a:hover {
+  transform: translate(3px, -12px);
+  box-shadow: -1px 5px 4px #c1c3d1;
+}
+footer ul li a:hover .fa {
+  color: white;
+}
+footer ul li:nth-child(1) a:hover {
+  background-color: #3b5999;
+}
+footer ul li:nth-child(2) a:hover {
+  background-color: #55acee;
+}
+footer ul li:nth-child(3) a:hover {
+  background-color: #e4405f;
+}
+footer ul li:nth-child(4) a:hover {
+  background-color: #0077b5;
 }

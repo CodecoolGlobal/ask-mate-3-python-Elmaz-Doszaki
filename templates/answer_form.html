@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 
 <html>
-<link rel="stylesheet" href="/static/new_form_style.css">
+<link rel="stylesheet" href="/static/css_files/new_form_style.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<div class="form-style-8">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+
     <head>
         <title> New Answer </title>
     </head>
     <body>
+      <header>
+        Ask Mate
+      </header>
         <form action="/list">
             <button
               id="home"
@@ -19,15 +24,18 @@
               BACK
             </button>
           </form>
-    <h3> Give a new answer! </h3>
+   <div class="form-style-8">
+    <h2 align="middle">Give a new answer!</h2>
     <form action="/question/new-answer" method="POST" enctype="multipart/form-data">
         <p><h4> Type your answer: </h4><br>
-        <textarea id="answer_message" name="answer_message" rows="5" cols="20" minlength="10"
-                  placeholder="Type your answer here..." required autofocus></textarea></p>
+        <textarea id="answer_message" name="answer_message" rows="6" cols="60" minlength="10"
+        placeholder="Type here..." required autofocus></textarea></p>
         <input type="hidden" name="question_id" value="{{ question_id }}">
         <input type="file" name="answerfile" class="button">
         <input type="submit" value="Submit" name="Submit" class="button">
-    </form>
+    
+      </form>
+    </div>
     </body>
-</div>
+
 </html>
