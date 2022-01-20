@@ -67,7 +67,7 @@
                     <input
                             id="delete_button"
                             type="image"
-                            src="/static/img/view.png"
+                            src="/static/img/trash.png"
                             alt="Delete"
                             width="60"
                             value="delete_button"
@@ -81,14 +81,14 @@
             <td align="middle">
                 <form action="/answer/{{ row[0] }}/vote-up" method="POST">
                     <input type="hidden" name="question_id" value="{{ current_question[0] }}"/>
-                    <input id="vote_up_button" name="vote_up_button" type="image" src="/static/img/vote_up.png"
+                    <input id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
                            alt="Vote-up" width="60" value="{{ row[0] }}">
                 </form>
             </td>
             <td align="middle">
                 <form action="/answer/{{ row[0] }}/vote-down" method="POST">
                     <input type="hidden" name="question_id" value="{{ current_question[0] }}"/>
-                    <input id="vote_down_button" name="vote_down_button" type="image" src="/static/img/vote_down.png"
+                    <input id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
                            alt="Vote-down" width="60" value="{{ row[0] }}">
                 </form>
             </td>
