@@ -85,11 +85,14 @@ section div {
     background-position-y: center;
     background-size:contain;
     background-repeat: no-repeat;
+    font-size: 20px;
 
 }
 
 button {
-    height: 60%;
+    height: 20vh;
+    width: 50vh;
+    font-size: 30px;
     box-shadow: -1px 5px 4px #3f291f;
     background-image: url("/static/img/satir.png");
     background-position-x: center;
@@ -97,7 +100,7 @@ button {
     background-size:contain;
     background-repeat: no-repeat;
     background-color: #b1a296;
-    font-family: 'The Nautigal', cursive;
+    font-family: 'Pacifico', cursive;
 
 }
 button:hover {
@@ -131,8 +134,13 @@ main aside img {
 
 
 header h1 {
-    font-family: 'The Nautigal', cursive;
-    color: #3b5999;
+        color: black;
+        font-size: 90px;
+        font-weight: 200;
+        font-style: normal;
+        font-family: "The Nautigal", cursive;
+        text-shadow: 2px 2px #c1c3d1;
+        text-align: center;
 }
 
 footer {
