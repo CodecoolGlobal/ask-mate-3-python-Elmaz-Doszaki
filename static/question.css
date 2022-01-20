@@ -1,30 +1,33 @@
 body {
-  background-color: #3eecc0;
+  background-color: #ddba1d;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
   text-rendering: optimizeLegibility;
+  max-width: 80%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 div.table-title {
   display: block;
   margin: auto;
   max-width: 1200px;
-  padding: 5px;
   width: 100%;
 }
 
 .table-title h1 {
-  color: #fafafa;
-  font-size: 40px;
+  color: #ffffff;
+  font-size: 50px;
   font-weight: 400;
   font-style: normal;
   font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
+  background: #000000;
 }
 
 .table-fill {
-  background: white;
+  background: #ffffff;
   border-radius: 3px;
   border-collapse: collapse;
   height: 100px;
@@ -36,16 +39,30 @@ div.table-title {
   animation: float 5s infinite;
 }
 
+.tables {
+  background-color: #434343;
+  padding: 20px;
+  box-shadow: 10px 10px 10px #2c2b28;
+}
+
+.header {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 th {
-  color: #d5dde5;
-  background: #1b1e24;
-  border-bottom: 4px solid #9ea7af;
+  color: #ffffff;
+  background: #1a1919;
   border-right: 1px solid #343a45;
   font-size: 23px;
   font-weight: 100;
   padding: 24px;
-  text-align: left;
+  text-align: center;
   vertical-align: middle;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 th:first-child {
@@ -58,19 +75,22 @@ th:last-child {
 }
 
 tr {
-  border-top: 1px solid #c1c3d1;
-  border-bottom-: 1px solid #c1c3d1;
-  color: #666b85;
+  border-top: 1px solid #434343;
+  border-bottom: 1px solid #ffffff;
+  color: #000000;
   font-size: 16px;
   font-weight: normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+  margin: 6px;
+  border-top: solid 3px #434343;
 }
 
 tr:hover td {
-  background: #4e5066;
+  background: #ddba1d;
   color: #ffffff;
   border-top: 1px solid #22262e;
   border-bottom: 1px solid #22262e;
+  box-shadow: 5px 5px 5px #5c4242;
 }
 
 tr:first-child {
@@ -79,14 +99,6 @@ tr:first-child {
 
 tr:last-child {
   border-bottom: none;
-}
-
-tr:nth-child(odd) td {
-  background: #ebebeb;
-}
-
-tr:nth-child(odd):hover td {
-  background: #4e5066;
 }
 
 tr:last-child td:first-child {
@@ -105,7 +117,7 @@ td {
   font-weight: 300;
   font-size: 18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #c1c3d1;
+  border-right: 1px solid #c1d1ca;
 }
 
 td:last-child {
@@ -138,7 +150,7 @@ td.text-right {
 
 /*** Button Styles ***/
 .button {
-  background: #1b1e24;
+  background: #000000;
   color: #ffffff;
   padding: 16px 32px;
   text-align: center;
@@ -150,19 +162,22 @@ td.text-right {
   transition-duration: 0.4s;
   cursor: pointer;
   border-radius: 3px;
+  box-shadow: 5px 5px 5px #363535;
 }
 
 .button {
-  background-color: #1b1e24;
-  color: white;
-  border: 2px solid #1b1e24;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  border: 2px solid #000000;
   border-radius: 3px;
+  box-shadow: 5px 5px 5px #363535;
 }
 
 .button:hover {
   background-color: #4e5066;
-  color: white;
-  border: 3px solid #4e5066;
+  color: rgb(255, 255, 255);
+  border: 3px solid #000000;
+  box-shadow: 15px 15px 15px #363535;
 }
 
 #create_story {

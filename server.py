@@ -34,6 +34,7 @@ def display_question(question_id):
         if row[ID] == question_id:
             row[VIEW] = str(int(row[VIEW]) + 1)
             current_question.append(row[ID])
+            current_question.append(row[TIME])
             current_question.append(row[TITLE])
             current_question.append(row[MESSAGE])
             current_question.append(row[QUESTION_IMG_PATH])
@@ -42,10 +43,11 @@ def display_question(question_id):
     current_answers = []
     for row in answer_list:
         if row[QUESTION_ID_IN_ANSWERS] == question_id:
-            answers = [row[ID], row[ANSWER_VOTE], row[ANSWER_MESSAGE], row[IMG]]
+            answers = [row[ID], row[TIME], row[ANSWER_VOTE], row[ANSWER_MESSAGE], row[IMG]]
             current_answers.append(answers)
     return render_template('question.html',
                            current_question=current_question,
+                           answer_header=ANSWER_HEADERS,
                            current_answers=current_answers,
                            question_id=question_id)
 
@@ -92,9 +94,9 @@ def add_new_answer():
         answerfile = request.files['answerfile']
         path = UPLOAD_FOLDER + "A" + max_id + answerfile.filename
         answerfile.save(os.path.join(app.config['UPLOAD_FOLDER'], "A" + max_id + answerfile.filename))
-    current_time = str(int(time.time()))
-    decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    data = [max_id, decoded_time, '0', request.form['question_id'], request.form['answer_message'], path]
+    # current_time = str(int(time.time()))
+    # decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
+    data = [max_id, get_time_stamp(), '0', request.form['question_id'], request.form['answer_message'], path]
 
     append_file(data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
@@ -128,9 +130,8 @@ def route_edit(q_id):
     else:
         for index in range(len(data)):
             if data[index][ID] == q_id:
-                current_time = str(int(time.time()))
                 data[index] = [q_id,
-                               current_time,
+                               get_time_stamp(),
                                '0',
                                '0',
                                request.form['title'],

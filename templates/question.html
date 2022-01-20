@@ -26,10 +26,11 @@
       <h1 align="middle">AskMate</h1>
       <h2 align="middle">Question</h2>
     </div>
-    <div class="card shadow-sm">
+    <div class= "tables">
+    <div class="header">
       <table>
         <tr>
-          {% for item in range(current_question|length) %} {% if item != 3 %}
+          {% for item in range(current_question|length) %} {% if item != 4 %}
           <th>{{ current_question[item] }}</th>
           {% elif current_question[item] != "0" %}
           <th><img src="{{ current_question[item] }}" height="80px" /></th>
@@ -39,13 +40,20 @@
         </tr>
       </table>
     </div>
-
+    <br>
     <table class="table-fill">
+    <thead>
+    <tr>
+        {% for header in answer_header %}
+            <th>{{ header }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
       <tbody class="table-hover">
         {% for row in current_answers %}
         <tr>
             {% for i in range(row|length) %}
-                {% if i != 3 %}
+                {% if i != 4 %}
                     <td>{{ row[i] }}</td>
                 {% elif row[i] != "0" %}
                     <td><img src="{{ row[i] }}" height="60px"></td>
@@ -89,6 +97,8 @@
         {% endfor %}
       </tbody>
     </table>
+    </div>
+    <br>
     <form action="/question/{{ question_id }}/new-answer" method="POST">
       <input
         id="new_answer"
