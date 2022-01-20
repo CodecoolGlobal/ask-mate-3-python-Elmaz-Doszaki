@@ -6,6 +6,4 @@ venv/
 
 __pycache__/
 
-static/
-
 sample_data/
