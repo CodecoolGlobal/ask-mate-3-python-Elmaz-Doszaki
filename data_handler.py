@@ -42,8 +42,6 @@ ANSWER_MESSAGE = 4
 IMG = 5
 SEPARATOR = ';'
 
-NEW_LINE_SEPARATOR = "Ł@&"
-
 
 def data_sorting(data, order_by, order_direction):
     """
@@ -77,6 +75,7 @@ def write_file(data, filepath):
         for item in data:
             row = SEPARATOR.join(item)
             workfile.write(row + '\n')
+
 
 def append_file(data, filepath):
     # data = base64_encoder(data)
