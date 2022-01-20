@@ -42,6 +42,8 @@ ANSWER_MESSAGE = 4
 IMG = 5
 SEPARATOR = ';'
 
+NEW_LINE_SEPARATOR = "a6z?k@LLa&"
+
 
 def data_sorting(data, order_by, order_direction):
     """
@@ -68,31 +70,25 @@ def data_sorting(data, order_by, order_direction):
 
 
 def write_file(data, filepath):
-    # data = base64_encoder(data)
-    # data = time_stamp_encode(data)
-    # data = time_stamp_decode(data)
     with open(filepath, 'w') as workfile:
-        for item in data:
+        for item in range(len(data)):
+            data[item] = data[item].replace("\r\n", NEW_LINE_SEPARATOR)
             row = SEPARATOR.join(item)
             workfile.write(row + '\n')
 
-
 def append_file(data, filepath):
-    # data = base64_encoder(data)
-    # data = time_stamp_encode([data])
-    # data = time_stamp_decode(data)
     with open(filepath, 'a') as workfile:
+        for item in range(len(data)):
+            data[item] = data[item].replace("\r\n", NEW_LINE_SEPARATOR)
         row = SEPARATOR.join(data)
         workfile.write(row + '\n')
 
 
 def read_file(filepath):
-    with open(filepath) as workfile:
+    with open(filepath, 'r') as workfile:
         row = workfile.readlines()
-        data = [item.replace('\n', '').split(SEPARATOR) for item in row]
-        # data = time_stamp_decode(data)
-        # data = time_stamp_encode(data)
-        # data = base64_decoder_ans(data)
+        data = [item.replace('\n', '') for item in row]
+        data = [item.replace(NEW_LINE_SEPARATOR, "\r\n").split(SEPARATOR) for item in data]
         return data
 
 
