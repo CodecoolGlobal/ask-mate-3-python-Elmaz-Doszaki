@@ -110,12 +110,14 @@ def delete_question(q_id):
     question_data = read_file(QUESTIONS_FILE)
     for row in question_data:
         if row[ID] == q_id:
+            delete_file(row[-1])
             question_data.remove(row)
     write_file(question_data, QUESTIONS_FILE)
 
     answer_data = read_file(ANSWERS_FILE)
     for row in answer_data:
         if row[QUESTION_ID_IN_ANSWERS] == q_id:
+            delete_file(row[-1])
             answer_data.remove(row)
     write_file(answer_data, ANSWERS_FILE)
     return redirect('/list')
@@ -149,6 +151,7 @@ def delete_answer(a_id):
     answer_data = read_file(ANSWERS_FILE)
     for row in answer_data:
         if row[ID] == a_id:
+            delete_file(row[-1])
             answer_data.remove(row)
     write_file(answer_data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
