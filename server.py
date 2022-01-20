@@ -39,6 +39,7 @@ def display_question(question_id):
             current_question.append(row[TITLE])
             current_question.append(row[MESSAGE])
             current_question.append(row[QUESTION_IMG_PATH])
+            write_file(list_of_questions, QUESTIONS_FILE)
     answer_list = read_file(ANSWERS_FILE)
     current_answers = []
     for row in answer_list:
