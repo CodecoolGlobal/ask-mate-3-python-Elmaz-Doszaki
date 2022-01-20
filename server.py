@@ -64,7 +64,8 @@ def add_question():
             file1 = request.files['file1']
             path = UPLOAD_FOLDER + "Q" + id + file1.filename
             file1.save(os.path.join(app.config['UPLOAD_FOLDER'], "Q" + id + file1.filename))
-        data = [id, get_time_stamp(), "0", "0", request.form['title'], request.form['question'], path]
+        current_time = str(int(time.time()))
+        data = [id, current_time, "0", "0", request.form['title'], request.form['question'], path]
         append_file(data, QUESTIONS_FILE)
         return redirect('/questions/'+id)
 
@@ -94,10 +95,9 @@ def add_new_answer():
         answerfile = request.files['answerfile']
         path = UPLOAD_FOLDER + "A" + max_id + answerfile.filename
         answerfile.save(os.path.join(app.config['UPLOAD_FOLDER'], "A" + max_id + answerfile.filename))
-    # current_time = str(int(time.time()))
+    current_time = str(int(time.time()))
     # decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    data = [max_id, get_time_stamp(), '0', request.form['question_id'], request.form['answer_message'], path]
-
+    data = [max_id, current_time, '0', request.form['question_id'], request.form['answer_message'], path]
     append_file(data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
 
