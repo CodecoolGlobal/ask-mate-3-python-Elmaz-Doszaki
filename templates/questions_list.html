@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="/static/list.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<link rel="stylesheet" href="/static/list.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+
 <head>
     <title>Ask Mate</title>
 </head>
 <body>
+
 <div align="middle" class="table-title">
     <h1 align="middle">AskMate</h1>
     <h2 align="middle">Question list</h2>
@@ -14,7 +21,8 @@
     </form>
 </div>
 
-<form action="/list" method="get">  # post
+
+<form action="/list" method="get">
     <div>
         <label for="order_by">Sort by:</label>
         <select name="order_by" id="order_by">
@@ -52,20 +60,22 @@
         {% endfor %}
 
         <td align="middle">
-            <form action="/question/{{ row[0] }}/delete" method="POST" >
-                <input id="delete_button" type="image" src="/static/img/view.png" alt="Delete" width="60"
+
+            <form action="/question/{{ row[0] }}/delete" method="POST">
+                <input id="delete_button" type="image" src="/static/trash.png" alt="Delete" width="60"
+
                        value="delete_button">
             </form>
         </td>
         <td align="middle">
             <form action="/question/{{ row[0] }}/vote-up" method="POST">
-                <input id="vote_up_button" name="vote_up_button" type="image" src="/static/img/vote_up.png"
+                <input id="vote_up_button" name="vote_up_button" type="image" src="/static/arrows.webp.png"
                        alt="Vote-up" width="60" value="{{ row[0] }}">
             </form>
         </td>
         <td align="middle">
             <form action="/question/{{ row[0] }}/vote-down" method="POST">
-                <input id="vote_down_button" name="vote_down_button" type="image" src="/static/img/vote_down.png"
+                <input id="vote_down_button" name="vote_down_button" type="image" src="/static/arrow_down.png"
                        alt="Vote-down" width="60" value="{{ row[0] }}">
             </form>
         </td>
