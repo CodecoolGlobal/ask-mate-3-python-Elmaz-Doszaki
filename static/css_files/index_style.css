@@ -86,6 +86,7 @@ section div {
     background-size:contain;
     background-repeat: no-repeat;
     font-size: 20px;
+    border-radius: 6px;
 
 }
 
@@ -101,6 +102,7 @@ button {
     background-repeat: no-repeat;
     background-color: #b1a296;
     font-family: 'Pacifico', cursive;
+    border-radius: 6px;
 
 }
 button:hover {
@@ -115,10 +117,10 @@ aside {
     flex-direction: column;
     margin: 5px 2px 5px 2px;
     border: 2px;
-    border-radius: 1px;
+    border-radius: 6px;
     padding: 3px;
-    background-color: #c1c3d1;
-    box-shadow: 3px 5px 4px #c1c3d1;
+    background-color: #e5e4e2;
+    box-shadow: 3px 5px 4px #e5e4e2;
     max-width: 20%;
     font-size: small;
     text-align: center;
@@ -135,7 +137,7 @@ main aside img {
 
 header h1 {
         color: black;
-        font-size: 90px;
+        font-size: 80px;
         font-weight: 200;
         font-style: normal;
         font-family: "The Nautigal", cursive;
@@ -148,7 +150,7 @@ footer {
     bottom: 0px;
     min-height: 10vh;
     max-width: 100%;
-    background-image: linear-gradient(180deg, #B2BEB5, #b1a296, #b1a296, #b1a296, #b1a296, #b1a296, #b1a296);
+    background-image: linear-gradient(180deg, #e5e4e2, #b1a296, #b1a296, #b1a296, #b1a296, #b1a296, #b1a296);
 }
 footer ul {
     position: relative;
