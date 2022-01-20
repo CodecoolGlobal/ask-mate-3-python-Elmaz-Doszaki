@@ -158,7 +158,7 @@ def best_memes():
     pic_list = sorted(pic_list, key=lambda x: int(x[ANSWER_VOTE]), reverse= True)[:3]
     for i in pic_list:
         if i[IMG] != "0":
-        pics.append((i[ANSWER_VOTE], i[IMG]))
+            pics.append((i[ANSWER_VOTE], i[IMG]))
     pic_list = read_file(QUESTIONS_FILE)
     pic_list = sorted(pic_list, key=lambda x: int(x[VOTE]), reverse= True)[:3]
     for i in pic_list:
