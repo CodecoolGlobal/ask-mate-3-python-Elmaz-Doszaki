@@ -96,6 +96,12 @@ def read_file(filepath):
         return data
 
 
+def delete_file(file_path):
+    file_path = file_path[1:]
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+
 def time_stamp_decode(data):
     """
         Decodes the UNIX timestamp to readable string format.
