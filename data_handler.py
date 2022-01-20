@@ -74,8 +74,7 @@ def write_file(data, filepath):
     # data = time_stamp_encode(data)
     # data = time_stamp_decode(data)
     with open(filepath, 'w') as workfile:
-        for item in range(len(data)):
-            data[item] = data[item].replace("\r\n", NEW_LINE_SEPARATOR)
+        for item in data:
             row = SEPARATOR.join(item)
             workfile.write(row + '\n')
 
@@ -84,16 +83,14 @@ def append_file(data, filepath):
     # data = time_stamp_encode([data])
     # data = time_stamp_decode(data)
     with open(filepath, 'a') as workfile:
-        for item in range(len(data)):
-            data[item] = data[item].replace("\r\n", NEW_LINE_SEPARATOR)
         row = SEPARATOR.join(data)
         workfile.write(row + '\n')
 
 
 def read_file(filepath):
-    with open(filepath, 'r') as workfile:
+    with open(filepath) as workfile:
         row = workfile.readlines()
-        data = [item.replace(NEW_LINE_SEPARATOR, '\n').split(SEPARATOR) for item in row]
+        data = [item.replace('\n', '').split(SEPARATOR) for item in row]
         # data = time_stamp_decode(data)
         # data = time_stamp_encode(data)
         # data = base64_decoder_ans(data)
