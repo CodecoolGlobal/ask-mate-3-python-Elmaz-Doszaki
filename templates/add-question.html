@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Question</title>
-</head>
-<body>
-<h1>Add Question</h1>
-<form action="/add-question" method="post" enctype="multipart/form-data">
-    <div><label>Question title:</label> <br>
-        <input name="title" type="text" required minlength="3"></div>
-    <div><label>Question:</label> <br>
-        <textarea id="question" name="question" rows="6" cols="60"></textarea></div>
-    <input type="file" name="file1">
-    <button type="submit">Add new Question</button>
-</form>
-</body>
+  <link rel="stylesheet" href="/static/new_form_style.css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto"
+    rel="stylesheet"
+  />
+  <div class="form-style-8">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Add Question</title>
+    </head>
+    <body>
+      <form action="/list">
+        <button
+          id="home"
+          name="home_button"
+          type="submit"
+          action="/"
+          class="button"
+        >
+          HOME
+        </button>
+      </form>
+      <h1>Add Question</h1>
+      <form action="/add-question" method="post" enctype="multipart/form-data">
+        <div>
+          <label>Give your question a title:</label> <br />
+          <input name="title" type="text" required minlength="3" />
+        </div>
+        <div>
+          <label>Type your question:</label> <br />
+          <textarea id="question" name="question" rows="6" cols="60"></textarea>
+        </div>
+        <input type="file" class="button" name="file1" />
+        <button type="submit" class="button">Add new Question</button>
+      </form>
+    </body>
+  </div>
 </html>

@@ -16,7 +16,16 @@ TABLE_HEADERS = [
     'Vote Up',
     'Vote Down'
 ]
-
+ANSWER_HEADERS = [
+    '#ID',
+    'Submission time',
+    'Vote number',
+    'Message',
+    '',
+    'Delete',
+    'Vote Up',
+    'Vote Down'
+]
 QUESTIONS_FILE = "sample_data/question.csv"
 ID = 0
 TIME = 1
@@ -53,13 +62,15 @@ def data_sorting(data, order_by, order_direction):
         order_direction = False
     else:
         order_direction = True
-    data = sorted(data, key=lambda data: data[order_by], reverse=order_direction)
+    data = sorted(
+        data, key=lambda data: data[order_by], reverse=order_direction)
     return data
 
 
 def write_file(data, filepath):
     # data = base64_encoder(data)
     # data = time_stamp_encode(data)
+    # data = time_stamp_decode(data)
     with open(filepath, 'w') as workfile:
         for item in data:
             row = SEPARATOR.join(item)
@@ -68,7 +79,8 @@ def write_file(data, filepath):
 
 def append_file(data, filepath):
     # data = base64_encoder(data)
-    #     # data = time_stamp_encode(data)
+    # data = time_stamp_encode([data])
+    # data = time_stamp_decode(data)
     with open(filepath, 'a') as workfile:
         row = SEPARATOR.join(data)
         workfile.write(row + '\n')
@@ -79,8 +91,27 @@ def read_file(filepath):
         row = workfile.readlines()
         data = [item.replace('\n', '').split(SEPARATOR) for item in row]
         # data = time_stamp_decode(data)
+        # data = time_stamp_encode(data)
         # data = base64_decoder_ans(data)
         return data
+
+
+def time_stamp_decode(data):
+    """
+        Decodes the UNIX timestamp to readable string format.
+    """
+    for row in data:
+        row[1] = str(datetime.datetime.fromtimestamp(float(row[1])).strftime('%Y-%m-%d %H:%M:%S'))
+    return data
+
+
+def time_stamp_encode(data):
+    """
+        Encodes the string time format to UNIX timestamp.
+    """
+    for row in data:
+        row[1] = str(int(datetime.datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S').strftime("%s")))
+    return data
 
 
 def new_id(filepath):
@@ -94,8 +125,9 @@ def new_id(filepath):
 
 def get_time_stamp():
     current_time = str(int(time.time()))
-    decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    return decoded_time
+    decoded_time = str(datetime.datetime.fromtimestamp(
+        float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
+    return current_time
 
 
 def vote_question(q_id, vote):
@@ -118,3 +150,18 @@ def vote_answer(a_id, vote):
             else:
                 row[ANSWER_VOTE] = str(int(row[ANSWER_VOTE]) + 1)
     write_file(data, ANSWERS_FILE)
+
+
+def best_memes():
+    pics = []
+    pic_list = read_file(ANSWERS_FILE)
+    pic_list = sorted(pic_list, key=lambda x: int(x[ANSWER_VOTE]), reverse= True)[:3]
+    for i in pic_list:
+        if i[IMG] != "0":
+            pics.append((i[ANSWER_VOTE], i[IMG]))
+    pic_list = read_file(QUESTIONS_FILE)
+    pic_list = sorted(pic_list, key=lambda x: int(x[VOTE]), reverse= True)[:3]
+    for i in pic_list:
+        if i[QUESTION_IMG_PATH] != "0":
+            pics.append((i[VOTE], i[QUESTION_IMG_PATH]))
+    return sorted(pics, key=lambda x: int(x[0]), reverse= True)[:3]

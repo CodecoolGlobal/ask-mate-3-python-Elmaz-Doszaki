@@ -154,9 +154,8 @@ td.text-center {
 
 td.text-right {
     text-align: right;
-}
 
-/*** Button Styles ***/
+
 .button {
     background: #1b1e24;
     color: #ffffff;
@@ -200,4 +199,4 @@ td a {
     padding: 2px;
     background-color: #E5E4E2;
     margin: 0px;
-}
+  }
