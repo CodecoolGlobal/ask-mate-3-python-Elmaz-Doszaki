@@ -69,7 +69,7 @@ def data_sorting(data, order_by, order_direction):
 
 def write_file(data, filepath):
     # data = base64_encoder(data)
-    data = time_stamp_encode(data)
+    # data = time_stamp_encode(data)
     # data = time_stamp_decode(data)
     with open(filepath, 'w') as workfile:
         for item in data:
@@ -90,7 +90,7 @@ def read_file(filepath):
     with open(filepath) as workfile:
         row = workfile.readlines()
         data = [item.replace('\n', '').split(SEPARATOR) for item in row]
-        data = time_stamp_decode(data)
+        # data = time_stamp_decode(data)
         # data = time_stamp_encode(data)
         # data = base64_decoder_ans(data)
         return data
@@ -127,7 +127,7 @@ def get_time_stamp():
     current_time = str(int(time.time()))
     decoded_time = str(datetime.datetime.fromtimestamp(
         float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
-    return decoded_time
+    return current_time
 
 
 def vote_question(q_id, vote):
