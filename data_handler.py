@@ -72,8 +72,9 @@ def data_sorting(data, order_by, order_direction):
 def write_file(data, filepath):
     with open(filepath, 'w') as workfile:
         for item in range(len(data)):
-            data[item] = data[item].replace("\r\n", NEW_LINE_SEPARATOR)
-            row = SEPARATOR.join(item)
+            for i in range(len(data[item])):
+                data[item][i] = data[item][i].replace("\r\n", NEW_LINE_SEPARATOR)
+            row = SEPARATOR.join(data[item])
             workfile.write(row + '\n')
 
 def append_file(data, filepath):

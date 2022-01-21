@@ -90,11 +90,21 @@ section div {
 
 }
 
+@keyframes slow-pulser {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255,255,255,0.4);
+    }
+    100% {
+       box-shadow: 0 0 0 20px rgba(255,255,255,0);
+    }
+  }
+
 button {
+    animation: slow-pulser 2.5s infinite;
     height: 20vh;
     width: 50vh;
     font-size: 30px;
-    box-shadow: -1px 5px 4px #3f291f;
+    box-shadow: -2px 7px 5px #3f291f;
     background-image: url("/static/img/satir.png");
     background-position-x: center;
     background-position-y: center;
@@ -103,11 +113,14 @@ button {
     background-color: #b1a296;
     font-family: 'Pacifico', cursive;
     border-radius: 6px;
-
 }
+
 button:hover {
     transform: translate(2px, -8px);
-    box-shadow: -1px 3px 2px #E5E4E2;
+    height: 25vh;
+    width: 65vh;
+    font-size: 55px;
+    box-shadow: -3px 8px 6px #3f291f;
     font-family: 'Pacifico', cursive;
     transition: 1s;
 }

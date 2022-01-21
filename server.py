@@ -19,7 +19,8 @@ def display_questions_list():
     order_direction = args.get('order_direction', default='desc')
     list_of_questions = read_file(QUESTIONS_FILE)
     list_of_questions = time_stamp_decode(list_of_questions)
-    list_of_questions = data_sorting(list_of_questions, order_by, order_direction)
+    list_of_questions = data_sorting(
+        list_of_questions, order_by, order_direction)
     return render_template('questions_list.html',
                            table_headers=TABLE_HEADERS,
                            list_of_questions=list_of_questions,
@@ -39,11 +40,13 @@ def display_question(question_id):
             current_question.append(row[TITLE])
             current_question.append(row[MESSAGE])
             current_question.append(row[QUESTION_IMG_PATH])
+            write_file(list_of_questions, QUESTIONS_FILE)
     answer_list = read_file(ANSWERS_FILE)
     current_answers = []
     for row in answer_list:
         if row[QUESTION_ID_IN_ANSWERS] == question_id:
-            answers = [row[ID], row[TIME], row[ANSWER_VOTE], row[ANSWER_MESSAGE], row[IMG]]
+            answers = [row[ID], row[TIME], row[ANSWER_VOTE],
+                       row[ANSWER_MESSAGE], row[IMG]]
             current_answers.append(answers)
     if len(current_answers) > 0:
         current_answers = time_stamp_decode(current_answers)
@@ -67,8 +70,10 @@ def add_question():
         else:
             file1 = request.files['file1']
             path = UPLOAD_FOLDER + "Q" + id + file1.filename
-            file1.save(os.path.join(app.config['UPLOAD_FOLDER'], "Q" + id + file1.filename))
-        data = [id, get_time_stamp(), "0", "0", request.form['title'], request.form['question'], path]
+            file1.save(os.path.join(
+                app.config['UPLOAD_FOLDER'], "Q" + id + file1.filename))
+        data = [id, get_time_stamp(), "0", "0", request.form['title'],
+                request.form['question'], path]
         append_file(data, QUESTIONS_FILE)
         return redirect('/questions/'+id)
 
@@ -97,9 +102,11 @@ def add_new_answer():
     else:
         answerfile = request.files['answerfile']
         path = UPLOAD_FOLDER + "A" + max_id + answerfile.filename
-        answerfile.save(os.path.join(app.config['UPLOAD_FOLDER'], "A" + max_id + answerfile.filename))
+        answerfile.save(os.path.join(
+            app.config['UPLOAD_FOLDER'], "A" + max_id + answerfile.filename))
 
-    data = [max_id, get_time_stamp(), '0', request.form['question_id'], request.form['answer_message'], path]
+    data = [max_id, get_time_stamp(), '0', request.form['question_id'],
+            request.form['answer_message'], path]
     append_file(data, ANSWERS_FILE)
     return redirect("/questions/" + request.form['question_id'])
 
