@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
+
 <html>
-  <link rel="stylesheet" href="/static/css_files/footer.css">
-  <div class="container">
+  <link rel="stylesheet" href="/static/css_files/basic.css">
   <link rel="stylesheet" href="/static/css_files/question.css" />
   <link
     href="https://fonts.googleapis.com/css?family=Roboto"
@@ -18,29 +18,47 @@
 />
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <head>
-    <title>Ask Meme</title>
-    <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
-
-  </head>
-  <body>
-    <header>Ask Meme</header>
-    <br />
-    <form action="/list">
-        <button
-          id="home"
-          type="submit"
-          class="home-button"
-        >
-          HOME
-        </button>
-    </form>
+<head>
+  <title>Ask Meme</title>
+  <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
+  
+</head>
+<body>
+  <div class="container">
+    <div class = "head">
+      <div class = "logo"></div>
+      <div class = "search">
+          <form action="/action_page.php">
+              <input type="text" placeholder="Search.." name="search">
+              <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+      </div>
+      <div class = "account"></div>
+      <div class = "empty"></div>
+      <a href = #vmi class = "nav1">Questions</a>
+      <a href = #vmi class = "nav2">Premium</a>
+      <a href = #vmi class = "nav3">About Us</a>
+      <a href = #vmi class = "nav4">Contact</a>
+      <div class = "headline">Question</div>    
+    </div>
+    <div class = "back_button">
+      <form action="/list">
+          <button
+            id="home"
+            type="submit"
+            class="button"
+          >
+            BACK
+          </button>
+      </form>
+    </div>
     <br />
     
     <div class = "question-header">
       <table>
         <tr>
-          {% for item in range(current_question|length) %} {% if item != 4 %}
+          {% for item in range(current_question|length) %} 
+          {% if item != 4 %}
           <th class = "question-header">{{ current_question[item] }}</th>
           {% elif current_question[item] != "0" %}
           <th class = "question-header" ><img src="{{ current_question[item] }}" height="80px" /></th>
@@ -141,7 +159,8 @@
           <li> <a href="#"> <i class="fa fa-instagram"> </i> </a> </li>
           <li> <a href="#"> <i class="fa fa-linkedin"> </i> </a> </li>
         </ul>
-  </footer>
-  </body>
-</div>
+    </footer>
+  </div>
+</body>
+
 </html>

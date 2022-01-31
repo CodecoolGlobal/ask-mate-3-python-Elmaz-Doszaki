@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<link rel="stylesheet" href="/static/css_files/basic.css">
 <link rel="stylesheet" href="/static/css_files/list.css">
-<link rel="stylesheet" href="/static/css_files/footer.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap" rel="stylesheet"/>
 
 <head>
     <title>Ask Meme</title>
     <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
 <div class = "container">
-<div align="middle" class="table-title">
-    <h1 align="middle">Ask Meme</h1>
-    <h2 align="middle">Question list</h2>
-    <form action="/add-question">
-        <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/add-question">
-    </form>
-</div>
-
+    <div class = "head">
+        <div class = "logo"></div>
+        <div class = "search">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class = "account"></div>
+        <div class = "empty"></div>
+        <a href = #vmi class = "nav1">Questions</a>
+        <a href = #vmi class = "nav2">Premium</a>
+        <a href = #vmi class = "nav3">About Us</a>
+        <a href = #vmi class = "nav4">Contact</a>
+        <div class = "headline">Questions</div>    
+    </div>
+    
+        <form action="/add-question">
+            <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/add-question">
+        </form>
+  
 <form action="/list" method="get">
-    <div>
+    <div class = "order">
         <label for="order_by">Sort by:</label>
         <select name="order_by" id="order_by">
             <option {{ 'selected' if order_by == 'title' }} value="title">Title</option>
@@ -42,57 +53,57 @@
         <button>Sort</button>
     </div>
 </form>
-
-<table>
-    <tr>
-        {% for item in table_headers %}
-            <th>{{ item }}</th>
-        {% endfor %}
-    </tr>
+<div class = "questions">
     {% for row in list_of_questions %}
-    <tr>
-        {% for index in range(row|length) %}
-            {% if index != 6 %}
-                <td><a href='/questions/{{ row[0] }}'>{{ row[index] }}</a></td>
-            {% elif row[index] != "0" %}
-                <td><img src="{{ row[index] }}"></td>
-            {% else %}
-                <td></td>
-            {% endif %}
-        {% endfor %}
+        <div class = "question">
+                {% for index in range(1, row|length) %}
+                    {% if index != 6 %}
+                        <div class = "data_{{ index }}">{{ row[index] }}</div>
+                    {% elif row[index] != "0" %}
+                        <div class = "data_image"><img src="{{ row[index] }}"></div>
+                    {% else %}
+                        <div class= "empty"></div>
+                    {% endif %}
+                {% endfor %}
+                <form action="/question/{{ row[0] }}/delete" method="POST">
+                    <input class= "kuka" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
 
-        <td align="middle">
-
-            <form action="/question/{{ row[0] }}/delete" method="POST">
-                <input class= "icon" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
-
-                       value="delete_button">
-            </form>
-        </td>
-        <td align="middle">
-            <form action="/question/{{ row[0] }}/vote-up" method="POST">
-                <input class= "icon" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
-                       alt="Vote-up" width="60" value="{{ row[0] }}">
-            </form>
-        </td>
-        <td align="middle">
-            <form action="/question/{{ row[0] }}/vote-down" method="POST">
-                <input class= "icon" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
-                       alt="Vote-down" width="60" value="{{ row[0] }}">
-            </form>
-        </td>
-
-        </tr>
+                        value="delete_button">
+                </form>
+                <form action="/question/{{ row[0] }}/vote-up" method="POST">
+                    <input class= "up" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
+                        alt="Vote-up" width="60" value="{{ row[0] }}">
+                </form>
+                <form action="/question/{{ row[0] }}/vote-down" method="POST">
+                    <input class= "down" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
+                        alt="Vote-down" width="60" value="{{ row[0] }}">
+                </form>
+            
+            <div class = "view">
+                <form action="/questions/{{ row[0] }}">
+                    <button id="home" type="submit" class="view">View</button>
+                </form>
+                
+            </div>
+        </div>
     {% endfor %}
-</table>
 </div>
-<footer>
-    <ul>
-        <li> <a href="#"> <i class="fa fa-facebook"> </i> </a> </li>
-        <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
-        <li> <a href="#"> <i class="fa fa-instagram"> </i> </a> </li>
-        <li> <a href="#"> <i class="fa fa-linkedin"> </i> </a> </li>
-      </ul>
-</footer>
+    <footer>
+        <ul>
+        <li>
+            <a href="#"> <i class="fa fa-facebook"> </i> </a>
+        </li>
+        <li>
+            <a href="#"> <i class="fa fa-twitter"> </i> </a>
+        </li>
+        <li>
+            <a href="#"> <i class="fa fa-instagram"> </i> </a>
+        </li>
+        <li>
+            <a href="#"> <i class="fa fa-linkedin"> </i> </a>
+        </li>
+        </ul>
+    </footer>
+</div>
 </body>
 </html>

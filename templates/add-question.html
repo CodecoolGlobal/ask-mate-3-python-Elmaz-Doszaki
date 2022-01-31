@@ -1,57 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link rel="stylesheet" href="/static/css_files/footer.css">
+  <link rel="stylesheet" href="/static/css_files/basic.css" />
   <link rel="stylesheet" href="/static/css_files/new_form_style.css" />
   <link
     href="https://fonts.googleapis.com/css?family=Roboto"
     rel="stylesheet"
   />
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container"> 
-<head>
-      <meta charset="UTF-8" />
-      <title>Ask Meme</title>
-      <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
-    </head>
-    <body>
-      <header>
-        Ask Mate
-      </header>
-      <br> <br> <br>
-      <form action="/list">
-        <button
-          id="home"
-          type="submit"
-          class="button"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet"
+  />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ask Meme</title>
+    <link rel="icon" href="static/img/logo.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="head">
+        <div class="logo"></div>
+        <div class="search">
+          <form action="/action_page.php">
+            <input type="text" placeholder="Search.." name="search" />
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+        <div class="account"></div>
+        <div class="empty"></div>
+        <a href="#vmi" class="nav1">Questions</a>
+        <a href="#vmi" class="nav2">Premium</a>
+        <a href="#vmi" class="nav3">About Us</a>
+        <a href="#vmi" class="nav4">Contact</a>
+        <div class="headline">Add question</div>
+      </div>
+      <div class="back_button">
+        <form action="/list">
+          <button id="home" type="submit" class="button">BACK</button>
+        </form>
+      </div>
+      <div class="form-style-8">
+        <form
+          action="/add-question"
+          method="post"
+          enctype="multipart/form-data"
         >
-          HOME
-        </button>
-        <div class="form-style-8">
-      </form>
-      <h2 align="middle">Add question</h2>
-      <form action="/add-question" method="post" enctype="multipart/form-data">
-        <div>
-          <label class = "text">Give your question a title:</label> <br />
-          <input placeholder="Type here..." name="title" type="text" required minlength="3" />
-        </div>
-        <div>
-          <label class = "text">Type your question:</label> <br />
-          <textarea placeholder="Type here..." id="question" name="question" rows="6" cols="60"></textarea>
-        </div>
-        <input type="file" class="tallozas" name="file1" />
-        <button type="submit" class="button">Add new Question</button>
-      </form>
-    </div>
-    <footer>
-      <ul>
-          <li> <a href="#"> <i class="fa fa-facebook"> </i> </a> </li>
-          <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
-          <li> <a href="#"> <i class="fa fa-instagram"> </i> </a> </li>
-          <li> <a href="#"> <i class="fa fa-linkedin"> </i> </a> </li>
+          <div>
+            <label class="text">Give your question a title:</label> <br />
+            <input
+              placeholder="Type here..."
+              name="title"
+              type="text"
+              required
+              minlength="3"
+            />
+          </div>
+          <div>
+            <label class="text">Type your question:</label> <br />
+            <textarea
+              placeholder="Type here..."
+              id="question"
+              name="question"
+              rows="6"
+              cols="60"
+            ></textarea>
+          </div>
+          <input type="file" class="tallozas" name="file1" />
+          <button type="submit" class="button">Add new Question</button>
+        </form>
+      </div>
+      <footer>
+        <ul>
+          <li>
+            <a href="#"> <i class="fa fa-facebook"> </i> </a>
+          </li>
+          <li>
+            <a href="#"> <i class="fa fa-twitter"> </i> </a>
+          </li>
+          <li>
+            <a href="#"> <i class="fa fa-instagram"> </i> </a>
+          </li>
+          <li>
+            <a href="#"> <i class="fa fa-linkedin"> </i> </a>
+          </li>
         </ul>
-  </footer>
-    </body>
-  </div>
+      </footer>
+    </div>
+  </body>
 </html>

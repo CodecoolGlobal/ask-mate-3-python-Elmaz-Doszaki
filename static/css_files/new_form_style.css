@@ -14,39 +14,6 @@ meg fehér meg fekete
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
 fontokhoz */
-.container {
-  margin: auto;
-  width: 79%;
-  height: 1500px;
-  background-color: #b1a296;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  text-rendering: optimizeLegibility;
-  width: 100%;
-  height: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  background-color: #2e2a26;
-  opacity: 0.8;
-  background-image: radial-gradient(#b1a296 0.5px, transparent 0.5px),
-    radial-gradient(#b1a296 0.5px, #2e2a26 0.5px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-}
-
-h1 {
-  color: #fafafa;
-  font-size: 40px;
-  font-weight: 400;
-  font-style: normal;
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-}
-
 .text {
   font-family: "Luxurious Roman", cursive;
   font-size: 20px;
@@ -58,11 +25,11 @@ h1 {
   padding: 30px;
   background: #fafafa;
   margin: 50px auto;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   border-radius: 3px;
   border: 4px dotted #5d5c61;
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 .form-style-8 h2 {
   background: #ffffff;
@@ -116,28 +83,14 @@ h1 {
   resize: none;
   overflow: hidden;
 }
-.button {
-  background: #1b1e24;
-  color: #ffffff;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 20px;
-  font-family: "Luxurious Roman", cursive;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 3px;
-  margin-right: 10px;
-}
 
 .tallozas {
   background: #000000;
   color: #ffffff;
-  padding: 13px 10px;
+  padding: 16px 10px;
   text-align: center;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 15px;
   font-family: "Luxurious Roman", cursive;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
@@ -154,47 +107,6 @@ h1 {
   box-shadow: 15px 15px 15px #363535;
 }
 
-.button {
-  background-color: #000000;
-  color: rgb(255, 255, 255);
-  border: 2px solid #000000;
-  border-radius: 3px;
-  box-shadow: 5px 5px 5px #363535;
-}
-
-.button:hover {
-  background-color: #4e5066;
-  color: rgb(255, 255, 255);
-  border: 3px solid #000000;
-  box-shadow: 15px 15px 15px #363535;
-}
-
-#home {
-  position: absolute;
-  transition: 0.5s ease;
-  left: 20px;
-  top: 20px;
-}
-
-header h1 {
-  font-family: "The Nautigal", cursive;
-  color: #fafafa;
-}
-header {
-  width: 100%;
-  height: 15vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #b1a296;
-  font-weight: bold;
-  font-family: "The Nautigal", cursive;
-  color: #fafafa;
-  font-size: 100px;
-  text-shadow: 2px 2px black;
-}
-
-h2 {
-  font-family: "The Nautigal", cursive;
-  font-size: 35px;
+.back_button {
+  margin-left: 20px;
 }
