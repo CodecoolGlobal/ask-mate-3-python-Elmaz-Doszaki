@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect
 from data_handler import *
 
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static'
+=======
+from flask import Flask
+
+app = Flask(__name__)
+>>>>>>> 093bd79d657b518dc5044789e67e17e0a0e33ab6
 
 
 @app.route("/")
 def hello():
+<<<<<<< HEAD
     list_of_best_memes = best_memes()
     return render_template('index.html', list_of_best_memes=list_of_best_memes)
 
@@ -191,3 +198,10 @@ def vote_down_answer(answer_id):
 
 if __name__ == "__main__":
     app.run(debug=True)
+=======
+    return "Hello World!"
+
+
+if __name__ == "__main__":
+    app.run()
+>>>>>>> 093bd79d657b518dc5044789e67e17e0a0e33ab6
