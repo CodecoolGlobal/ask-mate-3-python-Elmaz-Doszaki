@@ -26,10 +26,11 @@ def display_questions_list():
 
 @app.route('/questions/<question_id>')
 def display_question(question_id):
+    data_manager2.increase_view_number(question_id)
     return render_template('question.html',
-                           current_question=get_current_question(question_id),
+                           current_question=data_manager2.display_question(question_id),
                            answer_header=ANSWER_HEADERS,
-                           current_answers=get_current_answers(question_id),
+                           current_answers=data_manager2.get_answers_for_question(question_id),
                            question_id=question_id)
 
 
