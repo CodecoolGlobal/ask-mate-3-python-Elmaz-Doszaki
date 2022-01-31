@@ -56,31 +56,34 @@
 <div class = "questions">
     {% for row in list_of_questions %}
         <div class = "question">
-                {% for index in range(1, row|length) %}
-                    {% if index != 6 %}
-                        <div class = "data_{{ index }}">{{ row[index] }}</div>
-                    {% elif row[index] != "0" %}
-                        <div class = "data_image"><img src="{{ row[index] }}"></div>
-                    {% else %}
-                        <div class= "empty"></div>
-                    {% endif %}
-                {% endfor %}
-                <form action="/question/{{ row[0] }}/delete" method="POST">
-                    <input class= "kuka" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
+            <div class = "data_1" >{{ row["submission_time"] }}</div>
+            <div class = "data_2" >{{ row["view_number"] }}</div>
+            <div class = "data_3" >{{ row["vote_number"] }}</div>
+            <div class = "data_4" >{{ row["title"] }}</div>
+            <div class = "data_5" >{{ row["message"] }}</div>
+            {% if row["image"] %}
+                <div class = "data_image"><img src="/static/{{ row["image"] }}"></div>
+            {% else %}
+                <div class= "empty"></div>
+            {% endif %}
 
-                        value="delete_button">
-                </form>
-                <form action="/question/{{ row[0] }}/vote-up" method="POST">
-                    <input class= "up" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
-                        alt="Vote-up" width="60" value="{{ row[0] }}">
-                </form>
-                <form action="/question/{{ row[0] }}/vote-down" method="POST">
-                    <input class= "down" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
-                        alt="Vote-down" width="60" value="{{ row[0] }}">
-                </form>
-            
+
+            <form action="/question/{{ row['id'] }}/delete" method="POST">
+                <input class= "kuka" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
+
+                    value="delete_button">
+            </form>
+            <form action="/question/{{ row['id'] }}/vote-up" method="POST">
+                <input class= "up" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
+                    alt="Vote-up" width="60" value="{{ row['id'] }}">
+            </form>
+            <form action="/question/{{ row['id'] }}/vote-down" method="POST">
+                <input class= "down" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
+                    alt="Vote-down" width="60" value="{{ row['id'] }}">
+            </form>
+
             <div class = "view">
-                <form action="/questions/{{ row[0] }}">
+                <form action="/questions/{{ row["id"] }}">
                     <button id="home" type="submit" class="view">View</button>
                 </form>
                 

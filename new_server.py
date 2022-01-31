@@ -1,3 +1,4 @@
+import data_manager2
 from flask import Flask, render_template, request, redirect
 from data_manager import *
 
@@ -15,7 +16,7 @@ def display_questions_list():
     args = request.args
     order_by = args.get('order_by', default='submission_time', type=str)
     order_direction = args.get('order_direction', default='desc')
-    questions = data_sorting(get_questions(), order_by, order_direction)
+    questions = data_manager2.list_questions(order_by, order_direction)
     return render_template('questions_list.html',
                            table_headers=TABLE_HEADERS,
                            list_of_questions=questions,
