@@ -55,7 +55,6 @@ def add_question():
 
 @app.route('/question/<question_id>/new-answer', methods=['POST'])
 def display_answer(question_id):
-    question_id = question_id
     return render_template('answer_form.html', question_id=question_id)
 
 @app.route('/question/new-answer', methods=['POST'])

@@ -30,7 +30,7 @@ def display_question(cursor, question_id):
 def get_answers_for_question(cursor, question_id):
     cursor.execute("""
                     SELECT * FROM answer
-                    WHERE id = %(question_id)s
+                    WHERE question_id = %(question_id)s
                     ORDER BY vote_number DESC;
                     """,
                    {'question_id': question_id})
