@@ -11,12 +11,12 @@
   padding: 20px;
   display: grid;
   grid-gap: 5px;
-  grid-template-columns: 250px 1fr 50px 50px 50px;
-  grid-template-rows: 25px 200px 25px;
+  grid-template-columns: repeat(10,1fr);
+  grid-template-rows: minmax(25px,auto) minmax(200px,auto) 35px;
   grid-template-areas:
-    "time    title     view    view     view"
-    "photo   message   message message message"
-    "seen    vote      kuka     up       down";
+    "time   time   time    title  title  title  title   title    view     seen"
+    "photo  photo  photo message message message message  message message message"
+    "tag-but  tag  tag    tag    tag        tag  vote   up       down      kuka";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
@@ -24,18 +24,21 @@
   grid-area: kuka;
   max-width: 25px;
   max-height: 25px;
-  padding-left: 15px;
-  padding-top: 5px;
+  place-self: center;
 }
 .up {
   grid-area: up;
   max-width: 35px;
   max-height: 35px;
+  justify-self: center;
+  align-self: center;
 }
 .down {
   grid-area: down;
   max-width: 35px;
   max-height: 35px;
+  justify-self: start;
+  align-self: center;
 }
 
 .data_1 {
@@ -45,14 +48,14 @@
 
 .data_2 {
   grid-area: seen;
-  justify-self: stretch;
-  text-align: center;
+  justify-self: center;
+  align-self: center;
 }
 
 .data_3 {
   grid-area: vote;
-  justify-self: stretch;
-  text-align: center;
+  justify-self: end;
+  align-self: center;
 }
 
 .data_4 {
@@ -77,10 +80,22 @@
 
 .view {
   grid-area: view;
+  align-self: center;
+  text-align: center;
+  justify-self: end;
+  align-self: center;
+}
+
+.add-tag {
+  grid-area: tag-but;
   justify-self: center;
   align-self: center;
-  justify-self: stretch;
-  text-align: center;
+}
+
+.tags {
+  grid-area: tag;
+  justify-self: start;
+  align-self: center;
 }
 
 img {
