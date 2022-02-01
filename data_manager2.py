@@ -5,6 +5,7 @@ import os
 
 UPLOAD_FOLDER = 'static/images/'
 
+
 @connection2.connection_handler
 def list_questions(cursor, order_by, order):
     cursor.execute(f"""
@@ -168,7 +169,7 @@ def delete_question_from_db(cursor, question_id):
                 DELETE  FROM question
                 WHERE id = %(question_id)s;
                 """,
-                {'question_id': question_id})
+                   {'question_id': question_id})
 
 
 @connection2.connection_handler
@@ -179,7 +180,8 @@ def delete_all_answer_from_db(cursor, q_id):
                 DELETE FROM answer
                 WHERE question_id = %(question_id)s;
                 """,
-                {'question_id': q_id})
+                   {'question_id': q_id})
+
 
 
 @connection2.connection_handler
@@ -190,7 +192,8 @@ def delete_an_answer(cursor, id):
                 DELETE  FROM answer
                 WHERE id = %(id)s;
                 """,
-                {'id': id})
+                   {'id': id})
+
 
 
 @connection2.connection_handler
@@ -199,7 +202,7 @@ def delete_img_from_question(cursor, question_id):
                 SELECT image FROM question
                 WHERE id = %(question_id)s AND image IS NOT NULL;
                 """,
-                {'question_id': question_id})
+                   {'question_id': question_id})
     file_path = cursor.fetchall()
     file_path = file_path[0]['image']
     if os.path.exists(file_path):
@@ -212,7 +215,7 @@ def delete_img_from_all_answer(cursor, q_id):
                 SELECT image FROM answer
                 WHERE question_id = %(q_id)s AND image IS NOT NULL;
                 """,
-                {'q_id': q_id})
+                   {'q_id': q_id})
     target_list = cursor.fetchall()
     for file_path in target_list:
         if os.path.exists(file_path['image']):
@@ -225,7 +228,7 @@ def delete_an_img_from_answer(cursor, id):
                 DELETE  FROM answer
                 WHERE id = %(id)s AND image IS NOT NULL;
                 """,
-                {'id': id})
+                   {'id': id})
     file_path = cursor.fetchall()
     if os.path.exists(file_path['image']):
         os.remove(file_path)
@@ -270,6 +273,23 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
                         'message': data['message'],
                         'submission_time': dt,
                         'edited_count': data['edited_count']})
+
+
+@connection2.connection_handler
+def get_comment(cursor, key_id: str, question_id: bool = True):
+    if question_id:
+        query = """
+                SELECT * FROM comment
+                WHERE question_id = %(key_id)s
+                """
+    else:
+        query = """
+                SELECT * FROM comment
+                WHERE answer_id = %(key_id)s
+                """
+    cursor.execute(query, {'key_id': int(key_id)})
+    comments = cursor.fetchall()
+    return comments
 
 
 def save_question_picture(file1, path):
