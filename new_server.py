@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect
 from data_manager import *
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'static'
+app.config['UPLOAD_FOLDER'] = 'static/images/'
 
 
 @app.route("/")
@@ -41,16 +41,16 @@ def add_question():
     else:
         question_id = str(new_id(QUESTIONS_FILE))
         file1 = request.files['file1']
-        title = request.form['title']
-        question = request.form['question']
         if request.files['file1'].filename == "":
-            path = "0"
+            path = ""
         else:
             file_name = file1.filename
             path = UPLOAD_FOLDER + "Q" + question_id + file_name
             upload_folder = app.config['UPLOAD_FOLDER']
             save_question_picture(file1, file_name, question_id, upload_folder)
-        append_new_question(path, question, question_id, title)
+
+        data = {'title': request.form['title'], 'message': request.form['question'], 'image': path}
+        data_manager2.add_new_data_to_table(data, 'question')
         return redirect('/questions/'+question_id)
 
 
