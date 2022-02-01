@@ -47,12 +47,7 @@ def increase_view_number(cursor, question_id):
                    """,
                    {'question_id': question_id})
 
-def save_question_picture(file1, file_name, question_id, upload_folder):
-    file1.save(os.path.join(upload_folder, "Q" + question_id + file_name))
 
-
-def save_answer_picture(answerfile, file_name, max_id, upload_folder):
-    answerfile.save(os.path.join(upload_folder, "A" + max_id + file_name))
 
 def delete_question(question_id):
     delete_img_from_all_answer(question_id)
@@ -172,3 +167,21 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
                         'submission_time': dt,
                         'edited_count': data['edited_count']})
 
+
+def save_question_picture(file1, path):
+    file1.save(os.path.join(path))
+
+
+def save_answer_picture(answerfile, file_name, max_id, upload_folder):
+    answerfile.save(os.path.join(upload_folder, "A" + max_id + file_name))
+
+
+@connection2.connection_handler
+def new_questionid(cursor):
+    cursor.execute("""
+                SELECT id FROM question
+                ORDER BY id DESC
+                LIMIT 1;
+                """,)
+    answers = int(cursor.fetchall()[0]["id"]) + 1
+    return answers
