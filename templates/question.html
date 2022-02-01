@@ -62,7 +62,7 @@
             <th>{{ current_question[0]["title"] }}</th>
             <th>{{ current_question[0]["message"] }}</th>
             {% if current_question[0]["image"] %}
-                <th class = "question-header"><img src="/static/{{ current_question[0]["image"] }}"></th>
+                <th class = "question-header"><img src="/{{ current_question[0]["image"] }}"}></th>
             {% else %}
                <th></th>
             {% endif %}
