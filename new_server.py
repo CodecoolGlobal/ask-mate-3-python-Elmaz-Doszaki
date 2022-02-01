@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect
 from data_manager import *
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'static'
+app.config['UPLOAD_FOLDER'] = 'static/images/'
 
 
 @app.route("/")
@@ -41,16 +41,16 @@ def add_question():
     else:
         question_id = str(new_id(QUESTIONS_FILE))
         file1 = request.files['file1']
-        title = request.form['title']
-        question = request.form['question']
         if request.files['file1'].filename == "":
-            path = "0"
+            path = ""
         else:
             file_name = file1.filename
-            path = UPLOAD_FOLDER + "Q" + question_id + file_name
+            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file_name
             upload_folder = app.config['UPLOAD_FOLDER']
-            save_question_picture(file1, file_name, question_id, upload_folder)
-        append_new_question(path, question, question_id, title)
+            data_manager2.save_question_picture(file1, file_name, question_id, upload_folder)
+
+        data = {'title': request.form['title'], 'message': request.form['question'], 'image': path}
+        data_manager2.add_new_data_to_table(data, 'question')
         return redirect('/questions/'+question_id)
 
 
@@ -74,7 +74,7 @@ def add_new_answer():
         file_name = answerfile.filename
         path = UPLOAD_FOLDER + "A" + max_id + file_name
         upload_folder = app.config['UPLOAD_FOLDER']
-        save_answer_picture(answerfile, file_name, max_id, upload_folder)
+        data_manager2.save_answer_picture(answerfile, file_name, max_id, upload_folder)
     append_new_answer(max_id, path)
     return redirect("/questions/" + request.form['question_id'])
 
@@ -86,9 +86,15 @@ def append_new_answer(max_id, path):
 
 @app.route('/question/<q_id>/delete', methods=['POST'])
 def delete_question(q_id):
-    delete_question_from_file(q_id)
-    delete_answer_to_question(q_id)
+    data_manager2.delete_question(q_id)
     return redirect('/list')
+
+
+@app.route('/answer/<a_id>/delete', methods=['POST'])
+def delete_answer(a_id):
+    data_manager2.delete_an_img_from_answer(a_id)
+    data_manager2.delete_an_answer(a_id)
+    return redirect("/questions/" + request.form['question_id'])
 
 
 @app.route('/question/<q_id>/edit', methods=['POST', 'GET'])
@@ -101,12 +107,6 @@ def route_edit(q_id):
         message = request.form['message']
         edit_question(message, q_id, title)
         return redirect('/questions/' + q_id)
-
-
-@app.route('/answer/<a_id>/delete', methods=['POST'])
-def delete_answer(a_id):
-    delete_an_answer(a_id)
-    return redirect("/questions/" + request.form['question_id'])
 
 
 @app.route('/question/<q_id>/vote-up', methods=['POST'])

@@ -84,13 +84,26 @@ main button {
   background-color: #b1a296;
   font-family: "Pacifico", cursive;
   border-radius: 6px;
+  animation: slow-pulser 2s infinite;
+  transition: all 0.35s ease-in-out;
+
 }
 button:hover {
   transform: translate(2px, -8px);
-  box-shadow: -1px 3px 2px #e5e4e2;
+  box-shadow: -1px 3px 2px yellow;
   font-family: "Pacifico", cursive;
-  transition: 1s;
+  transition: all 0.5s ease-in;
 }
+
+@keyframes slow-pulser {
+    0% {
+      box-shadow: 0 0 0 -6px yellow;
+
+    }
+    100% {
+       box-shadow: 0 0 0 22px yellow;
+    }
+  }
 
 aside {
   display: flex;

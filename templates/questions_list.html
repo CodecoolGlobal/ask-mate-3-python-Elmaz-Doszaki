@@ -42,8 +42,8 @@
             <option {{ 'selected' if order_by == 'title' }} value="title">Title</option>
             <option {{ 'selected' if order_by == 'submission_time' }} value="submission_time">Submission time</option>
             <option {{ 'selected' if order_by == 'message' }} value="message">Message</option>
-            <option {{ 'selected' if order_by == 'number_of_views' }} value="number_of_views">Number of views</option>
-            <option {{ 'selected' if order_by == 'number_of_votes' }} value="number_of_votes">Number of votes</option>
+            <option {{ 'selected' if order_by == 'view_number' }} value="view_number">Number of views</option>
+            <option {{ 'selected' if order_by == 'vote_number' }} value="vote_number">Number of votes</option>
         </select>
         <label for="order_direction">Order:</label>
         <select name="order_direction" id="order_direction">
@@ -62,7 +62,7 @@
             <div class = "data_4" >{{ row["title"] }}</div>
             <div class = "data_5" >{{ row["message"] }}</div>
             {% if row["image"] %}
-                <div class = "data_image"><img src="/static/{{ row["image"] }}"></div>
+                <div class = "data_image"><img src="{{ row["image"] }}"></div>
             {% else %}
                 <div class= "empty"></div>
             {% endif %}
