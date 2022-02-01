@@ -332,3 +332,14 @@ def get_comments_from_answers(cursor, current_answers):
         return cursor.fetchall()
     else:
         return None
+
+
+@connection2.connection_handler
+def get_searched_question(cursor, search):
+    cursor.execute("""
+                SELECT * FROM question 
+                WHERE message LIKE %(search)s OR title LIKE %(search)s;
+    """,
+                   {'search': '%' + search + '%'})
+    questions = cursor.fetchall()
+    return questions
