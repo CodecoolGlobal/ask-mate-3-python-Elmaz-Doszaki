@@ -100,12 +100,14 @@ def delete_answer(a_id):
 @app.route('/question/<q_id>/edit', methods=['POST', 'GET'])
 def route_edit(q_id):
     if request.method == 'GET':
-        message, title = data_for_question_edit(q_id)
+        question_to_edit = data_manager2.route_edit_question(q_id)
+        message = question_to_edit["message"]
+        title = question_to_edit["title"]
         return render_template('edit-question.html', title=title, message=message, q_id=q_id)
     else:
         title = request.form['title']
         message = request.form['message']
-        edit_question(message, q_id, title)
+        data_manager2.edit_question(q_id, title, message)
         return redirect('/questions/' + q_id)
 
 
