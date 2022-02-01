@@ -111,25 +111,35 @@ def delete_answer(a_id):
 
 @app.route('/question/<q_id>/vote-up', methods=['POST'])
 def vote_up_question(q_id):
-    vote_question(q_id, 'up')
+    vote_number = data_manager2.get_question_vote_number(q_id)
+    modify_vote_number = util.vote_up_or_down(vote_number, 'up')
+    data_manager2.update_question_vote_number(q_id, modify_vote_number)
     return redirect('/list')
 
 
 @app.route('/question/<q_id>/vote-down', methods=['POST'])
 def vote_down_question(q_id):
-    vote_question(q_id, 'down')
+    vote_number = data_manager2.get_question_vote_number(q_id)
+    modify_vote_number = util.vote_up_or_down(vote_number, 'down')
+    data_manager2.update_question_vote_number(q_id, modify_vote_number)
     return redirect('/list')
 
 
 @app.route('/answer/<answer_id>/vote-up', methods=['POST'])
 def vote_up_answer(answer_id):
-    vote_answer(answer_id, 'up')
+    question_id = request.form['question_id']
+    vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
+    modify_vote_number = util.vote_up_or_down(vote_number, 'up')
+    data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     return redirect('/questions/' + request.form['question_id'])
 
 
 @app.route('/answer/<answer_id>/vote-down', methods=['POST'])
 def vote_down_answer(answer_id):
-    vote_answer(answer_id, 'down')
+    question_id = request.form['question_id']
+    vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
+    modify_vote_number = util.vote_up_or_down(vote_number, 'down')
+    data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     return redirect('/questions/' + request.form['question_id'])
 
 

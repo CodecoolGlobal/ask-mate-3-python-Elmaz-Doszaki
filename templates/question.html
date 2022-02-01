@@ -84,8 +84,8 @@
         {% for row in current_answers %}
             <tr>
                 <td>{{ row["id"] }}</td>
-                <td>{{ row["vote_number"] }}</td>
                 <td>{{ row["submission_time"] }}</td>
+                <td>{{ row["vote_number"] }}</td>
                 <td>{{ row["message"] }}</td>
                 {% if row["image"] %}
                     <td ><img src="/static/{{ row["image"] }}"></td>
@@ -106,20 +106,20 @@
                         <input
                                 type="hidden"
                                 name="question_id"
-                                value="{{ current_question['id'] }}"
+                                value="{{ current_question[0]['id'] }}"
                         />
                     </form>
                 </td>
                 <td align="middle">
                     <form action="/answer/{{ row['id'] }}/vote-up" method="POST">
-                        <input type="hidden" name="question_id" value="{{ current_question['id'] }}"/>
+                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
                         <input class= "icon" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
                                alt="Vote-up" width="60" value="{{ row[0] }}">
                     </form>
                 </td>
                 <td align="middle">
                     <form action="/answer/{{ row['id'] }}/vote-down" method="POST">
-                        <input type="hidden" name="question_id" value="{{ current_question['id'] }}"/>
+                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
                         <input class= "icon" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
                                alt="Vote-down" width="60" value="{{ row[0] }}">
                     </form>

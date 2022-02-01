@@ -42,3 +42,49 @@ def increase_view_number(cursor, question_id):
                    WHERE id = %(question_id)s;
                    """,
                    {'question_id': question_id})
+
+
+@connection2.connection_handler
+def get_question_vote_number(cursor, question_id):
+    cursor.execute("""
+                    SELECT vote_number FROM question
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id})
+    vote_number = cursor.fetchall()
+    return vote_number[0]
+
+
+@connection2.connection_handler
+def update_question_vote_number(cursor, question_id, vote_number):
+    cursor.execute("""
+                    UPDATE question
+                    SET vote_number = %(vote_number)s
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'vote_number': vote_number})
+
+
+@connection2.connection_handler
+def get_answer_vote_number(cursor, question_id, answer_id):
+    cursor.execute("""
+                    SELECT vote_number FROM answer
+                    WHERE question_id = %(question_id)s AND id = %(answer_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'answer_id': answer_id})
+    vote_number = cursor.fetchall()
+    return vote_number[0]
+
+
+@connection2.connection_handler
+def update_answer_vote_number(cursor, question_id, answer_id, vote_number):
+    cursor.execute("""
+                    UPDATE answer
+                    SET vote_number = %(vote_number)s
+                    WHERE question_id = %(question_id)s AND id = %(answer_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'answer_id': answer_id,
+                    'vote_number': vote_number})
