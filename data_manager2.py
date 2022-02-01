@@ -94,6 +94,30 @@ def update_answer_vote_number(cursor, question_id, answer_id, vote_number):
                     'vote_number': vote_number})
 
 
+@connection2.connection_handler
+def route_edit_question(cursor, question_id):
+    cursor.execute("""
+                    SELECT * FROM question
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id})
+
+    question_to_edit = cursor.fetchall()
+    return question_to_edit[0]
+
+
+@connection2.connection_handler
+def edit_question(cursor, question_id, edited_title, edited_message):
+    cursor.execute("""
+                    UPDATE question
+                    SET title = %(edited_title)s, message = %(edited_message)s
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'edited_title': edited_title,
+                    'edited_message': edited_message})
+
+
 def save_question_picture(file1, file_name, question_id, upload_folder):
     file1.save(os.path.join(upload_folder, "Q" + question_id + file_name))
 
