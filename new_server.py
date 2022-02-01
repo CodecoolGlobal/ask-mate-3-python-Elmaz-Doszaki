@@ -39,18 +39,17 @@ def add_question():
     if request.method == 'GET':
         return render_template('add-question.html')
     else:
-        question_id = str(new_id(QUESTIONS_FILE))
+        question_id = str(data_manager2.new_questionid())
         file1 = request.files['file1']
         if request.files['file1'].filename == "":
             path = ""
         else:
-            file_name = file1.filename
-            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file_name
-            upload_folder = app.config['UPLOAD_FOLDER']
-            data_manager2.save_question_picture(file1, file_name, question_id, upload_folder)
-
+            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file1.filename
         data = {'title': request.form['title'], 'message': request.form['question'], 'image': path}
         data_manager2.add_new_data_to_table(data, 'question')
+        if path != "":
+            data_manager2.save_question_picture(file1, path)
+
         return redirect('/questions/'+question_id)
 
 

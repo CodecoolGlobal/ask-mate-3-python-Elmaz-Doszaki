@@ -48,82 +48,6 @@ def increase_view_number(cursor, question_id):
                    {'question_id': question_id})
 
 
-@connection2.connection_handler
-def get_question_vote_number(cursor, question_id):
-    cursor.execute("""
-                    SELECT vote_number FROM question
-                    WHERE id = %(question_id)s;
-                    """,
-                   {'question_id': question_id})
-    vote_number = cursor.fetchall()
-    return vote_number[0]
-
-
-@connection2.connection_handler
-def update_question_vote_number(cursor, question_id, vote_number):
-    cursor.execute("""
-                    UPDATE question
-                    SET vote_number = %(vote_number)s
-                    WHERE id = %(question_id)s;
-                    """,
-                   {'question_id': question_id,
-                    'vote_number': vote_number})
-
-
-@connection2.connection_handler
-def get_answer_vote_number(cursor, question_id, answer_id):
-    cursor.execute("""
-                    SELECT vote_number FROM answer
-                    WHERE question_id = %(question_id)s AND id = %(answer_id)s;
-                    """,
-                   {'question_id': question_id,
-                    'answer_id': answer_id})
-    vote_number = cursor.fetchall()
-    return vote_number[0]
-
-
-@connection2.connection_handler
-def update_answer_vote_number(cursor, question_id, answer_id, vote_number):
-    cursor.execute("""
-                    UPDATE answer
-                    SET vote_number = %(vote_number)s
-                    WHERE question_id = %(question_id)s AND id = %(answer_id)s;
-                    """,
-                   {'question_id': question_id,
-                    'answer_id': answer_id,
-                    'vote_number': vote_number})
-
-
-@connection2.connection_handler
-def route_edit_question(cursor, question_id):
-    cursor.execute("""
-                    SELECT * FROM question
-                    WHERE id = %(question_id)s;
-                    """,
-                   {'question_id': question_id})
-
-    question_to_edit = cursor.fetchall()
-    return question_to_edit[0]
-
-
-@connection2.connection_handler
-def edit_question(cursor, question_id, edited_title, edited_message):
-    cursor.execute("""
-                    UPDATE question
-                    SET title = %(edited_title)s, message = %(edited_message)s
-                    WHERE id = %(question_id)s;
-                    """,
-                   {'question_id': question_id,
-                    'edited_title': edited_title,
-                    'edited_message': edited_message})
-
-
-def save_question_picture(file1, file_name, question_id, upload_folder):
-    file1.save(os.path.join(upload_folder, "Q" + question_id + file_name))
-
-
-def save_answer_picture(answerfile, file_name, max_id, upload_folder):
-    answerfile.save(os.path.join(upload_folder, "A" + max_id + file_name))
 
 def delete_question(question_id):
     delete_img_from_all_answer(question_id)
@@ -242,3 +166,22 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
                         'message': data['message'],
                         'submission_time': dt,
                         'edited_count': data['edited_count']})
+
+
+def save_question_picture(file1, path):
+    file1.save(os.path.join(path))
+
+
+def save_answer_picture(answerfile, file_name, max_id, upload_folder):
+    answerfile.save(os.path.join(upload_folder, "A" + max_id + file_name))
+
+
+@connection2.connection_handler
+def new_questionid(cursor):
+    cursor.execute("""
+                SELECT id FROM question
+                ORDER BY id DESC
+                LIMIT 1;
+                """,)
+    answers = int(cursor.fetchall()[0]["id"]) + 1
+    return answers
