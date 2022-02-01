@@ -1,3 +1,5 @@
+from psycopg2.sql import NULL
+import data_manager2
 from flask import Flask, render_template, request, redirect, url_for
 from data_manager import *
 import data_manager2
@@ -31,7 +33,8 @@ def display_question(question_id):
                            current_question=data_manager2.display_question(question_id),
                            answer_header=ANSWER_HEADERS,
                            current_answers=data_manager2.get_answers_for_question(question_id),
-                           question_id=question_id)
+                           question_id=question_id,
+                           answer_comments=data_manager2.get_comment(question_id))
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -52,7 +55,6 @@ def add_question():
         return redirect('/questions/'+question_id)
 
 
-
 @app.route('/question/<question_id>/new-answer', methods=['POST'])
 def display_answer(question_id):
     return render_template('answer_form.html', question_id=question_id)
@@ -66,7 +68,6 @@ def add_new_answer():
                   'image': None}
     data_manager2.add_new_data_to_table(new_answer, 'answer')
     return redirect(url_for("display_question", question_id=question_id))
-
 
 
 @app.route('/question/<q_id>/delete', methods=['POST'])
@@ -128,6 +129,19 @@ def vote_down_answer(answer_id):
     modify_vote_number = util.vote_up_or_down(vote_number, 'down')
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     return redirect('/questions/' + request.form['question_id'])
+
+
+@app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
+def add_comment_to_question(question_id):
+    if request.method == 'GET':
+        return render_template('add-comment.html', question_id=question_id,
+                               current_question=data_manager2.display_question(question_id))
+    if request.method == 'POST':
+        data_manager2.add_new_data_to_table(
+            data={'question_id': question_id, 'answer_id': None, 'message': request.form['message'],
+                  'edited_count': None},
+            table_name='comment')
+        return redirect(url_for('display_question', question_id=question_id))
 
 
 @app.route('/answer/<answer_id>/edit', methods=['POST', 'GET'])
