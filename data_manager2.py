@@ -47,6 +47,53 @@ def increase_view_number(cursor, question_id):
                    """,
                    {'question_id': question_id})
 
+
+@connection2.connection_handler
+def get_question_vote_number(cursor, question_id):
+    cursor.execute("""
+                    SELECT vote_number FROM question
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id})
+    vote_number = cursor.fetchall()
+    return vote_number[0]
+
+
+@connection2.connection_handler
+def update_question_vote_number(cursor, question_id, vote_number):
+    cursor.execute("""
+                    UPDATE question
+                    SET vote_number = %(vote_number)s
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'vote_number': vote_number})
+
+
+@connection2.connection_handler
+def get_answer_vote_number(cursor, question_id, answer_id):
+    cursor.execute("""
+                    SELECT vote_number FROM answer
+                    WHERE question_id = %(question_id)s AND id = %(answer_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'answer_id': answer_id})
+    vote_number = cursor.fetchall()
+    return vote_number[0]
+
+
+@connection2.connection_handler
+def update_answer_vote_number(cursor, question_id, answer_id, vote_number):
+    cursor.execute("""
+                    UPDATE answer
+                    SET vote_number = %(vote_number)s
+                    WHERE question_id = %(question_id)s AND id = %(answer_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'answer_id': answer_id,
+                    'vote_number': vote_number})
+
+
 def save_question_picture(file1, file_name, question_id, upload_folder):
     file1.save(os.path.join(upload_folder, "Q" + question_id + file_name))
 
@@ -171,4 +218,3 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
                         'message': data['message'],
                         'submission_time': dt,
                         'edited_count': data['edited_count']})
-
