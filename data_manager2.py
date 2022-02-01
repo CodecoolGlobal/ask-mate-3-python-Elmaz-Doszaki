@@ -2,6 +2,7 @@ from typing import Dict, Optional
 
 import connection2
 import os
+from datetime import datetime
 
 UPLOAD_FOLDER = 'static/images/'
 
@@ -242,11 +243,48 @@ def delete_a_comment(cursor, c_id):
                    {'cid': c_id})
 
 @connection2.connection_handler
+def get_comment(cursor, comment_id):
+    cursor.execute("""
+                    SELECT * FROM comment
+                    WHERE id = %(c_id)s;
+                    """,
+                   {'c_id': comment_id})
+    comment_to_edit = cursor.fetchall()
+    return comment_to_edit[0]
+
+@connection2.connection_handler
+def edit_comment(cursor, comment_id, edited_message, sub_time, edited_counter):
+    cursor.execute("""
+                    UPDATE comment
+                    SET message = %(edited_message)s, submission_time = %(s_time)s, edited_count = %(edit_counter)s
+                    WHERE id = %(c_id)s;
+                    """,
+                   {'c_id': comment_id,
+                    'edited_message': edited_message,
+                    's_time': sub_time,
+                    'edit_counter': edited_counter})
+
+
+def get_submission_time_for_comment():
+    return datetime.now().strftime("%Y-%m-%d %H:%M")
+
+@connection2.connection_handler
+def get_edited_counter_for_comment(cursor, comment_id):
+    cursor.execute("""
+                        SELECT edited_count FROM comment
+                        WHERE id = %(c_id)s;
+                        """,
+                   {'c_id': comment_id})
+    edited_count = cursor.fetchall()
+    edited_count = 1 if edited_count[0]['edited_count'] == None else edited_count[0]['edited_count'] + 1
+    return edited_count
+
+@connection2.connection_handler
 def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None:
     """
     table_name:  = 'question' or 'answer' or 'comment'
     """
-    from datetime import datetime
+
     dt = datetime.now().strftime("%Y-%m-%d %H:%M")
 
     if table_name == 'question':
