@@ -21,7 +21,7 @@
 <head>
   <title>Ask Meme</title>
   <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
-  
+
 </head>
 <body>
   <div class="container">
@@ -39,7 +39,7 @@
       <a href = #vmi class = "nav2">Premium</a>
       <a href = #vmi class = "nav3">About Us</a>
       <a href = #vmi class = "nav4">Contact</a>
-      <div class = "headline">Question</div>    
+      <div class = "headline">Question</div>
     </div>
     <div class = "back_button">
       <form action="/list">
@@ -53,7 +53,7 @@
       </form>
     </div>
     <br />
-    
+
     <div class = "question-header">
       <table>
         <tr>
@@ -70,6 +70,19 @@
         </tr>
       </table>
     </div>
+    <br>
+
+    {% for comment in answer_comments %}
+        <div>
+            <div>
+                {{ comment['message'] }}
+            </div>
+            <div>
+                {{ comment['submission_time'] }}
+            </div>
+        </div>
+    {% endfor %}
+
     <br>
     <div class= "tables">
     <table class="table-fill">
@@ -138,6 +151,17 @@
         class="button"
         width="60"
         value="New Answer"
+      />
+    </form>
+    <br>
+    <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="GET">
+      <input
+        id="new_comment"
+        name="new_comment"
+        type="submit"
+        class="button"
+        width="60"
+        value="New Comment"
       />
     </form>
     <br />
