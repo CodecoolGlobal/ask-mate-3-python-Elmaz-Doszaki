@@ -49,6 +49,7 @@ def increase_view_number(cursor, question_id):
                    {'question_id': question_id})
 
 
+
 @connection2.connection_handler
 def get_question_vote_number(cursor, question_id):
     cursor.execute("""
@@ -119,6 +120,30 @@ def edit_question(cursor, question_id, edited_title, edited_message):
                     'edited_message': edited_message})
 
 
+@connection2.connection_handler
+def route_edit_answer(cursor, answer_id, question_id):
+    cursor.execute("""
+                    SELECT * FROM answer
+                    WHERE id = %(answer_id)s AND question_id = %(question_id)s;
+                    """,
+                   {'answer_id': answer_id,
+                    'question_id': question_id})
+    answer_to_edit = cursor.fetchall()
+    return answer_to_edit[0]
+
+
+@connection2.connection_handler
+def edit_answer(cursor, answer_id, question_id, edited_message):
+    cursor.execute("""
+                    UPDATE answer
+                    SET message = %(edited_message)s
+                    WHERE id = %(answer_id)s AND question_id = %(question_id)s;
+                    """,
+                   {'answer_id': answer_id,
+                    'question_id': question_id,
+                    'edited_message': edited_message})
+
+
 def save_question_picture(file1, file_name, question_id, upload_folder):
     file1.save(os.path.join(upload_folder, "Q" + question_id + file_name))
 
@@ -158,6 +183,7 @@ def delete_all_answer_from_db(cursor, q_id):
                    {'question_id': q_id})
 
 
+
 @connection2.connection_handler
 def delete_an_answer(cursor, id):
     cursor.execute("""
@@ -167,6 +193,7 @@ def delete_an_answer(cursor, id):
                 WHERE id = %(id)s;
                 """,
                    {'id': id})
+
 
 
 @connection2.connection_handler
@@ -263,3 +290,22 @@ def get_comment(cursor, key_id: str, question_id: bool = True):
     cursor.execute(query, {'key_id': int(key_id)})
     comments = cursor.fetchall()
     return comments
+
+
+def save_question_picture(file1, path):
+    file1.save(os.path.join(path))
+
+
+def save_answer_picture(answerfile, file_name, max_id, upload_folder):
+    answerfile.save(os.path.join(upload_folder, "A" + max_id + file_name))
+
+
+@connection2.connection_handler
+def new_questionid(cursor):
+    cursor.execute("""
+                SELECT id FROM question
+                ORDER BY id DESC
+                LIMIT 1;
+                """,)
+    answers = int(cursor.fetchall()[0]["id"]) + 1
+    return answers

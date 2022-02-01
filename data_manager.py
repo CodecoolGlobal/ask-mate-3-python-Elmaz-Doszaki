@@ -5,7 +5,7 @@ import util
 
 UPLOAD_FOLDER = 'images/'
 TABLE_HEADERS = ['#ID', 'Submission time', 'View number', 'Vote number', 'Title', '         Message       ', 'Photo', 'Delete', 'Vote Up', 'Vote Down']
-ANSWER_HEADERS = ['#ID', 'Submission time', 'Vote number', '___________Message___________', '___________Photo___________', 'Delete', 'Vote Up', 'Vote Down']
+ANSWER_HEADERS = ['#ID', 'Submission time', 'Vote number', '___________Message___________', '___________Photo___________', 'Delete', 'Vote Up', 'Vote Down', 'Edit']
 QUESTIONS_FILE = "sample_data/question.csv"
 ID = 0
 TIME = 1
@@ -134,23 +134,23 @@ def vote_answer(answer_id, vote):
     write_file(data, ANSWERS_FILE)
 
 
-def best_memes():
-    import os
-
-    cwd = os.getcwd()  # Get the current working directory (cwd)
-    files = os.listdir(cwd)  # Get all the files in that directory
-    print("Files in %r: %s" % (cwd, files))
-
-
-    pics = []
-    pic_list = read_file(ANSWERS_FILE)
-    pic_list = sorted(pic_list, key=lambda x: int(x[ANSWER_VOTE]), reverse=True)[:3]
-    for i in pic_list:
-        if i[IMG] != "0":
-            pics.append((i[ANSWER_VOTE], i[IMG]))
-    pic_list = read_file(QUESTIONS_FILE)
-    pic_list = sorted(pic_list, key=lambda x: int(x[VOTE]), reverse=True)[:3]
-    for i in pic_list:
-        if i[QUESTION_IMG_PATH] != "0":
-            pics.append((i[VOTE], i[QUESTION_IMG_PATH]))
-    return sorted(pics, key=lambda x: int(x[0]), reverse=True)[:3]
+# def best_memes():
+#     import os
+#
+#     cwd = os.getcwd()  # Get the current working directory (cwd)
+#     files = os.listdir(cwd)  # Get all the files in that directory
+#     print("Files in %r: %s" % (cwd, files))
+#
+#
+#     pics = []
+#     pic_list = read_file(ANSWERS_FILE)
+#     pic_list = sorted(pic_list, key=lambda x: int(x[ANSWER_VOTE]), reverse=True)[:3]
+#     for i in pic_list:
+#         if i[IMG] != "0":
+#             pics.append((i[ANSWER_VOTE], i[IMG]))
+#     pic_list = read_file(QUESTIONS_FILE)
+#     pic_list = sorted(pic_list, key=lambda x: int(x[VOTE]), reverse=True)[:3]
+#     for i in pic_list:
+#         if i[QUESTION_IMG_PATH] != "0":
+#             pics.append((i[VOTE], i[QUESTION_IMG_PATH]))
+#     return sorted(pics, key=lambda x: int(x[0]), reverse=True)[:3]
