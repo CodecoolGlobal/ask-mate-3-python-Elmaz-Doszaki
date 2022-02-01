@@ -62,7 +62,7 @@
             <div class = "data_4" >{{ row["title"] }}</div>
             <div class = "data_5" >{{ row["message"] }}</div>
             {% if row["image"] %}
-                <div class = "data_image"><img src="/static/{{ row["image"] }}"></div>
+                <div class = "data_image"><img src="{{ row["image"] }}"></div>
             {% else %}
                 <div class= "empty"></div>
             {% endif %}
