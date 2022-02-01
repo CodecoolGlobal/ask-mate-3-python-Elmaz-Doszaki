@@ -1,6 +1,7 @@
 from typing import Dict, Optional
 
 import connection2
+import os
 
 
 @connection2.connection_handler
@@ -46,6 +47,84 @@ def increase_view_number(cursor, question_id):
                    {'question_id': question_id})
 
 
+def delete_question(question_id):
+    delete_img_from_all_answer(question_id)
+    delete_img_from_question(question_id)
+    delete_all_answer_from_db(question_id)
+    delete_question_from_db(question_id)
+
+
+@connection2.connection_handler
+def delete_question_from_db(cursor, question_id):
+    cursor.execute("""
+                DELETE  FROM question_tag
+                WHERE question_id = %(question_id)s;
+                DELETE  FROM comment
+                WHERE question_id = %(question_id)s;
+                DELETE  FROM question
+                WHERE id = %(question_id)s;
+                """,
+                {'question_id': question_id})
+
+
+@connection2.connection_handler
+def delete_all_answer_from_db(cursor, q_id):
+    cursor.execute("""
+                DELETE FROM comment
+                WHERE answer_id = %(question_id)s;
+                DELETE FROM answer
+                WHERE question_id = %(question_id)s;
+                """,
+                {'question_id': q_id})
+
+@connection2.connection_handler
+def delete_an_answer(cursor, id):
+    cursor.execute("""
+                DELETE  FROM comment
+                WHERE answer_id = %(id)s;
+                DELETE  FROM answer
+                WHERE id = %(id)s;
+                """,
+                {'id': id})
+
+@connection2.connection_handler
+def delete_img_from_question(cursor, question_id):
+    cursor.execute("""
+                SELECT image FROM question
+                WHERE id = %(question_id)s AND image IS NOT NULL;
+                """,
+                {'question_id': question_id})
+    file_path = cursor.fetchall()
+    file_path = file_path[0]['image']
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+@connection2.connection_handler
+def delete_img_from_all_answer(cursor, q_id):
+    cursor.execute("""
+                SELECT image FROM answer
+                WHERE question_id = %(q_id)s AND image IS NOT NULL;
+                """,
+                {'q_id': q_id})
+    target_list = cursor.fetchall()
+    for file_path in target_list:
+        if os.path.exists(file_path['image']):
+            os.remove(file_path)
+
+
+@connection2.connection_handler
+def delete_an_img_from_answer(cursor, id):
+    cursor.execute("""
+                DELETE  FROM answer
+                WHERE id = %(id)s AND image IS NOT NULL;
+                """,
+                {'id': id})
+    file_path = cursor.fetchall()
+    if os.path.exists(file_path['image']):
+        os.remove(file_path)
+
+
+
 @connection2.connection_handler
 def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None:
     """
@@ -85,3 +164,4 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
                         'message': data['message'],
                         'submission_time': dt,
                         'edited_count': data['edited_count']})
+

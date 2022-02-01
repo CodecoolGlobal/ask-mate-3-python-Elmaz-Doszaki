@@ -86,9 +86,15 @@ def append_new_answer(max_id, path):
 
 @app.route('/question/<q_id>/delete', methods=['POST'])
 def delete_question(q_id):
-    delete_question_from_file(q_id)
-    delete_answer_to_question(q_id)
+    data_manager2.delete_question(q_id)
     return redirect('/list')
+
+
+@app.route('/answer/<a_id>/delete', methods=['POST'])
+def delete_answer(a_id):
+    data_manager2.delete_an_img_from_answer(a_id)
+    data_manager2.delete_an_answer(a_id)
+    return redirect("/questions/" + request.form['question_id'])
 
 
 @app.route('/question/<q_id>/edit', methods=['POST', 'GET'])
@@ -101,12 +107,6 @@ def route_edit(q_id):
         message = request.form['message']
         edit_question(message, q_id, title)
         return redirect('/questions/' + q_id)
-
-
-@app.route('/answer/<a_id>/delete', methods=['POST'])
-def delete_answer(a_id):
-    delete_an_answer(a_id)
-    return redirect("/questions/" + request.form['question_id'])
 
 
 @app.route('/question/<q_id>/vote-up', methods=['POST'])
