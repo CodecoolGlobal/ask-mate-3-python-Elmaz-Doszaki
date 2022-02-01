@@ -78,9 +78,14 @@ def delete_question(q_id):
 
 @app.route('/answer/<a_id>/delete', methods=['POST'])
 def delete_answer(a_id):
-    data_manager2.delete_an_img_from_answer(a_id)
-    data_manager2.delete_an_answer(a_id)
+    data_manager2.delete_an_img_from_answer(int(a_id))
+    data_manager2.delete_an_answer(int(a_id))
     return redirect("/questions/" + request.form['question_id'])
+
+@app.route('/delete_comment/<q_id>/<c_id>')
+def delete_comment(q_id, c_id):
+    data_manager2.delete_a_comment(c_id)
+    return redirect('/questions/' + q_id)
 
 
 @app.route('/question/<q_id>/edit', methods=['POST', 'GET'])
