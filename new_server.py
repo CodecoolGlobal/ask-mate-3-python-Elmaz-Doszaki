@@ -145,5 +145,19 @@ def vote_down_answer(answer_id):
     return redirect('/questions/' + request.form['question_id'])
 
 
+@app.route('/answer/<answer_id>/edit', methods=['POST', 'GET'])
+def route_edit_answer(answer_id):
+    if request.method == 'GET':
+        q_id = request.args.get('question_id')
+        answer_to_edit = data_manager2.route_edit_answer(answer_id, q_id)
+        message = answer_to_edit["message"]
+        return render_template('edit-answer.html', message=message, q_id=q_id, answer_id=answer_id)
+    else:
+        q_id = request.form['question_id']
+        message = request.form['message']
+        data_manager2.edit_answer(answer_id, q_id, message)
+        return redirect('/questions/' + q_id)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
