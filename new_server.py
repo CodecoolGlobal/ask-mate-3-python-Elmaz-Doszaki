@@ -45,9 +45,9 @@ def add_question():
             path = ""
         else:
             file_name = file1.filename
-            path = UPLOAD_FOLDER + "Q" + question_id + file_name
+            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file_name
             upload_folder = app.config['UPLOAD_FOLDER']
-            save_question_picture(file1, file_name, question_id, upload_folder)
+            data_manager2.save_question_picture(file1, file_name, question_id, upload_folder)
 
         data = {'title': request.form['title'], 'message': request.form['question'], 'image': path}
         data_manager2.add_new_data_to_table(data, 'question')
@@ -74,7 +74,7 @@ def add_new_answer():
         file_name = answerfile.filename
         path = UPLOAD_FOLDER + "A" + max_id + file_name
         upload_folder = app.config['UPLOAD_FOLDER']
-        save_answer_picture(answerfile, file_name, max_id, upload_folder)
+        data_manager2.save_answer_picture(answerfile, file_name, max_id, upload_folder)
     append_new_answer(max_id, path)
     return redirect("/questions/" + request.form['question_id'])
 
