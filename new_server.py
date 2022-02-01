@@ -129,6 +129,16 @@ def vote_down_answer(answer_id):
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     return redirect('/questions/' + request.form['question_id'])
 
+@app.route('/search')
+def search_question():
+    search = request.args.get('search')
+    questions = data_manager2.get_searched_question(search)
+    return render_template('questions_list.html',
+                           table_headers=TABLE_HEADERS,
+                           list_of_questions=questions,
+                           )
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
