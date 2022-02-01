@@ -89,6 +89,17 @@ def delete_comment(q_id, c_id):
     data_manager2.delete_a_comment(c_id)
     return redirect('/questions/' + q_id)
 
+@app.route('/edit_comment/<q_id>/<c_id>', methods=['GET', 'POST'])
+def edit_comment(q_id, c_id):
+    if request.method == 'GET':
+        comment_to_edit = data_manager2.get_comment(c_id)
+        return render_template('edit_comment.html', comment=comment_to_edit)
+    else:
+        sub_time = data_manager2.get_submission_time_for_comment()
+        edited_counter = data_manager2.get_edited_counter_for_comment(c_id)
+        data_manager2.edit_comment(c_id, request.form['message'], sub_time, edited_counter)
+        return redirect('/questions/' + q_id)
+
 
 @app.route('/question/<q_id>/edit', methods=['POST', 'GET'])
 def route_edit(q_id):

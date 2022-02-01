@@ -82,6 +82,9 @@
         <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
         <button type="submit">Delete</button>
         </form>
+        <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+        <button type="submit">Edit</button>
+        </form>
         </div>
     {% endfor %}
 
