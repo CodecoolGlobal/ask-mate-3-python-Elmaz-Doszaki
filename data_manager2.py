@@ -316,3 +316,17 @@ def new_questionid(cursor):
                 """,)
     answers = int(cursor.fetchall()[0]["id"]) + 1
     return answers
+
+
+@connection2.connection_handler
+def get_searched_question(cursor, search):
+    cursor.execute("""
+                SELECT * FROM question 
+                WHERE message LIKE %(search)s OR title LIKE %(search)s;
+    """,
+                   {'search': '%' + search + '%'})
+    questions = cursor.fetchall()
+    return questions
+
+
+
