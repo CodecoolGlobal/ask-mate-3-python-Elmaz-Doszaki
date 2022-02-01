@@ -283,17 +283,11 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
 
 
 @connection2.connection_handler
-def get_comment(cursor, key_id: str, question_id: bool = True):
-    if question_id:
-        query = """
-                SELECT * FROM comment
-                WHERE question_id = %(key_id)s
-                """
-    else:
-        query = """
-                SELECT * FROM comment
-                WHERE answer_id = %(key_id)s
-                """
+def get_comment(cursor, key_id: str):
+    query = """
+            SELECT * FROM comment
+            WHERE question_id = %(key_id)s
+            """
     cursor.execute(query, {'key_id': int(key_id)})
     comments = cursor.fetchall()
     return comments
@@ -319,6 +313,28 @@ def new_questionid(cursor):
 
 
 @connection2.connection_handler
+def get_question_id_from_answer(cursor, answer_id):
+    cursor.execute("""
+                    SELECT question_id FROM answer
+                    WHERE id = %(answer_id)s""",
+                   {'answer_id': answer_id})
+    return cursor.fetchall()[0]
+
+
+@connection2.connection_handler
+def get_comments_from_answers(cursor, current_answers):
+    if len(current_answers) > 0:
+        answer_ids = tuple(answer['id'] for answer in current_answers)
+        cursor.execute("""
+                        SELECT * FROM comment
+                        WHERE answer_id IN %(answer_ids)s""",
+                       {'answer_ids': answer_ids})
+        return cursor.fetchall()
+    else:
+        return None
+
+
+@connection2.connection_handler
 def get_searched_question(cursor, search):
     cursor.execute("""
                 SELECT * FROM question 
@@ -327,6 +343,3 @@ def get_searched_question(cursor, search):
                    {'search': '%' + search + '%'})
     questions = cursor.fetchall()
     return questions
-
-
-

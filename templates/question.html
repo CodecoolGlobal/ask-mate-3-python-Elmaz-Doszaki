@@ -71,8 +71,7 @@
       </table>
     </div>
     <br>
-
-    {% for comment in answer_comments %}
+    {% for comment in question_comments %}
         <div>
             <div>
                 {{ comment['message'] }}
@@ -86,6 +85,17 @@
         </div>
     {% endfor %}
 
+    <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="GET">
+      <input
+        id="new_comment"
+        name="new_comment"
+        type="submit"
+        class="button"
+        width="60"
+        value="New Comment"
+      />
+    </form>
+
     <br>
     <div class= "tables">
     <table class="table-fill">
@@ -94,6 +104,7 @@
         {% for header in answer_header %}
             <th >{{ header }}</th>
         {% endfor %}
+        <th>Comment</th>
     </tr>
     </thead>
       <tbody class="table-hover">
@@ -145,7 +156,26 @@
                         <button id="home" type="submit" class="edit" name="question_id" value="{{ current_question[0]['id'] }}">Edit</button>
                     </form>
                 </td>
+                <td>
+                    <form action="{{ url_for('add_comment_to_answer', answer_id=row["id"]) }}">
+                        <button id="new_comment" type="submit" class="edit" name="new_comment" value="{{ current_question[0]['id'] }}">New comment</button>
+                    </form>
+                </td>
             </tr>
+
+
+                {% for comment in answer_comments %}
+                    {% if comment['answer_id'] == row['id'] %}
+                        <tr>
+                        <td>Comment:</td>
+                        <td>{{ comment['submission_time'] }}</td>
+                        <td></td>
+                        <td>{{ comment['message'] }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+
         {% endfor %}
       </tbody>
     </table>
@@ -161,17 +191,7 @@
         value="New Answer"
       />
     </form>
-    <br>
-    <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="GET">
-      <input
-        id="new_comment"
-        name="new_comment"
-        type="submit"
-        class="button"
-        width="60"
-        value="New Comment"
-      />
-    </form>
+
     <br />
     <form action="/question/{{ question_id }}/edit" method="GET">
       <input
