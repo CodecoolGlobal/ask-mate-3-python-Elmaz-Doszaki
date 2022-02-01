@@ -135,6 +135,13 @@ def vote_answer(answer_id, vote):
 
 
 def best_memes():
+    import os
+
+    cwd = os.getcwd()  # Get the current working directory (cwd)
+    files = os.listdir(cwd)  # Get all the files in that directory
+    print("Files in %r: %s" % (cwd, files))
+
+
     pics = []
     pic_list = read_file(ANSWERS_FILE)
     pic_list = sorted(pic_list, key=lambda x: int(x[ANSWER_VOTE]), reverse=True)[:3]
