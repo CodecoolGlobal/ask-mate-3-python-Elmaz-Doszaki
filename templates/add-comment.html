@@ -37,13 +37,17 @@
     </div>
     <div class="form-style-8">
         <h2 align="middle">Give a new comment!</h2>
-        <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="POST">
-            <p><h4> Type your comment: </h4><br>
-            <textarea id="answer_message" name="message" rows="6" cols="60" minlength="10"
-                      placeholder="Type here..." required autofocus></textarea></p>
+        {% if question_id %}
+            <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="POST">
             <input type="hidden" name="question_id" value="{{ question_id }}">
-            <input type="submit" value="Submit" name="Submit" class="button">
-
+        {% else %}
+            <form action="{{ url_for('add_comment_to_answer', answer_id=answer_id) }}" method="POST">
+            <input type="hidden" name="answer_id" value="{{ answer_id }}">
+        {% endif %}
+        <p><h4> Type your comment: </h4><br>
+        <textarea id="answer_message" name="message" rows="6" cols="60" minlength="10"
+                  placeholder="Type here..." required autofocus></textarea></p>
+        <input type="submit" value="Submit" name="Submit" class="button">
         </form>
     </div>
 

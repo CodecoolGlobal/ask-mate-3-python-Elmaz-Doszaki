@@ -29,12 +29,14 @@ def display_questions_list():
 @app.route('/questions/<question_id>')
 def display_question(question_id):
     data_manager2.increase_view_number(question_id)
+    current_answers = data_manager2.get_answers_for_question(question_id)
     return render_template('question.html',
                            current_question=data_manager2.display_question(question_id),
                            answer_header=ANSWER_HEADERS,
-                           current_answers=data_manager2.get_answers_for_question(question_id),
+                           current_answers=current_answers,
                            question_id=question_id,
-                           answer_comments=data_manager2.get_comment(question_id))
+                           question_comments=data_manager2.get_comment(question_id),
+                           answer_comments=data_manager2.get_comments_from_answers(current_answers))
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -139,8 +141,7 @@ def vote_down_answer(answer_id):
 @app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
 def add_comment_to_question(question_id):
     if request.method == 'GET':
-        return render_template('add-comment.html', question_id=question_id,
-                               current_question=data_manager2.display_question(question_id))
+        return render_template('add-comment.html', question_id=question_id)
     if request.method == 'POST':
         data_manager2.add_new_data_to_table(
             data={'question_id': question_id, 'answer_id': None, 'message': request.form['message'],
@@ -161,6 +162,19 @@ def route_edit_answer(answer_id):
         message = request.form['message']
         data_manager2.edit_answer(answer_id, q_id, message)
         return redirect('/questions/' + q_id)
+
+
+@app.route('/answer/<answer_id>/new-comment', methods=['GET', 'POST'])
+def add_comment_to_answer(answer_id):
+    if request.method == 'GET':
+        return render_template('add-comment.html', answer_id=answer_id)
+    if request.method == 'POST':
+        data_manager2.add_new_data_to_table(
+            data={'question_id': None, 'answer_id': answer_id, 'message': request.form['message'],
+                  'edited_count': None},
+            table_name='comment')
+        answer_data = data_manager2.get_question_id_from_answer(answer_id)
+        return redirect(url_for('display_question', question_id=answer_data['question_id']))
 
 
 if __name__ == "__main__":
