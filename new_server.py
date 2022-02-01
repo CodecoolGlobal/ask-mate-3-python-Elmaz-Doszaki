@@ -39,19 +39,17 @@ def add_question():
     if request.method == 'GET':
         return render_template('add-question.html')
     else:
-        question_id = str(new_id(QUESTIONS_FILE))
+        question_id = str(data_manager2.new_questionid())
         file1 = request.files['file1']
         if request.files['file1'].filename == "":
             path = ""
         else:
-            file_name = file1.filename
-            path = UPLOAD_FOLDER + "Q" + question_id + file_name
-            upload_folder = app.config['UPLOAD_FOLDER']
-            save_question_picture(file1, file_name, question_id, upload_folder)
-
+            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file1.filename
         data = {'title': request.form['title'], 'message': request.form['question'], 'image': path}
         data_manager2.add_new_data_to_table(data, 'question')
-        return redirect('/questions/' + question_id)
+        if path != "":
+            data_manager2.save_question_picture(file1, path)
+        return redirect('/questions/'+question_id)
 
 
 
@@ -71,6 +69,7 @@ def add_new_answer():
     return redirect(url_for("display_question", question_id=question_id))
 
 
+
 @app.route('/question/<q_id>/delete', methods=['POST'])
 def delete_question(q_id):
     data_manager2.delete_question(q_id)
@@ -87,36 +86,48 @@ def delete_answer(a_id):
 @app.route('/question/<q_id>/edit', methods=['POST', 'GET'])
 def route_edit(q_id):
     if request.method == 'GET':
-        message, title = data_for_question_edit(q_id)
+        question_to_edit = data_manager2.route_edit_question(q_id)
+        message = question_to_edit["message"]
+        title = question_to_edit["title"]
         return render_template('edit-question.html', title=title, message=message, q_id=q_id)
     else:
         title = request.form['title']
         message = request.form['message']
-        edit_question(message, q_id, title)
+        data_manager2.edit_question(q_id, title, message)
         return redirect('/questions/' + q_id)
 
 
 @app.route('/question/<q_id>/vote-up', methods=['POST'])
 def vote_up_question(q_id):
-    vote_question(q_id, 'up')
+    vote_number = data_manager2.get_question_vote_number(q_id)
+    modify_vote_number = util.vote_up_or_down(vote_number, 'up')
+    data_manager2.update_question_vote_number(q_id, modify_vote_number)
     return redirect('/list')
 
 
 @app.route('/question/<q_id>/vote-down', methods=['POST'])
 def vote_down_question(q_id):
-    vote_question(q_id, 'down')
+    vote_number = data_manager2.get_question_vote_number(q_id)
+    modify_vote_number = util.vote_up_or_down(vote_number, 'down')
+    data_manager2.update_question_vote_number(q_id, modify_vote_number)
     return redirect('/list')
 
 
 @app.route('/answer/<answer_id>/vote-up', methods=['POST'])
 def vote_up_answer(answer_id):
-    vote_answer(answer_id, 'up')
+    question_id = request.form['question_id']
+    vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
+    modify_vote_number = util.vote_up_or_down(vote_number, 'up')
+    data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     return redirect('/questions/' + request.form['question_id'])
 
 
 @app.route('/answer/<answer_id>/vote-down', methods=['POST'])
 def vote_down_answer(answer_id):
-    vote_answer(answer_id, 'down')
+    question_id = request.form['question_id']
+    vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
+    modify_vote_number = util.vote_up_or_down(vote_number, 'down')
+    data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     return redirect('/questions/' + request.form['question_id'])
 
 

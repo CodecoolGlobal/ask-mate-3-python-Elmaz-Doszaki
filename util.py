@@ -48,24 +48,6 @@ def get_new_id(data):
     return new_id
 
 
-def question_vote(data, question_id, vote):
-    for row in data:
-        if row[ID] == question_id:
-            if vote == 'down':
-                row[VOTE] = str(int(row[VOTE]) - 1)
-            else:
-                row[VOTE] = str(int(row[VOTE]) + 1)
-
-
-def answer_vote(answer_id, data, vote):
-    for row in data:
-        if row[ID] == answer_id:
-            if vote == 'down':
-                row[ANSWER_VOTE] = str(int(row[ANSWER_VOTE]) - 1)
-            else:
-                row[ANSWER_VOTE] = str(int(row[ANSWER_VOTE]) + 1)
-
-
 def get_answers_for_question(answer_list, question_id):
     current_answers = []
     for row in answer_list:
@@ -73,3 +55,11 @@ def get_answers_for_question(answer_list, question_id):
             answers = [row[ID], row[TIME], row[ANSWER_VOTE], row[ANSWER_MESSAGE], row[IMG]]
             current_answers.append(answers)
     return current_answers
+
+
+def vote_up_or_down(vote_number, vote_type):
+    if vote_type == 'up':
+        vote_number['vote_number'] += 1
+    else:
+        vote_number['vote_number'] -= 1
+    return vote_number['vote_number']
