@@ -1,6 +1,6 @@
-import data_manager2
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from data_manager import *
+import data_manager2
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images/'
@@ -8,7 +8,7 @@ app.config['UPLOAD_FOLDER'] = 'static/images/'
 
 @app.route("/")
 def hello():
-    return render_template('index.html', list_of_best_memes=best_memes())
+    return render_template('index.html')
 
 
 @app.route("/list")
@@ -51,37 +51,24 @@ def add_question():
 
         data = {'title': request.form['title'], 'message': request.form['question'], 'image': path}
         data_manager2.add_new_data_to_table(data, 'question')
-        return redirect('/questions/'+question_id)
+        return redirect('/questions/' + question_id)
 
 
-@app.route('/question/<q_id>/new-answer', methods=['POST'])
-def display_answer(q_id):
-    question_id = q_id
+
+@app.route('/question/<question_id>/new-answer', methods=['POST'])
+def display_answer(question_id):
+    question_id = question_id
     return render_template('answer_form.html', question_id=question_id)
-
 
 @app.route('/question/new-answer', methods=['POST'])
 def add_new_answer():
-    data = read_file(ANSWERS_FILE)
-    max_id = 0
-    if len(data) > 0:
-        max_id = max(int(i[0]) for i in data)
-    max_id = str(max_id+1)
-    if request.files['answerfile'].filename == "":
-        path = "0"
-    else:
-        answerfile = request.files['answerfile']
-        file_name = answerfile.filename
-        path = UPLOAD_FOLDER + "A" + max_id + file_name
-        upload_folder = app.config['UPLOAD_FOLDER']
-        save_answer_picture(answerfile, file_name, max_id, upload_folder)
-    append_new_answer(max_id, path)
-    return redirect("/questions/" + request.form['question_id'])
-
-
-def append_new_answer(max_id, path):
-    data = [max_id, get_time_stamp(), '0', request.form['question_id'], request.form['answer_message'], path]
-    append_file(data, ANSWERS_FILE)
+    question_id = request.form['question_id']
+    new_answer = {'vote_number': 0,
+                  'question_id': question_id,
+                  'message': request.form['answer_message'],
+                  'image': None}
+    data_manager2.add_new_data_to_table(new_answer, 'answer')
+    return redirect(url_for("display_question", question_id=question_id))
 
 
 @app.route('/question/<q_id>/delete', methods=['POST'])
