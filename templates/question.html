@@ -80,6 +80,9 @@
             <div>
                 {{ comment['submission_time'] }}
             </div>
+        <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+        <button type="submit">Delete</button>
+        </form>
         </div>
     {% endfor %}
 

@@ -223,16 +223,23 @@ def delete_img_from_all_answer(cursor, q_id):
 
 
 @connection2.connection_handler
-def delete_an_img_from_answer(cursor, id):
+def delete_an_img_from_answer(cursor, a_id):
     cursor.execute("""
-                DELETE  FROM answer
-                WHERE id = %(id)s AND image IS NOT NULL;
+                SELECT image FROM answer
+                WHERE id = %(aid)s AND image IS NOT NULL;;
                 """,
-                   {'id': id})
+                   {'aid': a_id})
     file_path = cursor.fetchall()
-    if os.path.exists(file_path['image']):
+    if file_path !=[] and os.path.exists(file_path[0]['image']):
         os.remove(file_path)
 
+@connection2.connection_handler
+def delete_a_comment(cursor, c_id):
+    cursor.execute("""
+                    DELETE  FROM comment
+                    WHERE id = %(cid)s;
+                    """,
+                   {'cid': c_id})
 
 @connection2.connection_handler
 def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None:
