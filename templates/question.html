@@ -2,132 +2,123 @@
 
 
 <html>
-  <link rel="stylesheet" href="/static/css_files/basic.css">
-  <link rel="stylesheet" href="/static/css_files/question.css" />
-  <link
-    href="https://fonts.googleapis.com/css?family=Roboto"
-    rel="stylesheet"
-  />
-  <link
-  href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap"
-  rel="stylesheet"
+<link rel="stylesheet" href="/static/css_files/basic.css">
+<link rel="stylesheet" href="/static/css_files/question.css"/>
+<link
+        href="https://fonts.googleapis.com/css?family=Roboto"
+        rel="stylesheet"
 />
 <link
-  href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap"
-  rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap"
+        rel="stylesheet"
+/>
+<link
+        href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap"
+        rel="stylesheet"
 />
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 <head>
-  <title>Ask Meme</title>
-  <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
-  
+    <title>Ask Meme</title>
+    <link rel="icon" href="static/img/logo.png" type="image/x-icon">
+
 </head>
 <body>
-  <div class="container">
-    <div class = "head">
-      <div class = "logo"></div>
-      <div class = "search">
-          <form action="/search" >
-              <input type="text" placeholder="Search.." name="search_question">
-              <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
-      </div>
-      <div class = "account"></div>
-      <div class = "empty"></div>
-      <a href = #vmi class = "nav1">Questions</a>
-      <a href = #vmi class = "nav2">Premium</a>
-      <a href = #vmi class = "nav3">About Us</a>
-      <a href = #vmi class = "nav4">Contact</a>
-      <div class = "headline">Question</div>    
+<div class="container">
+    <div class="head">
+        <div class="logo"></div>
+        <div class="search">
+            <form action="/search">
+                <input type="text" placeholder="Search.." name="search_question">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="account"></div>
+        <div class="empty"></div>
+        <a href=#vmi class="nav1">Questions</a>
+        <a href=#vmi class="nav2">Premium</a>
+        <a href=#vmi class="nav3">About Us</a>
+        <a href=#vmi class="nav4">Contact</a>
+        <div class="headline">Question</div>
     </div>
-    <div class = "back_button">
-      <form action="/list">
-          <button
-            id="home"
-            type="submit"
-            class="button"
-          >
-            BACK
-          </button>
-      </form>
+    <div class="back_button">
+        <form action="/list">
+            <button
+                    id="home"
+                    type="submit"
+                    class="button"
+            >
+                BACK
+            </button>
+        </form>
     </div>
-    <br />
-    
-    <div class = "question-header">
-      <table>
-        <tr>
+    <br/>
 
-            <th>{{ current_question[0]["submission_time"] }}</th>
-            <th>{{ current_question[0]["title"] }}</th>
-            <th>{{ current_question[0]["message"] }}</th>
-            {% if current_question[0]["image"] %}
-                <th class = "question-header"><img src="/static/{{ current_question[0]["image"] }}"></th>
-            {% else %}
-               <th></th>
-            {% endif %}
+    <div class="question">
+        <div class="time">{{ current_question[0]["submission_time"] }}</div>
+        <div class="title">{{ current_question[0]["title"] }}</div>
+        <div class="message">{{ current_question[0]["message"] }}</div>
+        {% if current_question[0]["image"] %}
+            <div class="meme"><img src="/{{ current_question[0]["image"] }}" }></div>
+        {% endif %}
+        <div class="add-tag">
+            <form action="{{ url_for('add_tags_to_question', question_id=question_id) }}">
+                <button id="home" type="submit" class="view">Add tag</button>
+            </form>
+        </div>
+        <div class="tags">
+            {% for tag in tags %}
+                {{ tag['name'] }}
+            {% endfor %}
+        </div>
 
-        </tr>
-      </table>
+        <div class="Q-comment">
+            <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="GET">
+                <input
+                        id="new_comment"
+                        name="new_comment"
+                        type="submit"
+                        class="button"
+                        width="60"
+                        value="New Comment"
+                />
+            </form>
+        </div>
+        <div class="Q-edit">
+            <form action="/question/{{ question_id }}/edit" method="GET">
+                <input
+                        id="edit_question"
+                        name="edit_question"
+                        type="submit"
+                        class="button"
+                        width="60"
+                        value="Edit Question"
+                />
+            </form>
+        </div>
     </div>
     <br>
-    <div class= "tables">
-    <table class="table-fill">
-    <thead>
-    <tr>
-        {% for header in answer_header %}
-            <th >{{ header }}</th>
+    <div class="comments">
+        {% for comment in question_comments %}
+            <div class="comment">
+                <div class="q-c-message">
+                    {{ comment['message'] }}
+                </div>
+                <div class="q-c-time">
+                    {{ comment['submission_time'] }}
+                </div>
+                <div class="q-c-delete">
+                    <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+                <div class="q-c-edit">
+                    <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                        <button type="submit">Edit</button>
+                    </form>
+                </div>
+            </div>
         {% endfor %}
-    </tr>
-    </thead>
-      <tbody class="table-hover">
-        {% for row in current_answers %}
-            <tr>
-                <td>{{ row["id"] }}</td>
-                <td>{{ row["submission_time"] }}</td>
-                <td>{{ row["vote_number"] }}</td>
-                <td>{{ row["message"] }}</td>
-                {% if row["image"] %}
-                    <td ><img src="/static/{{ row["image"] }}"></td>
-                {% else %}
-                   <td></td>
-                {% endif %}
-
-                <td align="middle">
-                    <form action="/answer/{{ row['id'] }}/delete" method="POST">
-                        <input class= "icon"
-                                id="delete_button"
-                                type="image"
-                                src="/static/img/trash.png"
-                                alt="Delete"
-                                width="60"
-                                value="delete_button"
-                        />
-                        <input
-                                type="hidden"
-                                name="question_id"
-                                value="{{ current_question[0]['id'] }}"
-                        />
-                    </form>
-                </td>
-                <td align="middle">
-                    <form action="/answer/{{ row['id'] }}/vote-up" method="POST">
-                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
-                        <input class= "icon" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
-                               alt="Vote-up" width="60" value="{{ row[0] }}">
-                    </form>
-                </td>
-                <td align="middle">
-                    <form action="/answer/{{ row['id'] }}/vote-down" method="POST">
-                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
-                        <input class= "icon" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
-                               alt="Vote-down" width="60" value="{{ row[0] }}">
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-      </tbody>
-    </table>
     </div>
     <br>
     <form action="/question/{{ question_id }}/new-answer" method="POST">
@@ -140,29 +131,84 @@
         value="New Answer"
       />
     </form>
+    <div class="answers">
+        {% for row in current_answers %}
+            <div class="answer">
+                <div class="a-time">{{ row["submission_time"] }}</div>
+                <div class="a-vote">{{ row["vote_number"] }}</div>
+                <div class="a-message">{{ row["message"] }}</div>
+                {% if row["image"] %}
+                    <div class="a-meme"><img src="/static/{{ row["image"] }}"></div>
+                {% endif %}
+                <div class="a-delete">
+                    <form action="/answer/{{ row['id'] }}/delete" method="POST">
+                        <input class= "icon" id="delete_button" type="image"  src="/static/img/trash.png" alt="Delete" value="delete_button"/>
+                        <input   type="hidden" name="question_id"    value="{{ current_question[0]['id'] }}" />
+                    </form>
+                </div>
+                <div class="a-vote-up">
+                    <form action="/answer/{{ row['id'] }}/vote-up" method="POST">
+                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
+                        <input class= "icon" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png" alt="Vote-up"  value="{{ row[0] }}">
+                    </form>
+                </div>
+                <div class="a-vote-down">
+                    <form action="/answer/{{ row['id'] }}/vote-down" method="POST">
+                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
+                        <input class= "icon" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png" alt="Vote-down" value="{{ row[0] }}">
+                    </form>
+                </div>
+                <div class="a-edit">
+                    <form action="/answer/{{ row["id"] }}/edit">
+                        <button id="home" type="submit" class="edit" name="question_id" value="{{ current_question[0]['id'] }}">Edit</button>
+                    </form>
+                </div>
+                <div class="a-add-comment">
+                    <form action="{{ url_for('add_comment_to_answer', answer_id=row["id"]) }}">
+                        <button id="new_comment" type="submit" class="edit" name="new_comment" value="{{ current_question[0]['id'] }}">New comment</button>
+                    </form>
+                </div>
+            </div>
+            <div class="a-comments">
+                {% for comment in answer_comments %}
+                    {% if comment['answer_id'] == row['id'] %}
+                        <div class = "a-comment">
+                            <div class= "a-c-time">
+                                {{ comment['submission_time'] }}
+                            </div>
+                            <div class= "a-c-message">
+                                {{ comment['message'] }}
+                            </div>
+                            <div class = "a-c-delete">
+                                <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </div>
+                            <div class = "a-c-edit">
+                                <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                    <button type="submit">Edit</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <br>
     <br />
-    <form action="/question/{{ question_id }}/edit" method="GET">
-      <input
-        id="edit_question"
-        name="edit_question"
-        type="submit"
-        class="button"
-        width="60"
-        value="Edit Question"
-      />
-    </form>
     <br>
     <br>
     <br>
     <footer>
-      <ul>
-          <li> <a href="#"> <i class="fa fa-facebook"> </i> </a> </li>
-          <li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
-          <li> <a href="#"> <i class="fa fa-instagram"> </i> </a> </li>
-          <li> <a href="#"> <i class="fa fa-linkedin"> </i> </a> </li>
+        <ul>
+            <li><a href="#"> <i class="fa fa-facebook"> </i> </a></li>
+            <li><a href="#"> <i class="fa fa-twitter"> </i> </a></li>
+            <li><a href="#"> <i class="fa fa-instagram"> </i> </a></li>
+            <li><a href="#"> <i class="fa fa-linkedin"> </i> </a></li>
         </ul>
     </footer>
-  </div>
+</div>
 </body>
 
 </html>

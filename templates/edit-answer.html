@@ -12,11 +12,11 @@
     <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
   </head>
   <body>
-    <div class="container"> 
+    <div class="container">
       <div class = "head">
         <div class = "logo"></div>
         <div class = "search">
-            <form action="/search">
+            <form action="/action_page.php">
                 <input type="text" placeholder="Search.." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
@@ -27,7 +27,7 @@
         <a href = #vmi class = "nav2">Premium</a>
         <a href = #vmi class = "nav3">About Us</a>
         <a href = #vmi class = "nav4">Contact</a>
-        <div class = "headline">Edit questions</div>
+        <div class = "headline">Edit answer</div>
       </div>
       <div class = "back_button">
         <form action="/questions/{{ q_id }}">
@@ -35,22 +35,12 @@
         </form>
       </div>
       <div class="form-style-8">
-        <form action="/question/{{ q_id }}/edit" method="post">
-          <div>
-            <label>Give your question a title:</label> <br />
-            <input
-              name="title"
-              type="text"
-              required
-              minlength="3"
-              value="{{ title }}"
-            />
-          </div>
+        <form action="/answer/{{ answer_id }}/edit" method="post">
           <div>
             <label>Type your question:</label> <br />
             <textarea id="message" name="message" rows="6" cols="60"> {{ message }}</textarea >
           </div>
-          <button type="submit" class="button">Edit Question</button>
+          <button name="question_id" value=" {{ q_id }} "  type="submit" class="button">Edit Answer</button>
         </form>
       </div>
       <br>

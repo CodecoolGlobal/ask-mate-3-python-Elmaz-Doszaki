@@ -63,28 +63,30 @@
             <div class = "data_5" >{{ row["message"] }}</div>
             {% if row["image"] %}
                 <div class = "data_image"><img src="{{ row["image"] }}"></div>
-            {% else %}
-                <div class= "empty"></div>
             {% endif %}
 
+            <div class ="kuka">
+                <form action="/question/{{ row['id'] }}/delete" method="POST">
+                    <input class= "kuka" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
 
-            <form action="/question/{{ row['id'] }}/delete" method="POST">
-                <input class= "kuka" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
-
-                    value="delete_button">
-            </form>
-            <form action="/question/{{ row['id'] }}/vote-up" method="POST">
-                <input class= "up" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
-                    alt="Vote-up" width="60" value="{{ row['id'] }}">
-            </form>
-            <form action="/question/{{ row['id'] }}/vote-down" method="POST">
-                <input class= "down" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
-                    alt="Vote-down" width="60" value="{{ row['id'] }}">
-            </form>
-
+                        value="delete_button">
+                </form>
+            </div>
+            <div class ="up">
+                <form action="/question/{{ row['id'] }}/vote-up" method="POST">
+                    <input class= "up" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
+                        alt="Vote-up" width="60" value="{{ row['id'] }}">
+                </form>
+            </div>
+            <div class ="down">
+                <form action="/question/{{ row['id'] }}/vote-down" method="POST">
+                    <input class= "down" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
+                        alt="Vote-down" width="60" value="{{ row['id'] }}">
+                </form>
+            </div>
             <div class = "view">
                 <form action="/questions/{{ row["id"] }}">
-                    <button id="home" type="submit" class="view">View</button>
+                    <button id="home" type="submit" class="view">View : </button>
                 </form>
 
             </div>

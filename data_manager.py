@@ -5,7 +5,7 @@ import util
 
 UPLOAD_FOLDER = 'images/'
 TABLE_HEADERS = ['#ID', 'Submission time', 'View number', 'Vote number', 'Title', '         Message       ', 'Photo', 'Delete', 'Vote Up', 'Vote Down']
-ANSWER_HEADERS = ['#ID', 'Submission time', 'Vote number', '___________Message___________', '___________Photo___________', 'Delete', 'Vote Up', 'Vote Down']
+ANSWER_HEADERS = ['#ID', 'Submission time', 'Vote number', '___________Message___________', '___________Photo___________', 'Delete', 'Vote Up', 'Vote Down', 'Edit']
 QUESTIONS_FILE = "sample_data/question.csv"
 ID = 0
 TIME = 1

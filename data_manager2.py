@@ -2,8 +2,10 @@ from typing import Dict, Optional
 
 import connection2
 import os
+from datetime import datetime
 
 UPLOAD_FOLDER = 'static/images/'
+
 
 @connection2.connection_handler
 def list_questions(cursor, order_by, order):
@@ -48,6 +50,107 @@ def increase_view_number(cursor, question_id):
                    {'question_id': question_id})
 
 
+@connection2.connection_handler
+def get_question_vote_number(cursor, question_id):
+    cursor.execute("""
+                    SELECT vote_number FROM question
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id})
+    vote_number = cursor.fetchall()
+    return vote_number[0]
+
+
+@connection2.connection_handler
+def update_question_vote_number(cursor, question_id, vote_number):
+    cursor.execute("""
+                    UPDATE question
+                    SET vote_number = %(vote_number)s
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'vote_number': vote_number})
+
+
+@connection2.connection_handler
+def get_answer_vote_number(cursor, question_id, answer_id):
+    cursor.execute("""
+                    SELECT vote_number FROM answer
+                    WHERE question_id = %(question_id)s AND id = %(answer_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'answer_id': answer_id})
+    vote_number = cursor.fetchall()
+    return vote_number[0]
+
+
+@connection2.connection_handler
+def update_answer_vote_number(cursor, question_id, answer_id, vote_number):
+    cursor.execute("""
+                    UPDATE answer
+                    SET vote_number = %(vote_number)s
+                    WHERE question_id = %(question_id)s AND id = %(answer_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'answer_id': answer_id,
+                    'vote_number': vote_number})
+
+
+@connection2.connection_handler
+def route_edit_question(cursor, question_id):
+    cursor.execute("""
+                    SELECT * FROM question
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id})
+
+    question_to_edit = cursor.fetchall()
+    return question_to_edit[0]
+
+
+@connection2.connection_handler
+def edit_question(cursor, question_id, edited_title, edited_message):
+    cursor.execute("""
+                    UPDATE question
+                    SET title = %(edited_title)s, message = %(edited_message)s
+                    WHERE id = %(question_id)s;
+                    """,
+                   {'question_id': question_id,
+                    'edited_title': edited_title,
+                    'edited_message': edited_message})
+
+
+@connection2.connection_handler
+def route_edit_answer(cursor, answer_id, question_id):
+    cursor.execute("""
+                    SELECT * FROM answer
+                    WHERE id = %(answer_id)s AND question_id = %(question_id)s;
+                    """,
+                   {'answer_id': answer_id,
+                    'question_id': question_id})
+    answer_to_edit = cursor.fetchall()
+    return answer_to_edit[0]
+
+
+@connection2.connection_handler
+def edit_answer(cursor, answer_id, question_id, edited_message):
+    cursor.execute("""
+                    UPDATE answer
+                    SET message = %(edited_message)s
+                    WHERE id = %(answer_id)s AND question_id = %(question_id)s;
+                    """,
+                   {'answer_id': answer_id,
+                    'question_id': question_id,
+                    'edited_message': edited_message})
+
+
+def save_question_picture(file1, file_name, question_id, upload_folder):
+    file1.save(os.path.join(upload_folder, "Q" + question_id + file_name))
+
+
+def save_answer_picture(answerfile, file_name, max_id, upload_folder):
+    answerfile.save(os.path.join(upload_folder, "A" + max_id + file_name))
+
 
 def delete_question(question_id):
     delete_img_from_all_answer(question_id)
@@ -66,7 +169,7 @@ def delete_question_from_db(cursor, question_id):
                 DELETE  FROM question
                 WHERE id = %(question_id)s;
                 """,
-                {'question_id': question_id})
+                   {'question_id': question_id})
 
 
 @connection2.connection_handler
@@ -77,7 +180,8 @@ def delete_all_answer_from_db(cursor, q_id):
                 DELETE FROM answer
                 WHERE question_id = %(question_id)s;
                 """,
-                {'question_id': q_id})
+                   {'question_id': q_id})
+
 
 @connection2.connection_handler
 def delete_an_answer(cursor, id):
@@ -87,7 +191,8 @@ def delete_an_answer(cursor, id):
                 DELETE  FROM answer
                 WHERE id = %(id)s;
                 """,
-                {'id': id})
+                   {'id': id})
+
 
 @connection2.connection_handler
 def delete_img_from_question(cursor, question_id):
@@ -95,11 +200,12 @@ def delete_img_from_question(cursor, question_id):
                 SELECT image FROM question
                 WHERE id = %(question_id)s AND image IS NOT NULL;
                 """,
-                {'question_id': question_id})
+                   {'question_id': question_id})
     file_path = cursor.fetchall()
     file_path = file_path[0]['image']
     if os.path.exists(file_path):
         os.remove(file_path)
+
 
 @connection2.connection_handler
 def delete_img_from_all_answer(cursor, q_id):
@@ -107,7 +213,7 @@ def delete_img_from_all_answer(cursor, q_id):
                 SELECT image FROM answer
                 WHERE question_id = %(q_id)s AND image IS NOT NULL;
                 """,
-                {'q_id': q_id})
+                   {'q_id': q_id})
     target_list = cursor.fetchall()
     for file_path in target_list:
         if os.path.exists(file_path['image']):
@@ -115,16 +221,64 @@ def delete_img_from_all_answer(cursor, q_id):
 
 
 @connection2.connection_handler
-def delete_an_img_from_answer(cursor, id):
+def delete_an_img_from_answer(cursor, a_id):
     cursor.execute("""
-                DELETE  FROM answer
-                WHERE question_id = %(id)s AND image IS NOT NULL;
+                SELECT image FROM answer
+                WHERE id = %(aid)s AND image IS NOT NULL;
                 """,
-                {'id': id})
+                   {'aid': a_id})
     file_path = cursor.fetchall()
-    if os.path.exists(file_path['image']):
+    if file_path != [] and os.path.exists(file_path[0]['image']):
         os.remove(file_path)
 
+
+@connection2.connection_handler
+def delete_a_comment(cursor, c_id):
+    cursor.execute("""
+                    DELETE  FROM comment
+                    WHERE id = %(cid)s;
+                    """,
+                   {'cid': c_id})
+
+
+@connection2.connection_handler
+def get_edit_comment(cursor, comment_id):
+    cursor.execute("""
+                    SELECT * FROM comment
+                    WHERE id = %(c_id)s;
+                    """,
+                   {'c_id': comment_id})
+    comment_to_edit = cursor.fetchall()
+    return comment_to_edit[0]
+
+
+@connection2.connection_handler
+def edit_comment(cursor, comment_id, edited_message, sub_time, edited_counter):
+    cursor.execute("""
+                    UPDATE comment
+                    SET message = %(edited_message)s, submission_time = %(s_time)s, edited_count = %(edit_counter)s
+                    WHERE id = %(c_id)s;
+                    """,
+                   {'c_id': comment_id,
+                    'edited_message': edited_message,
+                    's_time': sub_time,
+                    'edit_counter': edited_counter})
+
+
+def get_submission_time_for_comment():
+    return datetime.now().strftime("%Y-%m-%d %H:%M")
+
+
+@connection2.connection_handler
+def get_edited_counter_for_comment(cursor, comment_id):
+    cursor.execute("""
+                        SELECT edited_count FROM comment
+                        WHERE id = %(c_id)s;
+                        """,
+                   {'c_id': comment_id})
+    edited_count = cursor.fetchall()
+    edited_count = 1 if edited_count[0]['edited_count'] == None else edited_count[0]['edited_count'] + 1
+    return edited_count
 
 
 @connection2.connection_handler
@@ -132,7 +286,7 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
     """
     table_name:  = 'question' or 'answer' or 'comment'
     """
-    from datetime import datetime
+
     dt = datetime.now().strftime("%Y-%m-%d %H:%M")
 
     if table_name == 'question':
@@ -168,6 +322,17 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
                         'edited_count': data['edited_count']})
 
 
+@connection2.connection_handler
+def get_comment(cursor, key_id: str):
+    query = """
+            SELECT * FROM comment
+            WHERE question_id = %(key_id)s
+            """
+    cursor.execute(query, {'key_id': int(key_id)})
+    comments = cursor.fetchall()
+    return comments
+
+
 def save_question_picture(file1, path):
     file1.save(os.path.join(path))
 
@@ -182,9 +347,31 @@ def new_questionid(cursor):
                 SELECT id FROM question
                 ORDER BY id DESC
                 LIMIT 1;
-                """,)
+                """, )
     answers = int(cursor.fetchall()[0]["id"]) + 1
     return answers
+
+
+@connection2.connection_handler
+def get_question_id_from_answer(cursor, answer_id):
+    cursor.execute("""
+                    SELECT question_id FROM answer
+                    WHERE id = %(answer_id)s""",
+                   {'answer_id': answer_id})
+    return cursor.fetchall()[0]
+
+
+@connection2.connection_handler
+def get_comments_from_answers(cursor, current_answers):
+    if len(current_answers) > 0:
+        answer_ids = tuple(answer['id'] for answer in current_answers)
+        cursor.execute("""
+                        SELECT * FROM comment
+                        WHERE answer_id IN %(answer_ids)s""",
+                       {'answer_ids': answer_ids})
+        return cursor.fetchall()
+    else:
+        return None
 
 
 @connection2.connection_handler
@@ -202,4 +389,40 @@ GROUP BY question.id;
     return questions
 
 
+@connection2.connection_handler
+def get_tags(cursor, question_id):
+    cursor.execute("""
+                    SELECT * FROM tag
+                    JOIN question_tag
+                    ON tag.id = question_tag.tag_id
+                    WHERE question_id = %(question_id)s""",
+                   {'question_id': question_id})
+    return cursor.fetchall()
 
+
+@connection2.connection_handler
+def get_all_tags(cursor):
+    cursor.execute("""SELECT * FROM tag""")
+    return cursor.fetchall()
+
+
+@connection2.connection_handler
+def get_tag_id(cursor, tag: str) -> int:
+    cursor.execute("""SELECT id FROM tag WHERE name LIKE %(tag)s""", {'tag': tag})
+    return cursor.fetchall()[0]['id']
+
+
+@connection2.connection_handler
+def add_new_tag(cursor, new_tag: str, question_id) -> None:
+    tags = [tag['name'] for tag in get_all_tags()]
+    if new_tag not in tags:
+        cursor.execute("""
+                        INSERT INTO tag (name)
+                        VALUES (%(new_tag)s)""",
+                       {'new_tag': new_tag})
+    tag_id = get_tag_id(new_tag)
+    cursor.execute("""
+                    INSERT INTO question_tag (question_id, tag_id)
+                    VALUES (%(question_id)s, %(tag_id)s)
+                    """,
+                   {'question_id': question_id, 'tag_id': tag_id})

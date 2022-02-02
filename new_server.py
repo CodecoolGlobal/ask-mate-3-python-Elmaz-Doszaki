@@ -1,3 +1,5 @@
+from psycopg2.sql import NULL
+import data_manager2
 from flask import Flask, render_template, request, redirect, url_for
 from data_manager import *
 import data_manager2
@@ -27,11 +29,15 @@ def display_questions_list():
 @app.route('/questions/<question_id>')
 def display_question(question_id):
     data_manager2.increase_view_number(question_id)
+    current_answers = data_manager2.get_answers_for_question(question_id)
     return render_template('question.html',
                            current_question=data_manager2.display_question(question_id),
                            answer_header=ANSWER_HEADERS,
-                           current_answers=data_manager2.get_answers_for_question(question_id),
-                           question_id=question_id)
+                           current_answers=current_answers,
+                           question_id=question_id,
+                           question_comments=data_manager2.get_comment(question_id),
+                           answer_comments=data_manager2.get_comments_from_answers(current_answers),
+                           tags=data_manager2.get_tags(question_id))
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -49,13 +55,13 @@ def add_question():
         data_manager2.add_new_data_to_table(data, 'question')
         if path != "":
             data_manager2.save_question_picture(file1, path)
-        return redirect('/questions/'+question_id)
-
+        return redirect('/questions/' + question_id)
 
 
 @app.route('/question/<question_id>/new-answer', methods=['POST'])
 def display_answer(question_id):
     return render_template('answer_form.html', question_id=question_id)
+
 
 @app.route('/question/new-answer', methods=['POST'])
 def add_new_answer():
@@ -68,7 +74,6 @@ def add_new_answer():
     return redirect(url_for("display_question", question_id=question_id))
 
 
-
 @app.route('/question/<q_id>/delete', methods=['POST'])
 def delete_question(q_id):
     data_manager2.delete_question(q_id)
@@ -77,9 +82,27 @@ def delete_question(q_id):
 
 @app.route('/answer/<a_id>/delete', methods=['POST'])
 def delete_answer(a_id):
-    data_manager2.delete_an_img_from_answer(a_id)
-    data_manager2.delete_an_answer(a_id)
+    data_manager2.delete_an_img_from_answer(int(a_id))
+    data_manager2.delete_an_answer(int(a_id))
     return redirect("/questions/" + request.form['question_id'])
+
+
+@app.route('/delete_comment/<q_id>/<c_id>')
+def delete_comment(q_id, c_id):
+    data_manager2.delete_a_comment(c_id)
+    return redirect('/questions/' + q_id)
+
+
+@app.route('/edit_comment/<q_id>/<c_id>', methods=['GET', 'POST'])
+def edit_comment(q_id, c_id):
+    if request.method == 'GET':
+        comment_to_edit = data_manager2.get_edit_comment(c_id)
+        return render_template('edit_comment.html', comment=comment_to_edit)
+    else:
+        sub_time = data_manager2.get_submission_time_for_comment()
+        edited_counter = data_manager2.get_edited_counter_for_comment(c_id)
+        data_manager2.edit_comment(c_id, request.form['message'], sub_time, edited_counter)
+        return redirect('/questions/' + q_id)
 
 
 @app.route('/question/<q_id>/edit', methods=['POST', 'GET'])
@@ -129,6 +152,7 @@ def vote_down_answer(answer_id):
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     return redirect('/questions/' + request.form['question_id'])
 
+
 @app.route('/search')
 def search_question():
     search = request.args.get('search')
@@ -139,6 +163,55 @@ def search_question():
                            searched_phrase=search
                            )
 
+
+@app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
+def add_comment_to_question(question_id):
+    if request.method == 'GET':
+        return render_template('add-comment.html', question_id=question_id)
+    if request.method == 'POST':
+        data_manager2.add_new_data_to_table(
+            data={'question_id': question_id, 'answer_id': None, 'message': request.form['message'],
+                  'edited_count': None},
+            table_name='comment')
+        return redirect(url_for('display_question', question_id=question_id))
+
+
+@app.route('/answer/<answer_id>/edit', methods=['POST', 'GET'])
+def route_edit_answer(answer_id):
+    if request.method == 'GET':
+        q_id = request.args.get('question_id')
+        answer_to_edit = data_manager2.route_edit_answer(answer_id, q_id)
+        message = answer_to_edit["message"]
+        return render_template('edit-answer.html', message=message, q_id=q_id, answer_id=answer_id)
+    else:
+        q_id = request.form['question_id']
+        message = request.form['message']
+        data_manager2.edit_answer(answer_id, q_id, message)
+        return redirect('/questions/' + q_id)
+
+
+@app.route('/answer/<answer_id>/new-comment', methods=['GET', 'POST'])
+def add_comment_to_answer(answer_id):
+    if request.method == 'GET':
+        return render_template('add-comment.html', answer_id=answer_id)
+    if request.method == 'POST':
+        data_manager2.add_new_data_to_table(
+            data={'question_id': None, 'answer_id': answer_id, 'message': request.form['message'],
+                  'edited_count': None},
+            table_name='comment')
+        answer_data = data_manager2.get_question_id_from_answer(answer_id)
+        return redirect(url_for('display_question', question_id=answer_data['question_id']))
+
+
+@app.route('/question/<question_id>/new-tag', methods=['GET', 'POST'])
+def add_tags_to_question(question_id):
+    if request.method == 'GET':
+        tags = data_manager2.get_all_tags()
+        return render_template('add-tag.html', question_id=question_id, tags=tags)
+    if request.method == 'POST':
+        new_tag = request.form['new_tag']
+        data_manager2.add_new_tag(new_tag, question_id)
+        return redirect(url_for('display_question', question_id=question_id))
 
 
 if __name__ == "__main__":
