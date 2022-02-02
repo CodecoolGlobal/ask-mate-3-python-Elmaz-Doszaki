@@ -27,7 +27,7 @@
         <a href = #vmi class = "nav2">Premium</a>
         <a href = #vmi class = "nav3">About Us</a>
         <a href = #vmi class = "nav4">Contact</a>
-        <div class = "headline">Edit questions</div>
+        <div class = "headline">Edit comment</div>
       </div>
       <div class = "back_button">
         <form action="/questions/{{ q_id }}">
@@ -35,7 +35,7 @@
         </form>
       </div>
       <div class="form-style-8">
-        <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}" method="post">
+        <form action="/edit_comment/{{ q_id }}/{{ comment['id'] }}" method="post">
           <div>
             <label>Give your comment:</label> <br />
             <input

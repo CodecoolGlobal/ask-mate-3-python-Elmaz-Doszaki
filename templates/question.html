@@ -175,12 +175,12 @@
                                 {{ comment['message'] }}
                             </div>
                             <div class = "a-c-delete">
-                                <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                <form action="/delete_comment/{{ row['question_id'] }}/{{ comment['id'] }}">
                                     <button type="submit">Delete</button>
                                 </form>
                             </div>
                             <div class = "a-c-edit">
-                                <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                <form action="/edit_comment/{{ row['question_id'] }}/{{ comment['id'] }}">
                                     <button type="submit">Edit</button>
                                 </form>
                             </div>

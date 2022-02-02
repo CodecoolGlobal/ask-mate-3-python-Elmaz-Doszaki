@@ -68,11 +68,11 @@ def add_new_answer():
                   'image': ""}
     data_manager2.add_new_data_to_table(new_answer, 'answer')
 
-    question_id = str(data_manager2.get_new_id('a'))
+    answer_id = str(data_manager2.get_new_id('a'))
     file1 = request.files['file1']
     if request.files['file1'].filename != "":
-        path = data_manager2.UPLOAD_FOLDER + "A" + question_id + file1.filename
-        data_manager2.save_picture(file1, path, question_id)
+        path = data_manager2.UPLOAD_FOLDER + "A" + answer_id + file1.filename
+        data_manager2.save_picture(file1, path, answer_id)
     return redirect(url_for("display_question", question_id=question_id))
 
 
@@ -97,7 +97,7 @@ def delete_comment(q_id, c_id):
 def edit_comment(q_id, c_id):
     if request.method == 'GET':
         comment_to_edit = data_manager2.get_edit_comment(c_id)
-        return render_template('edit_comment.html', comment=comment_to_edit)
+        return render_template('edit_comment.html', comment=comment_to_edit, q_id=q_id)
     else:
         sub_time = data_manager2.get_submission_time_for_comment()
         edited_counter = data_manager2.get_edited_counter_for_comment(c_id)
@@ -195,7 +195,7 @@ def add_comment_to_answer(answer_id):
         return render_template('add-comment.html', answer_id=answer_id)
     if request.method == 'POST':
         data_manager2.add_new_data_to_table(
-            data={'question_id': data_manager2.get_question_id_from_answer(answer_id), 'answer_id': answer_id, 'message': request.form['message'],
+            data={'question_id': None, 'answer_id': answer_id, 'message': request.form['message'],
                   'edited_count': None},
             table_name='comment')
         answer_data = data_manager2.get_question_id_from_answer(answer_id)
