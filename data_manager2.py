@@ -446,3 +446,13 @@ def add_new_tag(cursor, new_tag: str, question_id) -> None:
                     VALUES (%(question_id)s, %(tag_id)s)
                     """,
                    {'question_id': question_id, 'tag_id': tag_id})
+
+
+@connection2.connection_handler
+def tag_delete_from_question(cursor, question_id, tag_id):
+    cursor.execute("""
+                    DELETE FROM question_tag
+                    WHERE question_id = %(question_id)s
+                    AND tag_id = %(tag_id)s
+                    """,
+                   {'question_id': question_id, 'tag_id': tag_id})
