@@ -242,7 +242,7 @@ def delete_a_comment(cursor, c_id):
 
 
 @connection2.connection_handler
-def get_comment(cursor, comment_id):
+def get_edit_comment(cursor, comment_id):
     cursor.execute("""
                     SELECT * FROM comment
                     WHERE id = %(c_id)s;
