@@ -36,7 +36,8 @@ def display_question(question_id):
                            current_answers=current_answers,
                            question_id=question_id,
                            question_comments=data_manager2.get_comment(question_id),
-                           answer_comments=data_manager2.get_comments_from_answers(current_answers))
+                           answer_comments=data_manager2.get_comments_from_answers(current_answers),
+                           tags=data_manager2.get_tags(question_id))
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -54,12 +55,13 @@ def add_question():
         data_manager2.add_new_data_to_table(data, 'question')
         if path != "":
             data_manager2.save_question_picture(file1, path)
-        return redirect('/questions/'+question_id)
+        return redirect('/questions/' + question_id)
 
 
 @app.route('/question/<question_id>/new-answer', methods=['POST'])
 def display_answer(question_id):
     return render_template('answer_form.html', question_id=question_id)
+
 
 @app.route('/question/new-answer', methods=['POST'])
 def add_new_answer():
@@ -84,10 +86,12 @@ def delete_answer(a_id):
     data_manager2.delete_an_answer(int(a_id))
     return redirect("/questions/" + request.form['question_id'])
 
+
 @app.route('/delete_comment/<q_id>/<c_id>')
 def delete_comment(q_id, c_id):
     data_manager2.delete_a_comment(c_id)
     return redirect('/questions/' + q_id)
+
 
 @app.route('/edit_comment/<q_id>/<c_id>', methods=['GET', 'POST'])
 def edit_comment(q_id, c_id):
@@ -148,6 +152,7 @@ def vote_down_answer(answer_id):
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     return redirect('/questions/' + request.form['question_id'])
 
+
 @app.route('/search')
 def search_question():
     search = request.args.get('search')
@@ -156,7 +161,6 @@ def search_question():
                            table_headers=TABLE_HEADERS,
                            list_of_questions=questions,
                            )
-
 
 
 @app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
@@ -196,6 +200,17 @@ def add_comment_to_answer(answer_id):
             table_name='comment')
         answer_data = data_manager2.get_question_id_from_answer(answer_id)
         return redirect(url_for('display_question', question_id=answer_data['question_id']))
+
+
+@app.route('/question/<question_id>/new-tag', methods=['GET', 'POST'])
+def add_tags_to_question(question_id):
+    if request.method == 'GET':
+        tags = data_manager2.get_all_tags()
+        return render_template('add-tag.html', question_id=question_id, tags=tags)
+    if request.method == 'POST':
+        new_tag = request.form['new_tag']
+        data_manager2.add_new_tag(new_tag, question_id)
+        return redirect(url_for('display_question', question_id=question_id))
 
 
 if __name__ == "__main__":
