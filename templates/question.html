@@ -116,90 +116,6 @@
         {% endfor %}
     </div>
     <br>
-    <div class= "tables">
-    <table class="table-fill">
-    <thead>
-    <tr>
-        {% for header in answer_header %}
-            <th >{{ header }}</th>
-        {% endfor %}
-        <th>Comment</th>
-    </tr>
-    </thead>
-      <tbody class="table-hover">
-        {% for row in current_answers %}
-            <tr>
-                <td>{{ row["id"] }}</td>
-                <td>{{ row["submission_time"] }}</td>
-                <td>{{ row["vote_number"] }}</td>
-                <td>{{ row["message"] }}</td>
-                {% if row["image"] %}
-                    <td ><img src="/static/{{ row["image"] }}"></td>
-                {% else %}
-                   <td></td>
-                {% endif %}
-
-                <td align="middle">
-                    <form action="/answer/{{ row['id'] }}/delete" method="POST">
-                        <input class= "icon"
-                                id="delete_button"
-                                type="image"
-                                src="/static/img/trash.png"
-                                alt="Delete"
-                                width="60"
-                                value="delete_button"
-                        />
-                        <input
-                                type="hidden"
-                                name="question_id"
-                                value="{{ current_question[0]['id'] }}"
-                        />
-                    </form>
-                </td>
-                <td align="middle">
-                    <form action="/answer/{{ row['id'] }}/vote-up" method="POST">
-                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
-                        <input class= "icon" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
-                               alt="Vote-up" width="60" value="{{ row[0] }}">
-                    </form>
-                </td>
-                <td align="middle">
-                    <form action="/answer/{{ row['id'] }}/vote-down" method="POST">
-                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
-                        <input class= "icon" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
-                               alt="Vote-down" width="60" value="{{ row[0] }}">
-                    </form>
-                </td>
-                <td>
-                    <form action="/answer/{{ row["id"] }}/edit">
-                        <button id="home" type="submit" class="edit" name="question_id" value="{{ current_question[0]['id'] }}">Edit</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="{{ url_for('add_comment_to_answer', answer_id=row["id"]) }}">
-                        <button id="new_comment" type="submit" class="edit" name="new_comment" value="{{ current_question[0]['id'] }}">New comment</button>
-                    </form>
-                </td>
-            </tr>
-
-
-                {% for comment in answer_comments %}
-                    {% if comment['answer_id'] == row['id'] %}
-                        <tr>
-                        <td>Comment:</td>
-                        <td>{{ comment['submission_time'] }}</td>
-                        <td></td>
-                        <td>{{ comment['message'] }}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-
-
-        {% endfor %}
-      </tbody>
-    </table>
-    </div>
-    <br>
     <form action="/question/{{ question_id }}/new-answer" method="POST">
       <input
         id="new_answer"
@@ -210,7 +126,71 @@
         value="New Answer"
       />
     </form>
-
+    <div class="answers">
+        {% for row in current_answers %}
+            <div class="answer">
+                <div class="a-time">{{ row["submission_time"] }}</div>
+                <div class="a-vote">{{ row["vote_number"] }}</div>
+                <div class="a-message">{{ row["message"] }}</div>
+                {% if row["image"] %}
+                    <div class="a-meme"><img src="/static/{{ row["image"] }}"></div>
+                {% endif %}
+                <div class="a-delete">
+                    <form action="/answer/{{ row['id'] }}/delete" method="POST">
+                        <input class= "icon" id="delete_button" type="image"  src="/static/img/trash.png" alt="Delete" value="delete_button"/>
+                        <input   type="hidden" name="question_id"    value="{{ current_question[0]['id'] }}" />
+                    </form>
+                </div>
+                <div class="a-vote-up">
+                    <form action="/answer/{{ row['id'] }}/vote-up" method="POST">
+                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
+                        <input class= "icon" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png" alt="Vote-up"  value="{{ row[0] }}">
+                    </form>
+                </div>
+                <div class="a-vote-down">
+                    <form action="/answer/{{ row['id'] }}/vote-down" method="POST">
+                        <input type="hidden" name="question_id" value="{{ current_question[0]['id'] }}"/>
+                        <input class= "icon" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png" alt="Vote-down" value="{{ row[0] }}">
+                    </form>
+                </div>
+                <div class="a-edit">
+                    <form action="/answer/{{ row["id"] }}/edit">
+                        <button id="home" type="submit" class="edit" name="question_id" value="{{ current_question[0]['id'] }}">Edit</button>
+                    </form>
+                </div>
+                <div class="a-add-comment">
+                    <form action="{{ url_for('add_comment_to_answer', answer_id=row["id"]) }}">
+                        <button id="new_comment" type="submit" class="edit" name="new_comment" value="{{ current_question[0]['id'] }}">New comment</button>
+                    </form>
+                </div>
+            </div>
+            <div class="a-comments">
+                {% for comment in answer_comments %}
+                    {% if comment['answer_id'] == row['id'] %}
+                        <div class = "a-comment">
+                            <div class= "a-c-time">
+                                {{ comment['submission_time'] }}
+                            </div>
+                            <div class= "a-c-message">
+                                {{ comment['message'] }}
+                            </div>
+                            <div class = "a-c-delete">
+                                <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </div>
+                            <div class = "a-c-edit">
+                                <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                    <button type="submit">Edit</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <br>
     <br />
     <br>
     <br>

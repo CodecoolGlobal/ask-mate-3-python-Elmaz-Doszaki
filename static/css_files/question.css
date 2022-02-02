@@ -6,209 +6,6 @@
   margin-left: 20px;
 }
 
-img {
-  max-width: 70px;
-  max-height: 70px;
-  padding: 5px;
-}
-
-.icon {
-  max-width: 30px;
-  max-height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 40px;
-}
-
-div.table-title {
-  display: block;
-  margin: auto;
-  max-width: 1200px;
-  width: 100%;
-}
-
-.table-title h1 {
-  color: #ffffff;
-  font-size: 50px;
-  font-weight: 400;
-  font-style: normal;
-  font-family: "Roboto", sans-serif;
-  /* text-transform: uppercase; */
-  background: #000000;
-}
-
-.table-fill {
-  background: #ffffff;
-  border-radius: 3px;
-  border-collapse: collapse;
-  height: 100px;
-  margin: auto;
-  max-width: 1200px;
-  padding: 5px;
-  width: 100%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  animation: float 5s infinite;
-}
-
-h2 {
-  font-family: "The Nautigal", cursive;
-  font-size: 40px;
-}
-
-.header {
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-th {
-  color: darkslategrey;
-  background: #b2beb5;
-
-  border-right: 1px solid white;
-  font-size: 16px;
-  font-weight: 100;
-  padding: 24px;
-  text-align: center;
-  vertical-align: middle;
-  font-family: "Luxurious Roman", cursive;
-}
-
-th:first-child {
-  border-top-left-radius: 3px;
-}
-
-th:last-child {
-  border-top-right-radius: 3px;
-  border-right: none;
-}
-
-.question-header {
-  background-color: #5d5c61;
-  color: white;
-  font-size: 18px;
-  margin: auto;
-  word-wrap: break-word;
-  max-width: 40vh;
-  max-width: 1000px;
-}
-
-tr {
-  border-top: 1px solid #434343;
-  border-bottom: 1px solid #ffff;
-  color: darkslategrey;
-  background-color: #d1d0cf;
-  font-size: 16px;
-  font-weight: normal;
-  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
-  margin: 2px;
-  border-top: solid 3px #434343;
-}
-
-tr:hover td {
-  background: #a3a1a1;
-  color: #5c4242;
-  border-top: 1px solid #22262e;
-  border-bottom: 1px solid #22262e;
-  box-shadow: 5px 5px 5px #5c4242;
-}
-
-tr:first-child {
-  border-top: none;
-}
-
-tr:last-child {
-  border-bottom: none;
-}
-
-tr:last-child td:first-child {
-  border-bottom-left-radius: 3px;
-}
-
-tr:last-child td:last-child {
-  border-bottom-right-radius: 3px;
-}
-
-td {
-  background: #ffffff;
-  text-align: center;
-  vertical-align: middle;
-  font-weight: 300;
-  font-size: 12px;
-  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #c1c3d1;
-  max-width: 40vh;
-  word-wrap: break-word;
-  max-width: 100px;
-}
-
-tr:nth-child(2) {
-  height: 150px;
-}
-
-tr:nth-child(3) {
-  height: 150px;
-}
-
-tr:nth-child(4) {
-  height: 150px;
-}
-
-tr:nth-child(5) {
-  height: 150px;
-}
-
-tr:nth-child(6) {
-  height: 150px;
-}
-
-tr:nth-child(7) {
-  height: 150px;
-}
-
-tr:nth-child(8) {
-  height: 150px;
-}
-
-tr:nth-child(9) {
-  height: 150px;
-}
-
-tr:nth-child(10) {
-  height: 150px;
-}
-
-td:last-child {
-  border-right: 0px;
-}
-
-th.text-left {
-  text-align: left;
-}
-
-th.text-center {
-  text-align: center;
-}
-
-th.text-right {
-  text-align: right;
-}
-
-td.text-left {
-  text-align: left;
-}
-
-td.text-center {
-  text-align: center;
-}
-
-td.text-right {
-  text-align: right;
-}
-
 /*kérdés kártya: */
 .question {
   margin-left: 140px;
@@ -218,7 +15,7 @@ td.text-right {
   display: grid;
   grid-gap: 5px;
   grid-template-columns: repeat(10,1fr);
-  grid-template-rows: minmax(45px,auto) minmax(200px,auto) minmax(30px,auto);
+  grid-template-rows: minmax(45px,auto) minmax(auto,200px) minmax(30px,auto);
   grid-template-areas:
     "time   time   time    title  title  title  title   title    edit     edit"
     "photo  photo  photo message message message message  message message message"
@@ -240,9 +37,15 @@ td.text-right {
 
 .meme {
   grid-area: photo;
-  justify-self: center;
-  align-self: center;
+  align-self: stretch;
+  text-align: center;
 }
+
+.meme img{
+  max-height: 100%;
+  max-width: 100%;
+
+  }
 
 .message {
   grid-area: message;
@@ -325,6 +128,141 @@ td.text-right {
 
 .q-c-delete {
   grid-area: q-c-delete;
+  justify-self: center;
+  align-self: center;
+}
+
+/*válasz kártya: */
+.answers {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 10px ;
+  margin-left: 180px;
+  margin-right: 180px;
+}
+
+.answer {
+  background: #aab6ad;
+  padding: 20px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(10,1fr);
+  grid-template-rows: minmax(25px,auto) minmax(auto, 130px) 35px;
+  grid-template-areas:
+    "a-time      a-time    a-time    a-time    a-time    a-time    a-time   a-time   a-edit   a-edit"
+    "a-message a-message a-message a-message  a-message a-message a-message a-photo  a-photo  a-photo"
+    "a-delete  a-delete   a-up    a-down    a-vote   a-vote  a-vote   a-vote  a-add-comment  a-add-comment";
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.a-time {
+  grid-area: a-time;
+  justify-self: start;
+  align-self: center;
+}
+
+.a-vote {
+  grid-area: a-vote;
+  justify-self: start;
+  align-self: center;
+}
+
+.a-message{
+  grid-area: a-message;
+  align-self: stretch;
+  background: lightgray;
+  padding: 10px;
+}
+
+.a-delete {
+  grid-area: a-delete;
+  text-align: left;
+  padding-top: 5px;
+}
+
+.icon{
+  width:28px;
+}
+
+.a-vote-down {
+  grid-area: a-down;
+  justify-self: start;
+  align-self: center;
+  padding-top: 5px;
+}
+
+.a-vote-up {
+  grid-area: a-up;
+  justify-self: center;
+  align-self: center;
+  padding-top: 5px;
+}
+
+.a-edit {
+  grid-area: a-edit;
+  justify-self: center;
+  align-self: center;
+}
+
+.a-add-comment {
+  grid-area: a-add-comment;
+  justify-self: center;
+  align-self: center;
+}
+
+.a-meme {
+  grid-area: a-photo;
+  align-self: stretch;
+  text-align: center;
+}
+
+.a- img{
+  max-height: 100%;
+  max-width: 100%;
+
+  }
+/*válasz-comment kártyák: */
+.a-comments {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  margin-left: 120px;
+  margin-right: 120px;
+}
+
+.a-comment {
+  border: 1px solid black;
+  border-radius: 25px;
+  background: lightgray;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-rows:minmax(30px,auto) minmax(30px,auto);
+  grid-template-areas:
+    "a-c-message a-c-message a-c-message"
+    "a-c-time    a-c-edit    a-c-delete";
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.a-c-time {
+  grid-area: a-c-time;
+  justify-self: start;
+  align-self: center;
+}
+
+.a-c-message {
+  grid-area: a-c-message;
+  justify-self: center;
+  align-self: center;
+}
+.a-c-edit {
+  grid-area: a-c-edit;
+  justify-self: center;
+  align-self: center;
+}
+
+.a-c-delete {
+  grid-area: a-c-delete;
   justify-self: center;
   align-self: center;
 }
