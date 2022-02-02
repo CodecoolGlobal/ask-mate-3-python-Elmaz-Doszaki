@@ -45,17 +45,15 @@ def add_question():
     if request.method == 'GET':
         return render_template('add-question.html')
     else:
-        question_id = str(data_manager2.new_questionid())
-        file1 = request.files['file1']
-        if request.files['file1'].filename == "":
-            path = ""
-        else:
-            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file1.filename
-        data = {'title': request.form['title'], 'message': request.form['question'], 'image': path}
+        data = {'title': request.form['title'], 'message': request.form['question'], 'image': ""}
         data_manager2.add_new_data_to_table(data, 'question')
-        if path != "":
-            data_manager2.save_question_picture(file1, path)
-        return redirect('/questions/' + question_id)
+
+        question_id = str(data_manager2.get_new_id('q'))
+        file1 = request.files['file1']
+        if request.files['file1'].filename != "":
+            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file1.filename
+            data_manager2.save_picture(file1, path, question_id)
+        return redirect('/questions/'+question_id)
 
 
 @app.route('/question/<question_id>/new-answer', methods=['POST'])
@@ -69,8 +67,14 @@ def add_new_answer():
     new_answer = {'vote_number': 0,
                   'question_id': question_id,
                   'message': request.form['answer_message'],
-                  'image': None}
+                  'image': ""}
     data_manager2.add_new_data_to_table(new_answer, 'answer')
+
+    answer_id = str(data_manager2.get_new_id('a'))
+    file1 = request.files['file1']
+    if request.files['file1'].filename != "":
+        path = data_manager2.UPLOAD_FOLDER + "A" + answer_id + file1.filename
+        data_manager2.save_picture(file1, path, answer_id)
     return redirect(url_for("display_question", question_id=question_id))
 
 
@@ -97,7 +101,7 @@ def delete_comment(q_id, c_id):
 def edit_comment(q_id, c_id):
     if request.method == 'GET':
         comment_to_edit = data_manager2.get_edit_comment(c_id)
-        return render_template('edit_comment.html', comment=comment_to_edit)
+        return render_template('edit_comment.html', comment=comment_to_edit, q_id=q_id)
     else:
         sub_time = data_manager2.get_submission_time_for_comment()
         edited_counter = data_manager2.get_edited_counter_for_comment(c_id)
@@ -160,6 +164,7 @@ def search_question():
     return render_template('questions_list.html',
                            table_headers=TABLE_HEADERS,
                            list_of_questions=questions,
+                           searched_phrase=search
                            )
 
 
