@@ -242,8 +242,9 @@ def delete_a_comment(cursor, c_id):
                     """,
                    {'cid': c_id})
 
+
 @connection2.connection_handler
-def get_comment(cursor, comment_id):
+def get_edit_comment(cursor, comment_id):
     cursor.execute("""
                     SELECT * FROM comment
                     WHERE id = %(c_id)s;
@@ -251,6 +252,7 @@ def get_comment(cursor, comment_id):
                    {'c_id': comment_id})
     comment_to_edit = cursor.fetchall()
     return comment_to_edit[0]
+
 
 @connection2.connection_handler
 def edit_comment(cursor, comment_id, edited_message, sub_time, edited_counter):

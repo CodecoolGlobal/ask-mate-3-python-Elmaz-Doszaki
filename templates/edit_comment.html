@@ -35,7 +35,7 @@
         </form>
       </div>
       <div class="form-style-8">
-        <form action="/edit_comment/{{ comment[0]['question_id'] }}/{{ comment[0]['id'] }}" method="post">
+        <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}" method="post">
           <div>
             <label>Give your comment:</label> <br />
             <input
@@ -43,7 +43,7 @@
               type="text"
               required
               minlength="3"
-              value="{{ comment[0]['message'] }}"
+              value="{{ comment['message'] }}"
             />
           </div>
           <button type="submit" class="button">Edit Comment</button>

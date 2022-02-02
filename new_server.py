@@ -92,7 +92,7 @@ def delete_comment(q_id, c_id):
 @app.route('/edit_comment/<q_id>/<c_id>', methods=['GET', 'POST'])
 def edit_comment(q_id, c_id):
     if request.method == 'GET':
-        comment_to_edit = data_manager2.get_comment(c_id)
+        comment_to_edit = data_manager2.get_edit_comment(c_id)
         return render_template('edit_comment.html', comment=comment_to_edit)
     else:
         sub_time = data_manager2.get_submission_time_for_comment()
