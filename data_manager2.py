@@ -50,7 +50,6 @@ def increase_view_number(cursor, question_id):
                    {'question_id': question_id})
 
 
-
 @connection2.connection_handler
 def get_question_vote_number(cursor, question_id):
     cursor.execute("""
@@ -197,7 +196,6 @@ def delete_all_answer_from_db(cursor, q_id):
                    {'question_id': q_id})
 
 
-
 @connection2.connection_handler
 def delete_an_answer(cursor, id):
     cursor.execute("""
@@ -207,7 +205,6 @@ def delete_an_answer(cursor, id):
                 WHERE id = %(id)s;
                 """,
                    {'id': id})
-
 
 
 @connection2.connection_handler
@@ -240,12 +237,13 @@ def delete_img_from_all_answer(cursor, q_id):
 def delete_an_img_from_answer(cursor, a_id):
     cursor.execute("""
                 SELECT image FROM answer
-                WHERE id = %(aid)s AND image IS NOT NULL;;
+                WHERE id = %(aid)s AND image IS NOT NULL;
                 """,
                    {'aid': a_id})
     file_path = cursor.fetchall()
-    if file_path !=[] and os.path.exists(file_path[0]['image']):
+    if file_path != [] and os.path.exists(file_path[0]['image']):
         os.remove(file_path)
+
 
 @connection2.connection_handler
 def delete_a_comment(cursor, c_id):
@@ -283,6 +281,7 @@ def edit_comment(cursor, comment_id, edited_message, sub_time, edited_counter):
 def get_submission_time_for_comment():
     return datetime.now().strftime("%Y-%m-%d %H:%M")
 
+
 @connection2.connection_handler
 def get_edited_counter_for_comment(cursor, comment_id):
     cursor.execute("""
@@ -293,6 +292,7 @@ def get_edited_counter_for_comment(cursor, comment_id):
     edited_count = cursor.fetchall()
     edited_count = 1 if edited_count[0]['edited_count'] == None else edited_count[0]['edited_count'] + 1
     return edited_count
+
 
 @connection2.connection_handler
 def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None:
@@ -397,9 +397,52 @@ def get_comments_from_answers(cursor, current_answers):
 @connection2.connection_handler
 def get_searched_question(cursor, search):
     cursor.execute("""
-                SELECT * FROM question 
-                WHERE message LIKE %(search)s OR title LIKE %(search)s;
+                SELECT question.* FROM question LEFT JOIN answer
+                ON question.id = answer.question_id
+                WHERE question.message LIKE %(search)s
+                OR question.title LIKE %(search)s
+                OR answer.message LIKE %(search)s
+GROUP BY question.id;
     """,
                    {'search': '%' + search + '%'})
     questions = cursor.fetchall()
     return questions
+
+
+@connection2.connection_handler
+def get_tags(cursor, question_id):
+    cursor.execute("""
+                    SELECT * FROM tag
+                    JOIN question_tag
+                    ON tag.id = question_tag.tag_id
+                    WHERE question_id = %(question_id)s""",
+                   {'question_id': question_id})
+    return cursor.fetchall()
+
+
+@connection2.connection_handler
+def get_all_tags(cursor):
+    cursor.execute("""SELECT * FROM tag""")
+    return cursor.fetchall()
+
+
+@connection2.connection_handler
+def get_tag_id(cursor, tag: str) -> int:
+    cursor.execute("""SELECT id FROM tag WHERE name LIKE %(tag)s""", {'tag': tag})
+    return cursor.fetchall()[0]['id']
+
+
+@connection2.connection_handler
+def add_new_tag(cursor, new_tag: str, question_id) -> None:
+    tags = [tag['name'] for tag in get_all_tags()]
+    if new_tag not in tags:
+        cursor.execute("""
+                        INSERT INTO tag (name)
+                        VALUES (%(new_tag)s)""",
+                       {'new_tag': new_tag})
+    tag_id = get_tag_id(new_tag)
+    cursor.execute("""
+                    INSERT INTO question_tag (question_id, tag_id)
+                    VALUES (%(question_id)s, %(tag_id)s)
+                    """,
+                   {'question_id': question_id, 'tag_id': tag_id})
