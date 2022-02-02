@@ -63,7 +63,7 @@
         {% endif %}
         <div class="add-tag">
             <form action="{{ url_for('add_tags_to_question', question_id=question_id) }}">
-                <button id="home" type="submit" class="view">Add tag</button>
+                <button class="button" id="home" type="submit" class="view">Add tag</button>
             </form>
         </div>
         <div class="tags">
@@ -79,21 +79,13 @@
                         name="new_comment"
                         type="submit"
                         class="button"
-                        width="60"
                         value="New Comment"
                 />
             </form>
         </div>
         <div class="Q-edit">
             <form action="/question/{{ question_id }}/edit" method="GET">
-                <input
-                        id="edit_question"
-                        name="edit_question"
-                        type="submit"
-                        class="button"
-                        width="60"
-                        value="Edit Question"
-                />
+                <input id="home" class="icon" name="question_id" type="image" src="/static/img/editpic2.png" alt="edit">
             </form>
         </div>
     </div>
@@ -109,28 +101,30 @@
                 </div>
                 <div class="q-c-delete">
                     <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
-                        <button type="submit">Delete</button>
+                        <input class= "icon" id="delete_button" type="image"  src="/static/img/trash.png" alt="Delete" value="delete_button"/>
                     </form>
                 </div>
                 <div class="q-c-edit">
                     <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
-                        <button type="submit">Edit</button>
+                        <input id="home" class="icon" name="question_id" type="image" src="/static/img/editpic2.png" alt="edit">
                     </form>
                 </div>
             </div>
         {% endfor %}
     </div>
     <br>
-    <form action="/question/{{ question_id }}/new-answer" method="POST">
-      <input
-        id="new_answer"
-        name="new_answer"
-        type="submit"
-        class="button"
-        width="60"
-        value="New Answer"
-      />
-    </form>
+    <div class="new-answer">
+        <form action="/question/{{ question_id }}/new-answer" method="POST">
+          <input
+            id="new_answer"
+            name="new_answer"
+            type="submit"
+            class="button"
+            width="60"
+            value="New Answer"
+          />
+        </form>
+    </div>
     <div class="answers">
         {% for row in current_answers %}
             <div class="answer">
@@ -160,12 +154,12 @@
                 </div>
                 <div class="a-edit">
                     <form action="/answer/{{ row["id"] }}/edit">
-                        <button id="home" type="submit" class="edit" name="question_id" value="{{ current_question[0]['id'] }}">Edit</button>
+                        <input id="home" class="icon" name="question_id" type="image" src="/static/img/editpic2.png" alt="edit" value="{{ current_question[0]['id'] }}">
                     </form>
                 </div>
                 <div class="a-add-comment">
                     <form action="{{ url_for('add_comment_to_answer', answer_id=row["id"]) }}">
-                        <button id="new_comment" type="submit" class="edit" name="new_comment" value="{{ current_question[0]['id'] }}">New comment</button>
+                        <button id="new_comment" type="submit" class="button" name="new_comment" value="{{ current_question[0]['id'] }}">New comment</button>
                     </form>
                 </div>
             </div>
@@ -180,13 +174,15 @@
                                 {{ comment['message'] }}
                             </div>
                             <div class = "a-c-delete">
-                                <form action="/delete_comment/{{ row['question_id'] }}/{{ comment['id'] }}">
-                                    <button type="submit">Delete</button>
+
+                                <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                    <input class= "icon" id="delete_button" type="image"  src="/static/img/trash.png" alt="Delete" value="delete_button"/>
                                 </form>
                             </div>
                             <div class = "a-c-edit">
-                                <form action="/edit_comment/{{ row['question_id'] }}/{{ comment['id'] }}">
-                                    <button type="submit">Edit</button>
+                                <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                    <input id="home" class="icon" name="question_id" type="image" src="/static/img/editpic2.png" alt="edit">
+
                                 </form>
                             </div>
                         </div>
