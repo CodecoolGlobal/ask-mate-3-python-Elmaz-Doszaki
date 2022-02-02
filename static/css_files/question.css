@@ -2,8 +2,24 @@
   margin-left: 20px;
 }
 
-.button {
+.back_button .button {
   margin-left: 20px;
+  padding: 20px;
+}
+
+.new-answer{
+  text-align: right ;
+  margin-right: 20px;
+  margin-top: -10px;
+  border-top: dotted #2c2824 4px;
+  }
+
+.new-answer .button {
+  margin-top: 5px;
+  margin-left: 20px;
+  left: 100%;
+  padding: 20px;
+
 }
 
 /*kérdés kártya: */
@@ -11,6 +27,7 @@
   margin-left: 140px;
   margin-right: 140px;
   background: #ffffff;
+  border-left: 20px solid #f9e69b;
   padding: 20px;
   display: grid;
   grid-gap: 5px;
@@ -27,12 +44,21 @@
   grid-area: time;
   justify-self: start;
   align-self: center;
+  font-style: italic;
 }
 
 .title {
   grid-area: title;
   justify-self: center;
   align-self: center;
+  font-family: 'Luxurious Roman', cursive;
+  font-weight: bold;
+  font-size: 110%;
+}
+.question .button{
+  background-color: #f9e69b;
+  color: black;
+  box-shadow: 2px 2px 2px #363535;
 }
 
 .meme {
@@ -44,7 +70,6 @@
 .meme img{
   max-height: 100%;
   max-width: 100%;
-
   }
 
 .message {
@@ -52,7 +77,7 @@
   align-self: stretch;
   background: #bbb5afa3;
   padding: 10px;
-  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+  font-family: 'Luxurious Roman', cursive;
 }
 
 .add-tag {
@@ -65,18 +90,28 @@
   grid-area: tag;
   justify-self: start;
   align-self: center;
+  padding-left: 15px;
+  font-style: italic;
 }
 
 .Q-comment {
   grid-area: q-com;
-  justify-self: center;
+  justify-self: start;
   align-self: center;
 }
 
 .Q-edit {
   grid-area: edit;
-  justify-self: center;
+  justify-self: end;
   align-self: center;
+}
+
+.Q-edit .icon {
+  width: 40px;
+}
+
+.question .button {
+  height: 80%;
 }
 
 /*kérdés-comment kártyák: */
@@ -84,14 +119,15 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: 210px;
+  margin-right: 210px;
 }
 
 .comment {
-  border: 1px solid black;
-  border-radius: 25px;
+  margin-top: -5px;
+  border-left: 8px solid #f9e69b;
   background: rgba(255, 255, 255, 0.79);
+  font-style: italic;
   padding: 10px;
   display: grid;
   grid-template-columns: 4fr 1fr 1fr;
@@ -106,6 +142,7 @@
   grid-area: time;
   justify-self: start;
   align-self: center;
+  font-style: italic;
 }
 
 .q-c-message {
@@ -126,12 +163,18 @@
   align-self: center;
 }
 
+.q-c-edit .icon{
+  width: 40px;
+}
+
 .q-c-delete {
   grid-area: q-c-delete;
   justify-self: center;
   align-self: center;
 }
-
+.q-c-delete .icon {
+  width:  20px;
+}
 /*válasz kártya: */
 .answers {
   display: grid;
@@ -139,10 +182,12 @@
   grid-row-gap: 10px ;
   margin-left: 180px;
   margin-right: 180px;
+  margin-top: -10px;
 }
 
 .answer {
-  background: #aab6ad;
+  background: #ffff;
+  border-right: 20px solid #71ab8a;
   padding: 20px;
   display: grid;
   grid-gap: 5px;
@@ -159,6 +204,7 @@
   grid-area: a-time;
   justify-self: start;
   align-self: center;
+  font-style: italic;
 }
 
 .a-vote {
@@ -170,14 +216,19 @@
 .a-message{
   grid-area: a-message;
   align-self: stretch;
-  background: lightgray;
+  background: #bbb5afa3;
   padding: 10px;
+  font-family: 'Luxurious Roman', cursive;
 }
 
 .a-delete {
   grid-area: a-delete;
   text-align: left;
   padding-top: 5px;
+}
+.answer .button{
+  background-color: #71ab8a;
+  box-shadow: 2px 2px 2px #363535;
 }
 
 .icon{
@@ -200,8 +251,12 @@
 
 .a-edit {
   grid-area: a-edit;
-  justify-self: center;
+  justify-self: end;
   align-self: center;
+}
+
+.a-edit .icon {
+  width: 40px;
 }
 
 .a-add-comment {
@@ -226,14 +281,14 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
-  margin-left: 120px;
-  margin-right: 120px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .a-comment {
-  border: 1px solid black;
-  border-radius: 25px;
-  background: lightgray;
+  font-style: italic;
+  border-right: 8px solid #71ab8a;
+  background: rgba(255, 255, 255, 0.79);
   padding: 10px;
   display: grid;
   grid-template-columns: 4fr 1fr 1fr;
@@ -257,12 +312,18 @@
 }
 .a-c-edit {
   grid-area: a-c-edit;
-  justify-self: center;
-  align-self: center;
+  text-align: right;
 }
 
 .a-c-delete {
   grid-area: a-c-delete;
   justify-self: center;
   align-self: center;
+}
+
+.a-c-delete .icon {
+  width:  20px;
+}
+.a-c-edit .icon {
+  width: 40px;
 }
