@@ -15,7 +15,7 @@
 <body>
 <div class = "container">
     <div class = "head">
-        <div class = "logo"></div>
+        <a href = '/' ><img src="static/img/logo.png"/></a>
         <div class = "search">
             <form action="/search">
                 <input type="text" placeholder="Search.." name="search">
@@ -28,13 +28,13 @@
         <a href = #vmi class = "nav2">Premium</a>
         <a href = #vmi class = "nav3">About Us</a>
         <a href = #vmi class = "nav4">Contact</a>
-        <div class = "headline">Questions</div>    
+        <div class = "headline">Questions</div>
     </div>
-    
+
         <form action="/add-question">
             <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/add-question">
         </form>
-  
+
 <form action="/list" method="get">
     <div class = "order">
         <label for="order_by">Sort by:</label>
@@ -86,7 +86,7 @@
                 <form action="/questions/{{ row["id"] }}">
                     <button id="home" type="submit" class="view">View</button>
                 </form>
-                
+
             </div>
         </div>
     {% endfor %}

@@ -118,7 +118,7 @@ def delete_img_from_all_answer(cursor, q_id):
 def delete_an_img_from_answer(cursor, id):
     cursor.execute("""
                 DELETE  FROM answer
-                WHERE id = %(id)s AND image IS NOT NULL;
+                WHERE question_id = %(id)s AND image IS NOT NULL;
                 """,
                 {'id': id})
     file_path = cursor.fetchall()
@@ -190,8 +190,12 @@ def new_questionid(cursor):
 @connection2.connection_handler
 def get_searched_question(cursor, search):
     cursor.execute("""
-                SELECT * FROM question 
-                WHERE message LIKE %(search)s OR title LIKE %(search)s;
+                SELECT question.* FROM question LEFT JOIN answer
+                ON question.id = answer.question_id
+                WHERE question.message LIKE %(search)s
+                OR question.title LIKE %(search)s
+                OR answer.message LIKE %(search)s
+GROUP BY question.id;
     """,
                    {'search': '%' + search + '%'})
     questions = cursor.fetchall()

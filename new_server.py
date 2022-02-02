@@ -136,6 +136,7 @@ def search_question():
     return render_template('questions_list.html',
                            table_headers=TABLE_HEADERS,
                            list_of_questions=questions,
+                           searched_phrase=search
                            )
 
 
