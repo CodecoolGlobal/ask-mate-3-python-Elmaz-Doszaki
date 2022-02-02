@@ -44,16 +44,14 @@ def add_question():
     if request.method == 'GET':
         return render_template('add-question.html')
     else:
-        question_id = str(data_manager2.new_questionid())
-        file1 = request.files['file1']
-        if request.files['file1'].filename == "":
-            path = ""
-        else:
-            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file1.filename
-        data = {'title': request.form['title'], 'message': request.form['question'], 'image': path}
+        data = {'title': request.form['title'], 'message': request.form['question'], 'image': ""}
         data_manager2.add_new_data_to_table(data, 'question')
-        if path != "":
-            data_manager2.save_question_picture(file1, path)
+
+        question_id = str(data_manager2.get_new_id('q'))
+        file1 = request.files['file1']
+        if request.files['file1'].filename != "":
+            path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file1.filename
+            data_manager2.save_picture(file1, path, question_id)
         return redirect('/questions/'+question_id)
 
 
@@ -67,8 +65,14 @@ def add_new_answer():
     new_answer = {'vote_number': 0,
                   'question_id': question_id,
                   'message': request.form['answer_message'],
-                  'image': None}
+                  'image': ""}
     data_manager2.add_new_data_to_table(new_answer, 'answer')
+
+    question_id = str(data_manager2.get_new_id('a'))
+    file1 = request.files['file1']
+    if request.files['file1'].filename != "":
+        path = data_manager2.UPLOAD_FOLDER + "A" + question_id + file1.filename
+        data_manager2.save_picture(file1, path, question_id)
     return redirect(url_for("display_question", question_id=question_id))
 
 
@@ -191,7 +195,7 @@ def add_comment_to_answer(answer_id):
         return render_template('add-comment.html', answer_id=answer_id)
     if request.method == 'POST':
         data_manager2.add_new_data_to_table(
-            data={'question_id': None, 'answer_id': answer_id, 'message': request.form['message'],
+            data={'question_id': data_manager2.get_question_id_from_answer(answer_id), 'answer_id': answer_id, 'message': request.form['message'],
                   'edited_count': None},
             table_name='comment')
         answer_data = data_manager2.get_question_id_from_answer(answer_id)

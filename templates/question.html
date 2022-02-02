@@ -133,7 +133,7 @@
                 <div class="a-vote">{{ row["vote_number"] }}</div>
                 <div class="a-message">{{ row["message"] }}</div>
                 {% if row["image"] %}
-                    <div class="a-meme"><img src="/static/{{ row["image"] }}"></div>
+                    <div class="a-meme"><img src="/{{ row["image"] }}"></div>
                 {% endif %}
                 <div class="a-delete">
                     <form action="/answer/{{ row['id'] }}/delete" method="POST">
