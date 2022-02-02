@@ -1,5 +1,5 @@
-from typing import Dict, Optional
-
+from typing import Dict
+from markupsafe import Markup
 import connection2
 import os
 from datetime import datetime
@@ -398,16 +398,32 @@ def get_comments_from_answers(cursor, current_answers):
 @connection2.connection_handler
 def get_searched_question(cursor, search):
     cursor.execute("""
-                SELECT question.* FROM question LEFT JOIN answer
-                ON question.id = answer.question_id
-                WHERE question.message LIKE %(search)s
-                OR question.title LIKE %(search)s
-                OR answer.message LIKE %(search)s
-GROUP BY question.id;
-    """,
+                    SELECT question.* FROM question LEFT JOIN answer
+                    ON question.id = answer.question_id
+                    WHERE question.message LIKE %(search)s
+                    OR question.title LIKE %(search)s
+                    OR answer.message LIKE %(search)s
+                    GROUP BY question.id;
+                    """,
                    {'search': '%' + search + '%'})
     questions = cursor.fetchall()
+    for question in questions:
+        question['title'] = Markup(question['title'].replace(search, f"<mark>{search}</mark>"))
+        question['message'] = Markup(question['message'].replace(search, f"<mark>{search}</mark>"))
     return questions
+
+
+@connection2.connection_handler
+def get_searched_answer(cursor, search):
+    cursor.execute("""
+                    SELECT * FROM answer
+                    WHERE message LIKE %(search)s
+                    """,
+                   {'search': '%' + search + '%'})
+    answers = cursor.fetchall()
+    for answer in answers:
+        answer['message'] = Markup(answer['message'].replace(search, f"<mark>{search}</mark>"))
+    return answers
 
 
 @connection2.connection_handler
