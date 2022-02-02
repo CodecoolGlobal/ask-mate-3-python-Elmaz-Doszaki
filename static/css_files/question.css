@@ -209,7 +209,7 @@ td.text-right {
   text-align: right;
 }
 
-
+/*kérdés kártya: */
 .question {
   margin-left: 140px;
   margin-right: 140px;
@@ -272,6 +272,59 @@ td.text-right {
 
 .Q-edit {
   grid-area: edit;
+  justify-self: center;
+  align-self: center;
+}
+
+/*kérdés-comment kártyák: */
+.comments {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.comment {
+  border: 1px solid black;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.79);
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-rows:minmax(30px,auto) minmax(30px,auto);
+  grid-template-areas:
+    "q-c-message q-c-message q-c-message"
+    "q-c-time    q-c-edit    q-c-delete";
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.time {
+  grid-area: time;
+  justify-self: start;
+  align-self: center;
+}
+
+.q-c-message {
+  grid-area: q-c-message;
+  justify-self: center;
+  align-self: end;
+}
+
+.q-c-time {
+  grid-area: q-c-time;
+  justify-self: start;
+  align-self: center;
+}
+
+.q-c-edit {
+  grid-area: q-c-edit;
+  justify-self: end;
+  align-self: center;
+}
+
+.q-c-delete {
+  grid-area: q-c-delete;
   justify-self: center;
   align-self: center;
 }

@@ -93,23 +93,28 @@
         </div>
     </div>
     <br>
-    {% for comment in question_comments %}
-        <div>
-            <div>
-                {{ comment['message'] }}
+    <div class = "comments">
+        {% for comment in question_comments %}
+            <div class = "comment">
+                <div class = "q-c-message">
+                    {{ comment['message'] }}
+                </div>
+                <div class = "q-c-time">
+                    {{ comment['submission_time'] }}
+                </div>
+                <div class = "q-c-delete">
+                    <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+                <div class = "q-c-edit">
+                    <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                        <button type="submit">Edit</button>
+                    </form>
+                </div>
             </div>
-            <div>
-                {{ comment['submission_time'] }}
-            </div>
-        <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
-        <button type="submit">Delete</button>
-        </form>
-        <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
-        <button type="submit">Edit</button>
-        </form>
-        </div>
-    {% endfor %}
-
+        {% endfor %}
+    </div>
     <br>
     <div class= "tables">
     <table class="table-fill">
