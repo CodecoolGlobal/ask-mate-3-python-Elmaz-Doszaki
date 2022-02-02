@@ -143,13 +143,26 @@ def edit_answer(cursor, answer_id, question_id, edited_message):
                     'question_id': question_id,
                     'edited_message': edited_message})
 
-
-def save_question_picture(file1, file_name, question_id, upload_folder):
-    file1.save(os.path.join(upload_folder, "Q" + question_id + file_name))
-
-
-def save_answer_picture(answerfile, file_name, max_id, upload_folder):
-    answerfile.save(os.path.join(upload_folder, "A" + max_id + file_name))
+@connection2.connection_handler
+def save_picture(cursor, file1, path, i_d):
+    file1.save(os.path.join(path))
+    table = path.split('/')[-1][0]
+    if table == 'A':
+        cursor.execute("""
+                            UPDATE answer
+                            SET image = %(p)s
+                            WHERE id = %(i_d)s;
+                            """,
+                       {'p': path,
+                        'i_d': i_d})
+    else:
+        cursor.execute("""
+                                    UPDATE question
+                                    SET image = %(p)s
+                                    WHERE id = %(i_d)s;
+                                    """,
+                       {'p': path,
+                        'i_d': i_d})
 
 
 def delete_question(question_id):
@@ -342,13 +355,20 @@ def save_answer_picture(answerfile, file_name, max_id, upload_folder):
 
 
 @connection2.connection_handler
-def new_questionid(cursor):
-    cursor.execute("""
+def get_new_id(cursor, table):
+    if table == 'q':
+        cursor.execute("""
                 SELECT id FROM question
                 ORDER BY id DESC
                 LIMIT 1;
-                """, )
-    answers = int(cursor.fetchall()[0]["id"]) + 1
+                """)
+    else:
+        cursor.execute("""
+                        SELECT id FROM answer
+                        ORDER BY id DESC
+                        LIMIT 1;
+                        """)
+    answers = cursor.fetchall()[0]["id"]
     return answers
 
 

@@ -138,7 +138,7 @@
                 <div class="a-vote">{{ row["vote_number"] }}</div>
                 <div class="a-message">{{ row["message"] }}</div>
                 {% if row["image"] %}
-                    <div class="a-meme"><img src="/static/{{ row["image"] }}"></div>
+                    <div class="a-meme"><img src="/{{ row["image"] }}"></div>
                 {% endif %}
                 <div class="a-delete">
                     <form action="/answer/{{ row['id'] }}/delete" method="POST">
@@ -180,12 +180,12 @@
                                 {{ comment['message'] }}
                             </div>
                             <div class = "a-c-delete">
-                                <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                <form action="/delete_comment/{{ row['question_id'] }}/{{ comment['id'] }}">
                                     <button type="submit">Delete</button>
                                 </form>
                             </div>
                             <div class = "a-c-edit">
-                                <form action="/edit_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
+                                <form action="/edit_comment/{{ row['question_id'] }}/{{ comment['id'] }}">
                                     <button type="submit">Edit</button>
                                 </form>
                             </div>
