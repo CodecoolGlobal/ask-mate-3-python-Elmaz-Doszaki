@@ -215,9 +215,10 @@ def delete_img_from_question(cursor, question_id):
                 """,
                    {'question_id': question_id})
     file_path = cursor.fetchall()
-    file_path = file_path[0]['image']
-    if os.path.exists(file_path):
-        os.remove(file_path)
+    if len(file_path) > 0:
+        file_path = file_path[0]['image']
+        if os.path.exists(file_path):
+            os.remove(file_path)
 
 
 @connection2.connection_handler
