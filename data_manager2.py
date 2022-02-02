@@ -224,7 +224,7 @@ def delete_img_from_all_answer(cursor, q_id):
 def delete_an_img_from_answer(cursor, a_id):
     cursor.execute("""
                 SELECT image FROM answer
-                WHERE id = %(aid)s AND image IS NOT NULL;;
+                WHERE id = %(aid)s AND image IS NOT NULL;
                 """,
                    {'aid': a_id})
     file_path = cursor.fetchall()
@@ -377,8 +377,12 @@ def get_comments_from_answers(cursor, current_answers):
 @connection2.connection_handler
 def get_searched_question(cursor, search):
     cursor.execute("""
-                SELECT * FROM question 
-                WHERE message LIKE %(search)s OR title LIKE %(search)s;
+                SELECT question.* FROM question LEFT JOIN answer
+                ON question.id = answer.question_id
+                WHERE question.message LIKE %(search)s
+                OR question.title LIKE %(search)s
+                OR answer.message LIKE %(search)s
+GROUP BY question.id;
     """,
                    {'search': '%' + search + '%'})
     questions = cursor.fetchall()
