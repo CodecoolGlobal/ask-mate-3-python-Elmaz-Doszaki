@@ -61,17 +61,16 @@
         {% if current_question[0]["image"] %}
             <div class="meme"><img src="/{{ current_question[0]["image"] }}" }></div>
         {% endif %}
-
-
         <div class="add-tag">
             <form action="{{ url_for('add_tags_to_question', question_id=question_id) }}">
                 <button id="home" type="submit" class="view">Add tag</button>
             </form>
         </div>
-        {% for tag in tags %}
-            <div class="tags">{{ tag['name'] }}</div>
-        {% endfor %}
-
+        <div class="tags">
+            {% for tag in tags %}
+                {{ tag['name'] }}
+            {% endfor %}
+        </div>
 
         <div class="Q-comment">
             <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="GET">
