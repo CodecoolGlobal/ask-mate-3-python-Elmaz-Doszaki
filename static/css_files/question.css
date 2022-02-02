@@ -208,3 +208,70 @@ td.text-center {
 td.text-right {
   text-align: right;
 }
+
+
+.question {
+  margin-left: 140px;
+  margin-right: 140px;
+  background: #ffffff;
+  padding: 20px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(10,1fr);
+  grid-template-rows: minmax(45px,auto) minmax(200px,auto) minmax(30px,auto);
+  grid-template-areas:
+    "time   time   time    title  title  title  title   title    edit     edit"
+    "photo  photo  photo message message message message  message message message"
+    "tag-but  tag  tag    tag    tag        tag  tag   tag     q-com      q-com";
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.time {
+  grid-area: time;
+  justify-self: start;
+  align-self: center;
+}
+
+.title {
+  grid-area: title;
+  justify-self: center;
+  align-self: center;
+}
+
+.meme {
+  grid-area: photo;
+  justify-self: center;
+  align-self: center;
+}
+
+.message {
+  grid-area: message;
+  align-self: stretch;
+  background: #bbb5afa3;
+  padding: 10px;
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.add-tag {
+  grid-area: tag-but;
+  justify-self: center;
+  align-self: center;
+}
+
+.tags {
+  grid-area: tag;
+  justify-self: start;
+  align-self: center;
+}
+
+.Q-comment {
+  grid-area: q-com;
+  justify-self: center;
+  align-self: center;
+}
+
+.Q-edit {
+  grid-area: edit;
+  justify-self: center;
+  align-self: center;
+}

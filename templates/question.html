@@ -54,21 +54,43 @@
     </div>
     <br />
 
-    <div class = "question-header">
-      <table>
-        <tr>
-
-            <th>{{ current_question[0]["submission_time"] }}</th>
-            <th>{{ current_question[0]["title"] }}</th>
-            <th>{{ current_question[0]["message"] }}</th>
-            {% if current_question[0]["image"] %}
-                <th class = "question-header"><img src="/{{ current_question[0]["image"] }}"}></th>
-            {% else %}
-               <th></th>
-            {% endif %}
-
-        </tr>
-      </table>
+    <div class = "question">
+        <div class = "time">{{ current_question[0]["submission_time"] }}</div>
+        <div class = "title">{{ current_question[0]["title"] }}</div>
+        <div class = "message">{{ current_question[0]["message"] }}</div>
+        {% if current_question[0]["image"] %}
+            <div class = "meme"><img src="/{{ current_question[0]["image"] }}"}></div>
+        {% endif %}
+        <div class = "add-tag">
+                <form action="/valami">
+                    <button id="home" type="submit" class="view">Add tag </button>
+                </form>
+        </div>
+        <div class = "tags"> #blabla </div>
+        <div class = "Q-comment">
+            <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="GET">
+              <input
+                id="new_comment"
+                name="new_comment"
+                type="submit"
+                class="button"
+                width="60"
+                value="New Comment"
+              />
+            </form>
+        </div>
+        <div class = "Q-edit">
+            <form action="/question/{{ question_id }}/edit" method="GET">
+              <input
+                id="edit_question"
+                name="edit_question"
+                type="submit"
+                class="button"
+                width="60"
+                value="Edit Question"
+              />
+            </form>
+        </div>
     </div>
     <br>
     {% for comment in question_comments %}
@@ -87,17 +109,6 @@
         </form>
         </div>
     {% endfor %}
-
-    <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="GET">
-      <input
-        id="new_comment"
-        name="new_comment"
-        type="submit"
-        class="button"
-        width="60"
-        value="New Comment"
-      />
-    </form>
 
     <br>
     <div class= "tables">
@@ -196,16 +207,6 @@
     </form>
 
     <br />
-    <form action="/question/{{ question_id }}/edit" method="GET">
-      <input
-        id="edit_question"
-        name="edit_question"
-        type="submit"
-        class="button"
-        width="60"
-        value="Edit Question"
-      />
-    </form>
     <br>
     <br>
     <br>
