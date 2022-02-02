@@ -208,3 +208,123 @@ td.text-center {
 td.text-right {
   text-align: right;
 }
+
+/*kérdés kártya: */
+.question {
+  margin-left: 140px;
+  margin-right: 140px;
+  background: #ffffff;
+  padding: 20px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(10,1fr);
+  grid-template-rows: minmax(45px,auto) minmax(200px,auto) minmax(30px,auto);
+  grid-template-areas:
+    "time   time   time    title  title  title  title   title    edit     edit"
+    "photo  photo  photo message message message message  message message message"
+    "tag-but  tag  tag    tag    tag        tag  tag   tag     q-com      q-com";
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.time {
+  grid-area: time;
+  justify-self: start;
+  align-self: center;
+}
+
+.title {
+  grid-area: title;
+  justify-self: center;
+  align-self: center;
+}
+
+.meme {
+  grid-area: photo;
+  justify-self: center;
+  align-self: center;
+}
+
+.message {
+  grid-area: message;
+  align-self: stretch;
+  background: #bbb5afa3;
+  padding: 10px;
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.add-tag {
+  grid-area: tag-but;
+  justify-self: center;
+  align-self: center;
+}
+
+.tags {
+  grid-area: tag;
+  justify-self: start;
+  align-self: center;
+}
+
+.Q-comment {
+  grid-area: q-com;
+  justify-self: center;
+  align-self: center;
+}
+
+.Q-edit {
+  grid-area: edit;
+  justify-self: center;
+  align-self: center;
+}
+
+/*kérdés-comment kártyák: */
+.comments {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.comment {
+  border: 1px solid black;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.79);
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-rows:minmax(30px,auto) minmax(30px,auto);
+  grid-template-areas:
+    "q-c-message q-c-message q-c-message"
+    "q-c-time    q-c-edit    q-c-delete";
+  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.time {
+  grid-area: time;
+  justify-self: start;
+  align-self: center;
+}
+
+.q-c-message {
+  grid-area: q-c-message;
+  justify-self: center;
+  align-self: end;
+}
+
+.q-c-time {
+  grid-area: q-c-time;
+  justify-self: start;
+  align-self: center;
+}
+
+.q-c-edit {
+  grid-area: q-c-edit;
+  justify-self: end;
+  align-self: center;
+}
+
+.q-c-delete {
+  grid-area: q-c-delete;
+  justify-self: center;
+  align-self: center;
+}
