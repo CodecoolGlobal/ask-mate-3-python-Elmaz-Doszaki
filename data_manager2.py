@@ -446,3 +446,25 @@ def add_new_tag(cursor, new_tag: str, question_id) -> None:
                     VALUES (%(question_id)s, %(tag_id)s)
                     """,
                    {'question_id': question_id, 'tag_id': tag_id})
+
+@connection2.connection_handler
+def list_of_best_memes(cursor):
+    b_list = []
+    cursor.execute("""SELECT vote_number, image, id as question_id FROM question
+                    WHERE image IS NOT NULL
+                    ORDER BY vote_number DESC
+                        LIMIT 5;
+    """)
+    a_list = cursor.fetchall()
+    for i in range(len(a_list)):
+        b_list.append((a_list[i]['image'], a_list[i]['question_id'], a_list[i]['vote_number']))
+    cursor.execute("""SELECT vote_number, image, question_id FROM answer
+                        WHERE image IS NOT NULL
+                        ORDER BY vote_number DESC
+                            LIMIT 5;
+        """)
+    a_list = cursor.fetchall()
+    for i in range(len(a_list)):
+        b_list.append((a_list[i]['image'], a_list[i]['question_id'], a_list[i]['vote_number']))
+    return sorted(b_list, key=lambda x: x[2], reverse=True)[:5]
+

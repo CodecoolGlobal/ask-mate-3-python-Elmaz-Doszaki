@@ -48,8 +48,8 @@
           <p>Favorite memes:</p>
           {% for i in list_of_best_memes %}
           <div>
-            <img class="best_meme_pic" src="{{i[1]}}" alt="{{i[1]}}" /> <br />
-            <p>{{i[0]}}</p>
+            <a href="/questions/{{i[1]}}"><img class="best_meme_pic" src="{{i[0]}}" alt="{{i[0]}}" /> <br /></a>
+            <p>{{i[2]}}</p>
           </div>
           {% endfor %}
         </aside>
