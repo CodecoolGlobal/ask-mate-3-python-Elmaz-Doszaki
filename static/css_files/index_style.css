@@ -59,7 +59,7 @@ section div {
 }
 
 .indexbox {
-  box-shadow: -1px 5px 4px #3f291f;
+  box-shadow: -1px 5px 4px rgba(44, 40, 36, 0.9);
   display: flex;
   align-items: center;
   background-image: url("/static/img/satir.png");
@@ -84,24 +84,33 @@ main button {
   background-color: #b1a296;
   font-family: "Pacifico", cursive;
   border-radius: 6px;
-  animation: slow-pulser 2s infinite;
+  animation: slow-pulser 2.8s infinite;
   transition: all 0.35s ease-in-out;
 
 }
+.underbutton {
+  display: block;
+  height: 20vh;
+  width: 50vh;
+  border-radius: 6px;
+  background-color: rgba(44, 40, 36, 0.9);
+  box-shadow: -1px 5px 4px rgba(44, 40, 36, 0.85);
+}
 button:hover {
   transform: translate(2px, -8px);
-  box-shadow: -1px 3px 2px yellow;
+  box-shadow: -1px 23px 22px red;
   font-family: "Pacifico", cursive;
   transition: all 0.5s ease-in;
+  cursor: pointer;
 }
 
 @keyframes slow-pulser {
     0% {
-      box-shadow: 0 0 0 -6px yellow;
+      box-shadow: 0 0 0 -8px rgba(225, 173, 1, 0.75);
 
     }
     100% {
-       box-shadow: 0 0 0 22px yellow;
+       box-shadow: 0 0 0 22px rgba(225, 173, 1, 0.5);
     }
   }
 
@@ -113,7 +122,7 @@ aside {
   border-radius: 6px;
   padding: 3px;
   background-color: #e5e4e2;
-  box-shadow: 3px 5px 4px #e5e4e2;
+  box-shadow: 3px 5px 4px rgba(44, 40, 36, 0.85);
   max-width: 20%;
   font-size: small;
   text-align: center;
@@ -123,6 +132,6 @@ aside {
 main aside img {
   filter: opacity(90%);
   margin: 5px 2px 2px 2px;
-  box-shadow: 2px 3px 3px #000000;
+  box-shadow: 2px 3px 3px rgba(44, 40, 36, 0.85);
   border-radius: 5px;
 }
