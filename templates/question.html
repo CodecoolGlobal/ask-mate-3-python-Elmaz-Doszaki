@@ -101,7 +101,7 @@
                 </div>
                 <div class="q-c-delete">
                     <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
-                        <input class= "icon" id="delete_button" type="image"  onclick="del_confirm()" src="/static/img/trash.png" alt="Delete" value="delete_button"/>
+                        <input class= "icon" id="delete_button" type="image"  onclick="return confirm('R U sure?')" src="/static/img/trash.png" alt="Delete" value="delete_button"/>
                     </form>
                 </div>
                 <div class="q-c-edit">
@@ -136,7 +136,7 @@
                 {% endif %}
                 <div class="a-delete">
                     <form action="/answer/{{ row['id'] }}/delete" method="POST">
-                        <input class= "icon" id="delete_button" type="image" onclick="del_confirm()" src="/static/img/trash.png" alt="Delete" value="delete_button"/>
+                        <input class= "icon" id="delete_button" type="image" onclick="return confirm('R U sure?')" src="/static/img/trash.png" alt="Delete" value="delete_button"/>
                         <input   type="hidden" name="question_id"    value="{{ current_question[0]['id'] }}" />
                     </form>
                 </div>
@@ -176,7 +176,7 @@
                             <div class = "a-c-delete">
 
                                 <form action="/delete_comment/{{ comment['question_id'] }}/{{ comment['id'] }}">
-                                    <input class= "icon" id="delete_button" type="image" onclick="del_confirm()" src="/static/img/trash.png" alt="Delete" value="delete_button"/>
+                                    <input class= "icon" id="delete_button" type="image" onclick="return confirm('R U sure?')" src="/static/img/trash.png" alt="Delete" value="delete_button"/>
                                 </form>
                             </div>
                             <div class = "a-c-edit">
@@ -207,10 +207,6 @@
 </div>
 </body>
 
-<script>
-function del_confirm() {
-  confirm("R U Sure?");
-}
 </script>
 
 </html>

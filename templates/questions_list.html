@@ -67,7 +67,7 @@
 
             <div class ="kuka">
                 <form action="/question/{{ row['id'] }}/delete" method="POST">
-                    <input class= "kuka" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
+                    <input class= "kuka" onclick="return confirm('R U sure?')" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
 
                         value="delete_button">
                 </form>
