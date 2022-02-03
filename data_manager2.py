@@ -143,6 +143,7 @@ def edit_answer(cursor, answer_id, question_id, edited_message):
                     'question_id': question_id,
                     'edited_message': edited_message})
 
+
 @connection2.connection_handler
 def save_picture(cursor, file1, path, i_d):
     file1.save(os.path.join(path))
@@ -168,9 +169,6 @@ def save_picture(cursor, file1, path, i_d):
 def delete_question(question_id):
     delete_img_from_all_answer(question_id)
     delete_img_from_question(question_id)
-    # comments from answer
-    # delete comment from question?
-
     delete_all_answer_from_db(question_id)
     delete_question_from_db(question_id)
 
@@ -197,13 +195,14 @@ def delete_all_answer_from_db(cursor, q_id):
                    {'question_id': q_id})
     answers = cursor.fetchall()
     answer_ids = tuple(answer['id'] for answer in answers)
-    cursor.execute("""
-                DELETE FROM comment
-                WHERE answer_id IN %(answer_id)s;
-                DELETE FROM answer
-                WHERE question_id = %(question_id)s;
-                """,
-                   {'question_id': q_id, 'answer_id': answer_ids})
+    if answer_ids != tuple():
+        cursor.execute("""
+                    DELETE FROM comment
+                    WHERE answer_id IN %(answer_id)s;
+                    DELETE FROM answer
+                    WHERE question_id = %(question_id)s;
+                    """,
+                       {'question_id': q_id, 'answer_id': answer_ids})
 
 
 @connection2.connection_handler
@@ -390,7 +389,7 @@ def get_question_id_from_answer(cursor, answer_id):
                     SELECT question_id FROM answer
                     WHERE id = %(answer_id)s""",
                    {'answer_id': answer_id})
-    return cursor.fetchall()[0]
+    return cursor.fetchall()[0]['question_id']
 
 
 @connection2.connection_handler
@@ -505,7 +504,6 @@ def list_of_best_memes(cursor):
     return sorted(b_list, key=lambda x: x[2], reverse=True)[:5]
 
 
-
 @connection2.connection_handler
 def tag_delete_from_question(cursor, question_id, tag_id):
     cursor.execute("""
@@ -514,4 +512,3 @@ def tag_delete_from_question(cursor, question_id, tag_id):
                     AND tag_id = %(tag_id)s
                     """,
                    {'question_id': question_id, 'tag_id': tag_id})
-
