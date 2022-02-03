@@ -160,11 +160,9 @@ def search_question():
     search = request.args.get('search')
     questions = data_manager2.get_searched_question(search)
     answers = data_manager2.get_searched_answer(search)
-    return render_template('search_question.html',
-                           table_headers=TABLE_HEADERS,
-                           list_of_questions=questions,
-                           searched_phrase=search,
-                           current_answers=answers)
+    return render_template('search_question_sketch.html',
+                           questions=questions,
+                           answers=answers)
 
 
 @app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
