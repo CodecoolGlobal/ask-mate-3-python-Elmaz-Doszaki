@@ -13,11 +13,11 @@
   display: grid;
   grid-gap: 5px;
   grid-template-columns: repeat(10,1fr);
-  grid-template-rows: minmax(25px,auto) minmax(200px,auto) 35px;
+  grid-template-rows: minmax(25px,40px) minmax(80px,130px) 30px;
   grid-template-areas:
-    "time   time   time    title  title  title  title   title    view     seen"
+    "photo   photo   photo    title  title  title  title   title    view     seen"
     "photo  photo  photo message message message message  message message message"
-    "tag-but  tag  tag    tag    tag        tag  vote   up       down      kuka";
+    "photo  photo  photo  time   time   time  vote   up       down      kuka";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
@@ -66,7 +66,7 @@
   text-align: center;
   font-family: 'Luxurious Roman', cursive;
    font-weight: bold;
-  font-size: 110%;
+  font-size: 105%;
 }
 
 .data_5 {
@@ -76,6 +76,8 @@
   padding: 10px;
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
   font-family: 'Luxurious Roman', cursive;
+  border-right: 10px solid #f9e69b;
+  margin-right: 20px;
 }
 
 .data_image {
@@ -83,6 +85,14 @@
   justify-self: center;
   align-self: center;
 }
+
+.data_image img{
+  max-height: 240px;
+  max-width: 100%;
+  margin-top: -20px;
+  margin-bottom: -20px;
+  }
+
 
 .view {
   grid-area: view;
@@ -110,10 +120,6 @@
   align-self: center;
 }
 
-img {
-  max-width: 250px;
-  max-height: 200px;
-}
 
 .button {
   margin-left: 150px;

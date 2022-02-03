@@ -3,7 +3,7 @@ body {
     radial-gradient(#b1a296 0.5px, #2e2a26 0.5px);
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
-  margin: -8px;
+  margin: 0px;
 }
 
 .container {
@@ -177,7 +177,7 @@ body {
 }
 
 footer {
-  position: sticky;
+  position: relative;
   bottom: 0px;
   min-height: 10vh;
   margin: auto;
@@ -201,7 +201,7 @@ footer ul {
 }
 footer ul li {
   list-style: none;
-  margin: 10px 15px 10px 0;
+  margin: 10px 15px 0 0;
 }
 footer ul li .fa {
   font-size: 30px;
