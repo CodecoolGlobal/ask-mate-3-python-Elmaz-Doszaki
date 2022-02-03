@@ -30,6 +30,7 @@
         <div class="headline">Search</div>
     </div>
     <br/>
+{% if questions != [[]] %}
     {% for question in questions %}
         <div class="question">
             <div class="time">{{ question["submission_time"] }}</div>
@@ -120,6 +121,7 @@
             <br>
         </div>
     {% endfor %}
+{% endif %}
 
 
     <br>

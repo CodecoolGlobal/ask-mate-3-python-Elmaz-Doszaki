@@ -397,6 +397,8 @@ def get_comments_from_answers(cursor, current_answers):
 
 @connection2.connection_handler
 def get_searched_question(cursor, search):
+    if not search:
+        return [[]]
     cursor.execute("""
                     SELECT question.* FROM question LEFT JOIN answer
                     ON question.id = answer.question_id
@@ -415,6 +417,8 @@ def get_searched_question(cursor, search):
 
 @connection2.connection_handler
 def get_searched_answer(cursor, search):
+    if not search:
+        return [[]]
     cursor.execute("""
                     SELECT * FROM answer
                     WHERE message LIKE %(search)s
