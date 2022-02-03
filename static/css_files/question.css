@@ -32,11 +32,11 @@
   display: grid;
   grid-gap: 5px;
   grid-template-columns: repeat(10,1fr);
-  grid-template-rows: minmax(45px,auto) minmax(auto,200px) minmax(30px,auto);
+  grid-template-rows: minmax(25px,40px) minmax(80px,150px) minmax(30px,auto);
   grid-template-areas:
-    "time   time   time    title  title  title  title   title    edit     edit"
+    "photo  photo  photo    title  title  title  title   title    edit     edit"
     "photo  photo  photo message message message message  message message message"
-    "tag-but  tag  tag    tag    tag        tag  tag   tag     q-com      q-com";
+    "tag-but  tag  tag    tag    tag       time   time   time     q-com      q-com";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
@@ -63,12 +63,12 @@
 
 .meme {
   grid-area: photo;
-  align-self: stretch;
-  text-align: center;
+  align-self: center;
+  justify-self: center;
 }
 
 .meme img{
-  max-height: 100%;
+  max-height: 205px;
   max-width: 100%;
   }
 
@@ -78,6 +78,7 @@
   background: #bbb5afa3;
   padding: 10px;
   font-family: 'Luxurious Roman', cursive;
+  border-right: 10px solid #f9e69b;
 }
 
 .add-tag {
@@ -96,7 +97,7 @@
 
 .Q-comment {
   grid-area: q-com;
-  justify-self: start;
+  justify-self: end;
   align-self: center;
 }
 
@@ -192,11 +193,11 @@
   display: grid;
   grid-gap: 5px;
   grid-template-columns: repeat(10,1fr);
-  grid-template-rows: minmax(25px,auto) minmax(auto, 130px) 35px;
+  grid-template-rows: minmax(25px,35px) minmax(70px,130px) 30px;
   grid-template-areas:
-    "a-time      a-time    a-time    a-time    a-time    a-time    a-time   a-time   a-edit   a-edit"
+    "  a-edit   a-edit   a-time a-time      a-time    a-time    a-time    a-photo  a-photo  a-photo  "
     "a-message a-message a-message a-message  a-message a-message a-message a-photo  a-photo  a-photo"
-    "a-delete  a-delete   a-up    a-down    a-vote   a-vote  a-vote   a-vote  a-add-comment  a-add-comment";
+    "a-delete  a-add-comment  a-add-comment   a-up    a-down   a-vote  a-vote  a-photo  a-photo  a-photo  ";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
@@ -219,6 +220,8 @@
   background: #bbb5afa3;
   padding: 10px;
   font-family: 'Luxurious Roman', cursive;
+  border-left: 10px solid #71ab8a;
+  margin-left: 30px;
 }
 
 .a-delete {
@@ -251,7 +254,7 @@
 
 .a-edit {
   grid-area: a-edit;
-  justify-self: end;
+  justify-self: start;
   align-self: center;
 }
 
@@ -261,21 +264,25 @@
 
 .a-add-comment {
   grid-area: a-add-comment;
-  justify-self: center;
+  justify-self: start;
   align-self: center;
+  margin-top: 10px;
 }
 
 .a-meme {
+  display: grid;
+  margin: 5px;
   grid-area: a-photo;
-  align-self: stretch;
-  text-align: center;
+  place-self: center;
 }
 
-.a- img{
-  max-height: 100%;
+.a-meme img{
+  max-height: 240px;
   max-width: 100%;
-
+  margin-top: -20px;
+  margin-bottom: -20px;
   }
+
 /*válasz-comment kártyák: */
 .a-comments {
   display: grid;
