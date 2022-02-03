@@ -1,11 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="/static/css_files/basic.css">
+<link rel="stylesheet" href="/static/css_files/list.css">
+<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap"
+      rel="stylesheet"/>
+
 <head>
-    <meta charset="UTF-8">
-    <title>askmate</title>
+    <title>Ask Meme</title>
+    <link rel="icon" href="static/img/logo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
+<div class="container">
+    <div class="head">
+        <a href='/'><img src="static/img/logo.png"/></a>
+        <div class="search">
+            <form action="/search">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="account"></div>
+        <div class="empty"></div>
+        <a href=#vmi class="nav1">Questions</a>
+        <a href=#vmi class="nav2">Premium</a>
+        <a href=#vmi class="nav3">About Us</a>
+        <a href=#vmi class="nav4">Contact</a>
+        <div class="headline">Search</div>
+    </div>
+
+    <div class="questions">
+        {% for row in list_of_questions %}
+            <div class="question">
+                <div class="data_1">{{ row["submission_time"] }}</div>
+                <div class="data_2">{{ row["view_number"] }}</div>
+                <div class="data_3">{{ row["vote_number"] }}</div>
+                <div class="data_4">{{ row["title"] }}</div>
+                <div class="data_5">{{ row["message"] }}</div>
+                {% if row["image"] %}
+                    <div class="data_image"><img src="{{ row["image"] }}"></div>
+                {% endif %}
+
+                <div class="kuka">
+                    <form action="/question/{{ row['id'] }}/delete" method="POST">
+                        <input class="kuka" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete"
+                               width="60"
+                               value="delete_button">
+                    </form>
+                </div>
+                <div class="up">
+                    <form action="/question/{{ row['id'] }}/vote-up" method="POST">
+                        <input class="up" id="vote_up_button" name="vote_up_button" type="image"
+                               src="/static/img/arrows.webp.png"
+                               alt="Vote-up" width="60" value="{{ row['id'] }}">
+                    </form>
+                </div>
+                <div class="down">
+                    <form action="/question/{{ row['id'] }}/vote-down" method="POST">
+                        <input class="down" id="vote_down_button" name="vote_down_button" type="image"
+                               src="/static/img/arrow_down.png"
+                               alt="Vote-down" width="60" value="{{ row['id'] }}">
+                    </form>
+                </div>
+                <div class="view">
+                    <form action="/questions/{{ row["id"] }}">
+                        <button id="home" type="submit" class="view">View :</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 
+    <footer>
+        <ul>
+            <li>
+                <a href="#"> <i class="fa fa-facebook"> </i> </a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-twitter"> </i> </a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-instagram"> </i> </a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-linkedin"> </i> </a>
+            </li>
+        </ul>
+    </footer>
+</div>
 </body>
 </html>

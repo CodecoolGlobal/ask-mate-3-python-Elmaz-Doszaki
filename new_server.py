@@ -1,5 +1,3 @@
-from psycopg2.sql import NULL
-import data_manager2
 from flask import Flask, render_template, request, redirect, url_for
 from data_manager import *
 import data_manager2
@@ -53,7 +51,7 @@ def add_question():
         if request.files['file1'].filename != "":
             path = data_manager2.UPLOAD_FOLDER + "Q" + question_id + file1.filename
             data_manager2.save_picture(file1, path, question_id)
-        return redirect('/questions/'+question_id)
+        return redirect('/questions/' + question_id)
 
 
 @app.route('/question/<question_id>/new-answer', methods=['POST'])
@@ -161,11 +159,12 @@ def vote_down_answer(answer_id):
 def search_question():
     search = request.args.get('search')
     questions = data_manager2.get_searched_question(search)
-    return render_template('questions_list.html',
+    answers = data_manager2.get_searched_answer(search)
+    return render_template('search_question.html',
                            table_headers=TABLE_HEADERS,
                            list_of_questions=questions,
-                           searched_phrase=search
-                           )
+                           searched_phrase=search,
+                           current_answers=answers)
 
 
 @app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
