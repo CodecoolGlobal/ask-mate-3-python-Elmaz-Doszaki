@@ -102,6 +102,19 @@
   padding-left: 15px;
   font-style: italic;
 }
+.tags a{
+  text-decoration: None;
+  background-color: white;
+  padding: 2px;
+  color: rgba(0, 0, 0, 0.49);
+  border-radius: 2px;
+  border: rgba(0, 0, 0, 0.49) solid 1px;
+  font-style: normal;
+  font-size: 60% ;
+
+}
+
+
 
 .Q-comment {
   grid-area: q-com;
