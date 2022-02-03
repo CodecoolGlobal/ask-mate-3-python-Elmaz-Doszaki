@@ -193,15 +193,15 @@ def route_edit_answer(answer_id):
 
 @app.route('/answer/<answer_id>/new-comment', methods=['GET', 'POST'])
 def add_comment_to_answer(answer_id):
+    question_id = data_manager2.get_question_id_from_answer(answer_id)
     if request.method == 'GET':
-        return render_template('add-comment.html', answer_id=answer_id)
+        return render_template('add-comment.html', answer_id=answer_id, question_id=question_id)
     if request.method == 'POST':
         data_manager2.add_new_data_to_table(
             data={'question_id': None, 'answer_id': answer_id, 'message': request.form['message'],
                   'edited_count': None},
             table_name='comment')
-        answer_data = data_manager2.get_question_id_from_answer(answer_id)
-        return redirect(url_for('display_question', question_id=answer_data['question_id']))
+        return redirect(url_for('display_question', question_id=question_id))
 
 
 @app.route('/question/<question_id>/new-tag', methods=['GET', 'POST'])
