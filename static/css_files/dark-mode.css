@@ -1,0 +1,26 @@
+html {
+    transition: .4s ease;
+}
+
+#theme-switcher {
+    position: fixed;
+    top: 2rem;
+    right: 1rem;
+    background-color: red;
+    color: black;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
+}
+#dark {
+    display: none;
+}
+
+.dark-mode {
+    filter: invert(100%) hue-rotate(180deg);
+}
+.dark-mode img {
+    filter: invert(100%) hue-rotate(180deg);
+    transition: .4s ease;
+}
