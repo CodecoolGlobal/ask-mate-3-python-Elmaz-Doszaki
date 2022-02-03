@@ -10,7 +10,7 @@ app.config['UPLOAD_FOLDER'] = 'static/images/'
 
 @app.route("/")
 def hello():
-    return render_template('index.html')
+    return render_template('index.html', list_of_best_memes=data_manager2.list_of_best_memes())
 
 
 @app.route("/list")

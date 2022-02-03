@@ -130,14 +130,21 @@ body {
   color: white;
   text-align: center;
   text-decoration: none;
-  padding-top: 10px;
+  padding-top: 5%;
   font-size: 17px;
   background: black;
   font-family: "Luxurious Roman", cursive;
+  transition: all 0.7s;
 }
 
 .head a:hover {
-  background-color: #ddd;
+  background-color: rgba(177, 162, 150, 0.9);
+  border: 3px solid rgba(177, 162, 150, 0.7);
+  padding-top: 3%;
+  transition: all 0.7s;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
   color: black;
 }
 
@@ -176,7 +183,7 @@ footer {
   margin: auto;
   background-image: linear-gradient(
     180deg,
-    #b2beb5,
+    rgba(44, 40, 36, 0.85),
     #b1a296,
     #b1a296,
     #b1a296,
