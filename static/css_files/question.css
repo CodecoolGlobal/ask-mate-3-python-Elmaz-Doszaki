@@ -34,10 +34,18 @@
   grid-template-columns: repeat(10,1fr);
   grid-template-rows: minmax(25px,40px) minmax(80px,150px) minmax(30px,auto);
   grid-template-areas:
-    "photo  photo  photo    title  title  title  title   title    edit     edit"
+    "photo  photo  photo    title  title  title  title   view   view     edit"
     "photo  photo  photo message message message message  message message message"
     "tag-but  tag  tag    tag    tag       time   time   time     q-com      q-com";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.view {
+  grid-area: view;
+  align-self: center;
+  text-align: center;
+  justify-self: end;
+  align-self: center;
 }
 
 .time {
