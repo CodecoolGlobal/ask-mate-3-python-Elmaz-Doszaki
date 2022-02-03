@@ -6,8 +6,8 @@ html {
     position: fixed;
     top: 2rem;
     right: 1rem;
-    background-color: red;
-    color: black;
+    background-color: darkblue;
+    color: white;
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
@@ -15,12 +15,4 @@ html {
 }
 #dark {
     display: none;
-}
-
-.dark-mode {
-    filter: invert(100%) hue-rotate(180deg);
-}
-.dark-mode img {
-    filter: invert(100%) hue-rotate(180deg);
-    transition: .4s ease;
 }
