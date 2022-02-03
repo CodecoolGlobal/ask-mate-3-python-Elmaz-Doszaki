@@ -8,14 +8,14 @@
 
 <head>
     <title>Ask Meme</title>
-    <link rel = "icon" href = "static/img/logo.png" type = "image/x-icon">
+    <link rel = "icon" href = "/static/img/logo.png" type = "image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
 <div class = "container">
     <div class = "head">
-        <a href = '/' ><img src="static/img/logo.png"/></a>
+        <div class = "logo"><a class = "link" href = '/' ><img src="/static/img/logo.png"/></a></div>
         <div class = "search">
             <form action="/search">
                 <input type="text" placeholder="Search.." name="search">
@@ -86,7 +86,7 @@
             </div>
             <div class = "view">
                 <form action="/questions/{{ row["id"] }}">
-                    <button id="home" type="submit" class="view">View : </button>
+                    <button class= "button" id="home" type="submit" class="view">View : </button>
                 </form>
 
             </div>

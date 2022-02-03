@@ -20,13 +20,13 @@
 
 <head>
     <title>Ask Meme</title>
-    <link rel="icon" href="static/img/logo.png" type="image/x-icon">
+    <link rel="icon" href="/static/img/logo.png" type="image/x-icon">
 
 </head>
 <body>
 <div class="container">
     <div class="head">
-        <div class="logo"></div>
+        <div class = "logo"><a class = "link" href = '/' ><img src="/static/img/logo.png"/></a></div>
         <div class="search">
             <form action="/search">
                 <input type="text" placeholder="Search.." name="search_question">
@@ -68,7 +68,7 @@
         </div>
         <div class="tags">
             {% for tag in tags %}
-                {{ tag['name'] }}
+                {{ tag['name'] }} <a href="{{ url_for('delete_tag_from_question', question_id=question_id, tag_id=tag['id']) }}">x</a>
             {% endfor %}
         </div>
 

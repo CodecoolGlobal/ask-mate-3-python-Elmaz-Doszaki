@@ -447,6 +447,7 @@ def add_new_tag(cursor, new_tag: str, question_id) -> None:
                     """,
                    {'question_id': question_id, 'tag_id': tag_id})
 
+
 @connection2.connection_handler
 def list_of_best_memes(cursor):
     b_list = []
@@ -467,4 +468,15 @@ def list_of_best_memes(cursor):
     for i in range(len(a_list)):
         b_list.append((a_list[i]['image'], a_list[i]['question_id'], a_list[i]['vote_number']))
     return sorted(b_list, key=lambda x: x[2], reverse=True)[:5]
+
+
+
+@connection2.connection_handler
+def tag_delete_from_question(cursor, question_id, tag_id):
+    cursor.execute("""
+                    DELETE FROM question_tag
+                    WHERE question_id = %(question_id)s
+                    AND tag_id = %(tag_id)s
+                    """,
+                   {'question_id': question_id, 'tag_id': tag_id})
 
