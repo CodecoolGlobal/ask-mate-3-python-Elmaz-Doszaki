@@ -168,6 +168,9 @@ def save_picture(cursor, file1, path, i_d):
 def delete_question(question_id):
     delete_img_from_all_answer(question_id)
     delete_img_from_question(question_id)
+    # comments from answer
+    # delete comment from question?
+
     delete_all_answer_from_db(question_id)
     delete_question_from_db(question_id)
 
@@ -188,12 +191,19 @@ def delete_question_from_db(cursor, question_id):
 @connection2.connection_handler
 def delete_all_answer_from_db(cursor, q_id):
     cursor.execute("""
+                    SELECT id FROM answer
+                    WHERE question_id = %(question_id)s
+                    """,
+                   {'question_id': q_id})
+    answers = cursor.fetchall()
+    answer_ids = tuple(answer['id'] for answer in answers)
+    cursor.execute("""
                 DELETE FROM comment
-                WHERE answer_id = %(question_id)s;
+                WHERE answer_id IN %(answer_id)s;
                 DELETE FROM answer
                 WHERE question_id = %(question_id)s;
                 """,
-                   {'question_id': q_id})
+                   {'question_id': q_id, 'answer_id': answer_ids})
 
 
 @connection2.connection_handler
@@ -231,7 +241,7 @@ def delete_img_from_all_answer(cursor, q_id):
     target_list = cursor.fetchall()
     for file_path in target_list:
         if os.path.exists(file_path['image']):
-            os.remove(file_path)
+            os.remove(file_path['image'])
 
 
 @connection2.connection_handler
@@ -242,8 +252,9 @@ def delete_an_img_from_answer(cursor, a_id):
                 """,
                    {'aid': a_id})
     file_path = cursor.fetchall()
-    if file_path != [] and os.path.exists(file_path[0]['image']):
-        os.remove(file_path)
+    for path in file_path:
+        if file_path != [] and os.path.exists(path['image']):
+            os.remove(path['image'])
 
 
 @connection2.connection_handler
