@@ -462,11 +462,14 @@ def add_new_tag(cursor, new_tag: str, question_id) -> None:
                         VALUES (%(new_tag)s)""",
                        {'new_tag': new_tag})
     tag_id = get_tag_id(new_tag)
-    cursor.execute("""
-                    INSERT INTO question_tag (question_id, tag_id)
-                    VALUES (%(question_id)s, %(tag_id)s)
-                    """,
-                   {'question_id': question_id, 'tag_id': tag_id})
+    try:
+        cursor.execute("""
+                        INSERT INTO question_tag (question_id, tag_id)
+                        VALUES (%(question_id)s, %(tag_id)s)
+                        """,
+                       {'question_id': question_id, 'tag_id': tag_id})
+    except:
+        pass
 
 
 @connection2.connection_handler
