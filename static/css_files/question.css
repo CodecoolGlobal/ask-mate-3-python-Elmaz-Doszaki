@@ -28,9 +28,9 @@
   margin-right: 140px;
   background: #ffffff;
   border-left: 20px solid #f9e69b;
-  padding: 20px;
+  padding: 15px;
   display: grid;
-  grid-gap: 5px;
+  grid-gap: 8px;
   grid-template-columns: repeat(10,1fr);
   grid-template-rows: minmax(25px,40px) minmax(80px,150px) minmax(30px,auto);
   grid-template-areas:
@@ -92,7 +92,8 @@
 .add-tag {
   grid-area: tag-but;
   justify-self: center;
-  align-self: center;
+  align-self: end;
+  padding: 1px;
 }
 
 .tags {
