@@ -14,11 +14,12 @@ section {
 
 section div {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   height: 20vh;
   width: 100vh;
-  margin: 5px;
+  margin: 15px;
   text-align: center;
+
 
 }
 
@@ -60,17 +61,24 @@ section div {
 }
 
 .indexbox {
- box-shadow: -1px 5px 4px rgba(44, 40, 36, 0.9);
+  /*box-shadow: -1px 5px 4px rgba(44, 40, 36, 0.9);*/
   display: flex;
+  max-height: 30vh;
+  max-width: 60vh;
   align-items: center;
   background-image: url("/static/img/satir.png");
   background-position-x: center;
   background-position-y: center;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  font-size: 20px;
-  border-radius: 6px;
-  border: solid 20px;
+  font-size: 18px;
+  border: 50px solid;
+  border-image: url("/static/img/border.png") 142;
+  padding: 20px;
+  margin: 5px;
+}
+.indexbox p {
+  magin: 5px
 }
 
 main button {
