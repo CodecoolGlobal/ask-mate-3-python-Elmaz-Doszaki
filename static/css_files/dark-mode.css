@@ -18,7 +18,7 @@ html {
 }
 
 .dark-mode body {
-     background-image: none;
+    background-image: none;
     background-color: black;
 }
 
@@ -39,21 +39,14 @@ html {
   margin: 0px;
 }
 
-.dark-mode aside{
+.dark-mode aside, .dark-mode footer ul li a{
     background-color: black;
-}
-
-.dark-mode footer ul li a{
-    background-color: black;
-
-}
-
-.dark-mode footer ul li .fa {
     color: white;
 }
 
-.dark-mode footer ul li a:hover {
 
+.dark-mode footer ul li .fa {
+    color: white;
 }
 
 .dark-mode footer ul li a:hover {
