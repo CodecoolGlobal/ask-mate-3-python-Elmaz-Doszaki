@@ -4,6 +4,7 @@ import connection2
 import os
 from datetime import datetime
 import bcrypt
+
 UPLOAD_FOLDER = 'static/images/'
 
 
@@ -315,35 +316,35 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
 
     if table_name == 'question':
         cursor.execute("""
-                        INSERT INTO question (submission_time, view_number, vote_number, title, message, image)
-                        VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);
-                        """,
+            INSERT INTO question (submission_time, view_number, vote_number, title, message, image, user_id) VALUES
+            (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s, %(user_id)s);""",
                        {'submission_time': dt,
                         'view_number': 0,
                         'vote_number': 0,
                         'title': data['title'],
                         'message': data['message'],
-                        'image': data['image']})
+                        'image': data['image'],
+                        'user_id': data['user_id']})
     elif table_name == 'answer':
         cursor.execute("""
-                        INSERT INTO answer(submission_time, vote_number, question_id, message, image)
-                        VALUES(%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s);
-                        """,
+            INSERT INTO answer(submission_time, vote_number, question_id, message, image, user_id) VALUES
+            (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s, %(user_id)s);""",
                        {'submission_time': dt,
                         'vote_number': 0,
                         'question_id': data['question_id'],
                         'message': data['message'],
-                        'image': data['image']})
+                        'image': data['image'],
+                        'user_id': data['user_id']})
     elif table_name == 'comment':
         cursor.execute("""
-                        INSERT INTO comment(question_id, answer_id, message, submission_time, edited_count)
-                        VALUES(%(question_id)s, %(answer_id)s, %(message)s, %(submission_time)s, %(edited_count)s);
-                        """,
+            INSERT INTO comment(question_id, answer_id, message, submission_time, edited_count, user_id) VALUES
+            (%(question_id)s, %(answer_id)s, %(message)s, %(submission_time)s, %(edited_count)s, %(user_id)s);""",
                        {'question_id': data['question_id'],
                         'answer_id': data['answer_id'],
                         'message': data['message'],
                         'submission_time': dt,
-                        'edited_count': data['edited_count']})
+                        'edited_count': data['edited_count'],
+                        'user_id': data['user_id']})
 
 
 @connection2.connection_handler
@@ -535,3 +536,10 @@ def add_user(cursor, data):
                    {'username': data['username'],
                     'password': data['password'],
                     'register_time': dt})
+
+
+@connection2.connection_handler
+def get_user_id(cursor, username: str) -> int:
+    cursor.execute("""SELECT user_id FROM users WHERE username LIKE %(username)s""", {'username': username})
+    user_id = int(cursor.fetchall()[0]['user_id'])
+    return user_id
