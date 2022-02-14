@@ -535,3 +535,32 @@ def add_user(cursor, data):
                    {'username': data['username'],
                     'password': data['password'],
                     'register_time': dt})
+
+
+@connection2.connection_handler
+def list_questions_by_user_id(cursor, user_id):
+    cursor.execute("""
+        SELECT DISTINCT question.title, question.message, question.id FROM question 
+        WHERE question.user_id = %(user_id)s;
+    """, {'user_id': user_id})
+    questions_by_user = cursor.fetchall()
+    return questions_by_user
+
+@connection2.connection_handler
+def list_answers_by_user_id(cursor, user_id):
+    cursor.execute("""
+        SELECT DISTINCT answer.message,question.title FROM answer LEFT JOIN question ON answer.question_id =question.id
+        WHERE answer.user_id = %(user_id)s;
+    """, {'user_id': user_id})
+    answers_by_user = cursor.fetchall()
+    return answers_by_user
+
+
+@connection2.connection_handler
+def list_comments_by_user_id(cursor, user_id):
+    cursor.execute("""
+        SELECT DISTINCT comment.message,question.title FROM comment LEFT JOIN question  on comment.question_id =question.id
+        WHERE comment.user_id = %(user_id)s;
+    """, {'user_id': user_id})
+    comments_by_user = cursor.fetchall()
+    return comments_by_user
