@@ -14,11 +14,12 @@ def index():
         return redirect(url_for('hello'))
     return render_template('font_page.html')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         if 'username' in session:
-            return redirect(url_for('main'))
+            return redirect(url_for('hello'))
         return render_template('login.html')
     username = request.form['username']
     password = request.form['password']
@@ -50,7 +51,7 @@ def registration():
         return redirect(url_for('hello'))
 
 
-@app.route("/main") #ez máshol okozhat  gondot
+@app.route("/main")  # ez máshol okozhat  gondot
 def hello():
     return render_template('index.html', list_of_best_memes=data_manager2.list_of_best_memes())
 
@@ -88,8 +89,7 @@ def add_question():
         return render_template('add-question.html')
     else:
         data = {'title': request.form['title'], 'message': request.form['question'], 'image': "",
-                # 'user_id': data_manager2.get_user_id(session['username'])  # TODO after login
-                }
+                'user_id': data_manager2.get_user_id(session['username'])}
         data_manager2.add_new_data_to_table(data, 'question')
 
         question_id = str(data_manager2.get_new_id('q'))
@@ -108,11 +108,8 @@ def display_answer(question_id):
 @app.route('/question/new-answer', methods=['POST'])
 def add_new_answer():
     question_id = request.form['question_id']
-    new_answer = {'question_id': question_id,
-                  'message': request.form['answer_message'],
-                  'image': "",
-                  # 'user_id': data_manager2.get_user_id(session['username'])  # TODO after login
-                  }
+    new_answer = {'question_id': question_id, 'message': request.form['answer_message'],
+                  'image': "", 'user_id': data_manager2.get_user_id(session['username'])}
     data_manager2.add_new_data_to_table(new_answer, 'answer')
 
     answer_id = str(data_manager2.get_new_id('a'))
@@ -219,9 +216,7 @@ def add_comment_to_question(question_id):
     if request.method == 'POST':
         data_manager2.add_new_data_to_table(
             data={'question_id': question_id, 'answer_id': None, 'message': request.form['message'],
-                  'edited_count': None,
-                  # 'user_id': data_manager2.get_user_id(session['username'])  # TODO after login
-                  },
+                  'edited_count': None, 'user_id': data_manager2.get_user_id(session['username'])},
             table_name='comment')
         return redirect(url_for('display_question', question_id=question_id))
 
@@ -248,9 +243,7 @@ def add_comment_to_answer(answer_id):
     if request.method == 'POST':
         data_manager2.add_new_data_to_table(
             data={'question_id': None, 'answer_id': answer_id, 'message': request.form['message'],
-                  'edited_count': None,
-                  # 'user_id': data_manager2.get_user_id(session['username'])  # TODO after login
-                  },
+                  'edited_count': None, 'user_id': data_manager2.get_user_id(session['username'])},
             table_name='comment')
         return redirect(url_for('display_question', question_id=question_id))
 
