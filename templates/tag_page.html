@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css_files/basic.css">
+    <link rel="stylesheet" href="/static/css_files/question.css"/>
+{% endblock %}
+
+{% block headline %}
+    <div class="headline">Tags page</div>
+{% endblock %}
+
+{% block content %}
+    <div class="answers">
+        <div class="a-comments">
+            {% for tag_count in tags_counts %}
+                <div class="a-comment">
+
+                    <div class="a-c-message">
+                        {{ tag_count['tag'] }}
+                    </div>
+                    <div class="a-c-time">
+                        <p>The number of questions marked with this tag: {{ tag_count['count'] }}</p>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
