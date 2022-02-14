@@ -3,7 +3,7 @@ from markupsafe import Markup
 import connection2
 import os
 from datetime import datetime
-
+import bcrypt
 UPLOAD_FOLDER = 'static/images/'
 
 
@@ -512,3 +512,26 @@ def tag_delete_from_question(cursor, question_id, tag_id):
                     AND tag_id = %(tag_id)s
                     """,
                    {'question_id': question_id, 'tag_id': tag_id})
+
+
+def hash_password(plain_text_password):
+    # By using bcrypt, the salt is saved into the hash itself
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+
+
+@connection2.connection_handler
+def add_user(cursor, data):
+    dt = datetime.now().strftime("%Y-%m-%d %H:%M")
+    cursor.execute("""
+        INSERT INTO users(username, password, registration_time, reputation)
+        VALUES (%(username)s, %(password)s,%(register_time)s, 0 );
+    """,
+                   {'username': data['username'],
+                    'password': data['password'],
+                    'register_time': dt})

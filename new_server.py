@@ -1,12 +1,33 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, session, render_template, request, redirect, url_for
 from data_manager import *
 import data_manager2
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images/'
 
 
-@app.route("/")
+@app.route('/')
+def index():
+    if 'username' in session:
+        return redirect(url_for('main'))
+    return render_template('font_page.html')
+
+
+@app.route('/registration', methods=['GET', 'POST'])
+def registration():
+    if request.method == 'GET':
+        return render_template('register.html')
+    elif request.method == 'POST':
+        form_data = {
+            'username': request.form['username'],
+            'password': data_manager2.hash_password(request.form['password'])
+        }
+        data_manager2.add_user(form_data)
+        return redirect(url_for('hello'))
+
+
+@app.route("/main") #ez máshol okozhat  gondot
 def hello():
     return render_template('index.html', list_of_best_memes=data_manager2.list_of_best_memes())
 
