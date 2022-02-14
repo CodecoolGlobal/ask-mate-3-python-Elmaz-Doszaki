@@ -249,5 +249,11 @@ def delete_tag_from_question(question_id, tag_id):
     return redirect(url_for('display_question', question_id=question_id))
 
 
+@app.route('/tags')
+def tag_page():
+    tags_and_count = data_manager2.get_data_for_tags_page()
+    return render_template('tag_page.html', tags_counts=tags_and_count)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

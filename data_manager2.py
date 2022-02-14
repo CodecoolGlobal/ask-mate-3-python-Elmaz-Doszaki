@@ -543,3 +543,10 @@ def get_user_id(cursor, username: str) -> int:
     cursor.execute("""SELECT user_id FROM users WHERE username LIKE %(username)s""", {'username': username})
     user_id = int(cursor.fetchall()[0]['user_id'])
     return user_id
+
+
+@connection2.connection_handler
+def get_data_for_tags_page(cursor):
+    cursor.execute("""SELECT tag.name AS tag, COUNT(qt.question_id) FROM tag
+                    LEFT JOIN question_tag AS qt ON tag.id = qt.tag_id GROUP BY tag.name""")
+    return cursor.fetchall()
