@@ -73,7 +73,7 @@ section div {
   background-repeat: no-repeat;
   font-size: 18px;
   border: 50px solid;
-  border-image: url("/static/img/border.png") 142;
+  border-image: url("/static/img/border.png") 143 stretch;
   padding: 20px;
   margin: 5px;
 }

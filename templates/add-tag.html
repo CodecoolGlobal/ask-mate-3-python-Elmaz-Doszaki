@@ -1,38 +1,14 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
+{% block css %}
 <link rel="stylesheet" href="/static/css_files/basic.css">
 <link rel="stylesheet" href="/static/css_files/new_form_style.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap"
-      rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<head>
-    <title> Ask Meme </title>
-    <link rel="icon" href="/static/img/logo.png" type="image/x-icon">
-    <link href="/static/css_files/dark-mode.css" rel="stylesheet" />
-        <script src="/static/css_files/theme-switcher.js" defer></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-<div class="container">
-    <div class="head">
-        <div class = "logo"><a class = "link" href = '/' ><img src="/static/img/logo.png"/></a></div>
-        <div class="search">
-            <form action="/action_page.php">
-                <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-        <div class="account"></div>
-        <div class="empty"></div>
-        <a href="{{ url_for('display_questions_list') }}" class="nav1">Questions</a>
-        <a href="{{ url_for('hello') }}" class="nav2">Premium</a>
-        <a href="{{ url_for('hello') }}" class="nav3">About Us</a>
-        <a href="{{ url_for('hello') }}" class="nav4">Contact</a>
+{% endblock %}
+{% block headline %}
         <div class="headline">New Tag</div>
-    </div>
+{% endblock %}
+{% block content%}
+
     <div class="back_button">
         <form action="/questions/{{ question_id }}">
             <button id="home" type="submit" class="button"> BACK</button>
@@ -58,19 +34,4 @@
         </form>
     </div>
 
-    <footer>
-        <ul>
-            <li><a href="#"> <i class="fa fa-facebook"> </i> </a></li>
-            <li><a href="#"> <i class="fa fa-twitter"> </i> </a></li>
-            <li><a href="#"> <i class="fa fa-instagram"> </i> </a></li>
-            <li><a href="#"> <i class="fa fa-linkedin"> </i> </a></li>
-        </ul>
-    </footer>
-</div>
- <div class="theme-switcher" id="theme-switcher" title="Dark Mode On/Off">
-        <i id="dark" class="fa fa-moon-o"></i>
-        <i id="light" class="fa fa-sun-o"></i>
-    </div>
-</body>
-</div>
-</html>
+{% endblock %}
