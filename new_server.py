@@ -87,7 +87,9 @@ def add_question():
     if request.method == 'GET':
         return render_template('add-question.html')
     else:
-        data = {'title': request.form['title'], 'message': request.form['question'], 'image': ""}
+        data = {'title': request.form['title'], 'message': request.form['question'], 'image': "",
+                # 'user_id': data_manager2.get_user_id(session['username'])  # TODO after login
+                }
         data_manager2.add_new_data_to_table(data, 'question')
 
         question_id = str(data_manager2.get_new_id('q'))
@@ -106,10 +108,11 @@ def display_answer(question_id):
 @app.route('/question/new-answer', methods=['POST'])
 def add_new_answer():
     question_id = request.form['question_id']
-    new_answer = {'vote_number': 0,
-                  'question_id': question_id,
+    new_answer = {'question_id': question_id,
                   'message': request.form['answer_message'],
-                  'image': ""}
+                  'image': "",
+                  # 'user_id': data_manager2.get_user_id(session['username'])  # TODO after login
+                  }
     data_manager2.add_new_data_to_table(new_answer, 'answer')
 
     answer_id = str(data_manager2.get_new_id('a'))
@@ -216,7 +219,9 @@ def add_comment_to_question(question_id):
     if request.method == 'POST':
         data_manager2.add_new_data_to_table(
             data={'question_id': question_id, 'answer_id': None, 'message': request.form['message'],
-                  'edited_count': None},
+                  'edited_count': None,
+                  # 'user_id': data_manager2.get_user_id(session['username'])  # TODO after login
+                  },
             table_name='comment')
         return redirect(url_for('display_question', question_id=question_id))
 
@@ -243,7 +248,9 @@ def add_comment_to_answer(answer_id):
     if request.method == 'POST':
         data_manager2.add_new_data_to_table(
             data={'question_id': None, 'answer_id': answer_id, 'message': request.form['message'],
-                  'edited_count': None},
+                  'edited_count': None,
+                  # 'user_id': data_manager2.get_user_id(session['username'])  # TODO after login
+                  },
             table_name='comment')
         return redirect(url_for('display_question', question_id=question_id))
 
@@ -263,6 +270,12 @@ def add_tags_to_question(question_id):
 def delete_tag_from_question(question_id, tag_id):
     data_manager2.tag_delete_from_question(question_id, tag_id)
     return redirect(url_for('display_question', question_id=question_id))
+
+
+@app.route('/tags')
+def tag_page():
+    tags_and_count = data_manager2.get_data_for_tags_page()
+    return render_template('tag_page.html', tags_counts=tags_and_count)
 
 
 if __name__ == "__main__":
