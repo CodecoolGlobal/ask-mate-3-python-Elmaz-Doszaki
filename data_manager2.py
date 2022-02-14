@@ -526,6 +526,15 @@ def verify_password(plain_text_password, hashed_password):
 
 
 @connection2.connection_handler
+def user_list_with_hash(cursor):
+    cursor.execute("""SELECT username, password FROM users""")
+    user_list = {}
+    for row in cursor.fetchall():
+        user_list[row['username']] = row['password']
+    return user_list
+
+
+@connection2.connection_handler
 def add_user(cursor, data):
     dt = datetime.now().strftime("%Y-%m-%d %H:%M")
     cursor.execute("""

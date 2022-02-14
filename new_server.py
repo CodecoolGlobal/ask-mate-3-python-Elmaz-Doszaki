@@ -1,17 +1,40 @@
-from flask import Flask, session, render_template, request, redirect, url_for
+from flask import Flask, session, render_template, flash, request, redirect, url_for
 from data_manager import *
 import data_manager2
 
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images/'
+app.secret_key = "iqwr87fgbvisfv0w/akic^"
 
 
 @app.route('/')
 def index():
     if 'username' in session:
-        return redirect(url_for('main'))
+        return redirect(url_for('hello'))
     return render_template('font_page.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        if 'username' in session:
+            return redirect(url_for('main'))
+        return render_template('login.html')
+    username = request.form['username']
+    password = request.form['password']
+    user_list = data_manager2.user_list_with_hash()
+    if username in user_list:
+        if data_manager2.verify_password(password, user_list[username]):
+            session["username"] = username
+            return redirect(url_for("hello"))
+        else:
+            return render_template('font_page.html')
+
+
+@app.route("/logout")
+def logout():
+    session.pop("username", None)
+    return redirect(url_for("index"))
 
 
 @app.route('/registration', methods=['GET', 'POST'])
