@@ -12,7 +12,7 @@ app.secret_key = "iqwr87fgbvisfv0w/akic^"
 def index():
     if 'username' in session:
         return redirect(url_for('hello'))
-    return render_template('font_page.html')
+    return render_template('login.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -29,7 +29,7 @@ def login():
             session["username"] = username
             return redirect(url_for("hello"))
         else:
-            return render_template('font_page.html')
+            return render_template('login.html')
 
 
 @app.route("/logout")
