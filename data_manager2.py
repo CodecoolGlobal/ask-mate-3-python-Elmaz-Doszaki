@@ -535,3 +535,13 @@ def add_user(cursor, data):
                    {'username': data['username'],
                     'password': data['password'],
                     'register_time': dt})
+
+
+@connection2.connection_handler
+def get_all_users(cursor):
+    cursor.execute("""
+                    SELECT * FROM users;
+                   """)
+    all_users = cursor.fetchall()
+    return all_users
+

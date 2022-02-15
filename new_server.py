@@ -242,5 +242,11 @@ def delete_tag_from_question(question_id, tag_id):
     return redirect(url_for('display_question', question_id=question_id))
 
 
+@app.route('/users')
+def users():
+    all_users = data_manager2.get_all_users()
+    return render_template('list_users.html', all_users=all_users)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
