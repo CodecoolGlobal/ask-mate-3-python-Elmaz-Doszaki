@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block headline %}
-        <div class="headline">Comment</div>
+    <div class="headline">Comment</div>
 {% endblock %}
 
-{% block content%}
+{% block content %}
 
 
     <div class="back_button">
@@ -14,12 +14,12 @@
     </div>
     <div class="form-style-8">
         <h2 align="middle">Give a new comment!</h2>
-        {% if question_id %}
-            <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="POST">
-            <input type="hidden" name="question_id" value="{{ question_id }}">
-        {% else %}
+        {% if answer_id %}
             <form action="{{ url_for('add_comment_to_answer', answer_id=answer_id) }}" method="POST">
             <input type="hidden" name="answer_id" value="{{ answer_id }}">
+        {% else %}
+            <form action="{{ url_for('add_comment_to_question', question_id=question_id) }}" method="POST">
+            <input type="hidden" name="question_id" value="{{ question_id }}">
         {% endif %}
         <p><h4> Type your comment: </h4><br>
         <textarea id="answer_message" name="message" rows="6" cols="60" minlength="10"
