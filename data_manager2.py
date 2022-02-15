@@ -548,15 +548,6 @@ def add_user(cursor, data):
 
 
 @connection2.connection_handler
-def get_all_users(cursor):
-    cursor.execute("""
-                    SELECT * FROM users;
-                   """)
-    all_users = cursor.fetchall()
-    return all_users
-
-
-@connection2.connection_handler
 def list_questions_by_user_id(cursor, user_id):
     cursor.execute("""
         SELECT DISTINCT question.title, question.message, question.id FROM question 
@@ -615,3 +606,15 @@ def get_data_for_user_page(user_id):
     user_comments = list_comments_by_user_id(user_id)
     user_data = get_user_data(user_id)
     return user_questions, user_answers, user_comments, user_data
+
+
+@connection2.connection_handler
+def get_data_for_users_page(cursor):
+    cursor.execute("""SELECT u.*, COUNT(q.title) AS question_count, COUNT(a.message) AS answer_count,
+        COUNT(q.message) AS comment_count
+        FROM users AS u
+        LEFT JOIN question AS q ON u.user_id = q.user_id
+        LEFT JOIN answer AS a ON u.user_id = a.user_id
+        LEFT JOIN comment AS c ON u.user_id = c.user_id
+        GROUP BY u.user_id""")
+    return cursor.fetchall()

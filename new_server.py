@@ -269,7 +269,7 @@ def delete_tag_from_question(question_id, tag_id):
 @app.route('/users')
 def users():
     if 'username' in session:
-        all_users = data_manager2.get_all_users()
+        all_users = data_manager2.get_data_for_users_page()
         return render_template('list_users.html', all_users=all_users)
     else:
         return redirect(url_for('index'))
