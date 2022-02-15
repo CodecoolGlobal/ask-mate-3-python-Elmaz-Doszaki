@@ -548,15 +548,6 @@ def add_user(cursor, data):
 
 
 @connection2.connection_handler
-def get_all_users(cursor):
-    cursor.execute("""
-                    SELECT * FROM users;
-                   """)
-    all_users = cursor.fetchall()
-    return all_users
-
-
-@connection2.connection_handler
 def list_questions_by_user_id(cursor, user_id):
     cursor.execute("""
         SELECT DISTINCT question.title, question.message, question.id FROM question 
@@ -660,3 +651,15 @@ def gain_reputation(cursor, table, ID, accepted=0):
                         """,
                    {'userID': userID,
                     'gain': gain})
+
+    
+def get_data_for_users_page(cursor):
+    cursor.execute("""SELECT u.*, COUNT(q.title) AS question_count, COUNT(a.message) AS answer_count,
+        COUNT(q.message) AS comment_count
+        FROM users AS u
+        LEFT JOIN question AS q ON u.user_id = q.user_id
+        LEFT JOIN answer AS a ON u.user_id = a.user_id
+        LEFT JOIN comment AS c ON u.user_id = c.user_id
+        GROUP BY u.user_id""")
+    return cursor.fetchall()
+
