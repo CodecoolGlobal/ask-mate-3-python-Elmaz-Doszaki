@@ -37,6 +37,7 @@
 
     </head>
     <body>
+
         <div class="head">
             <div class="logo"><a class="link" href='/'><img src="/static/img/logo.png"/></a></div>
             <div class="search">
@@ -54,11 +55,14 @@
                         </form>
                     </div>
 
+        
+
+
             </div>
             <div class="empty"></div>
             <a href="{{ url_for('tag_page') }}" class="nav3">Tags</a>
             <a href="{{ url_for('display_questions_list') }}" class="nav2">Questions</a>
-            <a href="{{ url_for('hello') }}" class="nav4">Home</a>
+            <a href="{{ url_for('user_page',user_id=session.get('user_id')) if session.get('user_id') else url_for('index') }}" class="nav4">User page</a>
             <a href="{{ url_for('users') }}" class="nav1">Users</a>
 
             {% block headline %}
@@ -94,6 +98,7 @@
             });
         </script>
     </body>
+
 
   </div>
     <div class="theme-switcher" id="theme-switcher" title="Dark Mode On/Off">
