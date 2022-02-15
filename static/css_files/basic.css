@@ -97,17 +97,61 @@ body {
   display: table;
 }
 
+.head .account .click{
+
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 1em;
+  background: white;
+  font-family: "Luxurious Roman", cursive;
+  cursor: pointer;
+  width: 150px;
+  transition: 0.3s;
+  position: relative;
+  display: block;
+}
+
+.head .account .click:hover{
+  background-color: #b1a296;
+}
+
+.links {
+  padding: 10px;
+  color: black;
+  font-size: 1em;
+  background: #e5e4e2;
+  font-family: "Luxurious Roman", cursive;
+  text-align: center;
+  cursor: pointer;
+  width: 150px;
+   transition: 0.3s;
+}
+
+.links:hover{
+  background-color: #b1a296;
+  transform: scale(1.1);
+}
+
+.list{
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.3s;
+}
+
+.newlist {
+ transform: skewY(0);
+}
+
 .account {
   grid-area: account;
   align-items: center;
   justify-content: center;
-  background-image: url("/static/img/account.png");
-  background-position-x: center;
-  background-position-y: center;
-  background-size: contain;
-  background-repeat: no-repeat;
   max-width: 150px;
+  margin-top: 20px;
 }
+
 
 .nav1 {
   grid-area: nav1;
@@ -168,13 +212,14 @@ body {
   padding: 10px;
   font-family: "Luxurious Roman", cursive;
   cursor: pointer;
+  margin: 10px;
 }
 
 .button:hover {
   background-color: #4e5066;
   color: rgb(255, 255, 255);
-  border: 3px solid #000000;
-  box-shadow: 15px 15px 15px #363535;
+
+
 }
 
 footer {

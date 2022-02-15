@@ -108,6 +108,10 @@
   box-shadow: 2px 2px 2px #363535;
   width: 100px;
 }
+.question .button:hover {
+  background-color: #b1a296;
+  color: rgb(255, 255, 255);
+}
 .add-tag {
   grid-area: tag-but;
   justify-self: center;
@@ -130,4 +134,16 @@
   margin-right: 150px;
   text-align: right;
   font-family: "Luxurious Roman", cursive;
+}
+
+.sort-button {
+  font-family: "Luxurious Roman", cursive;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 3px 10px;
+}
+
+.sort-button:hover {
+  background-color: #b1a296;
+  color: rgb(255, 255, 255);
 }

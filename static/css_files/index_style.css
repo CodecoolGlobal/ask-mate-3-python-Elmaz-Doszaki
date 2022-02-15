@@ -106,13 +106,6 @@ main button {
   background-color: rgba(44, 40, 36, 0.9);
   box-shadow: -1px 5px 4px rgba(44, 40, 36, 0.85);
 }
-button:hover {
-  transform: translate(2px, -8px);
-  box-shadow: -1px 23px 22px red;
-  font-family: "Pacifico", cursive;
-  transition: all 0.5s ease-in;
-  cursor: pointer;
-}
 
 @keyframes slow-pulser {
     0% {
