@@ -1,20 +1,32 @@
 {% extends "base.html" %}
 
 {% block css %}
-      <link rel="stylesheet" href="/static/css_files/basic.css" />
-      <link href="/static/css_files/index_style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css_files/basic.css"/>
+    <link href="/static/css_files/index_style.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block content %}
     <h2>Username : {{ session.get('username') }}</h2>
+    <ul>
+        <li>User ID: {{ session.get('user_id') }}</li>
+        <li>Username: <a
+                href="{{ url_for('user_page', user_id=session.get('user_id')) }}">{{ session.get('username') }}</a></li>
+        <li>Registration date: {{ user_data.registration_time }}</li>
+        <li>Number of asked questions: {{ user_questions|length }}</li>
+        <li>Number of answers: {{ user_answers|length }}</li>
+        <li>Number of comments: {{ user_comments|length }}</li>
+        <li>Reputation: {{ user_data.reputation }}</li>
+    </ul>
     <hr>
     {% if  user_questions== [] %}
         <h3>Questions asked: None</h3>
     {% else %}
         <h3>Questions asked:</h3>
         {% for question in user_questions %}
-            <h4>Question title:</h4><h4><a href={{ url_for('display_question', question_id=question.id) }}> {{ question.title }}</a></h4>
-            <h5>Question message: {{ question.message }}</h5><hr>
+            <h4>Question title:</h4>
+            <h4><a href={{ url_for('display_question', question_id=question.id) }}> {{ question.title }}</a></h4>
+            <h5>Question message: {{ question.message }}</h5>
+            <hr>
         {% endfor %}
     {% endif %}
 
@@ -24,8 +36,10 @@
     {% else %}
         <h3>Answers given:</h3>
         {% for answer in user_answers %}
-            <h4>Question title: </h4><h4><a href={{ url_for('display_question', question_id=answer.id) }}> {{ answer.title }} </a></h4>
-            <h5>Answer given: {{ answer.message }}</h5><hr>
+            <h4>Question title: </h4>
+            <h4><a href={{ url_for('display_question', question_id=answer.id) }}> {{ answer.title }} </a></h4>
+            <h5>Answer given: {{ answer.message }}</h5>
+            <hr>
         {% endfor %}
     {% endif %}
 
@@ -36,8 +50,10 @@
     {% else %}
         <h3>Answers given:</h3>
         {% for comment in user_comments %}
-            <h4>Question title:</h4><h4> <a href={{ url_for('display_question', question_id=comment.id) }}>{{ comment.title }}</a></h4>
-            <h5>Comment given: {{ comment.message }}</h5><hr>
+            <h4>Question title:</h4>
+            <h4><a href={{ url_for('display_question', question_id=comment.id) }}>{{ comment.title }}</a></h4>
+            <h5>Comment given: {{ comment.message }}</h5>
+            <hr>
         {% endfor %}
     {% endif %}
 {% endblock content %}

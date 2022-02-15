@@ -53,7 +53,7 @@
         <a href="{{ url_for('tag_page') }}" class="nav2">Tags</a>
         <a href="{{ url_for('hello') }}" class="nav3">About Us</a>
         <a href="{{ url_for('user_page',user_id=session.get('user_id')) if session.get('user_id') else url_for('index') }}"
-           class="nav4">User information</a>
+           class="nav4">User page</a>
 
         {% block headline %}
             <div class="headline">Ask meme</div>

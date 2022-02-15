@@ -598,3 +598,20 @@ def get_data_for_tags_page(cursor):
     cursor.execute("""SELECT tag.name AS tag, COUNT(qt.question_id) FROM tag
                     LEFT JOIN question_tag AS qt ON tag.id = qt.tag_id GROUP BY tag.name""")
     return cursor.fetchall()
+
+
+@connection2.connection_handler
+def get_user_data(cursor, user_id):
+    user_id = int(user_id)
+    cursor.execute("""SELECT registration_time, reputation FROM users WHERE user_id = %(user_id)s""",
+                   {'user_id': user_id})
+    result = cursor.fetchall()[0]
+    return result
+
+
+def get_data_for_user_page(user_id):
+    user_questions = list_questions_by_user_id(user_id)
+    user_answers = list_answers_by_user_id(user_id)
+    user_comments = list_comments_by_user_id(user_id)
+    user_data = get_user_data(user_id)
+    return user_questions, user_answers, user_comments, user_data
