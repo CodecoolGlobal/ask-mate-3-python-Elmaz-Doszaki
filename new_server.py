@@ -197,6 +197,7 @@ def vote_down_answer(answer_id):
     vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
     modify_vote_number = util.vote_up_or_down(vote_number, 'down')
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
+    data_manager2.lose_reputation("answer", answer_id)
     return redirect('/questions/' + request.form['question_id'])
 
 

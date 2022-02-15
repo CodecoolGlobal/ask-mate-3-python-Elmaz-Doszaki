@@ -615,3 +615,31 @@ def get_data_for_user_page(user_id):
     user_comments = list_comments_by_user_id(user_id)
     user_data = get_user_data(user_id)
     return user_questions, user_answers, user_comments, user_data
+
+
+@connection2.connection_handler
+def lose_reputation(cursor, table, ID):
+    if table == "answer":
+        cursor.execute("""SELECT user_id FROM answer
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+    elif table == "question":
+        cursor.execute("""SELECT user_id FROM question
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+    elif table == "comment":
+        cursor.execute("""SELECT user_id FROM comment
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+
+
+    cursor.execute("""
+                        UPDATE users
+                        SET reputation = reputation - 2
+                        WHERE user_id = %(userID)s;
+                        """,
+                   {'userID': userID})
+
