@@ -49,7 +49,7 @@ def registration():
             'password': data_manager2.hash_password(request.form['password'])
         }
         data_manager2.add_user(form_data)
-        return redirect(url_for('hello'))
+        return redirect(url_for('login'))
 
 
 @app.route("/main")  # ez máshol okozhat  gondot
@@ -171,6 +171,7 @@ def vote_up_question(q_id):
     vote_number = data_manager2.get_question_vote_number(q_id)
     modify_vote_number = util.vote_up_or_down(vote_number, 'up')
     data_manager2.update_question_vote_number(q_id, modify_vote_number)
+    data_manager2.gain_reputation("question", q_id)
     return redirect('/list')
 
 
@@ -179,6 +180,7 @@ def vote_down_question(q_id):
     vote_number = data_manager2.get_question_vote_number(q_id)
     modify_vote_number = util.vote_up_or_down(vote_number, 'down')
     data_manager2.update_question_vote_number(q_id, modify_vote_number)
+    data_manager2.lose_reputation("question", q_id)
     return redirect('/list')
 
 
@@ -188,6 +190,7 @@ def vote_up_answer(answer_id):
     vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
     modify_vote_number = util.vote_up_or_down(vote_number, 'up')
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
+    data_manager2.gain_reputation("answer", answer_id)
     return redirect('/questions/' + request.form['question_id'])
 
 
@@ -197,6 +200,7 @@ def vote_down_answer(answer_id):
     vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
     modify_vote_number = util.vote_up_or_down(vote_number, 'down')
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
+    data_manager2.lose_reputation("answer", answer_id)
     return redirect('/questions/' + request.form['question_id'])
 
 

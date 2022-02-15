@@ -609,6 +609,50 @@ def get_data_for_user_page(user_id):
 
 
 @connection2.connection_handler
+def lose_reputation(cursor, table, ID):
+    if table == "answer":
+        cursor.execute("""SELECT user_id FROM answer
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+    elif table == "question":
+        cursor.execute("""SELECT user_id FROM question
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+
+
+    cursor.execute("""
+                        UPDATE users
+                        SET reputation = reputation - 2
+                        WHERE user_id = %(userID)s;
+                        """,
+                   {'userID': userID})
+
+
+@connection2.connection_handler
+def gain_reputation(cursor, table, ID, accepted=0):
+    if table == "answer":
+        cursor.execute("""SELECT user_id FROM answer
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+        gain = 15 if accepted else 10
+    elif table == "question":
+        cursor.execute("""SELECT user_id FROM question
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+        gain = 5
+    cursor.execute("""
+                        UPDATE users
+                        SET reputation = reputation + %(gain)s
+                        WHERE user_id = %(userID)s;
+                        """,
+                   {'userID': userID,
+                    'gain': gain})
+
+    
 def get_data_for_users_page(cursor):
     cursor.execute("""SELECT u.*, COUNT(q.title) AS question_count, COUNT(a.message) AS answer_count,
         COUNT(q.message) AS comment_count
@@ -618,3 +662,4 @@ def get_data_for_users_page(cursor):
         LEFT JOIN comment AS c ON u.user_id = c.user_id
         GROUP BY u.user_id""")
     return cursor.fetchall()
+
