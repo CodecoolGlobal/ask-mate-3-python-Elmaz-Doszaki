@@ -49,7 +49,9 @@
             <div class="account">
                 <button class="click"><i class="fa fa-user"></i> My account</button>
                     <div class="list">
-                        <button class="links">View</button>
+                        <form action="{{ url_for('user_page',user_id=session.get('user_id')) if session.get('user_id') else url_for('index') }}">
+                            <button class="links">View</button>
+                        </form>
                         <form action="/logout">
                             <button class="links">Log out</button>
                         </form>
@@ -62,7 +64,7 @@
             <div class="empty"></div>
             <a href="{{ url_for('tag_page') }}" class="nav3">Tags</a>
             <a href="{{ url_for('display_questions_list') }}" class="nav2">Questions</a>
-            <a href="{{ url_for('user_page',user_id=session.get('user_id')) if session.get('user_id') else url_for('index') }}" class="nav4">User page</a>
+            <a href="{{ url_for('hello') }}" class="nav4">Home</a>
             <a href="{{ url_for('users') }}" class="nav1">Users</a>
 
             {% block headline %}
