@@ -4,6 +4,7 @@ import connection2
 import os
 from datetime import datetime
 import bcrypt
+
 UPLOAD_FOLDER = 'static/images/'
 
 
@@ -315,35 +316,35 @@ def add_new_data_to_table(cursor, data: Dict[str, str], table_name: str) -> None
 
     if table_name == 'question':
         cursor.execute("""
-                        INSERT INTO question (submission_time, view_number, vote_number, title, message, image)
-                        VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);
-                        """,
+            INSERT INTO question (submission_time, view_number, vote_number, title, message, image, user_id) VALUES
+            (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s, %(user_id)s);""",
                        {'submission_time': dt,
                         'view_number': 0,
                         'vote_number': 0,
                         'title': data['title'],
                         'message': data['message'],
-                        'image': data['image']})
+                        'image': data['image'],
+                        'user_id': data['user_id']})
     elif table_name == 'answer':
         cursor.execute("""
-                        INSERT INTO answer(submission_time, vote_number, question_id, message, image)
-                        VALUES(%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s);
-                        """,
+            INSERT INTO answer(submission_time, vote_number, question_id, message, image, user_id) VALUES
+            (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s, %(user_id)s);""",
                        {'submission_time': dt,
                         'vote_number': 0,
                         'question_id': data['question_id'],
                         'message': data['message'],
-                        'image': data['image']})
+                        'image': data['image'],
+                        'user_id': data['user_id']})
     elif table_name == 'comment':
         cursor.execute("""
-                        INSERT INTO comment(question_id, answer_id, message, submission_time, edited_count)
-                        VALUES(%(question_id)s, %(answer_id)s, %(message)s, %(submission_time)s, %(edited_count)s);
-                        """,
+            INSERT INTO comment(question_id, answer_id, message, submission_time, edited_count, user_id) VALUES
+            (%(question_id)s, %(answer_id)s, %(message)s, %(submission_time)s, %(edited_count)s, %(user_id)s);""",
                        {'question_id': data['question_id'],
                         'answer_id': data['answer_id'],
                         'message': data['message'],
                         'submission_time': dt,
-                        'edited_count': data['edited_count']})
+                        'edited_count': data['edited_count'],
+                        'user_id': data['user_id']})
 
 
 @connection2.connection_handler
@@ -526,6 +527,15 @@ def verify_password(plain_text_password, hashed_password):
 
 
 @connection2.connection_handler
+def user_list_with_hash(cursor):
+    cursor.execute("""SELECT username, password FROM users""")
+    user_list = {}
+    for row in cursor.fetchall():
+        user_list[row['username']] = row['password']
+    return user_list
+
+
+@connection2.connection_handler
 def add_user(cursor, data):
     dt = datetime.now().strftime("%Y-%m-%d %H:%M")
     cursor.execute("""
@@ -538,10 +548,52 @@ def add_user(cursor, data):
 
 
 @connection2.connection_handler
+
 def get_all_users(cursor):
     cursor.execute("""
                     SELECT * FROM users;
                    """)
     all_users = cursor.fetchall()
     return all_users
+
+
+def list_questions_by_user_id(cursor, user_id):
+    cursor.execute("""
+        SELECT DISTINCT question.title, question.message, question.id FROM question 
+        WHERE question.user_id = %(user_id)s;
+    """, {'user_id': user_id})
+    questions_by_user = cursor.fetchall()
+    return questions_by_user
+
+@connection2.connection_handler
+def list_answers_by_user_id(cursor, user_id):
+    cursor.execute("""
+        SELECT DISTINCT answer.message,question.title FROM answer LEFT JOIN question ON answer.question_id =question.id
+        WHERE answer.user_id = %(user_id)s;
+    """, {'user_id': user_id})
+    answers_by_user = cursor.fetchall()
+    return answers_by_user
+
+
+@connection2.connection_handler
+def list_comments_by_user_id(cursor, user_id):
+    cursor.execute("""
+        SELECT DISTINCT comment.message,question.title FROM comment LEFT JOIN question  on comment.question_id =question.id
+        WHERE comment.user_id = %(user_id)s;
+    """, {'user_id': user_id})
+    comments_by_user = cursor.fetchall()
+    return comments_by_user
+
+def get_user_id(cursor, username: str) -> int:
+    cursor.execute("""SELECT user_id FROM users WHERE username LIKE %(username)s""", {'username': username})
+    user_id = int(cursor.fetchall()[0]['user_id'])
+    return user_id
+
+
+@connection2.connection_handler
+def get_data_for_tags_page(cursor):
+    cursor.execute("""SELECT tag.name AS tag, COUNT(qt.question_id) FROM tag
+                    LEFT JOIN question_tag AS qt ON tag.id = qt.tag_id GROUP BY tag.name""")
+    return cursor.fetchall()
+
 
