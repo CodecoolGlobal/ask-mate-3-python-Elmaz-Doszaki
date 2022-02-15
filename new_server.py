@@ -266,6 +266,12 @@ def delete_tag_from_question(question_id, tag_id):
 
 
 
+@app.route('/users')
+def users():
+    all_users = data_manager2.get_all_users()
+    return render_template('list_users.html', all_users=all_users)
+
+
 @app.route('/user/<user_id>')
 def user_page(user_id):
     user_questions = data_manager2.list_questions_by_user_id(user_id)
@@ -280,6 +286,7 @@ def user_page(user_id):
 def tag_page():
     tags_and_count = data_manager2.get_data_for_tags_page()
     return render_template('tag_page.html', tags_counts=tags_and_count)
+
 
 
 

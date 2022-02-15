@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block css %}
+      <link rel="stylesheet" href="/static/css_files/basic.css" />
+      <link href="/static/css_files/users.css" rel="stylesheet" />
+{% endblock %}
+
+{% block headline %}
+        <div class = "headline">Users</div>
+{% endblock %}
+
+{% block content%}
+    <div class = "users">
+        {% for row in all_users %}
+            <div class = "user">
+                <div class = "username" >{{ row["username"] }}</div>
+                <div class = "date" >Registration time: {{ row["registration_time"] }}</div>
+                {# A '...' helyére megy majd a változó#}
+                <div class = "q-num" >... question </div>
+                <div class = "a-num" >... answer</div>
+                <div class = "c-num" >... comment</div>
+                <div class = "reputation" >Reputation: ...</div>
+                <div class = "user-view">
+                    <form action="/user/{{ row["user_id"] }}">
+                        <button class= "user-button" id="home" type="submit" class="view">View </button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

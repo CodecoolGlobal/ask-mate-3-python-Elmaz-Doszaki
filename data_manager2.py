@@ -549,6 +549,14 @@ def add_user(cursor, data):
 
 @connection2.connection_handler
 
+def get_all_users(cursor):
+    cursor.execute("""
+                    SELECT * FROM users;
+                   """)
+    all_users = cursor.fetchall()
+    return all_users
+
+
 def list_questions_by_user_id(cursor, user_id):
     cursor.execute("""
         SELECT DISTINCT question.title, question.message, question.id FROM question 
@@ -587,4 +595,5 @@ def get_data_for_tags_page(cursor):
     cursor.execute("""SELECT tag.name AS tag, COUNT(qt.question_id) FROM tag
                     LEFT JOIN question_tag AS qt ON tag.id = qt.tag_id GROUP BY tag.name""")
     return cursor.fetchall()
+
 
