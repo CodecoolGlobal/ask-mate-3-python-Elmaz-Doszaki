@@ -560,7 +560,7 @@ def list_questions_by_user_id(cursor, user_id):
 @connection2.connection_handler
 def list_answers_by_user_id(cursor, user_id):
     cursor.execute("""
-        SELECT DISTINCT answer.message,question.title FROM answer LEFT JOIN question ON answer.question_id =question.id
+        SELECT DISTINCT answer.message,question.title, answer.question_id FROM answer LEFT JOIN question ON answer.question_id =question.id
         WHERE answer.user_id = %(user_id)s;
     """, {'user_id': user_id})
     answers_by_user = cursor.fetchall()
@@ -570,9 +570,13 @@ def list_answers_by_user_id(cursor, user_id):
 @connection2.connection_handler
 def list_comments_by_user_id(cursor, user_id):
     cursor.execute("""
-        SELECT DISTINCT comment.message,question.title FROM comment LEFT JOIN question  on comment.question_id =question.id
-        WHERE comment.user_id = %(user_id)s;
-    """, {'user_id': user_id})
+        SELECT c.message, question.title, q.title AS q_title, question.id AS question_id, q.id AS q_id
+        FROM comment AS c
+        FULL JOIN question ON c.question_id = question.id
+        FULL JOIN answer ON c.answer_id = answer.id
+        FULL JOIN question AS q ON answer.question_id = q.id
+        WHERE c.user_id = %(user_id)s
+        """, {'user_id': user_id})
     comments_by_user = cursor.fetchall()
     return comments_by_user
 
@@ -594,7 +598,7 @@ def get_data_for_tags_page(cursor):
 @connection2.connection_handler
 def get_user_data(cursor, user_id):
     user_id = int(user_id)
-    cursor.execute("""SELECT registration_time, reputation FROM users WHERE user_id = %(user_id)s""",
+    cursor.execute("""SELECT user_id, username, registration_time, reputation FROM users WHERE user_id = %(user_id)s""",
                    {'user_id': user_id})
     result = cursor.fetchall()[0]
     return result
@@ -654,11 +658,19 @@ def gain_reputation(cursor, table, ID, accepted=0):
 
 @connection2.connection_handler
 def get_data_for_users_page(cursor):
-    cursor.execute("""SELECT u.*, COUNT(q.title) AS question_count, COUNT(a.message) AS answer_count,
-        COUNT(q.message) AS comment_count
-        FROM users AS u
-        LEFT JOIN question AS q ON u.user_id = q.user_id
-        LEFT JOIN answer AS a ON u.user_id = a.user_id
-        LEFT JOIN comment AS c ON u.user_id = c.user_id
-        GROUP BY u.user_id""")
-    return cursor.fetchall()
+    cursor.execute("""SELECT u.*, COUNT(q.id) AS question_count FROM users AS u
+        LEFT JOIN question q ON u.user_id = q.user_id GROUP BY u.user_id""")
+    data = cursor.fetchall()
+    cursor.execute("""SELECT u.user_id, COUNT(a.id) AS answer_count FROM users AS u
+        LEFT JOIN answer a ON u.user_id = a.user_id GROUP BY u.user_id""")
+    answer_count = cursor.fetchall()
+    cursor.execute("""SELECT u.user_id, COUNT(c.id) AS comment_count FROM users AS u
+        LEFT JOIN comment c ON u.user_id = c.user_id GROUP BY u.user_id""")
+    comment_count = cursor.fetchall()
+    for d in data:
+        for a in answer_count:
+            for c in comment_count:
+                if d['user_id'] == a['user_id'] == c['user_id']:
+                    d['answer_count'] = a['answer_count']
+                    d['comment_count'] = c['comment_count']
+    return data
