@@ -70,6 +70,11 @@
   box-shadow: 2px 2px 2px #363535;
 }
 
+.question .button:hover {
+  background-color: #b1a296;
+  color: rgb(255, 255, 255);
+}
+
 .meme {
   grid-area: photo;
   align-self: center;
@@ -96,6 +101,7 @@
   align-self: end;
   padding: 1px;
 }
+
 
 .tags {
   grid-area: tag;
@@ -256,7 +262,10 @@
   background-color: #71ab8a;
   box-shadow: 2px 2px 2px #363535;
 }
-
+.answer .button:hover {
+  background-color: #b1a296;
+  color: rgb(255, 255, 255);
+}
 .icon{
   width:28px;
 }

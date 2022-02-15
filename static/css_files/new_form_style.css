@@ -21,10 +21,10 @@ fontokhoz */
 
 .form-style-8 {
   font-family: "Roboto", sans-serif;
-  width: 1000px;
+
   padding: 30px;
   background: #fafafa;
-  margin: 50px auto;
+  margin: 100px;
   -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   border-radius: 3px;
@@ -104,7 +104,6 @@ fontokhoz */
 .tallozas:hover {
   background-color: #4e5066;
   color: rgb(255, 255, 255);
-  border: 3px solid #000000;
   box-shadow: 15px 15px 15px #363535;
 }
 
