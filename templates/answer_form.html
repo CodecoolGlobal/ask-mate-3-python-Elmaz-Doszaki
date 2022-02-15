@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css_files/basic.css">
-<link rel="stylesheet" href="/static/css_files/new_form_style.css">
+    <link rel="stylesheet" href="/static/css_files/basic.css">
+    <link rel="stylesheet" href="/static/css_files/new_form_style.css">
 {% endblock %}
 {% block headline %}
           <div class = "headline">Answer</div>
 {% endblock %}
 {% block content%}
-        </div>
+
         <div class = "back_button">
           <form action="/questions/{{ question_id }}">
                 <button id="home" type="submit" class="button" >  BACK </button>
