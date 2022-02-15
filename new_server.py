@@ -265,10 +265,22 @@ def delete_tag_from_question(question_id, tag_id):
     return redirect(url_for('display_question', question_id=question_id))
 
 
+
+@app.route('/user/<user_id>')
+def user_page(user_id):
+    user_questions = data_manager2.list_questions_by_user_id(user_id)
+    user_answers = data_manager2.list_answers_by_user_id(user_id)
+    user_comments = data_manager2.list_comments_by_user_id(user_id)
+    return render_template('user_page.html', user_questions=user_questions, user_answers=user_answers,
+                           user_comments=user_comments)
+
+
+
 @app.route('/tags')
 def tag_page():
     tags_and_count = data_manager2.get_data_for_tags_page()
     return render_template('tag_page.html', tags_counts=tags_and_count)
+
 
 
 if __name__ == "__main__":
