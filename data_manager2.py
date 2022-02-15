@@ -621,7 +621,6 @@ def lose_reputation(cursor, table, ID):
                        {'input_id': ID})
         userID = cursor.fetchall()[0]['user_id']
 
-
     cursor.execute("""
                         UPDATE users
                         SET reputation = reputation - 2
@@ -652,7 +651,8 @@ def gain_reputation(cursor, table, ID, accepted=0):
                    {'userID': userID,
                     'gain': gain})
 
-    
+
+@connection2.connection_handler
 def get_data_for_users_page(cursor):
     cursor.execute("""SELECT u.*, COUNT(q.title) AS question_count, COUNT(a.message) AS answer_count,
         COUNT(q.message) AS comment_count
@@ -662,4 +662,3 @@ def get_data_for_users_page(cursor):
         LEFT JOIN comment AS c ON u.user_id = c.user_id
         GROUP BY u.user_id""")
     return cursor.fetchall()
-
