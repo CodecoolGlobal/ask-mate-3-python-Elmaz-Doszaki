@@ -50,7 +50,7 @@
         <div class="account"></div>
         <div class="empty"></div>
         <a href="{{ url_for('display_questions_list') }}" class="nav1">Questions</a>
-        <a href="{{ url_for('hello') }}" class="nav2">Premium</a>
+        <a href="{{ url_for('tag_page') }}" class="nav2">Tags</a>
         <a href="{{ url_for('hello') }}" class="nav3">About Us</a>
         <a href="{{ url_for('hello') }}" class="nav4">Contact</a>
         <a href="{{ url_for('user_page',user_id=user_id) }}" class="nav1">User information</a>
@@ -82,9 +82,12 @@
         </ul>
     </footer>
     </body>
-</div>
-<div class="theme-switcher" id="theme-switcher" title="Dark Mode On/Off">
-    <i id="dark" class="fa fa-moon-o"></i>
-    <i id="light" class="fa fa-sun-o"></i>
-</div>
+
+  </div>
+    <div class="theme-switcher" id="theme-switcher" title="Dark Mode On/Off">
+        <i id="dark" class="fa fa-moon-o"></i>
+        <i id="light" class="fa fa-sun-o"></i>
+    </div>
+    <a class = "log_out" href="/logout"><button>LOGOUT</button></a>
+
 </html>
