@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Username : {{ session.get('username') }}</h2>
+    <h2>Username : {{ user_data.username }}</h2>
     <ul>
-        <li>User ID: {{ session.get('user_id') }}</li>
+        <li>User ID: {{ user_data.user_id }}</li>
         <li>Username: <a
-                href="{{ url_for('user_page', user_id=session.get('user_id')) }}">{{ session.get('username') }}</a></li>
+                href="{{ url_for('user_page', user_id=session.get('user_id')) }}">{{ user_data.username }}</a></li>
         <li>Registration date: {{ user_data.registration_time }}</li>
         <li>Number of asked questions: {{ user_questions|length }}</li>
         <li>Number of answers: {{ user_answers|length }}</li>
@@ -37,7 +37,7 @@
         <h3>Answers given:</h3>
         {% for answer in user_answers %}
             <h4>Question title: </h4>
-            <h4><a href={{ url_for('display_question', question_id=answer.id) }}> {{ answer.title }} </a></h4>
+            <h4><a href={{ url_for('display_question', question_id=answer.question_id) }}> {{ answer.title }} </a></h4>
             <h5>Answer given: {{ answer.message }}</h5>
             <hr>
         {% endfor %}
@@ -46,12 +46,14 @@
 
     <hr>
     {% if  user_comments== [] %}
-        <h3>Answers given: None</h3>
+        <h3>Comments given: None</h3>
     {% else %}
-        <h3>Answers given:</h3>
+        <h3>Comments given:</h3>
         {% for comment in user_comments %}
             <h4>Question title:</h4>
-            <h4><a href={{ url_for('display_question', question_id=comment.id) }}>{{ comment.title }}</a></h4>
+            <h4>
+                <a href={{ url_for('display_question', question_id=comment.question_id if comment.question_id else comment.q_id) }}>{{ comment.title if comment.title else comment.q_title }}</a>
+            </h4>
             <h5>Comment given: {{ comment.message }}</h5>
             <hr>
         {% endfor %}
