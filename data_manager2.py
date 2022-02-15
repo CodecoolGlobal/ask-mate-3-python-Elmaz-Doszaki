@@ -629,11 +629,6 @@ def lose_reputation(cursor, table, ID):
                        WHERE id = %(input_id)s""",
                        {'input_id': ID})
         userID = cursor.fetchall()[0]['user_id']
-    elif table == "comment":
-        cursor.execute("""SELECT user_id FROM comment
-                       WHERE id = %(input_id)s""",
-                       {'input_id': ID})
-        userID = cursor.fetchall()[0]['user_id']
 
 
     cursor.execute("""
@@ -643,3 +638,25 @@ def lose_reputation(cursor, table, ID):
                         """,
                    {'userID': userID})
 
+
+@connection2.connection_handler
+def gain_reputation(cursor, table, ID, accepted=0):
+    if table == "answer":
+        cursor.execute("""SELECT user_id FROM answer
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+        gain = 15 if accepted else 10
+    elif table == "question":
+        cursor.execute("""SELECT user_id FROM question
+                       WHERE id = %(input_id)s""",
+                       {'input_id': ID})
+        userID = cursor.fetchall()[0]['user_id']
+        gain = 5
+    cursor.execute("""
+                        UPDATE users
+                        SET reputation = reputation + %(gain)s
+                        WHERE user_id = %(userID)s;
+                        """,
+                   {'userID': userID,
+                    'gain': gain})
