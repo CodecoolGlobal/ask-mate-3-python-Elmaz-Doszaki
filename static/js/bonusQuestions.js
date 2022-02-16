@@ -8,18 +8,56 @@ function getSortedItems(items, sortField, sortDirection) {
     // if you have not changed the original html uncomment the code below to have an idea of the
     // effect this function has on the table
     //
-    if (sortDirection === "asc") {
-        const firstItem = items.shift()
-        if (firstItem) {
-            items.push(firstItem)
+    // if (sortDirection === "asc") {
+    //     const firstItem = items.shift()
+    //     if (firstItem) {
+    //         items.push(firstItem)
+    //     }
+    // } else {
+    //     const lastItem = items.pop()
+    //     if (lastItem) {
+    //         items.push(lastItem)
+    //     }
+    // }
+    //
+    // return items
+    if (sortField === 'Description' || sortField === 'Title') {
+        if (sortDirection === "asc") {
+            items.sort((a, b) => {
+                let ta = a[sortField],
+                    tb = b[sortField];
+                if (ta < tb) {
+                    return -1;
+                }
+                if (ta > tb) {
+                    return 1;
+                }
+                return 0;
+            });
+        } else {
+            items.sort((a, b) => {
+                let ta = a[sortField],
+                    tb = b[sortField];
+                if (ta < tb) {
+                    return 1;
+                }
+                if (ta > tb) {
+                    return -1;
+                }
+                return 0;
+            });
         }
     } else {
-        const lastItem = items.pop()
-        if (lastItem) {
-            items.push(lastItem)
+        if (sortDirection === "asc") {
+            items.sort((a, b) => {
+                return a[sortField] - b[sortField];
+            });
+        } else {
+            items.sort((a, b) => {
+                return b[sortField] - a[sortField];
+            });
         }
     }
-
     return items
 }
 
