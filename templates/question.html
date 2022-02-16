@@ -130,6 +130,13 @@
                         <button id="new_comment" type="submit" class="button" name="new_comment" value="{{ current_question[0]['id'] }}">New comment</button>
                     </form>
                 </div>
+                    <div class="a-accepted">
+                {% if session.user_id == current_question[0]['user_id'] %}
+                        <a href="{{ url_for('answer_status', answer_id=row['id'], question_id=question_id, status=row.accepted, user_id=row.user_id) }}">{{ 'Unaccept' if row.accepted else 'Accept' }}</a>
+                {% else %}
+                    {{ 'Accepted' if row.accepted else '' }}
+                {% endif %}
+                    </div>
             </div>
             <div class="a-comments">
                 {% for comment in answer_comments %}
