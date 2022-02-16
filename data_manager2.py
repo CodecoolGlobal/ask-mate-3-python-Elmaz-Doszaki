@@ -34,7 +34,7 @@ def get_answers_for_question(cursor, question_id):
     cursor.execute("""
                     SELECT * FROM answer
                     WHERE question_id = %(question_id)s
-                    ORDER BY vote_number DESC;
+                    ORDER BY vote_number DESC, submission_time;
                     """,
                    {'question_id': question_id})
     answers = cursor.fetchall()
@@ -613,7 +613,7 @@ def get_data_for_user_page(user_id):
 
 
 @connection2.connection_handler
-def lose_reputation(cursor, table, ID):
+def lose_reputation(cursor, table, ID, accepted=0):
     if table == "answer":
         cursor.execute("""SELECT user_id FROM answer
                        WHERE id = %(input_id)s""",
@@ -624,13 +624,15 @@ def lose_reputation(cursor, table, ID):
                        WHERE id = %(input_id)s""",
                        {'input_id': ID})
         userID = cursor.fetchall()[0]['user_id']
-
+    else:
+        userID = ID
+    loss = 15 if accepted else 2
     cursor.execute("""
                         UPDATE users
-                        SET reputation = reputation - 2
+                        SET reputation = reputation - %(loss)s
                         WHERE user_id = %(userID)s;
                         """,
-                   {'userID': userID})
+                   {'userID': userID, 'loss': loss})
 
 
 @connection2.connection_handler
@@ -640,13 +642,16 @@ def gain_reputation(cursor, table, ID, accepted=0):
                        WHERE id = %(input_id)s""",
                        {'input_id': ID})
         userID = cursor.fetchall()[0]['user_id']
-        gain = 15 if accepted else 10
+        gain = 10
     elif table == "question":
         cursor.execute("""SELECT user_id FROM question
                        WHERE id = %(input_id)s""",
                        {'input_id': ID})
         userID = cursor.fetchall()[0]['user_id']
         gain = 5
+    else:
+        userID = ID
+        gain = 15
     cursor.execute("""
                         UPDATE users
                         SET reputation = reputation + %(gain)s
@@ -674,3 +679,13 @@ def get_data_for_users_page(cursor):
                     d['answer_count'] = a['answer_count']
                     d['comment_count'] = c['comment_count']
     return data
+
+
+@connection2.connection_handler
+def change_answer_status(cursor, answer_id, status):
+    if status == 'True':
+        status = bool(False)
+    else:
+        status = bool(True)
+    query = """UPDATE answer SET accepted = %(status)s WHERE id = %(answer_id)s"""
+    cursor.execute(query, {'status': status, 'answer_id': answer_id})

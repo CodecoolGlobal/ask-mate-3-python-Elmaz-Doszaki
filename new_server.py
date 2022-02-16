@@ -292,5 +292,15 @@ def tag_page():
     return render_template('tag_page.html', tags_counts=tags_and_count)
 
 
+@app.route('/answer-status/<answer_id>/<question_id>/<status>/<user_id>')
+def answer_status(answer_id, question_id, status, user_id):
+    if status == 'True':
+        data_manager2.lose_reputation(False, user_id, True)
+    else:
+        data_manager2.gain_reputation(False, user_id, True)
+    data_manager2.change_answer_status(answer_id, status)
+    return redirect(url_for('display_question', question_id=question_id))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
