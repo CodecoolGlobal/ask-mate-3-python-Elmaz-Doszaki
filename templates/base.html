@@ -37,7 +37,7 @@
 
     </head>
     <body>
-
+        {% block head %}
         <div class="head">
             <div class="logo"><a class="link" href='/'><img src="/static/img/logo.png"/></a></div>
             <div class="search">
@@ -62,20 +62,21 @@
 
             </div>
             <div class="empty"></div>
-            <a href="{{ url_for('tag_page') }}" class="nav3">Tags</a>
-            <a href="{{ url_for('display_questions_list') }}" class="nav2">Questions</a>
-            <a href="{{ url_for('hello') }}" class="nav4">Home</a>
-            <a href="{{ url_for('users') }}" class="nav1">Users</a>
+            <a href="{{ url_for('tag_page') }}" class="nav3"><i class="fa fa-tags"></i>Tags</a>
+            <a href="{{ url_for('display_questions_list') }}" class="nav2"><i class="fa fa-smile-o"></i>Memes</a>
+            <a href="{{ url_for('hello') }}" class="nav4"><i class="fa fa-home"></i>Home</a>
+            <a href="{{ url_for('users') }}" class="nav1"><i class="fa fa-users"></i>Users</a>
 
             {% block headline %}
                 <div class="headline">Ask meme</div>
             {% endblock %}
         </div>
+        {% endblock %}
         <br/>
         <br/>
         {% block content %}
         {% endblock %}
-
+        {% block footer %}
         <footer>
             <ul>
                 <li>
@@ -92,6 +93,7 @@
                 </li>
             </ul>
         </footer>
+        {% endblock %}
         <script>
             let click = document.querySelector('.click');
             let list = document.querySelector('.list');
@@ -100,13 +102,13 @@
             });
         </script>
     </body>
-
-
   </div>
+  {% block theme %}
+
     <div class="theme-switcher" id="theme-switcher" title="Dark Mode On/Off">
         <i id="dark" class="fa fa-moon-o"></i>
         <i id="light" class="fa fa-sun-o"></i>
     </div>
-
+  {% endblock %}
 
 </html>

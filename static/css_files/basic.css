@@ -40,6 +40,7 @@ body {
 
 .logo .link:hover{
   background-color: white;
+  border: white;
 }
 
 .logo img{
@@ -283,4 +284,8 @@ footer ul li:nth-child(3) a:hover {
 }
 footer ul li:nth-child(4) a:hover {
   background-color: #0077b5;
+}
+
+.fa {
+  padding-right: 7px;
 }
