@@ -1,6 +1,7 @@
 from flask import Flask, session, render_template, flash, request, redirect, url_for
 from data_manager import *
 import data_manager2
+from bonus_questions import SAMPLE_QUESTIONS
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images/'
@@ -300,6 +301,11 @@ def answer_status(answer_id, question_id, status, user_id):
         data_manager2.gain_reputation(False, user_id, True)
     data_manager2.change_answer_status(answer_id, status)
     return redirect(url_for('display_question', question_id=question_id))
+
+
+@app.route("/bonus-questions")
+def bonus_questions():
+    return render_template('bonus_questions.html', questions=SAMPLE_QUESTIONS)
 
 
 if __name__ == "__main__":
