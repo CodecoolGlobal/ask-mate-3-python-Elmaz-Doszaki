@@ -27,6 +27,8 @@ function getSortedItems(items, sortField, sortDirection) {
 function getFilteredItems(items, filterValue) {
     console.log(items)
     console.log(filterValue)
+    const newFilterValue = filterValue.slice(1)
+    console.log(newFilterValue)
 
     // === SAMPLE CODE ===
     // if you have not changed the original html uncomment the code below to have an idea of the
@@ -38,13 +40,17 @@ function getFilteredItems(items, filterValue) {
     const newItems = []
     for (let i=0; i<items.length; i++) {
         console.log(items[i])
-        if (items[i]['Title'].indexOf(filterValue) !== -1 || items[i]['Description'].indexOf(filterValue) !== -1) {
+
+        if (filterValue[0] === "!" && (items[i]['Title'].includes(newFilterValue) === false && items[i]['Description'].includes(newFilterValue) === false)){
             newItems.push(items[i])
             console.log(newItems)
         }
-
+        if (filterValue[0] !== "!" && (items[i]['Title'].indexOf(filterValue) !== -1 || items[i]['Description'].indexOf(filterValue) !== -1)) {
+            newItems.push(items[i])
+            console.log(newItems)
+        }
     }
-
+// ha ! és benne van, akkor ne mutassa, minden mást igen
     return newItems
 }
 
