@@ -96,7 +96,7 @@ main button {
   border-radius: 6px;
   animation: slow-pulser 2.8s infinite;
   transition: all 0.35s ease-in-out;
-
+  cursor: pointer;
 }
 .underbutton {
   display: block;
