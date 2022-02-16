@@ -32,11 +32,20 @@ function getFilteredItems(items, filterValue) {
     // if you have not changed the original html uncomment the code below to have an idea of the
     // effect this function has on the table
     //
-    for (let i=0; i<filterValue.length; i++) {
-        items.pop()
+    // for (let i=0; i<filterValue.length; i++) {
+    //     items.pop()
+    // }
+    const newItems = []
+    for (let i=0; i<items.length; i++) {
+        console.log(items[i])
+        if (items[i]['Title'].indexOf(filterValue) !== -1 || items[i]['Description'].indexOf(filterValue) !== -1) {
+            newItems.push(items[i])
+            console.log(newItems)
+        }
+
     }
 
-    return items
+    return newItems
 }
 
 function toggleTheme() {
