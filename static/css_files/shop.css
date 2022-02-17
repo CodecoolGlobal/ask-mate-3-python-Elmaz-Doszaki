@@ -1,0 +1,259 @@
+.kontener {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.kontener .doboz {
+  position: relative;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+  width: 90%; height: 25vh;
+  margin: 40px;
+  border-radius: 20px;
+  transform-style: preserve-3d;
+}
+.kontener .doboz::before {
+	content: "AskMeme Kft.";
+	position: absolute;
+	top: -15px; left: 20px;
+	font-size: 5em;
+	font-weight: 700;
+	color: #000;
+	font-style: italic;
+	opacity: 0;
+	transform: translate3d(0,0,-10px);
+}
+.kontener .doboz::after {
+	content: "HotSale";
+	position: absolute;
+	top: 60%; left: 20px;
+	font-size: 4em;
+	font-weight: 900;
+	color: #fff;
+	font-style: italic;
+	opacity: 0;
+}
+.kontener .doboz:hover::before,
+.kontener .doboz:hover::after {
+	opacity: 0.4;
+}
+.kontener .doboz:hover::after {
+  transition: 1s;
+  transform: translate3d(0,0,-35px);
+  color: #FFA500;
+	bottom: 25%;
+}
+.kontener .doboz .nev {
+	position: absolute;
+	top: 50px;
+	text-align: center;
+	color: #fff;
+	width: 100%;
+	transform: translate3d(0,0,75px);
+	transition: 1.5s;
+	opacity: 0;
+	z-index: 10;
+}
+.kontener .doboz:hover .nev {
+    top: 40px;
+	opacity: 1;
+}
+.kontener .doboz a {
+	position: absolute;
+	top: 150px;
+	left: 50%;
+	transform-style: preserve-3d;
+	transform: translate3d(-50%,0,75px);
+	background: #000;
+	padding: 10px 25px;
+	border-radius: 30px;
+	text-decoration: none;
+	transition: 1.5s;
+	opacity: 0;
+	z-index: 10;
+}
+.kontener .doboz:hover a {
+    top: 150px;
+	opacity: 1;
+}
+.kontener .doboz .kor {
+	position: absolute;
+
+	width: 150px; height: 150px;
+	border-radius: 50%;
+	transition: 1.5s;
+	background: #fff;
+	transform-style: preserve-3d;
+	z-index: 10;
+	opacity: 1;
+}
+.kontener .doboz:hover .kor {
+  transform: skewY(-20deg);
+  opacity: 0.7;
+  transition: 2s;
+}
+.kontener .doboz .termekkep {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 200px;
+	transition: 1.5s;
+	transform-style: preserve3d;
+	z-index: 11;
+	opacity: 1;
+}
+.kontener .doboz .termekkep img {
+
+	width: 180px;
+	transition: 1.5s;
+	transform-style: preserve3d;
+	z-index: 1;
+	opacity: 1;
+}
+.kontener .doboz .termekkep, .kontener .doboz .termekkep img {
+	transform: translate3d(0,0,60px);
+}
+
+.kontener .doboz .kor, .kontener .doboz a {
+  background: #f9e69b;
+}
+
+
+.set {
+	position: absolute;
+	width: inherit; height: inherit;
+	top: 0; left: 0;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 10;
+}
+.set div {
+  position: absolute;
+  z-index: 201;
+}
+.set div:nth-child(1), .set div:nth-child(1) img {
+
+	  animation-name: animate;
+      animation-duration: 6s;
+      animation-delay: 0.2s;
+      animation-iteration-count: infinite;
+	  width: 45%;
+	  top: -50%;
+}
+@keyframes animate {
+	 0%   { left:15%; top:-15%;}
+
+  100% { left:-2%; top:105%; transform: rotate3d( 50, 83, 15, 370deg);}
+}
+
+
+.set div:nth-child(2) {
+	  animation-name: animate2;
+      animation-duration: 8s;
+      animation-delay: 2.8s;
+      animation-iteration-count: infinite;
+	  top: -50%;
+}
+@keyframes animate2 {
+	 0%   { left: 18%; top:-18%;}
+
+  100% { left:32%; top:108%; transform: rotate(130deg);}
+}
+.set div:nth-child(3), .set div:nth-child(3) img {
+	  animation-name: animate3;
+      animation-duration: 11s;
+	  animation-delay: 0.2s;
+      animation-iteration-count: infinite;
+	  top: -50%;
+}
+@keyframes animate3 {
+	 0%   { left: 38%; top:-15%; width: 40%}
+
+  100% { left:69%; top:100%; transform: rotate(99deg); width: 25%}
+}
+.set div:nth-child(4) {
+	  animation-name: animate4;
+      animation-duration: 6.9s;
+	  animation-delay: 2.8s;
+      animation-iteration-count: infinite;
+	  top: -50%;
+}
+@keyframes animate4 {
+	 0%   { left: 91%; top:-10%;}
+
+  100% { left:45%; top:100%; transform: rotate3d( 100, 50, 35, -186deg);}
+}
+/*.set div:nth-child(5) img {
+	max-height: 95px;
+}*/
+.set div:nth-child(5) ,.set div:nth-child(5) img{
+	  animation-name: animate5;
+      animation-duration: 8.8s;
+	  animation-delay: 1.1s;
+      animation-iteration-count: infinite;
+	  filter: blur(1px);
+	  top: -50%;
+}
+@keyframes animate5 {
+	 0%   { left: 99%; top:-12%; width: 50px;}
+  50%  {left: 69%; top: 40%; width: 60px;}
+  100% { left:29%; top:100%; width: 85px; transform: rotate(-355deg);}
+}
+.set div:nth-child(6) img {
+	max-height: 85px; filter: blur(0.5px);
+}
+.set div:nth-child(6) {
+	  animation-name: animate6;
+      animation-duration: 10s;
+	  animation-delay: 0.7s;
+      animation-iteration-count: infinite;
+	  top: -50%;
+}
+@keyframes animate6 {
+	 0%   { left: 81%; top:-8%;}
+
+  100% { left:11%; top:100%; transform: rotate(375deg);}
+}
+.set div:nth-child(7) ,.set div:nth-child(7) img{
+	  animation-name: animate7;
+      animation-duration: 8.8s;
+      animation-iteration-count: infinite;
+	  animation-delay: 3.3s;
+	  filter: blur(1px);
+	  top: -50%;
+}
+@keyframes animate7 {
+	 0%   { left: 28%; top:-10%; width: 35px;}
+  100% { left:5%; top:100%; width: 40px; transform: rotate(318deg);}
+}
+.set div:nth-child(8) ,.set div:nth-child(8) img{
+	  animation-name: animate8;
+      animation-duration: 9.8s;
+      animation-iteration-count: infinite;
+	  animation-delay: 3.7s;
+	  filter: blur(1px);
+	  top: -50%;
+}
+@keyframes animate8 {
+	 0%   { left: 55%; top:-9%; width: 40px;}
+  100% { left:99%; top:100%; width: 40px; transform: rotate(420deg);}
+}
+.set div:nth-child(9) ,.set div:nth-child(9) img{
+	  animation-name: animate9;
+      animation-duration: 8.2s;
+      animation-iteration-count: infinite;
+	  animation-delay: 4.6s;
+	  top: -50%;
+}
+@keyframes animate9 {
+	 0%   { left: 120%; top:-12%; width: 68px;}
+  55%  {left: 81%; top: 44%; width: 75px; transform: rotate3d( 75, 11, 15, 110deg);}
+  100% { left:45%; top:100%; width: 46px; transform: rotate3d( 91, 2, 40, -71deg);}
+}
+
+
