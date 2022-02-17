@@ -26,14 +26,14 @@
   grid-area: user;
   place-self: center;
   font-style: italic;
-  color: #b1a296;
+  color: #8f847a;
   font-family: 'Luxurious Roman', cursive;
   font-size: 15px;
 }
 
 .user a{
   text-decoration: none;
-  color: #b1a296;
+  color: #8f847a;
 }
 .user a:hover{
   text-decoration: underline;
@@ -63,7 +63,7 @@
   grid-area: time;
   padding-left: 10px;
   font-style: italic;
-  color: #b1a296;
+  color: #8f847a;
   font-family: 'Luxurious Roman', cursive;
   align-self: center;
   font-size: 13px;
