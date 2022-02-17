@@ -30,8 +30,8 @@
                 {% else %}
                     <h3>Questions asked:</h3>
                     {% for question in user_questions %}
-                        <h4>Question title: <a href={{ url_for('display_question', question_id=question.id) }}> {{ question.title }}</a></h4>
-                        <h5>Question message: {{ question.message }}</h5>
+                        <h4> <a href={{ url_for('display_question', question_id=question.id) }}> {{ question.title }}</a></h4>
+                        <h5>{{ question.message }}</h5>
                         <hr>
                     {% endfor %}
                 {% endif %}
@@ -43,8 +43,8 @@
                 {% else %}
                     <h3>Answers given:</h3>
                     {% for answer in user_answers %}
-                        <h4>Question title: <a href={{ url_for('display_question', question_id=answer.question_id) }}> {{ answer.title }} </a> </h4>
-                        <h5>Answer given: {{ answer.message }}</h5>
+                        <h4> <a href={{ url_for('display_question', question_id=answer.question_id) }}> {{ answer.title }} </a> </h4>
+                        <h5>{{ answer.message }}</h5>
                         <hr>
                     {% endfor %}
                 {% endif %}
@@ -56,8 +56,8 @@
                 {% else %}
                     <h3>Comments given:</h3>
                     {% for comment in user_comments %}
-                        <h4>Question title: <a href={{ url_for('display_question', question_id=comment.question_id if comment.question_id else comment.q_id) }}>{{ comment.title if comment.title else comment.q_title }}</a></h4>
-                        <h5>Comment given: {{ comment.message }}</h5>
+                        <h4> <a href={{ url_for('display_question', question_id=comment.question_id if comment.question_id else comment.q_id) }}>{{ comment.title if comment.title else comment.q_title }}</a></h4>
+                        <h5> {{ comment.message }}</h5>
                         <hr>
                     {% endfor %}
                 {% endif %}

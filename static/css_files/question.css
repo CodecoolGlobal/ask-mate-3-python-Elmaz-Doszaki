@@ -37,10 +37,25 @@
   grid-template-areas:
     "photo  photo  photo    title  title  title  title   view   view     edit"
     "photo  photo  photo message message message message  message message message"
-    "tag-but  tag  tag    tag    tag       time   time   time     q-com      q-com";
+    "tag-but  tag  tag    tag    time       time   user   user     q-com      q-com";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
+.user {
+  grid-area: user;
+  place-self: center;
+  font-style: italic;
+  color: #b1a296;;
+  font-family: 'Luxurious Roman', cursive;
+  font-size: 15px;
+}
+.user a{
+  text-decoration: none;
+  color: #b1a296;
+}
+.user a:hover{
+  text-decoration: underline;
+}
 .view {
   grid-area: view;
   align-self: center;
@@ -54,6 +69,9 @@
   justify-self: start;
   align-self: center;
   font-style: italic;
+  color: #b1a296;;
+  font-family: 'Luxurious Roman', cursive;
+  font-size: 15px;
 }
 
 .title {
@@ -160,12 +178,30 @@
   font-style: italic;
   padding: 10px;
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
   grid-template-rows:minmax(30px,auto) minmax(30px,auto);
   grid-template-areas:
-    "q-c-message q-c-message q-c-message"
-    "q-c-time    q-c-edit    q-c-delete";
+    "none q-c-message q-c-edit"
+    "q-c-time     q-c-user    q-c-delete";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.q-c-user {
+  grid-area: q-c-user;
+  align-self: center;
+  justify-self: end;
+  font-style: italic;
+  color: #b1a296;;
+  font-family: 'Luxurious Roman', cursive;
+  font-size: 15px;
+}
+
+.q-c-user a{
+  text-decoration: none;
+  color: #b1a296;
+}
+.q-c-user a:hover{
+  text-decoration: underline;
 }
 
 .time {
@@ -178,13 +214,16 @@
 .q-c-message {
   grid-area: q-c-message;
   justify-self: center;
-  align-self: end;
+  align-self: center;
 }
 
 .q-c-time {
   grid-area: q-c-time;
   justify-self: start;
   align-self: center;
+    color: #b1a296;;
+  font-family: 'Luxurious Roman', cursive;
+  font-size: 15px;
 }
 
 .q-c-edit {
@@ -199,8 +238,9 @@
 
 .q-c-delete {
   grid-area: q-c-delete;
-  justify-self: center;
+  justify-self: end;
   align-self: center;
+  padding-right: 20px;
 }
 .q-c-delete .icon {
   width:  20px;
@@ -224,10 +264,28 @@
   grid-template-columns: repeat(10,1fr);
   grid-template-rows: minmax(25px,35px) minmax(70px,130px) 30px;
   grid-template-areas:
-    "  a-edit   a-edit   a-time a-time      a-time    a-time    a-accepted    a-photo  a-photo  a-photo  "
+    "  a-edit  a-time   a-time a-up    a-down   a-vote   a-accepted    a-photo  a-photo  a-photo  "
     "a-message a-message a-message a-message  a-message a-message a-message a-photo  a-photo  a-photo"
-    "a-delete  a-add-comment  a-add-comment   a-up    a-down   a-vote  a-vote  a-photo  a-photo  a-photo  ";
+    "a-delete  a-add-comment  a-add-comment    a-user      a-user    a-user nono  a-photo  a-photo  a-photo  ";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.a-user {
+  grid-area: a-user;
+  align-self: center;
+  justify-self: end;
+  font-style: italic;
+  color: #b1a296;;
+  font-family: 'Luxurious Roman', cursive;
+  font-size: 15px;
+}
+
+.a-user a{
+  text-decoration: none;
+  color: #b1a296;
+}
+.a-user a:hover{
+  text-decoration: underline;
 }
 
 .a-time {
@@ -235,6 +293,9 @@
   justify-self: start;
   align-self: center;
   font-style: italic;
+    color: #b1a296;;
+  font-family: 'Luxurious Roman', cursive;
+  font-size: 15px;
 }
 
 .a-vote {
@@ -330,18 +391,40 @@
   background: rgba(255, 255, 255, 0.79);
   padding: 10px;
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows:minmax(30px,auto) minmax(30px,auto);
   grid-template-areas:
-    "a-c-message a-c-message a-c-message"
-    "a-c-time    a-c-edit    a-c-delete";
+  "none a-c-message a-c-edit"
+    "a-c-time     a-c-user    a-c-delete";;
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+}
+
+.a-c-user {
+  grid-area: a-c-user;
+  align-self: center;
+  justify-self: end;
+  font-style: italic;
+  color: #b1a296;;
+  font-family: 'Luxurious Roman', cursive;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.a-c-user a{
+  text-decoration: none;
+  color: #b1a296;
+}
+.a-c-user a:hover{
+  text-decoration: underline;
 }
 
 .a-c-time {
   grid-area: a-c-time;
   justify-self: start;
   align-self: center;
+  color: #b1a296;;
+  font-family: 'Luxurious Roman', cursive;
+  font-size: 15px;
 }
 
 .a-c-message {
@@ -356,8 +439,9 @@
 
 .a-c-delete {
   grid-area: a-c-delete;
-  justify-self: center;
+  justify-self: end;
   align-self: center;
+  padding-right: 10px;
 }
 
 .a-c-delete .icon {

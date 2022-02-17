@@ -1,19 +1,25 @@
-<html>
-    <head>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/bonusQuestions.js') }}" defer></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/doNotModifyThisFile.js') }}" defer></script>
-    </head>
-    <body>
-        <h1 id="h1">AskMate</h1>
-        <h2 id="h2">All Questions:</h2>
-        <button id="theme-button">Change Theme to Dark</button>
-        <button id="increase-font-button">Increase page font</button>
-        <button id="decrease-font-button">Decrease page font</button>
+{% extends "base.html" %}
+
+{% block css %}
+      <link rel="stylesheet" href="/static/css_files/basic.css" />
+      <link rel="stylesheet" href="/static/css_files/bonus.css" />
+      <script type="text/javascript" src="{{ url_for('static', filename='js/bonusQuestions.js') }}" defer></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='js/doNotModifyThisFile.js') }}" defer></script>
+{% endblock %}
+{% block headline %}
+        <div class = "headline">Bonus</div>
+{% endblock %}
+{% block content%}
+        <button class = "but" id="theme-button">Change Theme to Dark</button>
+        <button class = "but" id="increase-font-button">Increase page font</button>
+        <button class = "but" id="decrease-font-button">Decrease page font</button>
+        <div class="inp">
         <input
                 data-table-body="doNotModifyThisId_QuestionsTableBody"
                 style="width: 500px" id="doNotModifyThisId_QuestionsFilter"
                 type="text"
                 placeholder="filter questions by keywords">
+        </div>
         <table>
             <thead id="doNotModifyThisId_QuestionsTableHeader">
                 <tr>
@@ -34,5 +40,5 @@
                 {% endfor %}
             </tbody>
         </table>
-    </body>
-</html>
+    <br><br><br><br><br><br><br><br>
+{% endblock %}

@@ -26,11 +26,18 @@
   grid-area: user;
   place-self: center;
   font-style: italic;
-  color: #b1a296;;
+  color: #b1a296;
   font-family: 'Luxurious Roman', cursive;
   font-size: 15px;
 }
 
+.user a{
+  text-decoration: none;
+  color: #b1a296;
+}
+.user a:hover{
+  text-decoration: underline;
+}
 .kuka {
   grid-area: kuka;
   max-width: 25px;
