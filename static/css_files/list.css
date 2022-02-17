@@ -160,10 +160,20 @@
   font-family: "Luxurious Roman", cursive;
   cursor: pointer;
   border-radius: 3px;
-  padding: 3px 10px;
+  padding: 6px 10px;
 }
 
 .sort-button:hover {
   background-color: #b1a296;
   color: rgb(255, 255, 255);
+}
+
+select {
+  padding: 6px;
+  font-family: "Luxurious Roman", cursive;
+  border-radius: 5px;
+}
+
+option{
+  font-family: "Luxurious Roman", cursive;
 }
