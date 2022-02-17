@@ -63,7 +63,7 @@
 }
 .kontener .doboz a {
 	position: absolute;
-	top: 130px;
+	top: 170px;
 	left: 50%;
 	transform-style: preserve-3d;
 	transform: translate3d(-50%,0,75px);
@@ -76,7 +76,7 @@
 	z-index: 10;
 }
 .kontener .doboz:hover a {
-    top: 130px;
+    top: 170px;
 	opacity: 1;
 }
 .kontener .doboz .kor {

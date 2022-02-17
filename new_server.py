@@ -311,7 +311,7 @@ def bonus_questions():
 
 @app.route("/shop")
 def go_shop():
-    return render_template('shop.html', list_of_best_memes=data_manager2.list_of_best_memes())
+    return render_template('shop.html', list_of_best_memes=data_manager.list_of_best_memes())
 
 
 if __name__ == "__main__":
