@@ -1,0 +1,127 @@
+.kontener {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.kontener .doboz {
+  position: relative;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+  width: 90%; height: 25vh;
+  margin: 40px;
+  border-radius: 20px;
+  transform-style: preserve-3d;
+}
+.kontener .doboz::before {
+	content: "AskMeme Kft.";
+	position: absolute;
+	top: -15px; left: 20px;
+	font-size: 5em;
+	font-weight: 700;
+	color: #000;
+	font-style: italic;
+	opacity: 0;
+	transform: translate3d(0,0,-10px);
+}
+.kontener .doboz::after {
+	content: "HotSale";
+	position: absolute;
+	top: 60%; left: 20px;
+	font-size: 4em;
+	font-weight: 900;
+	color: #fff;
+	font-style: italic;
+	opacity: 0;
+}
+.kontener .doboz:hover::before,
+.kontener .doboz:hover::after {
+	opacity: 0.4;
+}
+.kontener .doboz:hover::after {
+  transition: 1s;
+  transform: translate3d(0,0,-35px);
+  color: #FFA500;
+	bottom: 25%;
+}
+.kontener .doboz .nev {
+	position: absolute;
+	top: 50px;
+	text-align: center;
+	color: #fff;
+	width: 100%;
+	transform: translate3d(0,0,75px);
+	transition: 1.5s;
+	opacity: 0;
+	z-index: 10;
+}
+.kontener .doboz:hover .nev {
+    top: 40px;
+	opacity: 1;
+}
+.kontener .doboz a {
+	position: absolute;
+	top: 130px;
+	left: 50%;
+	transform-style: preserve-3d;
+	transform: translate3d(-50%,0,75px);
+	background: #000;
+	padding: 10px 25px;
+	border-radius: 30px;
+	text-decoration: none;
+	transition: 1.5s;
+	opacity: 0;
+	z-index: 10;
+}
+.kontener .doboz:hover a {
+    top: 130px;
+	opacity: 1;
+}
+.kontener .doboz .kor {
+	position: absolute;
+
+	width: 150px; height: 150px;
+	border-radius: 50%;
+	transition: 1.5s;
+	background: #fff;
+	transform-style: preserve-3d;
+	z-index: 10;
+	opacity: 1;
+}
+.kontener .doboz:hover .kor {
+  transform: skewY(-20deg);
+  opacity: 0.7;
+  transition: 2s;
+}
+.kontener .doboz .termekkep {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 200px;
+	transition: 1.5s;
+	transform-style: preserve3d;
+	z-index: 11;
+	opacity: 1;
+}
+.kontener .doboz .termekkep img {
+
+	width: 180px;
+	transition: 1.5s;
+	transform-style: preserve3d;
+	z-index: 1;
+	opacity: 1;
+}
+.kontener .doboz .termekkep, .kontener .doboz .termekkep img {
+	transform: translate3d(0,0,60px);
+}
+
+.kontener .doboz .kor, .kontener .doboz a {
+  background: #f9e69b;
+}
+
+
+

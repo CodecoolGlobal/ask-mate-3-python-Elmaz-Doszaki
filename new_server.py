@@ -309,5 +309,10 @@ def bonus_questions():
     return render_template('bonus_questions.html', questions=SAMPLE_QUESTIONS)
 
 
+@app.route("/shop")
+def go_shop():
+    return render_template('shop.html', list_of_best_memes=data_manager2.list_of_best_memes())
+
+
 if __name__ == "__main__":
     app.run(debug=True)
