@@ -64,17 +64,20 @@ def display_questions_list():
     order_by = args.get('order_by', default='submission_time', type=str)
     order_direction = args.get('order_direction', default='desc')
     questions = data_manager2.list_questions(order_by, order_direction)
+    all_users = data_manager2.get_data_for_users_page()
     return render_template('questions_list.html',
                            table_headers=TABLE_HEADERS,
                            list_of_questions=questions,
                            order_by=order_by,
-                           order_direction=order_direction)
+                           order_direction=order_direction,
+                           all_users=all_users)
 
 
 @app.route('/questions/<question_id>')
 def display_question(question_id):
     data_manager2.increase_view_number(question_id)
     current_answers = data_manager2.get_answers_for_question(question_id)
+    all_users = data_manager2.get_data_for_users_page()
     return render_template('question.html',
                            current_question=data_manager2.display_question(question_id),
                            answer_header=ANSWER_HEADERS,
@@ -82,7 +85,8 @@ def display_question(question_id):
                            question_id=question_id,
                            question_comments=data_manager2.get_comment(question_id),
                            answer_comments=data_manager2.get_comments_from_answers(current_answers),
-                           tags=data_manager2.get_tags(question_id))
+                           tags=data_manager2.get_tags(question_id),
+                           all_users=all_users)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
