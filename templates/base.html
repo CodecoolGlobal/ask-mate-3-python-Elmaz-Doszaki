@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
     {% block title %}
         <title>Ask Mate</title>
     {% endblock %}
+
     <link rel="icon" href="static/img/logo.png" type="image/x-icon"/>
     <meta charset="UTF-8"/>
+
     {% block css %}
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="/static/css_files/basic.css"/>
         <link rel="stylesheet" href="/static/css_files/list.css">
         <link rel="stylesheet" href="/static/css_files/new_form_style.css">
         <link href="/static/css_files/index_style.css" rel="stylesheet"/>
-
     {% endblock %}
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap"
-            rel="stylesheet"
-    />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap"
-            rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Pacifico&family=The+Nautigal&display=swap"
+          rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
     <link href="/static/css_files/dark-mode.css" rel="stylesheet"/>
     <script src="/static/css_files/theme-switcher.js" defer></script>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="container">
+
     {% block head %}
         <div class="head">
             <div class="logo"><a class="link" href='/'><img src="/static/img/logo.png"/></a></div>
@@ -57,31 +50,31 @@
                         <button class="links">Log out</button>
                     </form>
                 </div>
-
-
             </div>
             <div class="bonus">
                 <form action="{{ url_for('bonus_questions') }}">
                     <button class="bonus-but"><i class="fa fa-question-circle-o"></i></button>
                 </form>
             </div>
-
             <div class="empty"></div>
             <a href="{{ url_for('tag_page') }}" class="nav3"><i class="fa fa-tags"></i>Tags</a>
             <a href="{{ url_for('display_questions_list') }}" class="nav2"><i class="fa fa-smile-o"></i>Memes</a>
             <a href="{{ url_for('hello') }}" class="nav4"><i class="fa fa-home"></i>Home</a>
             <a href="{{ url_for('users') }}" class="nav1"><i class="fa fa-users"></i>Users</a>
 
-
             {% block headline %}
                 <div class="headline">Ask meme</div>
             {% endblock %}
+
         </div>
     {% endblock %}
+
     <br/>
     <br/>
+
     {% block content %}
     {% endblock %}
+
     {% block footer %}
         <footer>
             <ul>
@@ -100,6 +93,7 @@
             </ul>
         </footer>
     {% endblock %}
+
     <script>
         let click = document.querySelector('.click');
         let list = document.querySelector('.list');
@@ -108,14 +102,13 @@
         });
     </script>
 </div>
-{% block theme %}
 
+{% block theme %}
     <div class="theme-switcher" id="theme-switcher" title="Dark Mode On/Off">
         <i id="dark" class="fa fa-moon-o"></i>
         <i id="light" class="fa fa-sun-o"></i>
     </div>
 {% endblock %}
+
 </body>
-
-
 </html>

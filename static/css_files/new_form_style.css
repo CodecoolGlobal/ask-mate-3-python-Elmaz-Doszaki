@@ -15,98 +15,99 @@ meg fehér meg fekete
 <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
 fontokhoz */
 .text {
-  font-family: "Luxurious Roman", cursive;
-  font-size: 20px;
+    font-family: "Luxurious Roman", cursive;
+    font-size: 20px;
 }
 
 .form-style-8 {
-  font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif;
 
-  padding: 30px;
-  background: #fafafa;
-  margin: 100px;
-  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-  -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-  border-radius: 3px;
-  border: 4px dotted #5d5c61;
-  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    background: #fafafa;
+    margin: 100px;
+    -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    border-radius: 3px;
+    border: 4px dotted #5d5c61;
+    box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
+
 .form-style-8 h2 {
-  background: #ffffff;
-  font-family: "The Nautigal", cursive;
-  color: #000000;
-  font-size: 40px;
-  font-weight: 100;
-  padding: 20px;
-  margin: -30px -30px 30px -30px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  box-shadow: 0px 15px 15px rgba(255, 255, 255, 0);
+    background: #ffffff;
+    font-family: "The Nautigal", cursive;
+    color: #000000;
+    font-size: 40px;
+    font-weight: 100;
+    padding: 20px;
+    margin: -30px -30px 30px -30px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: 0px 15px 15px rgba(255, 255, 255, 0);
 }
 
 .form-style-8 textarea {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  outline: none;
-  display: block;
-  width: 100%;
-  margin-top: 7px;
-  border: none;
-  padding-top: 7px;
-  border-bottom: 1px solid #ddd;
-  background: transparent;
-  margin-bottom: 10px;
-  font: 16px "Roboto", sans-serif;
-  font-family: "Luxurious Roman", cursive;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    margin-top: 7px;
+    border: none;
+    padding-top: 7px;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px "Roboto", sans-serif;
+    font-family: "Luxurious Roman", cursive;
 
 }
 
 .form-style-8 input[type="text"],
 .form-style-8 input[type="number"],
 .form-style-8 select {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  outline: none;
-  display: block;
-  width: 100%;
-  padding: 7px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  background: transparent;
-  margin-bottom: 10px;
-  font: 16px "Roboto", sans-serif;
-  height: 45px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px "Roboto", sans-serif;
+    height: 45px;
 }
 
 .form-style-8 textarea {
-  resize: none;
-  overflow: hidden;
+    resize: none;
+    overflow: hidden;
 }
 
 .tallozas {
-  background: #000000;
-  color: #ffffff;
-  padding: 16px 10px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: "Luxurious Roman", cursive;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 3px;
-  box-shadow: 5px 5px 5px #363535;
-  margin-right: 40px;
+    background: #000000;
+    color: #ffffff;
+    padding: 16px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: "Luxurious Roman", cursive;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px #363535;
+    margin-right: 40px;
 }
 
 .tallozas:hover {
-  background-color: #4e5066;
-  color: rgb(255, 255, 255);
-  box-shadow: 15px 15px 15px #363535;
+    background-color: #4e5066;
+    color: rgb(255, 255, 255);
+    box-shadow: 15px 15px 15px #363535;
 }
 
 .back_button {
-  margin-left: 20px;
+    margin-left: 20px;
 }

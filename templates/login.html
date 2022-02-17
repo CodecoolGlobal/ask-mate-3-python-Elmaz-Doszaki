@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css_files/login.css">
+    <link rel="stylesheet" href="/static/css_files/login.css">
 {% endblock %}
 
 {% block head %}
@@ -10,7 +10,7 @@
 {% block content %}
     <div class="center">
         <h1>Login</h1>
-         <form action="/login" method="post">
+        <form action="/login" method="post">
             <div class="txt_field">
                 <input type=text name=username id=username>
                 <span></span>
@@ -22,17 +22,18 @@
                 <label for="password">Password </label>
             </div>
             <p><input type=submit value=Login>
-         </form>
-         <div class="pass">
-             Forget password?
-         </div>
-         <div class = "signup_link">
+        </form>
+        <div class="pass">
+            Forget password?
+        </div>
+        <div class="signup_link">
             Not a member? <a href="/registration">Signup</a>
-         </div>
+        </div>
     </div>
 {% endblock content %}
 
 {% block footer %}
 {% endblock %}
+
 {% block theme %}
 {% endblock %}

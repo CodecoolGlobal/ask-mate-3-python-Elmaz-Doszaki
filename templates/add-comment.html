@@ -5,8 +5,6 @@
 {% endblock %}
 
 {% block content %}
-
-
     <div class="back_button">
         <form action="/questions/{{ question_id }}">
             <button id="home" type="submit" class="button"> BACK</button>
@@ -23,9 +21,8 @@
         {% endif %}
         <p><h4> Type your comment: </h4><br>
         <textarea id="answer_message" name="message" rows="6" cols="60" minlength="10"
-                  placeholder="Type here..." required autofocus></textarea></p>
+                  placeholder="Type here..." required autofocus></textarea>
         <input type="submit" value="Submit" name="Submit" class="button">
         </form>
     </div>
-
 {% endblock %}

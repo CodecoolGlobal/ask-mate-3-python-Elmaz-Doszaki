@@ -1,81 +1,80 @@
 .users {
-  display: grid;
-  grid-template-columns: repeat(2,1fr) ;
-  grid-gap: 30px;
-  margin-left: 140px;
-  margin-right: 140px;
-  margin-bottom: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+    margin-left: 140px;
+    margin-right: 140px;
+    margin-bottom: 100%;
 }
 
 .user {
-  background: #ffffff;
-  border-left: 20px solid #f9e69b;
-  padding: 20px;
-  display: grid;
-  grid-gap: 5px;
-  font-size: large;
-  grid-template-columns: minmax(1fr,100px);
-  grid-template-rows: repeat(5,1fr);
-  grid-template-areas:
+    background: #ffffff;
+    border-left: 20px solid #f9e69b;
+    padding: 20px;
+    display: grid;
+    grid-gap: 5px;
+    font-size: large;
+    grid-template-columns: minmax(1fr, 100px);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
     "username"
     "date"
     "num"
     "reputation"
     "user-view";
-  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
 .username {
-  grid-area: username;
-  place-self: center;
-  font-size: 20px;
-  border-bottom: 1px solid lightgray;
-  width: 100%;
-  text-align: center;
-  padding: 3px;
-  margin: 3px;
-  font-weight: bold ;
+    grid-area: username;
+    place-self: center;
+    font-size: 20px;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+    text-align: center;
+    padding: 3px;
+    margin: 3px;
+    font-weight: bold;
 }
 
 .date {
-  grid-area: date;
-  font-size: 16px;
-  padding-left: 15px ;
-  align-self: center;
+    grid-area: date;
+    font-size: 16px;
+    padding-left: 15px;
+    align-self: center;
 }
 
 .num {
-  grid-area: num;
-  font-size: 16px;
-  padding-left: 15px ;
-  align-self: center;
+    grid-area: num;
+    font-size: 16px;
+    padding-left: 15px;
+    align-self: center;
 }
 
 .reputation {
-  grid-area: reputation;
-  font-size: 16px;
-  padding-left: 15px ;
-  align-self: center;
+    grid-area: reputation;
+    font-size: 16px;
+    padding-left: 15px;
+    align-self: center;
 }
 
-.user-view
-{
-  grid-area: user-view;
-  place-self: center;
+.user-view {
+    grid-area: user-view;
+    place-self: center;
 }
 
 .user-button {
-  font-family: "Luxurious Roman", cursive;
-  cursor: pointer;
-  border-radius: 3px;
-  padding: 5px 10px;
-  background-color: #f9e69b;
-  color: black;
-  box-shadow: 2px 2px 2px #363535;
-  width: 200px;
+    font-family: "Luxurious Roman", cursive;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 5px 10px;
+    background-color: #f9e69b;
+    color: black;
+    box-shadow: 2px 2px 2px #363535;
+    width: 200px;
 }
 
 .user-button:hover {
-  background-color: #b1a296;
-  color: rgb(255, 255, 255);
+    background-color: #b1a296;
+    color: rgb(255, 255, 255);
 }

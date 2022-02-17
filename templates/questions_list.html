@@ -1,77 +1,74 @@
 {% extends "base.html" %}
 
 {% block headline %}
-        <div class = "headline">Questions</div>
+    <div class="headline">Questions</div>
 {% endblock %}
 
-{% block content%}
-
-        <form action="/add-question">
-            <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/add-question">
-        </form>
-
-<form action="/list" method="get">
-    <div class = "order">
-        <label for="order_by">Sort by:</label>
-        <select name="order_by" id="order_by">
-            <option {{ 'selected' if order_by == 'title' }} value="title">Title</option>
-            <option {{ 'selected' if order_by == 'submission_time' }} value="submission_time">Submission time</option>
-            <option {{ 'selected' if order_by == 'message' }} value="message">Message</option>
-            <option {{ 'selected' if order_by == 'view_number' }} value="view_number">Number of views</option>
-            <option {{ 'selected' if order_by == 'vote_number' }} value="vote_number">Number of votes</option>
-        </select>
-        <label for="order_direction">Order:</label>
-        <select name="order_direction" id="order_direction">
-            <option {{ 'selected' if order_direction == 'desc' }} value="desc">Descending</option>
-            <option {{ 'selected' if order_direction == 'asc' }} value="asc">Ascending</option>
-        </select>
-        <button class="sort-button" >Sort</button>
-    </div>
-</form>
-<div class = "questions">
-    {% for row in list_of_questions %}
-        <div class = "question">
-            {% for user in all_users %}
-                {% if row["user_id"] == user['user_id']%}
-                    <div class = "user" ><a href="{{ url_for('user_page', user_id=user["user_id"]) }}"> @{{ user['username'] }}</a></div>
-                {% endif %}
-            {% endfor %}
-            <div class = "data_1" >{{ row["submission_time"] }}</div>
-            <div class = "data_2" >{{ row["view_number"] }}</div>
-            <div class = "data_3" >{{ row["vote_number"] }}</div>
-            <div class = "data_4" >{{ row["title"] }}</div>
-            <div class = "data_5" >{{ row["message"] }}</div>
-            {% if row["image"] %}
-                <div class = "data_image"><img src="{{ row["image"] }}"></div>
-            {% endif %}
-
-            <div class ="kuka">
-                <form action="/question/{{ row['id'] }}/delete" method="POST">
-                    <input class= "kuka" onclick="return confirm('R U sure?')" id="delete_button" type="image" src="/static/img/trash.png" alt="Delete" width="60"
-
-                        value="delete_button">
-                </form>
-            </div>
-            <div class ="up">
-                <form action="/question/{{ row['id'] }}/vote-up" method="POST">
-                    <input class= "up" id="vote_up_button" name="vote_up_button" type="image" src="/static/img/arrows.webp.png"
-                        alt="Vote-up" width="60" value="{{ row['id'] }}">
-                </form>
-            </div>
-            <div class ="down">
-                <form action="/question/{{ row['id'] }}/vote-down" method="POST">
-                    <input class= "down" id="vote_down_button" name="vote_down_button" type="image" src="/static/img/arrow_down.png"
-                        alt="Vote-down" width="60" value="{{ row['id'] }}">
-                </form>
-            </div>
-            <div class = "view">
-                <form action="/questions/{{ row["id"] }}">
-                    <button class= "button" id="home" type="submit" class="view">View : </button>
-                </form>
-
-            </div>
+{% block content %}
+    <form action="/add-question">
+        <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/add-question">
+    </form>
+    <form action="/list" method="get">
+        <div class="order">
+            <label for="order_by">Sort by:</label>
+            <select name="order_by" id="order_by">
+                <option {{ 'selected' if order_by == 'title' }} value="title">Title</option>
+                <option {{ 'selected' if order_by == 'submission_time' }} value="submission_time">Submission time
+                </option>
+                <option {{ 'selected' if order_by == 'message' }} value="message">Message</option>
+                <option {{ 'selected' if order_by == 'view_number' }} value="view_number">Number of views</option>
+                <option {{ 'selected' if order_by == 'vote_number' }} value="vote_number">Number of votes</option>
+            </select>
+            <label for="order_direction">Order:</label>
+            <select name="order_direction" id="order_direction">
+                <option {{ 'selected' if order_direction == 'desc' }} value="desc">Descending</option>
+                <option {{ 'selected' if order_direction == 'asc' }} value="asc">Ascending</option>
+            </select>
+            <button class="sort-button">Sort</button>
         </div>
-    {% endfor %}
-</div>
+    </form>
+    <div class="questions">
+        {% for row in list_of_questions %}
+            <div class="question">
+                {% for user in all_users %}
+                    {% if row["user_id"] == user['user_id'] %}
+                        <div class="user"><a href="{{ url_for('user_page', user_id=user["user_id"]) }}">
+                            @{{ user['username'] }}</a></div>
+                    {% endif %}
+                {% endfor %}
+                <div class="data_1">{{ row["submission_time"] }}</div>
+                <div class="data_2">{{ row["view_number"] }}</div>
+                <div class="data_3">{{ row["vote_number"] }}</div>
+                <div class="data_4">{{ row["title"] }}</div>
+                <div class="data_5">{{ row["message"] }}</div>
+                {% if row["image"] %}
+                    <div class="data_image"><img src="{{ row["image"] }}"></div>
+                {% endif %}
 
+                <div class="kuka">
+                    <form action="/question/{{ row['id'] }}/delete" method="POST">
+                        <input class="kuka" onclick="return confirm('R U sure?')" id="delete_button" type="image"
+                               src="/static/img/trash.png" alt="Delete" width="60" value="delete_button">
+                    </form>
+                </div>
+                <div class="up">
+                    <form action="/question/{{ row['id'] }}/vote-up" method="POST">
+                        <input class="up" id="vote_up_button" name="vote_up_button" type="image"
+                               src="/static/img/arrows.webp.png" alt="Vote-up" width="60" value="{{ row['id'] }}">
+                    </form>
+                </div>
+                <div class="down">
+                    <form action="/question/{{ row['id'] }}/vote-down" method="POST">
+                        <input class="down" id="vote_down_button" name="vote_down_button" type="image"
+                               src="/static/img/arrow_down.png" alt="Vote-down" width="60" value="{{ row['id'] }}">
+                    </form>
+                </div>
+                <div class="view">
+                    <form action="/questions/{{ row["id"] }}">
+                        <button class="button" id="home" type="submit" class="view">View :</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -4,27 +4,26 @@
     <link rel="stylesheet" href="/static/css_files/basic.css">
     <link rel="stylesheet" href="/static/css_files/new_form_style.css">
 {% endblock %}
-{% block headline %}
-          <div class = "headline">Answer</div>
-{% endblock %}
-{% block content%}
 
-        <div class = "back_button">
-          <form action="/questions/{{ question_id }}">
-                <button id="home" type="submit" class="button" >  BACK </button>
-          </form>
-        </div>
-        <div class="form-style-8">
-          <h2 align="middle">Give a new answer!</h2>
-          <form action="/question/new-answer" method="POST" enctype="multipart/form-data">
+{% block headline %}
+    <div class="headline">Answer</div>
+{% endblock %}
+
+{% block content %}
+    <div class="back_button">
+        <form action="/questions/{{ question_id }}">
+            <button id="home" type="submit" class="button"> BACK</button>
+        </form>
+    </div>
+    <div class="form-style-8">
+        <h2 align="middle">Give a new answer!</h2>
+        <form action="/question/new-answer" method="POST" enctype="multipart/form-data">
             <p><h4> Type your answer: </h4><br>
-            <textarea id="answer_message" name="answer_message" rows="6" cols="60" minlength="10" placeholder="Type here..." required autofocus></textarea></p>
+            <textarea id="answer_message" name="answer_message" rows="6" cols="60" minlength="10"
+                      placeholder="Type here..." required autofocus></textarea>
             <input type="hidden" name="question_id" value="{{ question_id }}">
             <input type="file" name="file1" class="tallozas">
             <input type="submit" value="Submit" name="Submit" class="button">
-      
-          </form>
-
-        </div>
-
+        </form>
+    </div>
 {% endblock %}

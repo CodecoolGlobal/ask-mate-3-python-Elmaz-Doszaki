@@ -214,7 +214,7 @@ def delete_all_answer_from_db(cursor, q_id):
                     DELETE FROM answer
                     WHERE question_id = %(question_id)s;
                     """,
-                    {'question_id': q_id, 'answer_id': answer_ids})
+                       {'question_id': q_id, 'answer_id': answer_ids})
 
 
 @connection.connection_handler
