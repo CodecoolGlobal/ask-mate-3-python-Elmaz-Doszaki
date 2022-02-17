@@ -52,7 +52,7 @@
 }
 .user a{
   text-decoration: none;
-  color: #b1a296;
+  color: #8f847a;
 }
 .user a:hover{
   text-decoration: underline;
@@ -70,7 +70,7 @@
   justify-self: start;
   align-self: center;
   font-style: italic;
-  color: #b1a296;;
+  color: #8f847a;;
   font-family: 'Luxurious Roman', cursive;
   font-size: 15px;
 }
@@ -201,7 +201,7 @@
 
 .q-c-user a{
   text-decoration: none;
-  color: #b1a296;
+  color: #8f847a;
 }
 .q-c-user a:hover{
   text-decoration: underline;
@@ -224,7 +224,7 @@
   grid-area: q-c-time;
   justify-self: start;
   align-self: center;
-    color: #b1a296;;
+    color: #8f847a;;
   font-family: 'Luxurious Roman', cursive;
   font-size: 15px;
 }
@@ -285,7 +285,7 @@
 
 .a-user a{
   text-decoration: none;
-  color: #b1a296;
+  color: #8f847a;
 }
 .a-user a:hover{
   text-decoration: underline;
@@ -415,7 +415,7 @@
 
 .a-c-user a{
   text-decoration: none;
-  color: #b1a296;
+  color: #8f847a;
 }
 .a-c-user a:hover{
   text-decoration: underline;
