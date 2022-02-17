@@ -1,182 +1,188 @@
 .questions {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 30px;
-  margin-left: 140px;
-  margin-right: 140px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+    margin-left: 140px;
+    margin-right: 140px;
 }
 
 .question {
-  background: #ffffff;
-  border-left: 20px solid #f9e69b;
-  border-radius: 5px;
-  padding: 20px;
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(11,1fr);
-  grid-template-rows: minmax(25px,40px) minmax(80px,130px) 30px;
-  grid-template-areas:
+    background: #ffffff;
+    border-left: 20px solid #f9e69b;
+    border-radius: 5px;
+    padding: 20px;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: minmax(25px, 40px) minmax(80px, 130px) 30px;
+    grid-template-areas:
     "photo   photo   photo    title  title  title  title   title    view view     seen"
     "photo  photo  photo message message message message  message message message message"
     "photo  photo  photo  time   time    vote   up       down  user  user   kuka";
-  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
 .user {
-  grid-area: user;
-  place-self: center;
-  font-style: italic;
-  color: #8f847a;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
+    grid-area: user;
+    place-self: center;
+    font-style: italic;
+    color: #8f847a;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
 }
 
-.user a{
-  text-decoration: none;
-  color: #8f847a;
+.user a {
+    text-decoration: none;
+    color: #8f847a;
 }
-.user a:hover{
-  text-decoration: underline;
+
+.user a:hover {
+    text-decoration: underline;
 }
+
 .kuka {
-  grid-area: kuka;
-  max-width: 25px;
-  max-height: 25px;
-  place-self: center;
+    grid-area: kuka;
+    max-width: 25px;
+    max-height: 25px;
+    place-self: center;
 }
+
 .up {
-  grid-area: up;
-  max-width: 35px;
-  max-height: 35px;
-  justify-self: center;
-  align-self: center;
+    grid-area: up;
+    max-width: 35px;
+    max-height: 35px;
+    justify-self: center;
+    align-self: center;
 }
+
 .down {
-  grid-area: down;
-  max-width: 35px;
-  max-height: 35px;
-  justify-self: start;
-  align-self: center;
+    grid-area: down;
+    max-width: 35px;
+    max-height: 35px;
+    justify-self: start;
+    align-self: center;
 }
 
 .data_1 {
-  grid-area: time;
-  padding-left: 10px;
-  font-style: italic;
-  color: #8f847a;
-  font-family: 'Luxurious Roman', cursive;
-  align-self: center;
-  font-size: 13px;
+    grid-area: time;
+    padding-left: 10px;
+    font-style: italic;
+    color: #8f847a;
+    font-family: 'Luxurious Roman', cursive;
+    align-self: center;
+    font-size: 13px;
 }
 
 .data_2 {
-  grid-area: seen;
-  justify-self: center;
-  align-self: center;
+    grid-area: seen;
+    justify-self: center;
+    align-self: center;
 }
 
 .data_3 {
-  grid-area: vote;
-  justify-self: end;
-  align-self: center;
+    grid-area: vote;
+    justify-self: end;
+    align-self: center;
 }
 
 .data_4 {
-  grid-area: title;
-  justify-self: stretch;
-  text-align: center;
-  font-family: 'Luxurious Roman', cursive;
-   font-weight: bold;
-  font-size: 105%;
+    grid-area: title;
+    justify-self: stretch;
+    text-align: center;
+    font-family: 'Luxurious Roman', cursive;
+    font-weight: bold;
+    font-size: 105%;
 }
 
 .data_5 {
-  grid-area: message;
-  align-self: stretch;
-  background: #bbb5afa3;
-  padding: 10px;
-  border-radius: 4px;
+    grid-area: message;
+    align-self: stretch;
+    background: #bbb5afa3;
+    padding: 10px;
+    border-radius: 4px;
 
-  font-family: 'Luxurious Roman', cursive;
-  border-right: 10px solid #f9e69b;
-  margin-right: 20px;
+    font-family: 'Luxurious Roman', cursive;
+    border-right: 10px solid #f9e69b;
+    margin-right: 20px;
 }
 
 .data_image {
-  grid-area: photo;
-  justify-self: center;
-  align-self: center;
+    grid-area: photo;
+    justify-self: center;
+    align-self: center;
 }
 
-.data_image img{
-  max-height: 240px;
-  max-width: 100%;
-  margin-top: -20px;
-  margin-bottom: -20px;
-  border-radius: 3px;
-  }
+.data_image img {
+    max-height: 240px;
+    max-width: 100%;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    border-radius: 3px;
+}
 
 
 .view {
-  grid-area: view;
-  align-self: center;
-  text-align: center;
-  justify-self: end;
-  align-self: center;
+    grid-area: view;
+    align-self: center;
+    text-align: center;
+    justify-self: end;
+    align-self: center;
 }
 
-.question .button{
-  background-color: #f9e69b;
-  color: black;
-  box-shadow: 2px 2px 2px #363535;
-  width: 100px;
+.question .button {
+    background-color: #f9e69b;
+    color: black;
+    box-shadow: 2px 2px 2px #363535;
+    width: 100px;
 }
+
 .question .button:hover {
-  background-color: #b1a296;
-  color: rgb(255, 255, 255);
+    background-color: #b1a296;
+    color: rgb(255, 255, 255);
 }
+
 .add-tag {
-  grid-area: tag-but;
-  justify-self: center;
-  align-self: center;
+    grid-area: tag-but;
+    justify-self: center;
+    align-self: center;
 }
 
 .tags {
-  grid-area: tag;
-  justify-self: start;
-  align-self: center;
+    grid-area: tag;
+    justify-self: start;
+    align-self: center;
 }
 
 
 .button {
-  margin-left: 150px;
+    margin-left: 150px;
 }
 
 .order {
-  margin-bottom: 20px;
-  margin-right: 150px;
-  text-align: right;
-  font-family: "Luxurious Roman", cursive;
+    margin-bottom: 20px;
+    margin-right: 150px;
+    text-align: right;
+    font-family: "Luxurious Roman", cursive;
 }
 
 .sort-button {
-  font-family: "Luxurious Roman", cursive;
-  cursor: pointer;
-  border-radius: 3px;
-  padding: 6px 10px;
+    font-family: "Luxurious Roman", cursive;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 6px 10px;
 }
 
 .sort-button:hover {
-  background-color: #b1a296;
-  color: rgb(255, 255, 255);
+    background-color: #b1a296;
+    color: rgb(255, 255, 255);
 }
 
 select {
-  padding: 6px;
-  font-family: "Luxurious Roman", cursive;
-  border-radius: 5px;
+    padding: 6px;
+    font-family: "Luxurious Roman", cursive;
+    border-radius: 5px;
 }
 
-option{
-  font-family: "Luxurious Roman", cursive;
+option {
+    font-family: "Luxurious Roman", cursive;
 }

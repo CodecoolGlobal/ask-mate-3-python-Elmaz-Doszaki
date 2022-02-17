@@ -1,35 +1,30 @@
 {% extends "base.html" %}
 
 {% block css %}
-  <link rel="stylesheet" href="/static/css_files/basic.css">
-  <link rel="stylesheet" href="/static/css_files/new_form_style.css" />
+    <link rel="stylesheet" href="/static/css_files/basic.css">
+    <link rel="stylesheet" href="/static/css_files/new_form_style.css"/>
 {% endblock %}
-{% block headline %}
-        <div class = "headline">Edit comment</div>
-{% endblock %}
-{% block content%}
-      <div class = "back_button">
-        <form action="/questions/{{ q_id }}">
-          <button id="home" type="submit" class="button">BACK</button>
-        </form>
-      </div>
-      <div class="form-style-8">
-        <form action="/edit_comment/{{ q_id }}/{{ comment['id'] }}" method="post">
-          <div>
-            <label>Give your comment:</label> <br />
-            <input
-              name="message"
-              type="text"
-              required
-              minlength="3"
-              value="{{ comment['message'] }}"
-            />
-          </div>
-          <button type="submit" class="button">Edit Comment</button>
-        </form>
-      </div>
-      <br>
-      <br>
-      <br>
 
+{% block headline %}
+    <div class="headline">Edit comment</div>
+{% endblock %}
+
+{% block content %}
+    <div class="back_button">
+        <form action="/questions/{{ q_id }}">
+            <button id="home" type="submit" class="button">BACK</button>
+        </form>
+    </div>
+    <div class="form-style-8">
+        <form action="/edit_comment/{{ q_id }}/{{ comment['id'] }}" method="post">
+            <div>
+                <label>Give your comment:</label> <br/>
+                <input name="message" type="text" required minlength="3" value="{{ comment['message'] }}"/>
+            </div>
+            <button type="submit" class="button">Edit Comment</button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
 {% endblock %}

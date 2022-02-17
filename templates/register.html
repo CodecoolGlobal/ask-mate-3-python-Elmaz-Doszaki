@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css_files/login.css">
+    <link rel="stylesheet" href="/static/css_files/login.css">
 {% endblock %}
 
 {% block head %}
@@ -10,7 +10,7 @@
 {% block content %}
     <div class="center">
         <h1>Signup</h1>
-         <form action="/registration" method="post">
+        <form action="/registration" method="post">
             <div class="txt_field">
                 <input type=text name=username id=username>
                 <span></span>
@@ -22,13 +22,12 @@
                 <label for="password">Password </label>
             </div>
             <p><input type=submit value=Register>
-         </form>
-
+        </form>
     </div>
-{% endblock content %}
-
+{% endblock %}
 
 {% block footer %}
 {% endblock %}
+
 {% block theme %}
 {% endblock %}

@@ -15,8 +15,9 @@
             <div class="user">
                 <div class="username">{{ user["username"] }}</div>
                 <div class="date"><b>Registration time:</b> {{ user["registration_time"] }}</div>
-                <div class="num"><b>History:</b> {{ user['question_count'] }} question, {{ user['answer_count'] }} answer, {{ user['comment_count'] }} comment </div>
-
+                <div class="num"><b>History:</b> {{ user['question_count'] }} question, {{ user['answer_count'] }}
+                    answer, {{ user['comment_count'] }} comment
+                </div>
                 <div class="reputation"><b>Reputation:</b> {{ user['reputation'] }}</div>
                 <div class="user-view">
                     <form action="{{ url_for('user_page', user_id=user["user_id"]) }}">

@@ -3,60 +3,64 @@
 {% block css %}
     <link rel="stylesheet" href="/static/css_files/basic.css"/>
     <link rel="stylesheet" href="/static/css_files/user.css"/>
-
 {% endblock %}
 
 {% block headline %}
-        <div class = "headline">User data</div>
+    <div class="headline">User data</div>
 {% endblock %}
 
 {% block content %}
-    <div class = "user-page">
+    <div class="user-page">
         <div class="user_data">
-            <div class = "name"> <a href="{{ url_for('user_page', user_id=session.get('user_id')) }}">{{ user_data.username }}</a></div>
+            <div class="name">
+                <a href="{{ url_for('user_page', user_id=session.get('user_id')) }}">{{ user_data.username }}</a>
+            </div>
             <ul>
-                <li><b>User ID:</b>   {{ user_data.user_id }}</li>
+                <li><b>User ID:</b> {{ user_data.user_id }}</li>
                 <li><b>Registration date:</b> {{ user_data.registration_time }}</li>
-                <li><b>Number of asked questions:   </b> {{ user_questions|length }}</li>
-                <li><b>Number of answers:</b>   {{ user_answers|length }}</li>
-                <li><b>Number of comments:   </b>{{ user_comments|length }}</li>
-                <li><b>Reputation:</b>    {{ user_data.reputation }}</li>
+                <li><b>Number of asked questions: </b> {{ user_questions|length }}</li>
+                <li><b>Number of answers:</b> {{ user_answers|length }}</li>
+                <li><b>Number of comments: </b>{{ user_comments|length }}</li>
+                <li><b>Reputation:</b> {{ user_data.reputation }}</li>
             </ul>
         </div>
         <div class="history">
-            <div class = "user-questions">
+            <div class="user-questions">
                 {% if  user_questions== [] %}
                     <h3>There is no question yet </h3>
                 {% else %}
                     <h3>Questions asked:</h3>
                     {% for question in user_questions %}
-                        <h4> <a href={{ url_for('display_question', question_id=question.id) }}> {{ question.title }}</a></h4>
+                        <h4><a href={{ url_for('display_question', question_id=question.id) }}> {{ question.title }}</a>
+                        </h4>
                         <h5>{{ question.message }}</h5>
                         <hr>
                     {% endfor %}
                 {% endif %}
             </div>
-            <div class = "user-answers">
-
+            <div class="user-answers">
                 {% if  user_answers== [] %}
                     <h3>There is no answer yet</h3>
                 {% else %}
                     <h3>Answers given:</h3>
                     {% for answer in user_answers %}
-                        <h4> <a href={{ url_for('display_question', question_id=answer.question_id) }}> {{ answer.title }} </a> </h4>
+                        <h4>
+                            <a href={{ url_for('display_question', question_id=answer.question_id) }}> {{ answer.title }} </a>
+                        </h4>
                         <h5>{{ answer.message }}</h5>
                         <hr>
                     {% endfor %}
                 {% endif %}
             </div>
-
-            <div class = "user-comments">
+            <div class="user-comments">
                 {% if  user_comments== [] %}
                     <h3>There is no comment yet</h3>
                 {% else %}
                     <h3>Comments given:</h3>
                     {% for comment in user_comments %}
-                        <h4> <a href={{ url_for('display_question', question_id=comment.question_id if comment.question_id else comment.q_id) }}>{{ comment.title if comment.title else comment.q_title }}</a></h4>
+                        <h4>
+                            <a href={{ url_for('display_question', question_id=comment.question_id if comment.question_id else comment.q_id) }}>{{ comment.title if comment.title else comment.q_title }}</a>
+                        </h4>
                         <h5> {{ comment.message }}</h5>
                         <hr>
                     {% endfor %}
@@ -64,5 +68,4 @@
             </div>
         </div>
     </div>
-{% endblock content %}
-
+{% endblock %}

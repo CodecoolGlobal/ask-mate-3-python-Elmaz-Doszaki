@@ -1,41 +1,44 @@
 {% extends "base.html" %}
 
 {% block css %}
-      <link rel="stylesheet" href="/static/css_files/basic.css" />
-      <link href="/static/css_files/index_style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css_files/basic.css"/>
+    <link href="/static/css_files/index_style.css" rel="stylesheet"/>
 {% endblock %}
-{% block content%}
-      <main>
+
+{% block content %}
+    <main>
         <aside>
-          <p>Favorite memes:</p>
-          {% for i in list_of_best_memes %}
-          <div>
-            <a href="/questions/{{i[1]}}"><img class="best_meme_pic" src="{{i[0]}}" alt="{{i[0]}}" /> <br /></a>
-            <p>{{i[2]}}</p>
-          </div>
-          {% endfor %}
+            <p>Favorite memes:</p>
+            {% for i in list_of_best_memes %}
+                <div>
+                    <a href="/questions/{{ i[1] }}"><img class="best_meme_pic" src="{{ i[0] }}" alt="{{ i[0] }}"/> <br/></a>
+                    <p>{{ i[2] }}</p>
+                </div>
+            {% endfor %}
         </aside>
-
         <section>
-          <a href="/list"></a>
-          <div>
-
-            <p class="indexbox">Describe your situation!</p>
-            <p></p>
-          </div>
-          <div>
-            <p class="arrow1"></p>
-            <p class="indexbox">Wait for the MEMES to come flowin'.</p>
-          </div>
-          <div>
-            <p class="indexbox">Make, or react with memes!</p>
-            <p class="arrow2"></p>
-          </div>
-          <div>
-            <p class="arrow3"></p>
-            <a href="/list"> <div class="underbutton"><button>Get Started!</button></div></a>
-          </div>
+            <a href="/list"></a>
+            <div>
+                <p class="indexbox">Describe your situation!</p>
+                <p></p>
+            </div>
+            <div>
+                <p class="arrow1"></p>
+                <p class="indexbox">Wait for the MEMES to come flowin'.</p>
+            </div>
+            <div>
+                <p class="indexbox">Make, or react with memes!</p>
+                <p class="arrow2"></p>
+            </div>
+            <div>
+                <p class="arrow3"></p>
+                <a href="/list">
+                    <div class="underbutton">
+                        <button>Get Started!</button>
+                    </div>
+                </a>
+            </div>
         </section>
-      </main>
+    </main>
     <br><br><br><br>
 {% endblock %}

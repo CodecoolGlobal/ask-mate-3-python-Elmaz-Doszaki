@@ -1,485 +1,498 @@
 .back_button {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 .back_button .button {
-  margin-left: 20px;
-  padding: 20px;
+    margin-left: 20px;
+    padding: 20px;
 }
 
-.new-answer{
-  text-align: right ;
-  margin-right: 20px;
-  margin-top: -10px;
-  border-top: dotted #2c2824 4px;
+.new-answer {
+    text-align: right;
+    margin-right: 20px;
+    margin-top: -10px;
+    border-top: dotted #2c2824 4px;
 
-  }
+}
 
 .new-answer .button {
-  margin-top: 5px;
-  margin-left: 20px;
-  left: 100%;
-  padding: 20px;
+    margin-top: 5px;
+    margin-left: 20px;
+    left: 100%;
+    padding: 20px;
 
 }
 
 /*kérdés kártya: */
 .question {
-  margin-left: 140px;
-  margin-right: 140px;
-  background: #ffffff;
-  border-left: 20px solid #f9e69b;
-  border-radius: 5px;
-  padding: 15px;
-  display: grid;
-  grid-gap: 8px;
-  grid-template-columns: repeat(10,1fr);
-  grid-template-rows: minmax(25px,40px) minmax(80px,150px) minmax(30px,auto);
-  grid-template-areas:
+    margin-left: 140px;
+    margin-right: 140px;
+    background: #ffffff;
+    border-left: 20px solid #f9e69b;
+    border-radius: 5px;
+    padding: 15px;
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: minmax(25px, 40px) minmax(80px, 150px) minmax(30px, auto);
+    grid-template-areas:
     "photo  photo  photo    title  title  title  title   view   view     edit"
     "photo  photo  photo message message message message  message message message"
     "tag-but  tag  tag    tag    time       time   user   user     q-com      q-com";
-  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
 .user {
-  grid-area: user;
-  place-self: center;
-  font-style: italic;
-  color: #b1a296;;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
+    grid-area: user;
+    place-self: center;
+    font-style: italic;
+    color: #b1a296;;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
 }
-.user a{
-  text-decoration: none;
-  color: #8f847a;
+
+.user a {
+    text-decoration: none;
+    color: #8f847a;
 }
-.user a:hover{
-  text-decoration: underline;
+
+.user a:hover {
+    text-decoration: underline;
 }
+
 .view {
-  grid-area: view;
-  align-self: center;
-  text-align: center;
-  justify-self: end;
-  align-self: center;
+    grid-area: view;
+    align-self: center;
+    text-align: center;
+    justify-self: end;
+    align-self: center;
 }
 
 .time {
-  grid-area: time;
-  justify-self: start;
-  align-self: center;
-  font-style: italic;
-  color: #8f847a;;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
+    grid-area: time;
+    justify-self: start;
+    align-self: center;
+    font-style: italic;
+    color: #8f847a;;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
 }
 
 .title {
-  grid-area: title;
-  justify-self: center;
-  align-self: center;
-  font-family: 'Luxurious Roman', cursive;
-  font-weight: bold;
-  font-size: 110%;
+    grid-area: title;
+    justify-self: center;
+    align-self: center;
+    font-family: 'Luxurious Roman', cursive;
+    font-weight: bold;
+    font-size: 110%;
 }
-.question .button{
-  background-color: #f9e69b;
-  color: black;
-  box-shadow: 2px 2px 2px #363535;
+
+.question .button {
+    background-color: #f9e69b;
+    color: black;
+    box-shadow: 2px 2px 2px #363535;
 }
 
 .question .button:hover {
-  background-color: #b1a296;
-  color: rgb(255, 255, 255);
+    background-color: #b1a296;
+    color: rgb(255, 255, 255);
 }
 
 .meme {
-  grid-area: photo;
-  align-self: center;
-  justify-self: center;
+    grid-area: photo;
+    align-self: center;
+    justify-self: center;
 }
 
-.meme img{
-  max-height: 205px;
-  max-width: 100%;
-  border-radius: 3px;
-  }
+.meme img {
+    max-height: 205px;
+    max-width: 100%;
+    border-radius: 3px;
+}
 
 .message {
-  grid-area: message;
-  align-self: stretch;
-  background: #bbb5afa3;
-  padding: 10px;
-  font-family: 'Luxurious Roman', cursive;
-  border-right: 10px solid #f9e69b;
-  border-radius: 4px;
+    grid-area: message;
+    align-self: stretch;
+    background: #bbb5afa3;
+    padding: 10px;
+    font-family: 'Luxurious Roman', cursive;
+    border-right: 10px solid #f9e69b;
+    border-radius: 4px;
 }
 
 .add-tag {
-  grid-area: tag-but;
-  justify-self: center;
-  align-self: end;
-  padding: 1px;
+    grid-area: tag-but;
+    justify-self: center;
+    align-self: end;
+    padding: 1px;
 }
 
 
 .tags {
-  grid-area: tag;
-  justify-self: start;
-  align-self: center;
-  padding-left: 15px;
-  font-style: italic;
-}
-.tags a{
-  text-decoration: None;
-  background-color: white;
-  padding: 2px;
-  color: rgba(0, 0, 0, 0.49);
-  border-radius: 2px;
-  border: rgba(0, 0, 0, 0.49) solid 1px;
-  font-style: normal;
-  font-size: 60% ;
-
+    grid-area: tag;
+    justify-self: start;
+    align-self: center;
+    padding-left: 15px;
+    font-style: italic;
 }
 
+.tags a {
+    text-decoration: None;
+    background-color: white;
+    padding: 2px;
+    color: rgba(0, 0, 0, 0.49);
+    border-radius: 2px;
+    border: rgba(0, 0, 0, 0.49) solid 1px;
+    font-style: normal;
+    font-size: 60%;
+
+}
 
 
 .Q-comment {
-  grid-area: q-com;
-  justify-self: end;
-  align-self: center;
+    grid-area: q-com;
+    justify-self: end;
+    align-self: center;
 }
 
 .Q-edit {
-  grid-area: edit;
-  justify-self: end;
-  align-self: center;
+    grid-area: edit;
+    justify-self: end;
+    align-self: center;
 }
 
 .Q-edit .icon {
-  width: 40px;
+    width: 40px;
 }
 
 .question .button {
-  height: 80%;
+    height: 80%;
 }
 
 /*kérdés-comment kártyák: */
 .comments {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 10px;
-  margin-left: 210px;
-  margin-right: 210px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    margin-left: 210px;
+    margin-right: 210px;
 }
 
 .comment {
-  margin-top: -5px;
-  border-left: 8px solid #f9e69b;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.79);
-  font-style: italic;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows:minmax(30px,auto) minmax(30px,auto);
-  grid-template-areas:
+    margin-top: -5px;
+    border-left: 8px solid #f9e69b;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.79);
+    font-style: italic;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows:minmax(30px, auto) minmax(30px, auto);
+    grid-template-areas:
     "none q-c-message q-c-edit"
     "q-c-time     q-c-user    q-c-delete";
-  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
 .q-c-user {
-  grid-area: q-c-user;
-  align-self: center;
-  justify-self: end;
-  font-style: italic;
-  color: #b1a296;;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
+    grid-area: q-c-user;
+    align-self: center;
+    justify-self: end;
+    font-style: italic;
+    color: #b1a296;;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
 }
 
-.q-c-user a{
-  text-decoration: none;
-  color: #8f847a;
+.q-c-user a {
+    text-decoration: none;
+    color: #8f847a;
 }
-.q-c-user a:hover{
-  text-decoration: underline;
+
+.q-c-user a:hover {
+    text-decoration: underline;
 }
 
 .time {
-  grid-area: time;
-  justify-self: start;
-  align-self: center;
-  font-style: italic;
+    grid-area: time;
+    justify-self: start;
+    align-self: center;
+    font-style: italic;
 }
 
 .q-c-message {
-  grid-area: q-c-message;
-  justify-self: center;
-  align-self: center;
+    grid-area: q-c-message;
+    justify-self: center;
+    align-self: center;
 }
 
 .q-c-time {
-  grid-area: q-c-time;
-  justify-self: start;
-  align-self: center;
+    grid-area: q-c-time;
+    justify-self: start;
+    align-self: center;
     color: #8f847a;;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
 }
 
 .q-c-edit {
-  grid-area: q-c-edit;
-  justify-self: end;
-  align-self: center;
+    grid-area: q-c-edit;
+    justify-self: end;
+    align-self: center;
 }
 
-.q-c-edit .icon{
-  width: 40px;
+.q-c-edit .icon {
+    width: 40px;
 }
 
 .q-c-delete {
-  grid-area: q-c-delete;
-  justify-self: end;
-  align-self: center;
-  padding-right: 20px;
+    grid-area: q-c-delete;
+    justify-self: end;
+    align-self: center;
+    padding-right: 20px;
 }
+
 .q-c-delete .icon {
-  width:  20px;
+    width: 20px;
 }
+
 /*válasz kártya: */
 .answers {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-row-gap: 10px ;
-  margin-left: 180px;
-  margin-right: 180px;
-  margin-top: -10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+    margin-left: 180px;
+    margin-right: 180px;
+    margin-top: -10px;
 }
 
 .answer {
-  background: #ffff;
-  border-right: 20px solid #71ab8a;
-  padding: 20px;
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(10,1fr);
-  grid-template-rows: minmax(25px,35px) minmax(70px,130px) 30px;
-  grid-template-areas:
+    background: #ffff;
+    border-right: 20px solid #71ab8a;
+    padding: 20px;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: minmax(25px, 35px) minmax(70px, 130px) 30px;
+    grid-template-areas:
     "  a-edit  a-time   a-time a-up    a-down   a-vote   nono    a-photo  a-photo  a-photo  "
     "a-message a-message a-message a-message  a-message a-message a-message a-photo  a-photo  a-photo"
     "a-delete  a-add-comment  a-add-comment    a-user      a-user    a-accepted a-accepted  a-photo  a-photo  a-photo  ";
-  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
-.a-accepted{
-  grid-area: a-accepted;
-  justify-self: right;
-  align-self: center;
+.a-accepted {
+    grid-area: a-accepted;
+    justify-self: right;
+    align-self: center;
 }
 
-.a-accepted a{
- text-decoration: none;
+.a-accepted a {
+    text-decoration: none;
 }
 
-.a-accepted a:hover{
- text-decoration: underline;
+.a-accepted a:hover {
+    text-decoration: underline;
 }
 
 .un {
-  color: red;
+    color: red;
 }
 
 .ac {
-  color: green;
+    color: green;
 }
 
-.fa-check{
-  color: green;
-  padding-right: 25px;
+.fa-check {
+    color: green;
+    padding-right: 25px;
 }
-
 
 
 .a-user {
-  grid-area: a-user;
-  align-self: center;
-  justify-self: center;
-  font-style: italic;
-  color: #b1a296;;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
+    grid-area: a-user;
+    align-self: center;
+    justify-self: center;
+    font-style: italic;
+    color: #b1a296;;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
 }
 
-.a-user a{
-  text-decoration: none;
-  color: #8f847a;
+.a-user a {
+    text-decoration: none;
+    color: #8f847a;
 }
-.a-user a:hover{
-  text-decoration: underline;
+
+.a-user a:hover {
+    text-decoration: underline;
 }
 
 .a-time {
-  grid-area: a-time;
-  justify-self: start;
-  align-self: center;
-  font-style: italic;
+    grid-area: a-time;
+    justify-self: start;
+    align-self: center;
+    font-style: italic;
     color: #b1a296;;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
 }
 
 .a-vote {
-  grid-area: a-vote;
-  justify-self: start;
-  align-self: center;
+    grid-area: a-vote;
+    justify-self: start;
+    align-self: center;
 }
 
-.a-message{
-  grid-area: a-message;
-  align-self: stretch;
-  background: #bbb5afa3;
-  padding: 10px;
-  font-family: 'Luxurious Roman', cursive;
-  border-left: 10px solid #71ab8a;
-  margin-left: 30px;
+.a-message {
+    grid-area: a-message;
+    align-self: stretch;
+    background: #bbb5afa3;
+    padding: 10px;
+    font-family: 'Luxurious Roman', cursive;
+    border-left: 10px solid #71ab8a;
+    margin-left: 30px;
 }
 
 .a-delete {
-  grid-area: a-delete;
-  text-align: left;
-  padding-top: 5px;
+    grid-area: a-delete;
+    text-align: left;
+    padding-top: 5px;
 }
-.answer .button{
-  background-color: #71ab8a;
-  box-shadow: 2px 2px 2px #363535;
+
+.answer .button {
+    background-color: #71ab8a;
+    box-shadow: 2px 2px 2px #363535;
 }
+
 .answer .button:hover {
-  background-color: #b1a296;
-  color: rgb(255, 255, 255);
+    background-color: #b1a296;
+    color: rgb(255, 255, 255);
 }
-.icon{
-  width:28px;
+
+.icon {
+    width: 28px;
 }
 
 .a-vote-down {
-  grid-area: a-down;
-  justify-self: start;
-  align-self: center;
-  padding-top: 5px;
+    grid-area: a-down;
+    justify-self: start;
+    align-self: center;
+    padding-top: 5px;
 }
 
 .a-vote-up {
-  grid-area: a-up;
-  justify-self: center;
-  align-self: center;
-  padding-top: 5px;
+    grid-area: a-up;
+    justify-self: center;
+    align-self: center;
+    padding-top: 5px;
 }
 
 .a-edit {
-  grid-area: a-edit;
-  justify-self: start;
-  align-self: center;
+    grid-area: a-edit;
+    justify-self: start;
+    align-self: center;
 }
 
 .a-edit .icon {
-  width: 40px;
+    width: 40px;
 }
 
 .a-add-comment {
-  grid-area: a-add-comment;
-  justify-self: start;
-  align-self: center;
-  margin-top: 10px;
+    grid-area: a-add-comment;
+    justify-self: start;
+    align-self: center;
+    margin-top: 10px;
 }
 
 .a-meme {
-  display: grid;
-  margin: 5px;
-  grid-area: a-photo;
-  place-self: center;
+    display: grid;
+    margin: 5px;
+    grid-area: a-photo;
+    place-self: center;
 }
 
-.a-meme img{
-  max-height: 240px;
-  max-width: 100%;
-  margin-top: -20px;
-  margin-bottom: -20px;
-  }
+.a-meme img {
+    max-height: 240px;
+    max-width: 100%;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
 
 /*válasz-comment kártyák: */
 .a-comments {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 10px;
-  margin-left: 100px;
-  margin-right: 100px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .a-comment {
-  font-style: italic;
-  border-right: 8px solid #71ab8a;
-  background: rgba(255, 255, 255, 0.79);
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows:minmax(30px,auto) minmax(30px,auto);
-  grid-template-areas:
+    font-style: italic;
+    border-right: 8px solid #71ab8a;
+    background: rgba(255, 255, 255, 0.79);
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows:minmax(30px, auto) minmax(30px, auto);
+    grid-template-areas:
   "none a-c-message a-c-edit"
     "a-c-time     a-c-user    a-c-delete";;
-  box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
 
 .a-c-user {
-  grid-area: a-c-user;
-  align-self: center;
-  justify-self: end;
-  font-style: italic;
-  color: #b1a296;;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
-  text-decoration: none;
+    grid-area: a-c-user;
+    align-self: center;
+    justify-self: end;
+    font-style: italic;
+    color: #b1a296;;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
+    text-decoration: none;
 }
 
-.a-c-user a{
-  text-decoration: none;
-  color: #8f847a;
+.a-c-user a {
+    text-decoration: none;
+    color: #8f847a;
 }
-.a-c-user a:hover{
-  text-decoration: underline;
+
+.a-c-user a:hover {
+    text-decoration: underline;
 }
 
 .a-c-time {
-  grid-area: a-c-time;
-  justify-self: start;
-  align-self: center;
-  color: #b1a296;;
-  font-family: 'Luxurious Roman', cursive;
-  font-size: 15px;
+    grid-area: a-c-time;
+    justify-self: start;
+    align-self: center;
+    color: #b1a296;;
+    font-family: 'Luxurious Roman', cursive;
+    font-size: 15px;
 }
 
 .a-c-message {
-  grid-area: a-c-message;
-  justify-self: center;
-  align-self: center;
+    grid-area: a-c-message;
+    justify-self: center;
+    align-self: center;
 }
+
 .a-c-edit {
-  grid-area: a-c-edit;
-  text-align: right;
+    grid-area: a-c-edit;
+    text-align: right;
 }
 
 .a-c-delete {
-  grid-area: a-c-delete;
-  justify-self: end;
-  align-self: center;
-  padding-right: 10px;
+    grid-area: a-c-delete;
+    justify-self: end;
+    align-self: center;
+    padding-right: 10px;
 }
 
 .a-c-delete .icon {
-  width:  20px;
+    width: 20px;
 }
+
 .a-c-edit .icon {
-  width: 40px;
+    width: 40px;
 }
