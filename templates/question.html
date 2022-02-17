@@ -146,11 +146,22 @@
                     </form>
                 </div>
                     <div class="a-accepted">
-                {% if session.user_id == current_question[0]['user_id'] %}
-                        <a href="{{ url_for('answer_status', answer_id=row['id'], question_id=question_id, status=row.accepted, user_id=row.user_id) }}">{{ 'Unaccept' if row.accepted else 'Accept' }}</a>
-                {% else %}
-                    {{ 'Accepted' if row.accepted else '' }}
-                {% endif %}
+                        {% if session.user_id == current_question[0]['user_id'] %}
+                                <a href="{{ url_for('answer_status', answer_id=row['id'], question_id=question_id, status=row.accepted, user_id=row.user_id) }}">
+                                    {% if row.accepted %}
+                                        <div class="un"><i class="fa fa-check" aria-hidden="true"></i>Unaccept</div>
+                                    {% else %}
+                                        <div class="ac">Accept</div>
+                                    {% endif %}
+                                </a>
+                        {% else %}
+                            {% if row.accepted %}
+                                <div ><i class="fa fa-check" aria-hidden="true"></i></div>
+                            {% else %}
+                                <div></div>
+                            {% endif %}
+
+                        {% endif %}
                     </div>
             </div>
             <div class="a-comments">
