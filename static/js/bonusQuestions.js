@@ -102,10 +102,54 @@ function toggleTheme() {
     console.log("toggle theme")
 }
 
+    let h1 = 32,
+        h2 = 24,
+        tableHeader = 18,
+        tableBody = 16,
+        buttonAndSearch = 13.3333,
+        counter = 3
+        changeFontSize = 4;
+
 function increaseFont() {
-    console.log("increaseFont")
+    console.log("increaseFont");
+
+    if (counter < 6) {
+        counter++
+        console.log(counter)
+        h1 += changeFontSize
+        h2 += changeFontSize
+        buttonAndSearch += changeFontSize
+        tableHeader += changeFontSize
+        tableBody += changeFontSize
+        document.getElementById('h1').style.fontSize = `${h1}px`;
+        document.getElementById('h2').style.fontSize = `${h2}px`;
+        document.getElementById('doNotModifyThisId_QuestionsTableHeader').style.fontSize = `${tableHeader}px`;
+        document.getElementById('doNotModifyThisId_QuestionsTableBody').style.fontSize = `${tableBody}px`;
+        document.getElementById('theme-button').style.fontSize = `${buttonAndSearch}px`;
+        document.getElementById('increase-font-button').style.fontSize = `${buttonAndSearch}px`;
+        document.getElementById('decrease-font-button').style.fontSize = `${buttonAndSearch}px`;
+        document.getElementById('doNotModifyThisId_QuestionsFilter').style.fontSize = `${buttonAndSearch}px`;
+    }
 }
 
 function decreaseFont() {
     console.log("decreaseFont")
+
+    if (counter > 0) {
+        counter--
+        console.log(counter)
+        h1 -= changeFontSize
+        h2 -= changeFontSize
+        buttonAndSearch -= changeFontSize
+        tableHeader -= changeFontSize
+        tableBody -= changeFontSize
+        document.getElementById('h1').style.fontSize = `${h1}px`;
+        document.getElementById('h2').style.fontSize = `${h2}px`;
+        document.getElementById('doNotModifyThisId_QuestionsTableHeader').style.fontSize = `${tableHeader}px`;
+        document.getElementById('doNotModifyThisId_QuestionsTableBody').style.fontSize = `${tableBody}px`;
+        document.getElementById('theme-button').style.fontSize = `${buttonAndSearch}px`;
+        document.getElementById('increase-font-button').style.fontSize = `${buttonAndSearch}px`;
+        document.getElementById('decrease-font-button').style.fontSize = `${buttonAndSearch}px`;
+        document.getElementById('doNotModifyThisId_QuestionsFilter').style.fontSize = `${buttonAndSearch}px`;
+    }
 }
