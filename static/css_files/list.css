@@ -9,6 +9,7 @@
 .question {
   background: #ffffff;
   border-left: 20px solid #f9e69b;
+  border-radius: 2%;
   padding: 20px;
   display: grid;
   grid-gap: 5px;
@@ -87,6 +88,7 @@
   align-self: stretch;
   background: #bbb5afa3;
   padding: 10px;
+  border-radius: 2%;
 
   font-family: 'Luxurious Roman', cursive;
   border-right: 10px solid #f9e69b;
@@ -104,6 +106,7 @@
   max-width: 100%;
   margin-top: -20px;
   margin-bottom: -20px;
+  border-radius: 2%;
   }
 
 
