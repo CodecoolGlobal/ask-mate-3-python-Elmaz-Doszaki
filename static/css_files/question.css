@@ -268,16 +268,45 @@
   grid-template-columns: repeat(10,1fr);
   grid-template-rows: minmax(25px,35px) minmax(70px,130px) 30px;
   grid-template-areas:
-    "  a-edit  a-time   a-time a-up    a-down   a-vote   a-accepted    a-photo  a-photo  a-photo  "
+    "  a-edit  a-time   a-time a-up    a-down   a-vote   nono    a-photo  a-photo  a-photo  "
     "a-message a-message a-message a-message  a-message a-message a-message a-photo  a-photo  a-photo"
-    "a-delete  a-add-comment  a-add-comment    a-user      a-user    a-user nono  a-photo  a-photo  a-photo  ";
+    "a-delete  a-add-comment  a-add-comment    a-user      a-user    a-accepted a-accepted  a-photo  a-photo  a-photo  ";
   box-shadow: 0px 2px 80px 0px rgba(0, 0, 0, 0.3);
 }
+
+.a-accepted{
+  grid-area: a-accepted;
+  justify-self: right;
+  align-self: center;
+}
+
+.a-accepted a{
+ text-decoration: none;
+}
+
+.a-accepted a:hover{
+ text-decoration: underline;
+}
+
+.un {
+  color: red;
+}
+
+.ac {
+  color: green;
+}
+
+.fa-check{
+  color: green;
+  padding-right: 25px;
+}
+
+
 
 .a-user {
   grid-area: a-user;
   align-self: center;
-  justify-self: end;
+  justify-self: center;
   font-style: italic;
   color: #b1a296;;
   font-family: 'Luxurious Roman', cursive;
