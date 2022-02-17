@@ -177,6 +177,7 @@
 .comment {
   margin-top: -5px;
   border-left: 8px solid #f9e69b;
+  border-radius: 4px;
   background: rgba(255, 255, 255, 0.79);
   font-style: italic;
   padding: 10px;
