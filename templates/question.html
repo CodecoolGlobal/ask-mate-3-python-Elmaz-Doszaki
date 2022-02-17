@@ -23,6 +23,7 @@
     <br/>
 
     <div class="question">
+        <div class = "user" > @UserName908</div>
         <div class="time">{{ current_question[0]["submission_time"] }}</div>
         <div class="title">{{ current_question[0]["title"] }}</div>
         <div class="message">{{ current_question[0]["message"] }}</div>
@@ -61,6 +62,7 @@
     <div class="comments">
         {% for comment in question_comments %}
             <div class="comment">
+                <div class = "q-c-user" > @UserName444 </div>
                 <div class="q-c-message">
                     {{ comment['message'] }}
                 </div>
@@ -96,6 +98,7 @@
     <div class="answers">
         {% for row in current_answers %}
             <div class="answer">
+                <div class = "a-user" > @UserName908 </div>
                 <div class="a-time">{{ row["submission_time"] }}</div>
                 <div class="a-vote">{{ row["vote_number"] }}</div>
                 <div class="a-message">{{ row["message"] }}</div>
@@ -142,6 +145,7 @@
                 {% for comment in answer_comments %}
                     {% if comment['answer_id'] == row['id'] %}
                         <div class = "a-comment">
+                            <div class = "a-c-user" > @UserName01 </div>
                             <div class= "a-c-time">
                                 {{ comment['submission_time'] }}
                             </div>
