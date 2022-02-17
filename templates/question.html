@@ -23,6 +23,11 @@
     <br/>
 
     <div class="question">
+        {% for user in all_users %}
+            {% if current_question[0]["user_id"] == user['user_id']%}
+                <div class = "user" > <a href="{{ url_for('user_page', user_id=user["user_id"]) }}"> @{{ user['username'] }}</a></div>
+            {% endif %}
+        {% endfor %}
         <div class="time">{{ current_question[0]["submission_time"] }}</div>
         <div class="title">{{ current_question[0]["title"] }}</div>
         <div class="message">{{ current_question[0]["message"] }}</div>
@@ -61,6 +66,11 @@
     <div class="comments">
         {% for comment in question_comments %}
             <div class="comment">
+                {% for user in all_users %}
+                    {% if comment["user_id"] == user['user_id']%}
+                        <div class = "q-c-user" > <a href="{{ url_for('user_page', user_id=user["user_id"]) }}"> @{{ user['username'] }}</a></div>
+                    {% endif %}
+                {% endfor %}
                 <div class="q-c-message">
                     {{ comment['message'] }}
                 </div>
@@ -96,6 +106,11 @@
     <div class="answers">
         {% for row in current_answers %}
             <div class="answer">
+                {% for user in all_users %}
+                    {% if row["user_id"] == user['user_id']%}
+                        <div class = "a-user" ><a href="{{ url_for('user_page', user_id=user["user_id"]) }}"> @{{ user['username'] }}</a></div>
+                    {% endif %}
+                {% endfor %}
                 <div class="a-time">{{ row["submission_time"] }}</div>
                 <div class="a-vote">{{ row["vote_number"] }}</div>
                 <div class="a-message">{{ row["message"] }}</div>
@@ -142,6 +157,11 @@
                 {% for comment in answer_comments %}
                     {% if comment['answer_id'] == row['id'] %}
                         <div class = "a-comment">
+                            {% for user in all_users %}
+                                {% if comment["user_id"] == user['user_id']%}
+                                    <div class = "a-c-user" ><a href="{{ url_for('user_page', user_id=user["user_id"]) }}"> @{{ user['username'] }}</a></div>
+                                {% endif %}
+                            {% endfor %}
                             <div class= "a-c-time">
                                 {{ comment['submission_time'] }}
                             </div>
