@@ -1,7 +1,6 @@
-from flask import Flask, session, render_template, flash, request, redirect, url_for
-from data_manager import *
-import data_manager2
+from flask import Flask, session, render_template, request, redirect, url_for
 from bonus_questions import SAMPLE_QUESTIONS
+import data_manager2
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/images/'
@@ -53,7 +52,7 @@ def registration():
         return redirect(url_for('login'))
 
 
-@app.route("/main")  # ez máshol okozhat  gondot
+@app.route("/main")
 def hello():
     return render_template('index.html', list_of_best_memes=data_manager2.list_of_best_memes())
 
@@ -66,7 +65,7 @@ def display_questions_list():
     questions = data_manager2.list_questions(order_by, order_direction)
     all_users = data_manager2.get_data_for_users_page()
     return render_template('questions_list.html',
-                           table_headers=TABLE_HEADERS,
+                           table_headers=data_manager2.TABLE_HEADERS,
                            list_of_questions=questions,
                            order_by=order_by,
                            order_direction=order_direction,
@@ -80,7 +79,7 @@ def display_question(question_id):
     all_users = data_manager2.get_data_for_users_page()
     return render_template('question.html',
                            current_question=data_manager2.display_question(question_id),
-                           answer_header=ANSWER_HEADERS,
+                           answer_header=data_manager2.ANSWER_HEADERS,
                            current_answers=current_answers,
                            question_id=question_id,
                            question_comments=data_manager2.get_comment(question_id),
@@ -97,7 +96,6 @@ def add_question():
         data = {'title': request.form['title'], 'message': request.form['question'], 'image': "",
                 'user_id': data_manager2.get_user_id(session['username'])}
         data_manager2.add_new_data_to_table(data, 'question')
-
         question_id = str(data_manager2.get_new_id('q'))
         file1 = request.files['file1']
         if request.files['file1'].filename != "":
@@ -117,7 +115,6 @@ def add_new_answer():
     new_answer = {'question_id': question_id, 'message': request.form['answer_message'],
                   'image': "", 'user_id': data_manager2.get_user_id(session['username'])}
     data_manager2.add_new_data_to_table(new_answer, 'answer')
-
     answer_id = str(data_manager2.get_new_id('a'))
     file1 = request.files['file1']
     if request.files['file1'].filename != "":
@@ -174,7 +171,7 @@ def route_edit(q_id):
 @app.route('/question/<q_id>/vote-up', methods=['POST'])
 def vote_up_question(q_id):
     vote_number = data_manager2.get_question_vote_number(q_id)
-    modify_vote_number = util.vote_up_or_down(vote_number, 'up')
+    modify_vote_number = data_manager2.vote_up_or_down(vote_number, 'up')
     data_manager2.update_question_vote_number(q_id, modify_vote_number)
     data_manager2.gain_reputation("question", q_id)
     return redirect('/list')
@@ -183,7 +180,7 @@ def vote_up_question(q_id):
 @app.route('/question/<q_id>/vote-down', methods=['POST'])
 def vote_down_question(q_id):
     vote_number = data_manager2.get_question_vote_number(q_id)
-    modify_vote_number = util.vote_up_or_down(vote_number, 'down')
+    modify_vote_number = data_manager2.vote_up_or_down(vote_number, 'down')
     data_manager2.update_question_vote_number(q_id, modify_vote_number)
     data_manager2.lose_reputation("question", q_id)
     return redirect('/list')
@@ -193,7 +190,7 @@ def vote_down_question(q_id):
 def vote_up_answer(answer_id):
     question_id = request.form['question_id']
     vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
-    modify_vote_number = util.vote_up_or_down(vote_number, 'up')
+    modify_vote_number = data_manager2.vote_up_or_down(vote_number, 'up')
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     data_manager2.gain_reputation("answer", answer_id)
     return redirect('/questions/' + request.form['question_id'])
@@ -203,7 +200,7 @@ def vote_up_answer(answer_id):
 def vote_down_answer(answer_id):
     question_id = request.form['question_id']
     vote_number = data_manager2.get_answer_vote_number(question_id, answer_id)
-    modify_vote_number = util.vote_up_or_down(vote_number, 'down')
+    modify_vote_number = data_manager2.vote_up_or_down(vote_number, 'down')
     data_manager2.update_answer_vote_number(question_id, answer_id, modify_vote_number)
     data_manager2.lose_reputation("answer", answer_id)
     return redirect('/questions/' + request.form['question_id'])

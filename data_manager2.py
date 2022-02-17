@@ -6,6 +6,18 @@ from datetime import datetime
 import bcrypt
 
 UPLOAD_FOLDER = 'static/images/'
+TABLE_HEADERS = ['#ID', 'Submission time', 'View number', 'Vote number', 'Title', '         Message       ', 'Photo',
+                 'Delete', 'Vote Up', 'Vote Down']
+ANSWER_HEADERS = ['#ID', 'Submission time', 'Vote number', '___________Message___________',
+                  '___________Photo___________', 'Delete', 'Vote Up', 'Vote Down', 'Edit']
+
+
+def vote_up_or_down(vote_number, vote_type):
+    if vote_type == 'up':
+        vote_number['vote_number'] += 1
+    else:
+        vote_number['vote_number'] -= 1
+    return vote_number['vote_number']
 
 
 @connection2.connection_handler
